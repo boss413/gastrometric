@@ -32,9 +32,17 @@ CREATE TABLE IF NOT EXISTS recipe_rows (
 
 c.execute("""
 CREATE TABLE IF NOT EXISTS ingredients (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    normalized_name TEXT
+    id INTEGER PRIMARY KEY,
+    name TEXT UNIQUE
+)
+""")
+
+c.execute("""
+CREATE TABLE IF NOT EXISTS ingredient_aliases (
+    id INTEGER PRIMARY KEY,
+    alias TEXT UNIQUE,
+    ingredient_id INTEGER,
+    FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
 )
 """)
 
@@ -46,6 +54,7 @@ CREATE TABLE IF NOT EXISTS recipe_ingredients (
     line_index INTEGER,
     raw_text TEXT,
     section TEXT,
+    ingredient_id INTEGER,
 
     -- future parsed fields (nullable)
     ingredient_name TEXT,
@@ -64,6 +73,15 @@ CREATE TABLE IF NOT EXISTS pantry_items (
     ingredient_id INTEGER,
     quantity TEXT,
     unit TEXT,
+    FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
+)
+""")
+
+c.execute("""
+CREATE TABLE IF NOT EXISTS fridge_items (
+    id INTEGER PRIMARY KEY,
+    ingredient_id INTEGER,
+    name TEXT,
     FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
 )
 """)
