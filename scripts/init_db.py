@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS recipe_rows (
 c.execute("""
 CREATE TABLE IF NOT EXISTS ingredients (
     id INTEGER PRIMARY KEY,
-    name TEXT UNIQUE
+    name TEXT UNIQUE,
+    canonical_group TEXT
 )
 """)
 
