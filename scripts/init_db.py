@@ -12,8 +12,12 @@ CREATE TABLE IF NOT EXISTS recipes (
     attribution TEXT,
     source TEXT,
     url TEXT,
+    video TEXT,
     notes TEXT,
-    yield TEXT
+    yield TEXT,
+    state TEXT,
+    parent_recipe_id INTEGER,
+    ingestion_method TEXT
 )
 """)
 

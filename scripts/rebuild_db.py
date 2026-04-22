@@ -18,7 +18,7 @@ def main():
 
     # 2. rebuild pipeline
     run("init_db.py")
-    run("load_csv.py")
+    run("ingest_markdown.py")
     run("parse_ingredient_blocks.py")
     run("parse_ingredient_lines.py")
     run("build_ingredients.py")          # (you should already have or we’ll define next)

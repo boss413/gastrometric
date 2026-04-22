@@ -14,15 +14,15 @@ conn = sqlite3.connect(DB_PATH)
 c = conn.cursor()
 
 # Load recipes
-recipes_df = pd.read_csv(RECIPES_CSV)
+recipes_df = pd.read_csv(RECIPES_CSV, engine='python')
 for _, row in recipes_df.iterrows():
     c.execute("""
-        INSERT OR IGNORE INTO recipes (id, name, alt_names, author, source, url, notes, yield)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT OR IGNORE INTO recipes (id, name, alt_names, author, source, url, notes, yield, state, parent_recipe_id, ingestion_method)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (row['id'], row['recipe_name'], row.get('alt_names', None),
           row.get('recipe_author', None), row.get('recipe_attribution', None),
           row.get('recipe_source', None), row.get('notes', None),
-          row.get('yield', None)))
+          row.get('yield', None), row.get('state', None), row.get('parent_recipe_id', None), row.get('ingestion_method', None)))
 
 # Load recipe_rows
 rows_df = pd.read_csv(ROWS_CSV)

@@ -39,8 +39,9 @@ def normalize_text(text):
 # CLEANING RULES
 # ------------------------
 
-def remove_leading_noise(text):
-    return re.sub(r'^[-–+]*\s*\d*[/\d]*\s*', '', text).strip()
+def remove_leading_symbols(text):
+    # remove bullets, dashes, etc. but NOT numbers
+    return re.sub(r'^[\-\–\+\•\*\s]+', '', text).strip()
 
 
 MEASURE_WORDS = [
@@ -106,16 +107,23 @@ def extract_parentheticals(text):
     return text, matches
 
 
-QUANTITY_PATTERN = r'(\d+\s*/\s*\d+|\d+\.\d+|\d+)'
+QUANTITY_PATTERN = r'^(\d+\s*/\s*\d+|\d+\.\d+|\d+)(\s*(to|-)\s*(\d+\s*/\s*\d+|\d+\.\d+|\d+))?'
 
 def extract_quantity(text):
-    match = re.search(QUANTITY_PATTERN, text)
+    match = re.match(QUANTITY_PATTERN, text)
     if match:
-        qty = match.group(0)
-        text = text.replace(qty, '', 1).strip()
-        return text, qty
-    return text, None
+        full = match.group(0)
 
+        # handle ranges like "1 to 2"
+        if match.group(2):
+            qty = match.group(4)  # take upper bound
+        else:
+            qty = match.group(1)
+
+        text = text[len(full):].strip()
+        return text, qty
+
+    return text, None
 
 UNIT_PATTERN = r'\b(cup|cups|quart|part|pinch|recipe|sprig|pint|tbsp|tsp|teaspoon|tablespoon|teaspoons|tablespoons|lb|pound|oz|ounce|clove|cloves|stick|sticks|can|cans|kg|g)\b'
 
@@ -179,11 +187,12 @@ def parse_line(raw_text):
     text = normalize_text(raw_text)
 
     # early cleanup
-    text = remove_leading_noise(text)
-
-    # structure extraction
+    text = remove_leading_symbols(text)
     text, parens = extract_parentheticals(text)
+
+    # extract quantity FIRST while string is intact
     text, quantity = extract_quantity(text)
+
     text, unit = extract_unit(text)
 
     # mid cleanup
