@@ -60,12 +60,14 @@ CREATE TABLE IF NOT EXISTS recipe_ingredients (
     raw_text TEXT,
     section TEXT,
     ingredient_id INTEGER,
-
-    -- future parsed fields (nullable)
     ingredient_name TEXT,
-    quantity_value TEXT,
+    quantity_value REAL,
     quantity_unit TEXT,
     preparation TEXT,
+    grams REAL,
+    ml REAL,
+    scaling REAL,
+    optional BOOLEAN DEFAULT 0,
 
     FOREIGN KEY(recipe_id) REFERENCES recipes(id),
     FOREIGN KEY(recipe_row_id) REFERENCES recipe_rows(id)

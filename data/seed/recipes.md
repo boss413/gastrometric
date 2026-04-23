@@ -14,10 +14,11 @@ Ingredients:
 Attribution: America’s Test Kitchen 
 Source: Restaurant Favorites
 Yield: SERVES 12
-Note: Several brands of Cajun seasoning can be found in the spice aisle at the supermarket. Crushed tomatoes, depending on the brand, can vary in consistency from smooth to clunky. Pulse the tomatoes in a food processor to achieve a smooth consistency.
+Note:
+Several brands of Cajun seasoning can be found in the spice aisle at the supermarket. Crushed tomatoes, depending on the brand, can vary in consistency from smooth to clunky. Pulse the tomatoes in a food processor to achieve a smooth consistency.
 
 Ingredients:
-1 pound (about 8 slices) bacon, sliced crosswise into 1/4-inch-wide places
+1 pound (about 8 slices) bacon, sliced crosswise into 1/4-inch-wide pieces
 
 1 large onion, minced
 
@@ -29,11 +30,12 @@ Ingredients:
 
 1 small green pepper, seeded and minced
 
-6 garlic cloves, minced or pressed through a garlle press (about 2 tablespoons)
+6 garlic cloves, minced or pressed through a garlic press (about 2 tablespoons)
 
 1 tablespoon Cajun seasoning Salt
 
-1 pound tasso, out into 1/4-inch dice pound boneless skinless chicken breasts, cut into 1/4-inch dice
+1 pound tasso, cut into 1/4-inch dice 
+1 pound boneless skinless chicken breasts, cut into 1/4-inch dice
 
 1 tablespoon all-purpose flour
 
@@ -47,7 +49,8 @@ Ingredients:
 
 8 ounces andouille sausage, cut into 1/4-inch-thick rounds
 
-1 teaspoon Worcestershire sauce Tabasco sauce
+1 teaspoon Worcestershire sauce 
+Tabasco sauce
 
 Ground black pepper
 
@@ -67,8 +70,9 @@ Ingredients:
 
 
 ½ t MSG
-4 oz melting cheese (for top)
-1 c chunks (sausage, mushrooms, aromatics)
+4 oz cheddar cheese
+½ c cooked sausage, 
+½ c mushrooms
 instructions:
 330 F, 13 min  + 10 min
 
@@ -76,11 +80,11 @@ instructions:
 ## Cook the Kale
 
 INGREDIENTS:
-2 T oil or rendered fat
+2 Tbsp oil or rendered fat
 16 oz. bulk Italian sausage
-10-12 oz. de-stemmed & chopped kale
-1 qt. Chicken broth or water 
-1 T Lemon juice or 2 T dry white wine
+10 oz. de-stemmed & chopped kale
+1 qt Chicken broth or water 
+1 Tbsp Lemon juice or 2 T dry white wine
 INSTRUCTIONS:
 Heat 1 T oil / fat in a soup pot to 300F over medium high heat, 
 then add the italian sausage, breaking it into very small pieces with a flat-edged wooden spoon. Cook until some has taken some crisp, brown color and some has released from the pot (about ten minutes). 
@@ -88,7 +92,7 @@ Add the kale and stock / water to deglaze the fond. Add the lemon juice / wine. 
 ## Cook the Aromatics
 INGREDIENTS:
 1 yellow onion, diced fine
-4 cloves Garlic, minced or crushed / pasted. But honestly, you measure that shit with your heart
+4 cloves Garlic, minced
 1 T Fennel seed
 INSTRUCTIONS:
 Heat 1 T oil / fat in a skillet over medium heat, then add the onion. Sweat until you see it take a little color. Add the garlic and cook for another couple of minutes. 
@@ -100,7 +104,7 @@ INGREDIENTS:
 1 t Xanthan gum (optional)
 1 T Chili flakes
 1 t Oregano
-1 12 oz. can Great Northern or White Navy beans, drained. Or 9 oz. homemade cooked beans
+9 oz. Great Northern beans, cooked (1 can)
 1 oz. minced fresh basil
 4-6 oz. half & half or 2-3 oz. cream
 INSTRUCTIONS:
@@ -126,7 +130,7 @@ Wring it out and add to tofu press
 
 # Cheeseburger Casserole
 INGREDIENTS:
-1 lb beef
+1 lb ground beef
 Half can diced tomatoes
 Half onion
 Two cloves garlic
@@ -138,24 +142,25 @@ Paprika
 2 T potato starch
 1 egg
 2 T ground mushrooms
-Enough Tater tots to cover 9 x 9
+3 c Tater tots
 1 c Mexican cheese blend
 # Oven Wings
 ## Equilibrium brine
 Ingredients
-2% salt
-.5% MSG
+1 pound chicken wings, (450g), 100%
+9g salt, 2% 
+3g MSG .5% 
 ## Parcook the wings
 Instructions:
-15 min steam, then cool + dry skin
+Steam for 15 minutes, then cool + dry skin
 ## Bread the Wings
 Ingredients:
-49% potato starch
-50% cornmeal 
-1% baking soda
+½ cup potato starch
+½ cup cornmeal 
+1/4 tsp baking soda
 ## Finish the Wings
 Instructions:
-500° 10m + 8m
+500° 10 minutes then flip and bake another 8 minutes
 
 
 # Thanksgiving Dinner Recipes
@@ -180,9 +185,9 @@ Author: Kenji Lopez Alt
 URL: https://cooking.nytimes.com/recipes/1023623-mayo-roasted-thanksgiving-turkey-with-gravy
 ## For the Turkey
 Ingredients:
-1 whole turkey, backbone removed, neck, giblets and backbone reserved
-1% by weight of turkey kosher salt (such as Diamond Crystal) or 6 tablespoons coarse salt (such as Morton’s)
-0.5% MSG by weight of turkey 
+1 whole 11-pound turkey, backbone removed, neck, giblets and backbone reserved
+6 Tbsp kosher salt (such as Diamond Crystal) or 1% by weight of turkey
+2 Tbsp MSG or 0.5% by weight of turkey
 Instructions: 
 Step 1
 Dry-brine the turkey: Pat the turkey dry with paper towels. Carefully loosen the skin from the breast of the turkey — going in through the neck may be easier here — until you can slide your hand between the skin and the meat. Season each turkey breast with 1 teaspoon salt, spreading it as evenly as possible with your hands. Sprinkle the remaining salt evenly over every surface of the turkey. Place the turkey skin-side up on a rimmed sheet pan, and refrigerate, uncovered, for 12 to 24 hours.
@@ -214,14 +219,14 @@ Ingredients:
 1 c chopped onion 
 1 c chopped celery 
 1 c chopped green pepper 
-1 T, kosher salt and corn oil as hardware
+1 T kosher salt and corn oil
 3 c Challah bread, cut into 1/2-inch cubes (from approximately 8 to 10 slices) 
 1 c chopped pecans
-2 whole eggs, beaten 
+2 eggs, beaten 
 2 t dried rubbed sage or double the amount of fresh
 2 t dried parsley or double the amount of fresh 
 1 t freshly ground black pepper
-Salt to taste.  This could be a lot
+Salt to taste
 Instructions:
 Brown the sausage, and at the end of the sauté, add the garlic.  Put this into a metal mixing bowl. Dice the trinity, toss with salt and oil, and roast at 400 degrees, stirring every ten minutes or so for 45 minutes, or until they start to take color, and add to the gigantic bowl, as well as the herbs and pepper.  In the last 10 minutes of roasting, add the bread and pecans and remove when they’ve turned GBD.  Add the stock a half cup every five minutes until the bread no longer feels hard in the middle. Store overnight.
 
@@ -292,19 +297,17 @@ sage
 chives
 bay leaves
 lemon peel
-Instructions: 
+Instructions:
 Heat the oil to 145 C (295 F). Add the shallots and garlic to fry while measuring out the spices and milk powder, then add them to the oil as well. Fry until all of the solids turn a light brown. 
 Add the thyme, then sage. Once the intense sputtering has stopped, add the rest of the herbs. 
 Remove from heat, and move to a pyrex dish and add the lemon peel. Let sit overnight.
 # Modernist Queso
 Author: Matt Boss
 1 can American Lager (Rainier)
-1 T + 1 t Sodium Citrate
+4 tsp Sodium Citrate
 4 oz Swiss Cheese
 8 oz Mexican Cheese blend
 4 oz Muenster Cheese
-To Serve: 
-Stir into blasted broccoli and / or macaroni.
 
 # Air Fryer Brussels Sprouts 
 Note: Blanching serves two purposes. It preserves the green color AND if you are a person that doesn’t like crisp-tender vegetables and wants the hearts or centers of the sprouts softer and less crisp, then you should blanche them. Noting that if you blanch them, they may not take the 15 minutes I suggest to cook through and may cook through as much as 5 minutes faster.
@@ -357,8 +360,8 @@ let sit >15 min
 Cover with Memphis Dust
 Vac seal, refrigerate overnight
 Ingredients: 
-1.5% salt
-0.5% MSG
+salt 1.5% 
+MSG 0.5% 
 ## Parcook the Ribs
 Instructions:
 Sous Vide 152 24 hrs
@@ -370,7 +373,7 @@ Reserved jus from bag
 Fresh ginger
 Tomato paste
 1 t (15ml) spicy brown mustard
-3 T cup (40ml) dark molasses
+3 T (40ml) dark molasses
 Ginger syrup 
 2 T (30ml) Worcestershire sauce
 2 T (30ml) apple cider vinegar
@@ -426,7 +429,7 @@ Note: Russet potatoes make slightly fluffier mashed potatoes, but Yukon Golds ha
 Yield: SERVES 4 TO 6
 Ingredients:
 2 pounds russet potatoes, scrubbed
-8 tablespoons (I stick) unsalted butter, melted
+8 tablespoons (1 stick) unsalted butter, melted
 1 ½ cup half-and-half, warmed
 1 ½ teaspoons salt 
 Ground black pepper
@@ -461,7 +464,8 @@ Ingredients:
 2 tablespoons heavy cream
 1/2 teaspoon salt
 2 teaspoon sugar
-2 pounds sweet potatoes (about 2 large or 3 medium), peeled, quartered lengthwise, and cut crosswise into 1/4-inch-thick slices Pinch ground black pepper
+2 pounds sweet potatoes (about 2 large or 3 medium), peeled, quartered lengthwise, and cut crosswise into 1/4-inch-thick slices 
+Pinch ground black pepper
 Instructions: 
 1. Combine the butter, cream, salt, sugar, and sweet potatoes in a 3- to 4-quart saucepan. Cover and cook over low heat, stirring occasionally, until the potatoes fall apart when poked with a fork, 35 to 45 minutes.
 2. Off the heat, mash the sweet potatoes in the saucepan with a potato masher. Stir in the pepper and serve immediately.
@@ -481,7 +485,7 @@ Ingredients:
 • 1/4 c vegetable oil
 • 1 yellow onion
 • 1/2 pound mushrooms
-• 1 package frozen chopped spinach
+• 1 12-oz. package frozen chopped spinach
 • 2 t parsley
 • 1 T red pepper flakes
 • ¼ c red-wine vinegar
@@ -521,7 +525,7 @@ Ingredients:
 4 whole green cardamom
 4-5 whole cloves
 2 whole cinnamon bark
-1 T whole tsp black peppercorn
+1 T whole black peppercorn
 1 T whole coriander
 2 bay leaves
 1 c tomato puree
@@ -570,10 +574,10 @@ Serve With: Rice, Brown Rice, Cauliflower, Chicken, Paneer, Tofu
 Ingredients: 
 350g kale
 
-3T coconut oil
+3 T coconut oil
 1 yellow onion
-3T garlic
-1T ginger
+3 T garlic
+1 T ginger
 4 green cardamom pods
 4 cloves
 ½ t black peppercorns
@@ -584,8 +588,8 @@ Ingredients:
 50g half & half
 
 4 cherry tomatoes
-3T butter
-1t sugar
+3 T butter
+1 t sugar
 Salt
 Msg
 
@@ -607,19 +611,19 @@ garlic minced
 Author: Matt Boss
 Ingredients: 
 Leg of lamb, at least 2 lbs boneless, at least 3 pounds bone-in
-1 teaspoon kosher salt per pound
-1/2 teaspoon dry marjoram per pound
-1/2 teaspoon dry parsley per pound
-1/2 teaspoon black pepper per pound
-1/4 teaspoon garlic powder per pound
+3 teaspoon kosher salt (1 tsp per pound)
+1 ½ teaspoon dry marjoram (½ tsp per pound)
+1 ½ teaspoon dry parsley (½ tsp per pound)
+1 ½ teaspoon black pepper (½ tsp per pound)
+¾ teaspoon garlic powder (¼ tsp per pound)
 
-3 cups leftover dry mashed potatoes (OR 2 1/2 cups potatoes boiled in salted water, 1/2 stick butter, mashed)
+1/2 recipe mashed potatoes 
 1 cup AP flour
 1 egg
 
 1 lb button mushrooms
 2 pinches salt
-2 ~1 lb bunches asparagus, trimmed
+2 lbs asparagus, trimmed
 2 pinches salt
 
 Reserved lamb liquid plus however much chicken or beef stock or broth is necessary to get up to 2 1/2 cups
@@ -662,7 +666,7 @@ Ingredients:
 
 1 teaspoon ground cumin
 
-1/2 - recipe Pinto Beans
+1/2 recipe Pinto Beans
 Instructions:
 Place the meat in a large mixing bowl and toss with the peanut oil and salt. Set aside.
 
@@ -676,11 +680,11 @@ Scrape the browned bits from the bottom of the pot. Add the meat back to the pre
 2 1/2 pounds red potatoes, large diced
 3 tablespoons red wine vinegar
 
-3/4 cup mayonnaise (homemade if possible)
+3/4 cup mayonnaise 
 1 teaspoon mustard powder
 1/4 cup chopped cilantro
 1/2 tablespoon very thinly sliced garlic
-1/2 cup small dice red onion
+1/2 cup red onion diced fine
 1/2 cup thinly sliced celery
 1 teaspoon kosher salt
 1/2 teaspoon freshly ground black pepper
@@ -691,11 +695,12 @@ Attribution: Good Eats Reloaded
 Author: Alton Brown
 Ingredients: 
 2-3lb Chuck roast
-1% salt
-0.5% MSG + same volume freshly ground pepper
+2.5 tsp kosher salt (1% of meat by weight)
+1 tsp MSG (0.5% of meat by weight)
+1 tsp freshly ground black pepper
 1-½ medium onions, halved
 2 carrots, chopped into large chunks
-medium soup container of low-sodium stock
+1 quart of low-sodium stock
 Instructions: 
 Heat the oven to 250F
 Salt & MSG outside of the Chuck roast
@@ -721,7 +726,11 @@ Sear the potatoes and mushrooms until they take color
 Add the potatoes and mushrooms to the pot roast, making sure they’re submerged
 set a timer for 90 minutes
 Ingredients: 
-red wine, vinegar, bouillon, MSG, black pepper
+red wine, 
+vinegar, 
+bouillon, 
+MSG, 
+black pepper
 Instructions: 
 Test the roast for doneness. Should be able to pull off a chunk with tongs. Maybe you like it like catfood–if you do, keep cooking another 90 minutes, weirdo. .
 Using tongs, remove and discard the onions, celery, and herb sprigs
@@ -768,7 +777,14 @@ In a food processor, turn the garlic into paste, then add the beef, tomato sauce
 
 Spoon the filling onto the crepes, roll them into tubes, and place in a 9x13 baking dish.  Spoon and spread the remaining tomato sauce over the cannelloni, and top with the reserved shredded mozzarella.  Put four inches under the broiler until the cheese and crepes brown slightly, four minutes or so.
 # Reverse Sear Steak
-2 inch rib steak from fridge temp (40 deg) took ~1h to reach 105 in a 180 degree oven, steak set onto cutting board (fat cap down) while cast iron heated + some oil to 600 degrees for ~1 min per side (inc fat cap side), pulled at 110, coasted to 130 covered w/ large bowl on cutting board (both room temp)
+Note: took ~1h to reach 105 in a 180 degree oven from fridge temp (40 deg)
+Ingredients:
+ribeye steak, two inches thick
+Instructions:
+place steak into 180 degree oven until it reaches 105 F, 
+steak set onto cutting board (fat cap down) while cast iron or carbon steel pan heats + some oil to at least 350 degrees 
+sear for 1.5 min per side (inc fat cap side), 
+carryover should take it to 130 covered w/ large bowl on cutting board (both room temp)
 # Bacon Jam
 ## Make the syrup
 Ingredients:
@@ -833,9 +849,8 @@ Attribution: ChefSteps
 Video: https://www.youtube.com/watch?v=QGS-cZWY_Zg
 Ingredients: 
 
-Sous vide dark meat 131 24 hours
-
-Sous vide light meat 4-8 hours
+turkey legs
+turkey breasts
 herbs & spices
 flour
 cornstarch
@@ -844,7 +859,9 @@ Trisol
 salt
 Instructions:
 Butcher, Bone, season, and Bag whole turkey into pieces
-Slice into even "nuggets"
+Cook the dark meat sous vide at 131 for 24 hours. cook the light meat sous vide for 4-8 hours
+
+Slice the white meat into even "nuggets"
 rest to hydrate
 
 rest in buttermilk 
@@ -932,7 +949,7 @@ Attribution: America’s Test Kitchen
 
 Ingredients:
 • ½ lb cannellini beans
-• 1½ T s
+• 1 ½ T salt
 • 2 quart water
 
 • ⅓ lb thick-cut bacon, diced
@@ -943,16 +960,16 @@ Ingredients:
 • 2 zucchini, rough chopped
 
 • 4 cloves garlic
-• ½ t s
+• ½ t salt
 • ¼ t red pepper flakes
 • ½ head green cabbage
 
 • 4 c water
 • 2 c chicken broth
-• 1½ bay leaf
+• 1 bay leaf
 • parmesan cheese rind
 
-• 1½ c V8 juice
+• 1 ½ c V8 juice
 • ½ c fresh basil
 Instructions:
 
@@ -987,9 +1004,7 @@ Ingredients:
 • 1 package won ton wrappers
 • 1 small bowl water
 • Oil for deep-frying
-
-
-Ingredients: 
+Instructions: 
 Combine the cream cheese and crab meat.  Mix in the remaining six filling ingredients one at a time. On a flat surface, lay out a won ton wrapper in front of you so that it forms 2 triangles (not a square). Wet the edges of the won ton.  Add 1 t of filling to the middle, and spread it out toward the left and right points of the wrapper so that it forms a log or rectangular shape.  Fold over the edges of the wrapper to make a triangle.
  
 Heat wok and add oil for deep-frying. When oil is ready (the temperature should be between 360° – 375°), carefully slide in the Crab Rangoon, taking care not to overcrowd the wok. Deep-fry until they are golden brown, about 3 minutes, turning once. Remove with a slotted spoon and drain. Serve hot with cool Hot Sweet and Sour Sauce
@@ -1201,15 +1216,16 @@ Note: Our wine of choice for this dish is Sweet Marsala Fine, an Italian wine th
 Yield: SERVES 4
 Ingredients:
 4 boneless, skinless chicken breasts (5 to 6 ounces each), fat trimmed 
-1 cup unbleached all-purpose flour Salt and ground black pepper
+1 cup unbleached all-purpose flour 
+Salt and ground black pepper
 2 tablespoons vegetable oil
-2 ½ ounces (about 3 slices) pancetta, cut into I by 1/8 -inch pieces
+2 ½ ounces (about 3 slices) pancetta, cut into 1 by 1/8 -inch pieces
 8 ounces white mushrooms, sliced (about 2 cups)
 1 medium garlic clove, minced or pressed through a garlic press
 1 teaspoon tomato paste
 1 ½ cups sweet Marsala
-1 ½  tablespoons juice from I large lemon
-4 tablespoons 1/2 stick) unsalted butter, cut into 4 pieces
+1 ½  tablespoons juice from 1 large lemon
+4 tablespoons (1/2 stick) unsalted butter, cut into 4 pieces
 2 tablespoons minced fresh parsley leaves
 Instructions: 
 1. Adjust an oven rack to the lower-middle position, place a large heatproof dinner plate on the rack, and heat the oven to 200 degrees.
@@ -1221,12 +1237,11 @@ al 's n T
 # Chicken Empanadas
 ## Make Dough
 Ingredients: 
-Dough:*
 4 1/2 cups unbleached all-purpose flour (Deb note: I used 1/2 cup whole wheat flour)
 3 teaspoons salt
 2 sticks (1 cup) cold unsalted butter, cut into 1/2-inch cubes
 2 large eggs
-2/3 cup ice water
+⅔ cup ice water
 2 tablespoons distilled white vinegar
 Instructions: 
 Sift flour with salt into a large bowl and blend in butter with your fingertips or a pastry blender until mixture resembles coarse meal with some (roughly pea-size) butter lumps. Beat together egg, water, and vinegar in a small bowl with a fork. Add to flour mixture, stirring with fork until just incorporated. (Mixture will look shaggy.) Turn out mixture onto a lightly floured surface and gather together, then knead gently with heel of your hand once or twice, just enough to bring dough together. (Deb note: If you use a large-ish bowl, you can do this step in-bowl.) Form dough into two flat rectangles and chill them, each wrapped in plastic wrap, at least 1 hour. Dough can be chilled up to 6 hours total. 
@@ -1374,15 +1389,17 @@ Ingredients:
 
 1 3/4 teaspoons salt
 
-1/2 teaspoon yeast. Mixed with 1-1/4 c of warm water + 1T sugar
+1/2 teaspoon yeast
+1-1/4 c of warm water 
+1 T sugar
 
-Up to additional 1/4 cup water, add in batches until shaggy dough.
+
 Instructions:
 Warm the water with sugar to body temperature, stir in yeast.
 
 In a large mixing bowl, whisk together flour, salt, and yeasted water.
 
-Add water and mix until a shaggy mixture forms.
+Add water and mix until a shaggy mixture forms. Up to additional 1/4 cup water, add in batches until shaggy dough.
 
 Cover bowl with plastic wrap and set aside for 12 - 18 hours.  Overnight works great. 
 ## Bake the bread
@@ -1406,7 +1423,7 @@ Ingredients:
 •  ¾ c butter flavored shortening 
 •  7 oz sugar
 •  ½ c cake flour
-•  2 c whole wheat, graham, or rye flour
+•  2 c whole wheat flour, graham flour, or rye flour
 •  3 t baking powder
 •  ¼ t salt
 •  ½ t cinnamon
@@ -1415,8 +1432,8 @@ Ingredients:
 •  3 T honey
 •  3 T molasses
 •  1 t vanilla 
-torch half package of mini marshmallows
-beat into 1 stick butter. 
+5 ounces mini marshmallows
+1 stick butter. 
 •  8 oz chocolate
 •  8 oz cream
 •  pinch salt 
@@ -1426,8 +1443,7 @@ Instructions:
 
 Preheat oven to 350, grease two 9-inch cake pans.  Cream together shortening salt, and sugar.  Combine the flours, baking powder, and cinnamon in a separate bowl.  Combine yolks with water, vanilla, honey and molasses in a cup with a spout.  Slowly alternate adding wet ingredients and dry ingredients until well combined.  Pour into cake pans and bake 18-20 minutes.  Remove from oven and cool on rack.  Cut these in half horizontally when cool enough.
 
-Place the gelatin into the bowl of a stand mixer along with ½ c of the water. Have the whisk attachment standing by. In a small saucepan combine the remaining ½ c water, granulated sugar, corn syrup and salt. Heat on medium high to 240.  Pour the syrup down the side of the bowl into the gelatin mixture. Once you have added all of the syrup, increase the speed to high. Continue to whip until the mixture becomes very thick and is lukewarm, adding the vanilla during the last minute of whipping. 
-
+torch the marshmallows. beat the still-warm marshmallows into the butter
 Microwave the chocolate, cream, salt, and vanilla and let cool.  Whip in a standing mixer or with a handheld mixer until stable.
 
 Spread the marshmallow on three layers of the cake and wait at least three hours.  Top with the fourth cake layer.  Ice with chocolate frosting.
@@ -1440,7 +1456,7 @@ Ingredients:
 pie crust, blind baked
 ¼ c brown sugar
 
-20 oz fully cooked sweet potatoes (preferably pre-salted)
+20 oz sweet potatoes, cooked
 2 T butter
 2 t cinnamon
 2 t ground ginger
@@ -1450,7 +1466,7 @@ pie crust, blind baked
 ¾ c sugar
 2 T molasses
 1 oz bourbon
-¼ t s if sw potatoes are unseasoned
+¼ t salt (if sweet potatoes are unseasoned)
 
 3 eggs, + 2 yolks
 # Gingerbread Pumpkin Trifle
@@ -1475,7 +1491,6 @@ Ingredients:
 
 • 12 oz whipped cream
 • 1/2 cup gingersnaps, optional
-
 Instructions: 
 Preheat oven to 325 degrees when using a glass pan. Spray an 8-by-8-inch pan with no-stick cooking spray. Mix melted and slightly cooled butter, sugar and egg and set aside. In a large bowl, sift dry ingredients. Combine molasses and hot water and stir to combine. Add flour mixture to butter-sugar mixture alternately with the molasses mixture and whisk to combine. Pour batter into pan and bake 50 to 60 minutes. Cool in the pan 5 minutes. Serve from the pan, or turn out onto a rack, and cool completely. 
 Meanwhile, prepare the pudding and set aside to cool. Stir the pumpkin pie filling, sugar, and cardamom into the pudding. 
@@ -1508,7 +1523,7 @@ Ingredients:
 ¼ c cocoa powder
 4 eggs 
 1 t vanilla
-½ t baking pdr
+½ t baking powder
 1 ¼ c AP flour
 
 
@@ -1534,25 +1549,25 @@ Author: Matt Boss
 Ingredients: 
 1/3 c cocoa
 1/2 c + 2 T hot water
-2 oz unsweetened
+2 oz unsweetened chocolate
 4 T butter
-1/2 c + 2T oil
+1/2 c + 2 T oil
 2 eggs + 2 yolks
 2 t vanilla
-2 1/2 c su
-1 3/4 c AP
-3/4 t s
+2 1/2 c sugar
+1 3/4 c AP flour
+3/4 t salt
 6 oz bittersweet chocolate
 
 
 1 stick butter
 2 sticks butter
-1 3/4 c su
+1 3/4 c sugar
 1 c peanut butter
-2 eggs 1 yolk
+2 eggs + 1 yolk
 2 t vanilla
-2 c AP
-1/2 t s
+2 c AP flour
+1/2 t salt
 
 Instructions: 
 Preheat oven to 305. Butter a 13- by 9- by 2-inch baking pan, then line bottom of pan with parchment paper and butter parchment. 
@@ -1594,7 +1609,7 @@ Instructions:
 • 1 T almond extract
 
 
-Ingredients: 
+Instructions: 
 Preheat the oven to 425◦F (220◦C) and line two baking sheets with parchment paper, then butter and flour them.
 
 Beat the egg whites with a handheld mixer until they form soft peaks. Add the granulated sugar and beat to a meringue.  In a stand mixer with a paddle attachment, beat the almonds, powdered sugar and eggs on medium speed until light and voluminous, about 3 minutes. Add the flour and beat on low speed until the flour is just combined (do not over beat). Fold the meringue and melted butter into the almond mixture. Divide the batter between the pans and spread it evenly to cover the entire surface of each pan.
@@ -1612,7 +1627,7 @@ Ingredients:
 
 1/4 tsp coarse sea salt
 
-2 cs (65 g) crispy rice cereal
+2 c (65 g) crispy rice cereal
 
 1 c golden grahams
 Instructions:
@@ -1669,7 +1684,7 @@ Ingredients:
 14 T butter sugar 
 •  1/4 c sugar 
 •  2 c brown sugar 
-•  2 c + 2 T AP 
+•  2 c + 2 T AP flour
 •  1/2 t baking soda 
 •  1/4 t baking powder
 •  1/2 t salt
@@ -1816,7 +1831,7 @@ Heat to 375 degrees.   mix the flour, cocoa, baking soda and powder, salt, and s
 4. To make the cream, place butter and shortening in a mixing bowl, and at low speed, gradually beat in the sugar and vanilla. Turn the mixer on high and beat for 2-3 minutes until filling is light and fluffy.
 5. To assemble the cookies, in a pastry bag with a 1/2 inch, round tip, pipe teaspoon-size blobs of cream into the center of one cookie. Place another cookie, equal in size to the first, on top of the cream. Lightly press, to work the filling evenly to the outsides of the cookie. Continue this process until all the cookies have been sandwiched with cream. Dunk generously in a large glass of milk. 
 
-# Chewy Chocolate Chip Granola Bars (Hypoallergenic)
+# Chewy Chocolate Chip Granola Bars
 Author: Matt Boss
 URL: https://tasty.co/recipe/chewy-granola-bars
 ## Melt the Butter & Sugar
@@ -1831,7 +1846,7 @@ Heat oven to 300F and prepare a quarter sheet pan with either a silpat, baking p
 In a large metal mixing bowl over very low heat, whisk everything except the oats, rice cereal, and chocolate chips until they homogenize, being careful not to bring to a boil.
 ## Mix in the Cereal
 Ingredients:
-3 cups old-fashioned oat
+3 cups old-fashioned oats
 2 cups rice cereal
 ½ cup mini chocolate chips
 Instructions:
@@ -1895,23 +1910,23 @@ next time, try 155 next time.for an 8” pan
 For the crust, chocolate wafers (such as Nabisco Famous) may be substituted for graham crackers; you will need about 14 wafers. The flavor and texture of the cheesecake are best if the cake is allowed to stand at room temperature for about 30 minutes before serving. When cutting the cake, have a pitcher of hot tap water ready; dipping the blade of the knife into the water and wiping it after each cut helps make clean slices.
 ## CRUST
 Ingredients: 
-5 tablespoons unsalted butter, melted, plus I tablespoon melted unsalted butter for the pan
+5 tablespoons unsalted butter, melted, plus 1 tablespoon melted unsalted butter for the pan
 8 whole graham crackers (4 ounces), broken into rough pieces and processed in a food processor to fine, even crumbs
 1 tablespoon sugar
 Instructions: 
 1. Adjust an oven rack to the lower-middle position and heat the oven to 325 degrees. Brush the bottom and sides of a 9-inch springform pan with 1/2 tablespoon of the melted but-ter. Combine the graham cracker crumbs and sugar in a medium bowl; add 5 tablespoons of the melted butter and toss with a fork until evenly moistened. Empty the crumbs into the springform pan and, following the illustrations on page 872, press evenly into the pan bottom. Bake until fragrant and begin-ning to brown around the edges, about 13 minutes. Cool on a wire rack while making the filling.
 ## FILLING
 Ingredients:
-2 ½ pounds (five 8-ounce packages) cream cheese, cut into rough I-inch chunks, at room temperature
+2 ½ pounds (five 8-ounce packages) cream cheese, cut into rough 1-inch chunks, at room temperature
 ⅛ teaspoon salt
-1 ½ cups (101/2 ounces) sugar
+1 ½ cups (10 ½ ounces) sugar
 ⅓ cup sour cream
-2 teaspoons juice from I lemon
+2 teaspoons juice from 1 lemon
 2 teaspoons vanilla extract
 2 large egg yolks, plus 6 large eggs, at room temperature
 Instructions: 
 Remove any baking steel from your oven. Put. sheet pan lower rack, as it will leak butter out of the springform pan
-Increase the oven tem-perature to 500 degrees. In the bowl of a standing mixer, beat the cream cheese at medium-low speed to break up and soften it slightly, about 1 minute. Scrape the beater and the bottom and sides of the bowl well with a rubber spatula; add the salt and about half of the sugar and beat at medium-low speed until combined, about 1 minute. Scrape the bowl; beat in the remaining sugar until combined, about 1 minute. Scrape the bowl; add the sour cream, lemon juice, and vanilla, and beat at low speed until combined, about 1 minute. Scrape the bowl; add the egg yolks and beat at medium-low speed until thoroughly combined, about 1 minute. Scrape the bowl; add the remaining eggs, two at a time, beating until thoroughly combined, about 1 minute, scraping the bowl between additions.
+Increase the oven temperature to 500 degrees. In the bowl of a standing mixer, beat the cream cheese at medium-low speed to break up and soften it slightly, about 1 minute. Scrape the beater and the bottom and sides of the bowl well with a rubber spatula; add the salt and about half of the sugar and beat at medium-low speed until combined, about 1 minute. Scrape the bowl; beat in the remaining sugar until combined, about 1 minute. Scrape the bowl; add the sour cream, lemon juice, and vanilla, and beat at low speed until combined, about 1 minute. Scrape the bowl; add the egg yolks and beat at medium-low speed until thoroughly combined, about 1 minute. Scrape the bowl; add the remaining eggs, two at a time, beating until thoroughly combined, about 1 minute, scraping the bowl between additions.
 3. Brush the sides of the springform pan with the remaining 1/2 tablespoon melted butter. Set the springform pan on a rimmed baking sheet (to catch any spills if the pan leaks). Pour the filling into the cooled crust and bake 10 minutes; without open-ing the oven door, reduce the oven temperature to 200 degrees and continue to bake until the cheese-cake registers about 150 degrees on an instant-read thermometer inserted in the center, about 1 1/2 hours. Transfer the cake to a wire rack and cool until barely warm, 2 1/2 to 3 hours. Run a paring knife between the cake and the pan sides. Wrap tightly in plastic wrap and refrigerate until cold, at least 3 hours. (The cheesecake can be refrigerated for up to 4 days.)
 4. To unmold the cheesecake, remove the sides of the pan. Slide a thin metal spatula between the crust and the bottom of the pan to loosen, then slide the cake onto a serving plate. Let the cheese-cake stand at room temperature about 30 minutes, then cut into wedges (see note) and serve with Fresh Strawberry Topping, if desired.
 # Chocolate Chip Meringues
@@ -2194,7 +2209,7 @@ Ingredients:
 3 T vanilla
 2½ c flour
 1 t baking soda
-12 oz choc chips
+12 oz chocolate chips
 Instructions:
 
 # Apple Pie
@@ -2284,7 +2299,7 @@ Ingredients:
 1 T unsweetened shredded coconut , toasted in a small dry skillet until golden brown
 # butterscotch sauce
 Ingredients: 
-¾ c brn sugar
+¾ c brown sugar
 ½ c light corn syrup
 2 T butter
 ½ c cream
@@ -2295,7 +2310,7 @@ Instructions:
 # Honey Cream Whip
 Ingredients: 
 2 c cream
-1 pckg instant vanilla pudding mix
+1 package instant vanilla pudding mix
 1 T honey3 ½ 
 T almond liqueur
 Instructions: 
@@ -2332,20 +2347,23 @@ Ingredients:
 1 c. sugar
 3 tbsp. cornstarch
 3 eggs
-1/2 c. sweetened condensed milk
+1/2 cup sweetened condensed milk
 2 tbsp. bourbon
 6 oz. semi-sweet chocolate, melted
 4 tbsp. butter, melted
+Instructions:
 arrange 1 1/2 c. pecans on top, bake 45 minutes in 375°F
 
 
 # Pork Belly Experiment:
+Note: 1% salt (perfect for pork belly as an entree, not salty enough as bacon)
+
 Ingredients
-10lbs pork belly from C&C cut into 5 sections (~1,000g)
+10 lbs pork belly from C&C cut into 5 sections (~1,000g)
 Packaged into zip lock bags with 100g water
-1% salt (perfect for pork belly as an entree, not salty enough as bacon)
-0.25% Instacure / Prague powder / sodium nitrite (reserved from ONE “Fat Duck” belly)
-0.5% MSG
+salt (perfect for pork belly as an entree, not salty enough as bacon)
+Instacure / Prague powder / sodium nitrite (reserved from ONE “Fat Duck” belly), 0.25%
+MSG, 0.5%
 
 #  Pastrami Bacon
 Attribution: Binging with Babish
@@ -2393,14 +2411,14 @@ Green peas, frozen (100g)
 Cherry tomatoes (120g) seeded down to 90g
 3 Italian sausages (275g)
 2 cups minus 60g bechamel
-Parm 25g
+Parm (25g)
 Pesto (60g)
 
 # Bro'-'Fu
 Author: Matt Boss
 Ingredients: 
-1 sheet pan roasted broccoli
-1 pound fried tofu
+1 recipe roasted broccoli
+1 recipe fried tofu
 Half onion
 ½ red bell pepper 
 2 tsp dark soy sauce
@@ -2818,7 +2836,7 @@ Ingredients:
 
 3 tablespoons (45ml) extra-virgin olive oil
 Instructions:
-Combine flour, sugar, salt, and yeast in bowl of food processor. Pulse 3 to 4 times to incorporate. Add water and olive oil. Run food processor until mixture forms ball that rides around the bowl above the blade, about 15 seconds. Continue processing 15 seconds longer.
+Combine flour, sugar, salt, and yeast in bowl of food processor. Pulse 3 to 4 times to incorporate. Add water and olive oil. Run food processor until the mixture forms a ball that rides around the bowl above the blade, about 15 seconds. Continue processing 15 seconds longer.
 
 Transfer dough ball to lightly floured surface and knead once or twice by hand until smooth ball is formed. It should pass the windowpane test. Divide dough into three even portions and place each in a covered quart-sized deli container or in a zipper-lock freezer bag. Place in refrigerator and allow to rise at least 1 day, and up to 5 days.
 # Flaky Biscuits
@@ -2878,7 +2896,7 @@ Ingredients:
 8 to 8 1/2 cups (1000 to 1063 grams) all-purpose flour
 
 1/2 cup raisins (about 70 grams) per challah, if using, plumped in hot water and drained
-Ingredients:
+Instructions:
 In a large bowl, dissolve yeast and 1 tablespoon (13 grams) sugar in water; set aside for 5 minutes until a bit foamy.
 
 Whisk oil into yeast, then beat in 4 eggs, one at a time, with remaining 1/2 cup (100 grams) sugar and salt. Gradually add flour. When dough holds together, it is ready for kneading. (You can also use a mixer with a dough hook for both mixing and kneading, but be careful if using a standard size KitchenAid–it’s a bit much for it, though it can be done.)
@@ -3097,7 +3115,7 @@ Strain, discarding the solids, and measure 20 g/20 mL/4 tsp of the wine reductio
 Ingredients:
 Egg yolks, 75g, 5-6 yolks, 100%
 Stock or water, 20g, 20 mL/4 tsp, 27%, 
-Instructions
+Instructions:
 Blend together with the wine reduction.
 Place in a zip-top bag, remove as much air as possible from the bag by using the water-displacement method, and seal It.
 Cook sous vide for 30 minutes.
@@ -3247,7 +3265,7 @@ DEGREE OF DIFFICULTY: moderate
 SPECIAL REQUIREMENTS: xanthan gum, liquid soy lecithin
 ## Hydrate the gelatin
 INGREDIENTs: 
-Chicken stock, 200 g, 200 ml/7/8 cup. 100%
+Chicken stock, 200 g, 200 ml, 7/8 cup. 100%
 Powdered gelatin (Knox brand), 4.3 g, 2%
 Instructions:
 Sprinkle the powdered gelatin over the stock, and allow it to dissolve, about 3-5 minutes.
@@ -3464,7 +3482,7 @@ Used In: Nacho Dip
 Ingredients:
 12 oz. Lager or low-hop beer. No IPAs.
 
-1 Tbsp plus 1 tsp Sodium Citrate
+4 tsp Sodium Citrate
 
 4 oz. Swiss cheese (shredded)
 
@@ -3550,7 +3568,7 @@ Ingredients:
 
 3/4 cups white wine
 
-1-ounce dried porcini mushrooms, finely chopped
+1 ounce dried porcini mushrooms, finely chopped
 
 Reserved bacon
 Instructions: 
@@ -3585,7 +3603,7 @@ Ingredients:
 
 3/4 cup evaporated milk
 
-Up to 4 tsp. Fish sauce
+4 tsp. Fish sauce
 
 4 teaspoons fresh basil
 
@@ -4652,19 +4670,16 @@ Ingredients:
 3 Tbsp (about 10 cloves) garlic, grated 
 2 Tbsp grated fresh ginger
 Instructions:
-In a small bowl, combine the garlic, ginger, and the 2 scallions.
+In a small bowl, combine the remaining garlic, remaining ginger, and the 2 remaining scallions.
 ## The rice
 Ingredients:
 400 grams dry (about 2 cups) short-grain white rice or sushi rice, cooked
 Instructions:
-
 Transfer to a bowl or, if making ahead, cool completely and transfer to a zip-top bag for refrigeration.
 ## The marinade
 Ingredients:
 1/3 cup soy sauce
-
 2 Tbsp doenjang or brown miso paste 
-
 2 Tbsp of the flavor base
 
 2 Tbsp dark brown sugar 
@@ -4758,9 +4773,10 @@ Attribution: Good Eats Reloaded
 Ingredients:
 2-3lb Chuck roast
 
-1% salt
+2.5 tsp salt
 
-0.5% MSG + same volume freshly ground pepper
+1 tsp MSG 
+2 tsp black pepper
 
 1-½ medium onions, halved
 
@@ -4870,7 +4886,7 @@ Ingredients
 
 3/4 teaspoon (3 ml) lemon juice 
 
-2/3 cup (160 ml) low-sodium store-bought or homemade chicken stock
+2/3 cup (160 ml) chicken stock
 
 1/2 cup (120 ml) heavy cream
 

@@ -21,10 +21,10 @@ def main():
     run("ingest_markdown.py")
     run("parse_ingredient_blocks.py")
     run("parse_ingredient_lines.py")
-    run("build_ingredients.py")          # (you should already have or we’ll define next)
+    run("build_ingredients.py")
     run("generate_canonical_groups.py")
-    run("seed_kitchen.py")               # your fridge/pantry script
-    run("create_views.py")               # new
+    run("seed_kitchen.py")               # fridge/pantry script
+    run("create_views.py")
 
     print("\n✅ Database rebuilt successfully")
 
