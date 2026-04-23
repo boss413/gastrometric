@@ -851,8 +851,8 @@ Ingredients:
 
 turkey legs
 turkey breasts
-herbs & spices
-flour
+KFC herbs & spices
+ap flour
 cornstarch
 baking soda
 Trisol
@@ -1788,8 +1788,8 @@ To assemble the cake: Cut each cake in half horizontally. Crumble one cake layer
 # Snickerdoodles
 # Ingredients
 • 2 ¼ c flour
-• 2 t tartar
-• 1 t soda
+• 2 t cream of tartar
+• 1 t baking soda
 • ½ t salt
 • 1 ½ stick butter
 • ¼ c shortening
@@ -2048,7 +2048,7 @@ Ingredients:
 12 tablespoons (11/2 sticks) unsalted butter, melted and cooled until just warm
 1 cup packed (7 ounces) light or dark brown sugar
 ½ cup (31/2 ounces) granulated sugar
-1 large egg, plus I large egg yolk
+1 large egg, plus 1 large egg yolk
 2 teaspoons vanilla extract
 1-1 ½ cups semisweet chocolate chips
 Instructions: 
@@ -2411,7 +2411,7 @@ Green peas, frozen (100g)
 Cherry tomatoes (120g) seeded down to 90g
 3 Italian sausages (275g)
 2 cups minus 60g bechamel
-Parm (25g)
+Parmesan (25g)
 Pesto (60g)
 
 # Bro'-'Fu
@@ -3495,7 +3495,7 @@ Pour beer and Sodium Citrate into a large soup container (minimum 32 oz.). Micro
 Working in handfuls, use an immersion blender to melt the cheese into the beer mixture. You will have to stop every second handful to microwave the mixture for another minute or two until it's hot again. Keep monitoring it to make sure it doesn't boil over.
 # Parmesan (Parm) Queso
 Ingredients:
-9 oz parm
+9 oz parmesan cheese
 
 7 oz white wine
 
@@ -3505,7 +3505,7 @@ Ingredients:
 Ingredients:
 1 Tbsp. oil or lard
 
-1 pound ground beef plus or minus an equal mix of Italian Sausage
+1 pound ground beef
 
 1 yellow onion, finely diced
 
@@ -3972,7 +3972,8 @@ Salt
 6-8 cups low-sodium chicken broth
 8 fresh garlic and pork sausages (about 1 1/4 pounds)
 1 large baguette (about 12 ounces), crust removed, cut into 1-inch pieces
-3 duck confit legs, thighs and drumsticks separated Ground black pepper
+3 duck confit legs, thighs and drumsticks separated 
+Ground black pepper
 Instructions:
 1. Drain the beans, place them in a medium bowl, and set aside. Tie the parsley stems, thyme sprigs, and bay leaves into a bundle with kitchen twine. Set aside.
 2. Cook the salt pork skin and meat in a Dutch oven over low heat until most of their fat has rendered, about 20 minutes. Increase the heat to medium and add the onion, carrot, tomatoes, garlic, and 1 teaspoon salt. Cook until the onion is tender, about 10 minutes.
@@ -4049,7 +4050,7 @@ Attribution: Serious Eats
 Note: Epazote, a Mexican herb, can be found at Mexican grocers. To add other flavors to the refried beans, try sautéing a pinch of ground cumin or fresh chiles with the minced onion, or puréeing toasted dried chiles into the mixture. Different cooking fats give different flavors to the beans: lard is one of the most traditional, and it adds a porky, funky depth to the beans that's hard to beat; bacon ups the ante even more by layering in a smoky flavor; vegetable oil keeps things neutral so you can really enjoy the flavor of the beans and the aromatics; and butter is decadent and rich without being overpowering.
 URL: https://www.seriouseats.com/perfect-refried-beans
 Ingredients: 
-1/2 recipe Pinto or Black Beans, including garlic and onion with root removed, reserving cooking liquid
+1/2 recipe Pinto Beans
 
 1/4 cup reserved bean cooking liquid
 
@@ -4151,7 +4152,7 @@ Add, and whip to stiff peaks.
 Ingredients:
 Egg yolks, blended, 60 g, 27%
 Corn maltodextrin (Maltrin M100, GPC brand), 40 g, 17.5%
-Instructions
+Instructions:
 Add and rewhip.
 Cast into desired mold.
 Steam at 77 °C/170 °F until fully set. Cool cheese soufflé.

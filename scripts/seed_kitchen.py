@@ -6,11 +6,11 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "gastrometric.db
 conn = sqlite3.connect(DB_PATH)
 c = conn.cursor()
 
-fridge = ['cabbage', 'scallions', 'red onion',
-          'cauliflower', 'half-and-half'
+fridge = ['cabbage', 'scallions', 'mushrooms', 'bean sprouts',
+          'cauliflower', 'crimini', 
           ]
 
-fridge_list = ['cabbage', 'green cabbage', 'scallions', 'red onion', 'cauliflower', 'half & half']
+fridge_list = ['cabbage', 'scallions', 'bean sprouts', 'cauliflower', 'mushrooms', 'crimini']
 
 for item in fridge_list:
     # Lookup ingredient ID first
@@ -26,7 +26,7 @@ for item in fridge_list:
         print(f"WARNING: {item} not found in ingredients table")
 
 pantry = [
-    "ap flour", "all purpose flour", "bread flour", "quinoa", "millet", "brown basmati rice",
+    "all purpose flour", "bread flour", "quinoa", "millet", "brown basmati rice",
     "brown rice", "potato starch", "corn starch", "corn flour", "corn meal", "gelatin",
     "long grain rice", "basmati rice", "sushi rice", "short grain rice",
     "black beans", "pinto beans", "garbanzo beans", "chickpeas",

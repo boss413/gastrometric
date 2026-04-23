@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS recipes (
     yield TEXT,
     state TEXT,
     parent_recipe_id INTEGER,
-    ingestion_method TEXT
+    ingestion_method TEXT,
+    raw_hash
 )
 """)
 
@@ -63,6 +64,10 @@ CREATE TABLE IF NOT EXISTS recipe_ingredients (
     ingredient_name TEXT,
     quantity_value REAL,
     quantity_unit TEXT,
+    imperial_volume_value REAL,
+    imperial_volume_unit TEXT,
+    imperial_weight_value REAL,
+    imperial_weight_unit TEXT,
     preparation TEXT,
     grams REAL,
     ml REAL,
