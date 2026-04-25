@@ -105,12 +105,17 @@ PLUS_SPLIT_PATTERN = re.compile(
 _WORD_NUMBERS = r'(?:one|two|three|four|five|six|seven|eight|nine|ten|half|a)\b'
 
 def split_on_plus(raw_text):
+    # Normalize first so unicode fractions (½, ¼, …) become digits before we
+    # check whether the second segment starts with a quantity.
+    norm_text = normalize_text(raw_text)
     # Mask parenthesised content so we don't split inside parens
-    paren_masked = re.sub(r'\([^)]*\)', lambda m: 'X' * len(m.group(0)), raw_text)
+    paren_masked = re.sub(r'\([^)]*\)', lambda m: 'X' * len(m.group(0)), norm_text)
     parts_masked = PLUS_SPLIT_PATTERN.split(paren_masked)
     if len(parts_masked) < 2:
         return [raw_text]
-    # Recover original text at split boundaries
+    # Recover split positions from the *normalized* text, then map back to raw_text.
+    # Since the normalized form may differ in length we work with the normalized
+    # parts and return them (the DB stores raw_text separately anyway).
     positions = []
     pos = 0
     for part in parts_masked:
@@ -120,7 +125,7 @@ def split_on_plus(raw_text):
         m = PLUS_SPLIT_PATTERN.match(remainder)
         if m:
             pos += len(m.group(0))
-    parts = [raw_text[s:e].strip() for s, e in positions if raw_text[s:e].strip()]
+    parts = [norm_text[s:e].strip() for s, e in positions if norm_text[s:e].strip()]
     if len(parts) >= 2:
         second = parts[1].strip()
         # Accept if it starts with a digit or a word-number
@@ -330,8 +335,11 @@ def extract_paren_secondary_measure(paren_text):
 _APPROX = r'(?:approximately|approx\.?|about)?\s*'
 
 # Grams: may be bare or parenthesised  e.g. "50g" or "(50 g)" or "50 grams"
+# Leading char class includes / and | so "7 oz / 200g" is handled correctly.
+# Use g(?![a-zA-Z]) instead of (?<!\w)g(?!\w) so that bare "200g" (g directly
+# after digit) is captured — the lookbehind (?<!\w) would incorrectly reject it.
 EXPLICIT_MASS_PATTERN = re.compile(
-    r'[\(\s,]*' + _APPROX + r'(\d+(?:\.\d+)?)\s*(?:grams?|(?<!\w)g(?!\w))\s*\)?'
+    r'[\(\s,/|]*' + _APPROX + r'(\d+(?:\.\d+)?)\s*(?:grams?|g(?![a-zA-Z]))\s*\)?'
     r'(?:\s*,)?',
     re.IGNORECASE
 )
@@ -367,22 +375,22 @@ def extract_explicit_measures(text):
     m = EXPLICIT_MASS_PATTERN.search(text)
     if m:
         grams_val = m.group(1)
-        text = (text[:m.start()] + text[m.end():]).strip().rstrip(',').strip()
+        text = (text[:m.start()] + ' ' + text[m.end():]).strip().rstrip(',').strip()
 
     m = EXPLICIT_ML_PATTERN.search(text)
     if m:
         ml_val = m.group(1)
-        text = (text[:m.start()] + text[m.end():]).strip().rstrip(',').strip()
+        text = (text[:m.start()] + ' ' + text[m.end():]).strip().rstrip(',').strip()
     else:
         m = EXPLICIT_LITER_PATTERN.search(text)
         if m:
             ml_val = str(float(m.group(1)) * 1000)
-            text = (text[:m.start()] + text[m.end():]).strip().rstrip(',').strip()
+            text = (text[:m.start()] + ' ' + text[m.end():]).strip().rstrip(',').strip()
 
     m = EXPLICIT_PCT_PATTERN.search(text)
     if m:
         pct_val = m.group(1)
-        text = (text[:m.start()] + text[m.end():]).strip().rstrip(',').strip()
+        text = (text[:m.start()] + ' ' + text[m.end():]).strip().rstrip(',').strip()
 
     text = APPROX_SECONDARY_PATTERN.sub('', text).strip().rstrip(',').strip()
     text = PLUS_ADDITIONAL_PATTERN.sub('', text).strip().rstrip(',').strip()
@@ -640,6 +648,112 @@ def extract_unit(text):
 
 
 # ============================================================
+# UNIT ROUTING
+# Standard measurement units never go to quantity_unit.  Instead they are
+# routed to the appropriate dedicated column:
+#   grams/kg          → grams  (already handled; unit cleared here)
+#   ml/l              → ml     (already handled; unit cleared here)
+#   oz/lb             → imperial_weight_value / imperial_weight_unit
+#   cup/tbsp/tsp/…    → imperial_volume_value / imperial_volume_unit
+#
+# quantity_unit is reserved for non-standard count-type units:
+#   clove, can, bunch, head, pinch, package, sprig, stick, slice, etc.
+# ============================================================
+
+_GRAM_UNITS = frozenset({'g', 'kg', 'gram', 'grams', 'kilogram', 'kilograms'})
+_ML_UNITS   = frozenset({'ml', 'mls', 'milliliter', 'milliliters',
+                          'millilitre', 'millilitres',
+                          'liter', 'liters', 'litre', 'litres', 'l'})
+_IMPERIAL_WEIGHT_UNITS = frozenset({'oz', 'ounce', 'ounces', 'lb', 'pound', 'pounds'})
+_IMPERIAL_VOLUME_UNITS = frozenset({
+    'cup', 'cups',
+    'tbsp', 'tablespoon', 'tablespoons',
+    'tsp', 'teaspoon', 'teaspoons',
+    'pint', 'pints',
+    'quart', 'quarts', 'qt',
+    'gallon', 'gallons',
+    'fl oz', 'fluid ounce', 'fluid ounces',
+})
+
+# Conversion factors to the canonical storage unit (grams / ml)
+_KG_TO_G   = 1000.0
+_OZ_TO_G   = 28.3495
+_LB_TO_G   = 453.592
+_CUP_TO_ML   = 236.588
+_TBSP_TO_ML  = 14.7868
+_TSP_TO_ML   = 4.92892
+_PINT_TO_ML  = 473.176
+_QUART_TO_ML = 946.353
+_GALLON_TO_ML = 3785.41
+_L_TO_ML     = 1000.0
+
+
+def route_unit(quantity, unit, grams, ml):
+    """
+    Given a raw quantity/unit pair (plus any already-extracted grams/ml),
+    return a dict with the correctly routed fields:
+
+        quantity_value, quantity_unit,
+        imperial_weight_value, imperial_weight_unit,
+        imperial_volume_value, imperial_volume_unit,
+        grams, ml
+
+    Standard measurement units are routed to their dedicated columns and
+    quantity_unit is set to None.  Count/container units (clove, can, …)
+    stay in quantity_unit.
+    """
+    qty_val  = float(quantity) if quantity is not None else None
+    unit_key = unit.lower().strip() if unit else None
+
+    imp_wt_val  = imp_wt_unit  = None
+    imp_vol_val = imp_vol_unit = None
+
+    if unit_key in _GRAM_UNITS:
+        # gram-family: populate grams if not already set
+        if grams is None and qty_val is not None:
+            factor = _KG_TO_G if unit_key in ('kg', 'kilogram', 'kilograms') else 1.0
+            grams = str(qty_val * factor)
+        # clear from quantity columns
+        qty_val  = None
+        unit_key = None
+
+    elif unit_key in _ML_UNITS:
+        # ml-family: populate ml if not already set
+        if ml is None and qty_val is not None:
+            factor = _L_TO_ML if unit_key in ('liter', 'litre', 'liters', 'litres', 'l') else 1.0
+            ml = str(qty_val * factor)
+        qty_val  = None
+        unit_key = None
+
+    elif unit_key in _IMPERIAL_WEIGHT_UNITS:
+        if qty_val is not None:
+            imp_wt_val  = str(qty_val)
+            imp_wt_unit = unit_key
+        qty_val  = None
+        unit_key = None
+
+    elif unit_key in _IMPERIAL_VOLUME_UNITS:
+        if qty_val is not None:
+            imp_vol_val  = str(qty_val)
+            imp_vol_unit = unit_key
+        qty_val  = None
+        unit_key = None
+
+    # else: count/container unit — leave qty_val and unit_key as-is
+
+    return {
+        "quantity":             str(int(float(qty_val))) if qty_val is not None and float(qty_val) == int(float(qty_val)) else (str(qty_val) if qty_val is not None else None),
+        "unit":                 unit_key,
+        "imperial_weight_value": imp_wt_val,
+        "imperial_weight_unit":  imp_wt_unit,
+        "imperial_volume_value": imp_vol_val,
+        "imperial_volume_unit":  imp_vol_unit,
+        "grams":                grams,
+        "ml":                   ml,
+    }
+
+
+# ============================================================
 # PREPARATION EXTRACTION
 # Prep patterns are extracted from the ingredient text and moved
 # to the preparation column.  Multi-word patterns must come before
@@ -785,8 +899,9 @@ def clean_name(text):
     # Remove stray unmatched parentheses
     text = text.replace("(", " ").replace(")", " ")
     text = " ".join(text.split())
-    # Strip leading stopwords / connectors
-    text = re.sub(r'^(of|from|and|or|\*|:|with|[-–])\s*', '', text, flags=re.IGNORECASE)
+    # Strip leading stopwords / connectors — use \b so that 'or' is only matched
+    # as a whole word and not as a prefix inside ingredient names like "orange".
+    text = re.sub(r'^(?:of|from|and|or|\*|:|with)\b\s*|^[-–]\s*', '', text, flags=re.IGNORECASE)
     # Strip trailing connectors and prepositions
     text = re.sub(r'\s+(and|or|\*|with|in)$', '', text, flags=re.IGNORECASE)
     # "from N <word>" — the source fruit/ingredient (e.g. "from 1 lime")
@@ -803,6 +918,10 @@ def clean_name(text):
         r'[\w\s-]*$',
         '', text, flags=re.IGNORECASE
     ).strip()
+    # Strip trailing "for <purpose>" clauses that leak through after noise removal.
+    # e.g. "plus more as needed for hands and work surface" → noise strips "plus more"
+    # and "as needed", leaving "for hands and work surface" attached to the name.
+    text = re.sub(r'\s+for\s+\S.*$', '', text, flags=re.IGNORECASE).strip()
     text = re.sub(r'(?<!\w)\d+(?:\.\d+)?(?!\w)', '', text).strip()
     # Strip stray isolated punctuation dots
     text = re.sub(r'(?<!\w)\.(?!\w)', '', text).strip()
@@ -869,11 +988,20 @@ def parse_line(raw_text, optional=False):
     text, can_qty, can_unit, can_size_note = extract_can_size(text)
     text = remove_size_descriptors(text)
 
-    # If a gram weight was already captured, strip any remaining secondary
-    # volume/count measure (e.g. "1/4 cup" after "50 g, 1/4 cup, …")
+    # Extract the primary quantity from the remaining text BEFORE deciding
+    # how to set qty/unit.  We need to know whether a leading quantity exists
+    # so we can decide whether the gram value is primary or secondary.
+    #
+    # If a gram weight was already captured AND there's also a leading volume/count
+    # quantity in the text (e.g. "7 oz / 200g", "1 cup (300g; 240ml)"), strip any
+    # leftover secondary measure words that aren't the leading quantity so they
+    # don't pollute the name — but do NOT strip the leading qty+unit itself.
     if grams_val is not None:
+        # Strip stray secondary measures that appear AFTER the first token
+        # e.g. trailing ", 1/4 cup" or "50 g, 1/4 cup" style suffixes.
+        # Use a lookahead so we only remove units that are NOT at the very start.
         text = re.sub(
-            r'(?<!\w)(\d+(?:\.\d+)?)\s*'
+            r'(?<=\s)(\d+(?:\.\d+)?)\s*'
             r'(cup|cups|tbsp|tsp|tablespoon|tablespoons|teaspoon|teaspoons|'
             r'oz|ounce|ounces|lb|pound|pounds|pint|pints|quart|quarts|'
             r'ml|liter|litre|g|kg)(?!\w)',
@@ -884,20 +1012,30 @@ def parse_line(raw_text, optional=False):
 
     unit = None
 
-    # Resolve canonical qty/unit from gram/can data
+    # Resolve canonical qty/unit.
+    # Priority:
+    #   1. Can/jar size (explicit container count)
+    #   2. Parenthetical imperial measure   e.g. "(1 stick)"
+    #   3. Gram weight — but ONLY when no other quantity was found in the text.
+    #      When a leading qty+unit exists (e.g. "7 oz" or "1 cup"), gram goes to
+    #      the grams column only; the primary measure is used for qty/unit.
     if can_qty is not None:
         quantity = can_qty
         unit     = can_unit
         if can_size_note:
             parens = list(parens) + [can_size_note]
     elif grams_val is not None:
-        # If a parenthetical imperial measure exists, prefer it for qty/unit
         if paren_qty and paren_unit:
+            # A parenthetical imperial measure was found — use it for qty/unit.
             quantity = paren_qty
             unit     = paren_unit
-        else:
+        elif quantity is None:
+            # No leading qty/unit found in the text — the gram value IS the
+            # primary measure (e.g. "200g all-purpose flour").
             quantity = grams_val
             unit     = "g"
+        # else: a leading qty/unit was already extracted (e.g. "7 oz") — leave
+        # quantity/unit as-is and let grams stay in the grams column only.
 
     # Protect phrases BEFORE unit extraction so e.g. "ground cloves" is not
     # split into unit=cloves + name=ground.
@@ -967,11 +1105,22 @@ def parse_ingredient_line(raw_text):
             qty, unit, prep, grams, ml, scaling, opt, names = parse_line(
                 sub, optional=is_optional
             )
+            routed = route_unit(qty, unit, grams, ml)
             for name in names:
                 parsed_sub.append({
-                    "quantity": qty, "unit": unit, "prep": prep,
-                    "grams": grams, "ml": ml, "scaling": scaling,
-                    "optional": opt, "name": name, "raw_text": raw_text,
+                    "quantity": routed["quantity"],
+                    "unit":     routed["unit"],
+                    "prep":     prep,
+                    "grams":    routed["grams"],
+                    "ml":       routed["ml"],
+                    "imperial_weight_value": routed["imperial_weight_value"],
+                    "imperial_weight_unit":  routed["imperial_weight_unit"],
+                    "imperial_volume_value": routed["imperial_volume_value"],
+                    "imperial_volume_unit":  routed["imperial_volume_unit"],
+                    "scaling":  scaling,
+                    "optional": opt,
+                    "name":     name,
+                    "raw_text": raw_text,
                 })
         # If a sub-line produced an empty name, forward the nearest real name
         if len(parsed_sub) > 1:
@@ -1035,7 +1184,9 @@ def _run(conn):
     c.execute("""
         UPDATE recipe_ingredients SET
             quantity_value=NULL, quantity_unit=NULL, preparation=NULL,
-            ingredient_name=NULL, grams=NULL, ml=NULL, scaling=NULL, optional=0
+            ingredient_name=NULL, grams=NULL, ml=NULL, scaling=NULL, optional=0,
+            imperial_weight_value=NULL, imperial_weight_unit=NULL,
+            imperial_volume_value=NULL, imperial_volume_unit=NULL
         WHERE raw_text IS NOT NULL
     """)
 
@@ -1051,21 +1202,29 @@ def _run(conn):
                 c.execute("""
                     UPDATE recipe_ingredients SET
                         quantity_value=?, quantity_unit=?, preparation=?,
-                        ingredient_name=?, grams=?, ml=?, scaling=?, optional=?
+                        ingredient_name=?, grams=?, ml=?, scaling=?, optional=?,
+                        imperial_weight_value=?, imperial_weight_unit=?,
+                        imperial_volume_value=?, imperial_volume_unit=?
                     WHERE id=?
                 """, (r["quantity"], r["unit"], r["prep"], r["name"],
                       r["grams"], r["ml"], r["scaling"], r["optional"],
+                      r["imperial_weight_value"], r["imperial_weight_unit"],
+                      r["imperial_volume_value"], r["imperial_volume_unit"],
                       primary_id))
             else:
                 c.execute("""
                     INSERT INTO recipe_ingredients
                     (recipe_id, recipe_row_id, line_index, raw_text, section,
                      quantity_value, quantity_unit, preparation, ingredient_name,
-                     grams, ml, scaling, optional)
-                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+                     grams, ml, scaling, optional,
+                     imperial_weight_value, imperial_weight_unit,
+                     imperial_volume_value, imperial_volume_unit)
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                 """, (recipe_id, recipe_row_id, line_index, raw_text, section,
                       r["quantity"], r["unit"], r["prep"], r["name"],
-                      r["grams"], r["ml"], r["scaling"], r["optional"]))
+                      r["grams"], r["ml"], r["scaling"], r["optional"],
+                      r["imperial_weight_value"], r["imperial_weight_unit"],
+                      r["imperial_volume_value"], r["imperial_volume_unit"]))
 
     conn.commit()
     print("Ingredient lines parsed — %d primary rows processed." % len(primary_rows))

@@ -46,9 +46,22 @@ CREATE TABLE IF NOT EXISTS ingredients (
 c.execute("""
 CREATE TABLE IF NOT EXISTS ingredient_aliases (
     id INTEGER PRIMARY KEY,
-    alias TEXT UNIQUE,
-    ingredient_id INTEGER,
-    FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
+    raw_text TEXT UNIQUE,
+    canonical_group TEXT,
+    confidence INTEGER, -- 1–3 (optional but useful)
+    source TEXT -- 'rule', 'manual', 'auto'
+)
+""")
+
+c.execute("""
+CREATE TABLE IF NOT EXISTS relationships (
+    id INTEGER PRIMARY KEY,
+    source_id INTEGER,
+    target_id INTEGER,
+    score INTEGER,
+    source TEXT,  -- 'flavor_bible'
+    FOREIGN KEY(source_id) REFERENCES ingredients(id),
+    FOREIGN KEY(target_id) REFERENCES ingredients(id)
 )
 """)
 
@@ -76,6 +89,15 @@ CREATE TABLE IF NOT EXISTS recipe_ingredients (
 
     FOREIGN KEY(recipe_id) REFERENCES recipes(id),
     FOREIGN KEY(recipe_row_id) REFERENCES recipe_rows(id)
+)
+""")
+
+c.execute("""
+CREATE TABLE flavor_bible_raw (
+    id INTEGER PRIMARY KEY,
+    source_text TEXT,
+    target_text TEXT,
+    score INTEGER
 )
 """)
 

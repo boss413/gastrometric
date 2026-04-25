@@ -23,6 +23,8 @@ def main():
     run("parse_ingredient_lines.py")
     run("build_ingredients.py")
     run("generate_canonical_groups.py")
+    run("load_flavor_bible_raw.py")
+    run("map_flavor_bible.py")
     run("seed_kitchen.py")               # fridge/pantry script
     run("create_views.py")
 

@@ -69,7 +69,9 @@ CANONICAL_RULES = [
     # --- butter ---
     (r'.*cashew butter.*', 'cashew butter'),
     (r'.*cashew.*', 'cashew'),
-    (r'.*pine nut.*', 'pine nut'),
+    (r'.*pine nut.*', 'pine nuts'),
+    (r'.*pecan.*', 'pecans'),
+    (r'.*walnut.*', 'walnuts'),
     (r'.*peanut butter.*', 'peanut butter'),
     (r'.*buttermilk.*', 'buttermilk'),
     (r'.*cocoa butter.*', 'cocoa butter'),
@@ -89,6 +91,7 @@ CANONICAL_RULES = [
     (r'.*turkey breast.*', "turkey breast"),
     (r'.*turkey thigh.*', "turkey thigh"),
     (r'.*turkey.*', "turkey"),
+    (r'.*duck.*', "duck"),
 
     # --- chicken ---
     (r'.*chicken.*(stock|broth|jus|juice).*', "chicken stock"),
@@ -132,6 +135,7 @@ CANONICAL_RULES = [
     (r'.*cookie|shortbread|grahams|gingersnap.*', "cookies"),    
     (r'.*crackers.*', "crackers"),
     (r'.*tater tots.*', "tater tots"),
+    (r'.*toffee.*', "toffee"),
     (r'.*fries.*', "fries"),
 
     # melting cheeses
@@ -151,6 +155,9 @@ CANONICAL_RULES = [
     (r'.*soy milk.*', 'soy milk'),
     (r'.*oat milk.*', 'oat milk'),
     (r'.*almond milk.*', 'almond milk'),
+    (r'.*almond butter.*', 'almond butter'),
+    (r'.*almond liqueur.*', 'almond liqueur'),
+    (r'.*almond.*', 'almonds'),
     (r'.*whipped cream.*', 'whipped cream'),
     (r'.*coconut milk.*', 'coconut milk'),
     (r'.*sweetened condensed milk.*', 'sweetened condensed milk'),
@@ -159,6 +166,7 @@ CANONICAL_RULES = [
     (r'.*cream cheese.*', 'cream cheese'),
     (r'.*ricotta.*', 'ricotta'),
     (r'.*milk powder|powdered milk.*', "milk powder"),
+    (r'.*half & half|half-and-half|half and half.*', "half & half"),
     
     # soft / fresh
     (r'.*cottage cheese.*', 'cottage cheese'),
@@ -185,6 +193,7 @@ CANONICAL_RULES = [
     (r'.*chervil.*', "chervil"),
     (r'.*spinach.*', "spinach"),
     (r'.*brussels sprouts|brussels|brussel.*', "brussels sprouts"),
+    (r'.*pepper powder.*', 'chili powder'),
     (r'.*bell pepper.*', "bell pepper"),
     (r'.*apricot.*', "apricot"),
     (r'.*shallot.*', "shallot"),
@@ -193,6 +202,8 @@ CANONICAL_RULES = [
     (r'.*raisins.*', "raisins"),
     (r'.*sage.*', "sage"),
     (r'.*chive.*', "chive"),
+    (r'.*cabbage.*', "cabbage"),    
+    (r'.*iceberg|arugula|romaine|lettuce.*', "lettuce"),
     (r'.*green onion|scallion|scalion|spring onion.*', "green onion"),
     (r'.*green pepper.*', "green pepper"),
     (r'.*zucchini.*', "zucchini"),
@@ -211,6 +222,7 @@ CANONICAL_RULES = [
     (r'.*bamboo.*', 'bamboo shoots'),
     (r'.*sweet potato|sweet potatoes|yams.*', "sweet potato"),
     (r'.*potato starch.*', "potato starch"),
+    (r'.*red onion.*', "red onion"),
     (r'.*onion.*', "onion"),
     (r'.*potato.*', "potato"),
     
@@ -243,7 +255,9 @@ CANONICAL_RULES = [
     (r'.*sushi rice.*', "sushi rice"),
     (r'.*brown rice.*', "brown rice"),
     (r'.*rice|white rice.*', "rice"),
-    (r'.*pasta.*|.*spaghetti.*|.*noodle.*', "pasta"),
+    (r'.*fresh*(fettuccine|linguine|parpadelle|spaghetti|pasta|noodles).*', "fresh pasta"),
+    (r'.*macaroni|spaghetti|linguine|fettuccine|lasagna|lasagne|orzo|penne.*', "dry pasta"),
+    (r'.*pasta.*|.*spaghetti.*|.*noodle.*', "dry pasta"),
 
     # --- legumes ---
     (r'.*chili bean.*', "chili bean paste"),
@@ -266,8 +280,8 @@ CANONICAL_RULES = [
     (r'.*tamarind.*', "tamarind"),
     (r'.*hot sauce|tabasco.*', "hot sauce"),
     (r'.*pepper sauce.*', "pepper sauce"),
-    (r'.*red wine vinegar.*', " red wine vinegar"),
-    (r'.*red wine.*', " red wine"),
+    (r'.*red wine vinegar.*', "red wine vinegar"),
+    (r'.*red wine.*', "red wine"),
     (r'.*white wine vinegar.*', "white wine vinegar"),
     (r'.*white wine.*', "white wine"),
     (r'.*vinegar powder.*', "vinegar powder"),
@@ -330,7 +344,12 @@ CANONICAL_RULES = [
     (r'.*baking powder.*', "baking powder"),
     (r'.*baking soda.*', "baking soda"),
     (r'.*cream of tartar.*', "cream of tartar"),
+    (r'.*tartaric acid.*', "tartaric acid"),
+    (r'.*citric acid.*', "citric acid"),
     (r'.*xanthan gum.*', "xanthan gum"),
+    (r'.*sodium citrate.*', "sodium citrate"),
+    (r'.*lecithin.*', "lecithin"),
+    (r'.*gelatin.*', "gelatin"),
     (r'.*sodium citrate.*', "sodium citrate"),
     (r'.*cloves.*', "cloves"),
 
@@ -338,21 +357,23 @@ CANONICAL_RULES = [
     (r'.*berry|berries.*', "berry"),
     (r'.*ginger.*', "ginger"),
     (r'.*garlic.*', "garlic"),
-    (r'.*stock|broth.*', "stock"),
     (r'.*milk.*', "milk"),
     (r'.*cream.*', "cream"),
     (r'.*bay leaf|bay leaves|bay.*', "bay leaf"),
     (r'.*egg white|whites.*', "egg white"),
     (r'.*egg yolk|yolk.*', "egg yolk"),
-    (r'.*water.*', "water"),
     (r'.*peanut|peanuts.*', "peanuts"),
     (r'.*pea.*', "peas"),
     (r'.*base.*', "bouillon"),
     (r'.*jalapeno|chile|chilli|chili|peppers.*', "chili pepper"),
     (r'.*black pepper.*', "black pepper"),
     (r'.*salt.*', "salt"),
+    (r'.*stick.*', "butter"),
     (r'\begg(s)?\b', "egg"),
+    (r'.*water|ice.*', "water"),
+    (r'.*sauce.*', "sauce"),
     (r'.*oil.*', "oil"),
+    (r'.*stock|broth|jus.*', "stock"),
 ]
 
 
