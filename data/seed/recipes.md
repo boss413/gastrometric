@@ -82,7 +82,7 @@ instructions:
 INGREDIENTS:
 2 Tbsp oil or rendered fat
 16 oz. bulk Italian sausage
-10 oz. de-stemmed & chopped kale
+10 oz. kale, stemmed, chopped
 1 qt Chicken broth or water 
 1 Tbsp Lemon juice or 2 T dry white wine
 INSTRUCTIONS:
@@ -523,7 +523,7 @@ Ingredients:
 2 star anise
 1 whole black cardamom
 4 whole green cardamom
-4-5 whole cloves
+4-5 cloves
 2 whole cinnamon bark
 1 T whole black peppercorn
 1 T whole coriander
@@ -1487,7 +1487,7 @@ Ingredients:
 • 1 (5.1-ounce) box cook-and-serve vanilla pudding mix 
 • 1 (30-ounce) can pumpkin pie filling 
 • ½ c packed brown sugar 
-• 1/3 t ground cardamom or cinnamon 
+• 1/3 t ground cinnamon 
 
 • 12 oz whipped cream
 • 1/2 cup gingersnaps, optional
@@ -1498,7 +1498,7 @@ Crumble ½ the gingerbread into the bottom of a large, pretty bowl. Pour ½ of t
 # Strawberry-Banana Sherbet
 Author: Matt Boss
 Ingredients:
-• 2 ripe bananas
+• 2 bananas
 • 3 c strawberries
 • ½ c water
 • 1 c sugar
@@ -2254,7 +2254,8 @@ Use a pastry brush to brush an even coat of lightly beaten egg white all over th
 Attribution: Serious Eats
 Ingredients:
 3 ½ pounds granny Smith, + Golden Delicious, Braeburn, or other baking apples, peeled, cored, and sliced into 1/4-inch slices
-3 quarts boiling water mixed with lemon juice and water (or cider, but water and lemon juice works fine)
+3 quarts boiling water
+¼ c lemon juice
 10 tablespoons granulated sugar, plus 1 tablespoon for sprinkling over crust
 1 shot apple jack or bourbon
 1/2 teaspoon cinnamon (or more, to taste)
@@ -3535,7 +3536,7 @@ kosher salt
 
 1/2 teaspoon freshly ground black pepper
 
-3 whole cloves
+3 cloves
 
 1 whole star anise pod
 

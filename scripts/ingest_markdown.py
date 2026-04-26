@@ -14,16 +14,16 @@ recipes = parse_markdown_file(MD_PATH)
 for recipe in recipes:
     c.execute("""
     INSERT INTO recipes (
-        name,
-        author,
-        attribution,
-        source,
-        url,
-        video,
-        notes,
-        yield,
-        state,
-        ingestion_method
+        recipe_name,
+        recipe_author,
+        recipe_attribution,
+        recipe_source,
+        recipe_url,
+        recipe_video,
+        recipe_notes,
+        recipe_yield,
+        recipe_state,
+        recipe_ingestion_method
     )
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'raw', 'manual')
 """, (
@@ -55,7 +55,7 @@ for recipe in recipes:
         # ingredients
         for i, ing in enumerate(section["ingredients"]):
             c.execute("""
-                INSERT INTO recipe_ingredients (
+                INSERT INTO recipe_ingredient_blocks (
                     recipe_id, recipe_row_id, line_index, raw_text
                 )
                 VALUES (?, ?, ?, ?)

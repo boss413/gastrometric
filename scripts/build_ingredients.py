@@ -13,10 +13,11 @@ c.execute("DELETE FROM ingredients")
 
 # insert unique ingredient names
 c.execute("""
-INSERT INTO ingredients (name)
+INSERT INTO ingredients (ingredient_name)
 SELECT DISTINCT ingredient_name
-FROM recipe_ingredients
+FROM recipe_ingredient_lines_normalized
 WHERE ingredient_name IS NOT NULL
+    AND TRIM(ingredient_name) != ''
 """)
 
 conn.commit()

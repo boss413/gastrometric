@@ -45,7 +45,7 @@ for row_id, recipe_id, section_name, block in rows:
 
     for i, line in enumerate(lines):
         c.execute("""
-        INSERT INTO recipe_ingredients
+        INSERT INTO recipe_ingredient_lines_raw
         (recipe_id, recipe_row_id, line_index, raw_text, section)
         VALUES (?, ?, ?, ?, ?)
         """, (

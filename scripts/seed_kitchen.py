@@ -14,12 +14,12 @@ fridge_list = ['cabbage', 'scallions', 'bean sprouts', 'cauliflower', 'mushrooms
 
 for item in fridge_list:
     # Lookup ingredient ID first
-    c.execute("SELECT id FROM ingredients WHERE name = ?", (item,))
+    c.execute("SELECT id FROM ingredients WHERE ingredient_name = ?", (item,))
     row = c.fetchone()
     if row:
         ingredient_id = row[0]
         c.execute(
-            "INSERT INTO fridge_items (ingredient_id, name) VALUES (?, ?)",
+            "INSERT INTO fridge_items (ingredient_id, ingredient_name) VALUES (?, ?)",
             (ingredient_id, item)
         )
     else:
@@ -66,16 +66,16 @@ pantry = [
 ]
 
 for name in fridge:
-    c.execute("SELECT id FROM ingredients WHERE name = ?", (name,))
+    c.execute("SELECT id FROM ingredients WHERE ingredient_name = ?", (name,))
     row = c.fetchone()
     if row:
-        c.execute("INSERT INTO fridge_items (ingredient_id, name) VALUES (?, ?)", (row[0], name))
+        c.execute("INSERT INTO fridge_items (ingredient_id, ingredient_name) VALUES (?, ?)", (row[0], name))
 
 for name in pantry:
-    c.execute("SELECT id FROM ingredients WHERE name = ?", (name,))
+    c.execute("SELECT id FROM ingredients WHERE ingredient_name = ?", (name,))
     row = c.fetchone()
     if row:
-        c.execute("INSERT INTO pantry_items (ingredient_id) VALUES (?)", (row[0],))
+        c.execute("INSERT INTO pantry_items (ingredient_id, ingredient_name) VALUES (?, ?)", (row[0], name))
 
 conn.commit()
 conn.close()

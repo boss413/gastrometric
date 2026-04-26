@@ -422,7 +422,7 @@ def derive_canonical(name):
 conn = sqlite3.connect(DB_PATH)
 c = conn.cursor()
 
-c.execute("SELECT id, name FROM ingredients")
+c.execute("SELECT id, ingredient_name FROM ingredients")
 rows = c.fetchall()
 
 stats = defaultdict(int)
