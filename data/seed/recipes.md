@@ -4881,7 +4881,8 @@ I made this specific recipe and thought the sauce was too runny. Need to up the 
 I only used about 2/3 of the mushroom sauce for 1 pound of green beans in a 9x9 pyrex. I have decreased the measurements to a 1/3 recipe of the sauce.
 
 This method assumes you're serving immediately, so it foregoes shocking the green beans in icewater and instead lets them continue cooking with their own latent heat.		
-Ingredients
+$$ For the mushroom sauce
+Ingredients:
 1/2 pound (225 g) white button mushrooms, rinsed and spun dry in a salad spinner
 
 3/4 teaspoon (3 ml) soy sauce
@@ -4909,6 +4910,7 @@ Add 1 tablespoon (15ml) reserved shallot oil or holiday oil and butter to a 12-i
 Reduce heat to medium-high. Add garlic and cook, stirring constantly, until fragrant, about 30 seconds. Add flour and cook, stirring constantly, until light golden blond, 1 to 2 minutes. Whisking constantly, add stock & cream mixture and mushrooms.
 
 Bring to a boil, reduce to a simmer, and cook until mixture achieves a texture between pancake batter and heavy cream, about 5 minutes. Season to taste with savory salt and pepper.
+## For the green beans
 Ingredients:
 1 lb frozen cut green beans
 Instructions: 
@@ -4917,3 +4919,33 @@ Bring 1 gallon (3.8L) water and 1/4 cup (48g) kosher salt to a boil over high he
 Add green beans to water and boil until tender but still bright green, about 5 minutes. Drain through a colander set over the sink and immediately add to the pyrex dish.
 
 Reheat the mushroom sauce and stir together with the beans, then top with a generous amount of fried onions. Add to the warming (225°F) oven for up to an hour.
+# Marcella Hazan’s Tomato Sauce
+Attribution: New York Times
+Ingredients
+2cups tomatoes, in addition to their juices (for example, a 28-ounce can of San Marzano whole peeled tomatoes)
+5tablespoons butter
+1onion, peeled and cut in half
+Salt
+Instructions
+Combine the tomatoes, their juices, the butter and the onion halves in a saucepan. Add a pinch or two of salt.
+
+
+Place over medium heat and bring to a simmer. Cook, uncovered, for about 45 minutes. Stir occasionally, mashing any large pieces of tomato with a spoon. Add salt as needed.
+
+
+Discard the onion before tossing the sauce with pasta. This recipe makes enough sauce for a pound of pasta.
+# No-Knead Bread
+# Attribution
+Ingredients: New York Times
+3⅓cups/430 grams all-purpose or bread flour, plus more for dusting
+Generous ¼ teaspoon/1 gram instant yeast
+2teaspoons/8 grams kosher salt
+Cornmeal or wheat bran, as needed
+Instructions:
+In a large bowl combine flour, yeast and salt. Add 1½ cups/345 grams water and stir until blended; dough will be shaggy and sticky. Cover bowl with plastic wrap. Let dough rest at least 12 hours, preferably about 18, at warm room temperature, about 70 degrees.
+
+Dough is ready when its surface is dotted with bubbles. Lightly flour a work surface and place dough on it; sprinkle it with a little more flour and fold it over on itself once or twice. Cover loosely with plastic wrap and let rest about 15 minutes.
+
+Using just enough flour to keep dough from sticking to work surface or to your fingers, gently and quickly shape dough into a ball. Generously coat a cotton towel (not terry cloth) with flour, wheat bran or cornmeal; put dough seam side down on towel and dust with more flour, bran or cornmeal. Cover with another cotton towel and let rise for about 2 hours. When it is ready, dough will be more than double in size and will not readily spring back when poked with a finger.
+
+At least a half-hour before dough is ready, heat oven to 450 degrees. Put a 6- to 8-quart heavy covered pot (cast iron, enamel, Pyrex or ceramic) in oven as it heats. When dough is ready, carefully remove pot from oven. Slide your hand under towel and turn dough over into pot, seam side up; it may look like a mess, but that is OK. Shake pan once or twice if dough is unevenly distributed; it will straighten out as it bakes. Cover with lid and bake 30 minutes, then remove lid and bake another 15 to 30 minutes, until loaf is beautifully browned. Cool on a rack.

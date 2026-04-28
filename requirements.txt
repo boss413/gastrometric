@@ -1,6 +1,8 @@
 beautifulsoup4
+ijson
 lxml
 pandas
 playwright
+pyarrow
 python-dotenv
 requests

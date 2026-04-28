@@ -44,6 +44,16 @@ CREATE TABLE IF NOT EXISTS ingredients (
 """)
 
 c.execute("""
+CREATE TABLE IF NOT EXISTS canonical_ingredients (
+    id TEXT PRIMARY KEY,
+    name TEXT,
+    base_food TEXT,
+    state TEXT,
+    form TEXT
+)
+""")
+
+c.execute("""
 CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_normalized (
     id                    INTEGER PRIMARY KEY AUTOINCREMENT,
     -- lineage
@@ -79,10 +89,26 @@ CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_normalized (
 """)
 
 c.execute("""
+CREATE TABLE IF NOT EXISTS usda_source_map (
+    fdc_id INTEGER,
+    canonical_id TEXT
+)
+""")
+
+c.execute("""
+CREATE TABLE IF NOT EXISTS canonical_lookup (
+    normalized_alias TEXT PRIMARY KEY,
+    canonical_id TEXT
+)
+""")
+
+c.execute("""
 CREATE TABLE IF NOT EXISTS ingredient_aliases (
     id INTEGER PRIMARY KEY,
     raw_text TEXT UNIQUE,
     canonical_group TEXT,
+    alias TEXT,
+    canonical_id TEXT,
     confidence INTEGER, -- 1–3 (optional but useful)
     source TEXT -- 'rule', 'manual', 'auto'
 )
@@ -123,6 +149,7 @@ CREATE TABLE IF NOT EXISTS recipe_ingredients (
     raw_text TEXT,
     section TEXT,
     ingredient_id INTEGER,
+    canonical_id TEXT,
     ingredient_name TEXT,
     quantity_value REAL,
     quantity_unit TEXT,
@@ -169,7 +196,7 @@ CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_raw (
 """)
 
 c.execute("""
-CREATE TABLE flavor_bible_raw (
+CREATE TABLE IF NOT EXISTS flavor_bible_raw (
     id INTEGER PRIMARY KEY,
     source_text TEXT,
     target_text TEXT,
