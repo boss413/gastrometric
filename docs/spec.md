@@ -23,3 +23,27 @@ A food and nutrition tracking system that supports:
 - authentication
 - UI polish
 - external APIs
+
+Future approaches:
+- Modular recipe forms
+    - Stir Fry
+    - Taco
+    - Casserole
+    - Pilaf
+    - Sandwich
+    - Wrap
+    - Grain Bowl
+    - Soup / Stew
+    - Sheet Pan 
+    - Saucy Pasta
+    - Full Plate (Protein, Vegetable, Starch)
+    - Skillet / Hash
+    - Frittata
+    - Kabob
+    - Flatbread
+    - Curry
+    - Quesadilla
+    - Savory Tart 
+    - Meatball
+    - Risotto
+    - Poach to Salad

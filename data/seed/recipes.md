@@ -4935,8 +4935,8 @@ Place over medium heat and bring to a simmer. Cook, uncovered, for about 45 minu
 
 Discard the onion before tossing the sauce with pasta. This recipe makes enough sauce for a pound of pasta.
 # No-Knead Bread
-# Attribution
-Ingredients: New York Times
+# Attribution: New York Times
+Ingredients:
 3⅓cups/430 grams all-purpose or bread flour, plus more for dusting
 Generous ¼ teaspoon/1 gram instant yeast
 2teaspoons/8 grams kosher salt
