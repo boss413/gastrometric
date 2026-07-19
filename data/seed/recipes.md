@@ -1,5 +1,269 @@
-Framing device idea: "To Serve Man" cannibalistic alien teaches humans how to cook. Cross between garyx wormuloid and resident alien. Beard is the parasitic alien hiding in plain sight. Pork is human meat he has to dispose of. Finds humans repulsive.
-# Panera style mac & cheese sauce
+# Coleslaw (Applebee's)
+Ingredients:
+14 oz. coleslaw mix
+¼ cup Freshly chopped cilantro
+¾ cup mayonnaise, add more if needed
+2 Tbsp sugar
+1 teaspoon white vinegar
+# Paella
+url: https://www.bonappetit.com/recipe/paella-de-pollo-con-verduras
+Author: Jose Andres
+Attribution: Bon Appetit
+Note: A 15" paella pan will provide the appropriate circumference to make a thin, even layer of seasoned rice. Because of its size, it’s important to move it around as you cook to ensure the entire surface of the dish gets time under direct heat. If you do not have a paella pan, use a comparably sized two-handled cast-iron or cast-aluminum skillet to make thin rice dishes that cook like paella, but ultimately, if you want to make a true paella, you should go and get yourself a paella pan.
+Ingredients:
+1 lb. skin-on, bone-in chicken thighs (about 3) or wings (drumettes and flats separated; 8–10)
+2 Tbsp. extra-virgin olive oil
+1 tsp. Diamond Crystal or ½ tsp. Morton kosher salt, plus more
+2 oz. mushrooms, preferably chanterelles, cut into ½" pieces (about ½ cup)
+3 oz. carrots (1–2 small), peeled, trimmed, cut into ½" pieces (about ½ cup)
+3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup)
+½ cup small cauliflower florets
+2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup)
+2 oz. Romano or other snap beans, trimmed, cut into 1½" pieces (about ½ cup)
+1 tsp. smoked Spanish paprika
+½ cup coarsely grated tomato or canned crushed tomatoes
+Pinch of saffron (about 8 threads)
+2 sprigs rosemary
+5 cups low-sodium chicken broth or water
+1 cup paella or bomba rice
+Instructions:
+Preparation
+If using 1 lb. skin-on, bone-in chicken thighs (about 3), arrange a thigh skin side down on a cutting board. Using a sharp knife, cut along both sides of bone to release from flesh (do not cut all the way through; you want to keep thigh intact). Work knife underneath bone and cut flesh away from bone; remove bone from thigh and discard. Cut thigh into quarters. Repeat with remaining thighs.
+Heat 2 Tbsp. extra-virgin olive oil in a 15" paella pan or two-handled cast-iron or cast-aluminum skillet over medium-high until just beginning to smoke, 1–2 minutes. Add chicken thighs or 1 lb. chicken wings (drumettes and flats separated; 8–10) and cook, turning about every 3 minutes and moving pan around on burner every 2 minutes or so to ensure even cooking, until deeply browned all over, 7–9 minutes. Season chicken with a big pinch of kosher salt and push to edges of pan.
+Add 2 oz. mushrooms, preferably chanterelles, cut into ½" pieces (about ½ cup), to center of pan and cook, stirring, until just turning golden, about 1 minute. Add 3 oz. carrots (1–2 small), peeled, trimmed, cut into ½" pieces (about ½ cup), 3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup), and ½ cup small cauliflower florets and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Add 2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup), and 2 oz. Romano or other snap beans, trimmed, cut into 1½" pieces (about ½ cup), and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Push vegetables to edges of pan with chicken.
+Add 1 tsp. smoked Spanish paprika to center of pan and cook, stirring constantly, 15 seconds to toast. Add ½ cup coarsely grated tomato or canned crushed tomatoes and cook, stirring occasionally, until thickened, about 2 minutes. Mix chicken and vegetables into tomato sauce in center of pan and cook until sauce is slightly thickened and caramelized, about 3 minutes.
+Crumble pinch of saffron (about 8 threads) into sauce and stir to combine. Add 2 sprigs rosemary, 5 cups low-sodium chicken broth or water, and 1 tsp. Diamond Crystal or ½ tsp. Morton kosher salt. Increase heat to high and bring to a boil, moving pan around on burner once or twice to ensure even cooking. Cook until sauce is reduced by about one quarter, about 5 minutes.
+Remove rosemary from pan; discard. Add 1 cup paella or bomba rice and spread evenly around pan to incorporate with chicken and vegetables. Cook, stirring often with a wooden spoon and moving pan around on burner every 2 minutes or so, until rice is starting to swell as it absorbs some liquid, 7–9 minutes.
+Reduce heat to medium-low and stir to evenly distribute rice, chicken, and vegetables across bottom of pan. Cook, undisturbed, moving pan around on burner every 2 minutes or so, until rice is slightly al dente and liquid is almost completely evaporated, about 5 minutes. Increase heat to high; cook until a crunchy socarrat (caramelized crust) forms underneath. Let paella cool 3 minutes before serving.
+# Cabbage Rolls
+url: https://www.spendwithpennies.com/easy-cabbage-rolls/#wprm-recipe-container-122147
+Author: Holly Nilsson
+Attribution: Spend with Pennies
+Notes:
+To remove leaves from head of cabbage, cut approx ¼" off the bottom of the head and place the whole head of cabbage in boiling water. Boil about 2 minutes. Peel off the softened leaves. Place remaining head back in the boiling water and repeat until all of the leaves are removed. Remove any tough stems from cooked leaves.
+Once boiled, use a small knife to cut the thick stem off the leaf (image above).
+Overlap smaller leaves and fill, even if they're not pretty, they'll cook perfectly.
+You may have leftover filling depending on the size of your cabbage. Extra filling can be added to tomato soup, or stuffed in zucchini or bell peppers.
+Cabbage rolls can be frozen before or after baking.
+Ingredients:
+1 head green cabbage
+1 cup long grain white rice uncooked
+1 pound lean ground pork or ground turkey
+½ pound lean ground beef
+2 small yellow onions diced
+3 cloves garlic minced
+½ teaspoon dried dill
+3 tablespoons chopped fresh parsley or, 1 tablespoons dried parsley
+salt and black pepper to taste
+1 (14.5 ounce each) can diced tomatoes with juices
+1 egg
+1 ¾ cups tomato sauce divided
+1 (10.75 ounce each) can condensed tomato soup
+Instructions:
+Boil cabbage leaves for about 2 minutes or until soft. (See note below for removing leaves). Set aside to cool.
+Preheat oven to 350°F.
+Cook rice according to package directions but reduce cooking time by 5 minutes so the rice is slightly underdone. Set aside.
+Cook pork (or turkey), beef, onions, garlic, & seasonings in a pan until no pink remains. Drain any fat. Add in rice, diced tomatoes, and ⅓ cup of tomato sauce. Stir in egg.
+Mix the remaining tomato sauce and tomato soup in a bowl. Spread a very thin layer of the tomato sauce mixture in a 9x13 pan.
+Remove or thin any thick stem on cabbage leaves. Lay the cabbage leaf flat and add ¼ to ⅓ cup filling to the center of the leaf. Fold in the sides and roll the cabbage up. Place seam side down in the pan. (See note for small leaves). Repeat with remaining cabbage.
+Pour sauce over the cabbage and cover tightly with foil. Bake for 75-90 minutes. Let cool for 15 minutes before serving.
+# Jamaican Sorrel (Hibiscus Punch)
+Yield: 3 quarts
+Attribution: Serious Eats
+Ingredients:
+5 1/4 ounces (150 g; about 3 cups) dried sorrel (hibiscus), rinsed with cold water in a colander or strainer
+3/4 pound (350 g) peel-on fresh ginger, washed and grated (see note)
+10 whole cloves
+10 allspice berries, roughly crushed with the side of a knife
+1 pound 1 1/2 ounces (495 g; about 2 1/2 cups) sugar
+Instructions:
+In a 4- or 5-quart pot or Dutch oven, bring 3 quarts water to a boil. Add sorrel, grated ginger, cloves, and crushed allspice, and boil until the sorrel begins to plump and swell, about 8 minutes.
+Remove from heat and let stand until cooled, then continue to steep in an airtight vessel in the refrigerator for at least 8 hours and up to 3 days.
+Strain the liquid through a fine-mesh strainer or through cheesecloth into a large pitcher, pressing on solids to express as much liquid as possible. If needed, strain again until it is clear of any ginger remnants. Discard solids.
+In a 2-quart saucepan, bring 2 cups of water to a boil with the sugar. Continue to cook, stirring, until sugar has completely dissolved. Remove simple syrup from heat.
+Stir simple syrup into the strained sorrel, 1/2 cup at a time, until desired sweetness level is reached.
+Chill until ready to drink. Serve over ice.
+# Buddae Jjigae (Korean Army Stew)
+url: https://www.maangchi.com/recipe/budae-jjigae
+Yield: Serves 4
+Ingredients:
+## Make the Korean fish stock:
+2 dried shiitake mushrooms
+8 large dried anchovies, heads and guts removed, in a soup strainer or tightly wrapped in a cheesecloth
+dried kelp (a 5 x 6 inch sheet)
+8 cups water
+1 teaspoon kosher salt
+Instructions:
+Combine the water, anchovies, mushrooms, and kelp in a large pot. Cover and cook for 25 minutes over medium high heat. Add the pork and cook for another 10 minutes.
+Remove the pot from the heat. Take out the anchovies, kelp and mushrooms. Slice the mushrooms into bite size pieces.
+Strain the mixture of the stock and the pork into a large bowl. Put the pork into a small bowl. You will get about 6 cups of stock. Stir in the salt until dissolved.
+## Make the Korean seasoning paste:
+Ingredients:
+6 garlic cloves, grated
+1 tablespoon hot pepper paste
+2 tablespoons Korean hot pepper flakes (gochugaru)
+1 teaspoon soy sauce
+1 teaspoon sugar
+2 tablespoons water
+Instructions: 
+Combine the seasoning paste ingredients – garlic, hot pepper paste, hot pepper flakes, soy sauce, sugar, and water in a bowl. Mix well.
+## Make the stew
+Ingredients:
+½ pound spam, cut into rashers
+2 ounces of sweet potato starch noodles, soaked in water for 30 minutes and drained
+1 cup worth cabbage, cut into bite size pieces
+½ of a medium onion, sliced
+2 green onions, cut into 1 inch pieces
+½ cup fermented kimchi, chopped
+4 ounces of Polish sausage, sliced
+½ of packaged instant ramyeon
+1 cup worth radish sprouts (or spinach, watercress, arugula)
+1 cup tofu, sliced
+¼ cup canned baked beans
+12-16 sliced rice cakes (Optional)
+1 slice of American cheese (Optional)
+Instructions:
+Arrange the ingredients in a shallow pot (10 to 12 inch):
+Put the cabbage, onion, green onion, pork, and the mushrooms, on the bottom of the pot.
+Add the kimchi, and the seasoning paste over top.
+Add the spam, sausage, rice cake, tofu, baked beans, and cheese.
+Add the ramyeon and the sweet potato starch noodles.
+Put radish sprouts on top and add 3 cups of stock.
+Cook over medium high heat. Korean style is to cook at the table with a portable burner. Friends and family will be sitting around the pot, talking and laughing, and maybe drinking. You can take a bit of cooked sausage or the meat with your chopsticks as you wait for the broth to boil and the noodles to soften. If you don’t have a tabletop burner, you can cook it on the stove away from the table.
+When it starts boiling about 10 minutes later, stir and turn the ingredients over with tongs to cook evenly.
+Serve right after the noodles and ramyeon have softened. Transfer some cooked stew to individual bowls and serve. Add more stock as the broth boils down.
+# Garlic Bread
+Notes: Every part of this is a work in progress.
+Ingredients:
+1 loaf french bread, split in half
+3 cloves garlic, grated
+6 Tbsp butter, room temperature, divided
+1 tsp garlic powder
+½ tsp parsley flakes
+instructions:
+Heat oven to 400
+Hydrate the garlic powder and parsley with one teaspoon of water. melt half of the butter with the grated garlic in the microwave. Combine the fresh garlic butter with the remaining butter and hydrated garlic powder. Spread the garlic butter evenly on each face of the bread
+Bake on a sheet pan lined with parchment paper for ten minutes. For crunchy-topped garlic bread: flip the bread halfway through baking so that the garlic butter is facing the baking sheet
+# Melted Cabbage
+Attribution: Fallow
+Ingredients:
+cabbage, green, half head
+4 Tbsp butter
+Instructions:
+Heat oven to 250 F.
+Cut cabbage into wedges, points trimmed. In a frying pan over high heat, sear the wedges on each side until they take some dark color–the leaves will not be cooked through. Add butter, salt, and a couple of tablespoons of water to the pan off the heat. Cover and add to the oven for 1-½ hour.
+# Beef Kafta
+url: https://feelgoodfoodie.net/recipe/beef-kafta/#wprm-recipe-container-6559
+Note: The original recipe didn’t have nearly enough salt and uses 7-spice powder, which I don’t keep on hand
+Ingredients:
+¼ cup parsley
+1 small yellow onion quartered
+1 pound ground beef
+2 teaspoons garam masala
+½ teaspoon cumin
+½ teaspoon cinnamon
+½ teaspoon coriander
+⅛ teaspoon cayenne pepper
+1 teaspoon salt
+¼ teaspoon black pepper
+# Marry Me Chicken
+url: https://cooking.nytimes.com/recipes/1024503-marry-me-chicken
+Author: Naz Deravian
+Note: To make it easier to slice into cutlets, place the chicken breasts in the freezer for 20 minutes.
+Ingredients:
+3 large boneless, skinless chicken breasts, or 6 chicken cutlets (about 2¼ pounds total), patted dry
+Kosher salt (such as Diamond Crystal) and black pepper
+¼ cup all-purpose flour
+3 tablespoons extra-virgin olive oil, plus more as needed
+3 tablespoons unsalted butter
+3 garlic cloves, chopped
+1 tablespoon tomato paste
+½ teaspoon dried oregano 
+Red-pepper flakes, to taste  
+1 cup low-sodium chicken stock
+½ to ¾ cup heavy cream
+½ cup (1½ ounces) grated Parmesan
+⅓ cup sliced sun-dried tomatoes, packed in oil
+Fresh basil, for serving
+Instructions: 
+If using chicken breasts, start from the thickest end and slice each chicken breast in half horizontally so you end up with a total of 6 cutlets (see Note). Season both sides of the chicken cutlets well with salt and pepper.
+
+Scatter the flour on a large plate and coat the cutlets, shaking off the excess. Transfer the cutlets to a sheet pan or large plate in a single layer.
+
+Heat the oil in a large pan over medium-high. Once hot, reduce the heat to medium and add the butter. As soon as it melts, add the cutlets and cook until golden on one side, about 5 minutes. Flip the chicken and cook the other side until golden, 4 to 5 minutes. Do this in batches, if needed, adding more oil, if needed. Transfer the cutlets to a plate or sheet pan.
+
+Reduce the heat to low, add the garlic and cook, stirring often, until fragrant, 1 to 2 minutes. Add the tomato paste, stirring until the color deepens, about 2 minutes. Add the oregano and red-pepper flakes, to taste.
+
+Increase the heat to medium, add the stock and bring to a simmer, scraping up any bits from the bottom of the pan, until the liquid is reduced by half, about 5 minutes.
+
+Add ½ cup of the cream and warm through, stirring, until it thickens slightly, about 3 minutes. Watch the cream closely, reducing the heat if necessary, to maintain a gentle simmer. Stir in the Parmesan and the sun-dried tomatoes. Add more cream, if you like, and season the sauce.
+
+Place the chicken back in the pan to warm through, about 4 minutes. Remove from the heat and scatter basil on top.
+
+
+# Cioppino
+Attribution: Epicurious
+Yield: 6–8 servings
+Note: Soup base (without clams, mussels, fish, shrimp, and parsley) can be made 1 day ahead. Let cool; cover and chill. Reheat before adding remaining seafood and parsley.
+## Make the soup
+Ingredients: 
+¼ cup extra-virgin olive oil
+1 medium onion, finely chopped
+1 small fennel bulb, thinly sliced
+1 celery stalk, finely chopped
+½ tsp. Diamond Crystal or ¼ tsp. Morton kosher salt, plus more
+¼ tsp. freshly ground black pepper
+2 garlic cloves, finely chopped
+½ tsp. crushed red pepper flakes
+8 oz. cleaned squid, bodies sliced into ½"-thick rings, tentacles halved lengthwise if large
+1 (15-oz.) can crushed tomatoes
+1 (8-oz.) bottle clam juice
+1½ cups Fish Stock, seafood stock, or low-sodium vegetable broth
+1 lb. small clams (such as littleneck), scrubbed
+1 lb. mussels, scrubbed, debearded
+8 oz. skinless, boneless flaky white fish (such as bass, halibut, hake, or cod), cut into 1" pieces
+1 lb. medium shrimp, peeled, deveined, tails left on
+Instructions: 
+Heat ¼ cup extra-virgin olive oil in a medium Dutch oven or other heavy pot over medium. Add 1 medium onion, finely chopped, 1 small fennel bulb, thinly sliced, 1 celery stalk, finely chopped, ½ tsp. Diamond Crystal or ¼ tsp. Morton kosher salt, and ¼ tsp. freshly ground black pepper. Cook, stirring occasionally, until vegetables are softened, 6–8 minutes. Add 2 garlic cloves, finely chopped, and ½ tsp. crushed red pepper flakes. Cook, stirring constantly, until garlic is golden and fragrant, 1–2 minutes.
+Reduce heat to medium-low and add 8 oz. cleaned squid, bodies sliced into ½"-thick rings, tentacles halved lengthwise if large. Cook, stirring occasionally, until squid are opaque and tender and released juices have reduced, 15–20 minutes. Add 1 Tbsp. tomato paste and 1 tsp. dried oregano and cook, stirring, 1 minute.
+Pour in 1 cup dry white wine; increase heat to medium-high and bring to a simmer. Cook until liquid is reduced by half, 5–7 minutes. Add 2 bay leaves, one 15-oz. can crushed tomatoes, one 8-oz. bottle clam juice, and 1½ cups Fish Stock, seafood stock, or low-sodium vegetable broth and bring to a boil. Stir, then reduce heat so stew is at a simmer. Cover and simmer 30 minutes to let flavors come together.
+Meanwhile, fill a large bowl with water and stir in a handful of kosher salt. Add 1 lb. small clams (such as littleneck), scrubbed. Let sit 15 minutes to allow them to expel any grit. Drain clams and rinse. Fill bowl with fresh water and add another handful of kosher salt; let soak 15 minutes. Drain and rinse again; set aside.
+Remove bay leaves from stew and discard. Increase heat to medium. Add reserved clams, cover pot, and cook 3 minutes. Uncover and stir in 1 lb. mussels, scrubbed, debearded. Arrange 8 oz. skinless, boneless flaky white fish (such as bass, halibut, hake, or cod), cut into 1" pieces, on top, cover pot, and simmer until clams and mussels open and fish is firm and opaque, about 4 minutes. Remove cioppino from heat. Stir in 1 lb. medium shrimp, peeled, deveined, tails left on, and 3 Tbsp. chopped parsley (shrimp will cook in residual heat).
+## Make the toasts
+Ingredients:
+4 Tbsp. unsalted butter, room temperature
+½ tsp. finely grated lemon zest
+Instructions:
+While cioppino simmers, mix 4 Tbsp. unsalted butter, room temperature, 1 Tbsp. chopped parsley, ½ tsp. finely grated lemon zest, and a pinch of kosher salt in a small bowl. Taste gremolata butter and season with more salt if needed.
+Heat broiler. Arrange 1 baguette, sliced, on a rimmed baking sheet and toast bread, turning halfway through, until light golden, about 4 minutes. Rub cut sides of 1 garlic clove, halved, over toasts.
+Spread gremolata butter over toasts. Ladle cioppino into shallow bowls and serve with toasts.
+# 15-Minute Cherry Tomato Pasta
+Attribution: Epicurious
+Yield: 4–6 servings
+url: https://www.epicurious.com/recipes/food/views/pasta-with-15-minute-burst-cherry-tomato-sauce-56390060
+Ingredients:
+1 lb. pasta
+1 tsp. Diamond Crystal Kosher salt plus more for pasta pot
+2 large garlic cloves, finely chopped
+½ tsp. freshly ground black pepper
+1 cup coarsely chopped fresh basil
+Freshly grated Parmesan (for serving)
+Instructions:
+Cook 1 lb. pasta in a large pot of boiling salted water, stirring occasionally, until al dente; drain pasta, reserving pasta water, and transfer to a large bowl.
+Meanwhile, warm ½ cup extra-virgin olive oil in a large skillet (12" diameter) or wide heavy saucepan over medium-high heat. Add 2 large garlic cloves, finely chopped, then 3 pints cherry tomatoes, ½ tsp. freshly ground black pepper, a pinch of sugar, and 1 tsp. Diamond Crystal or ½ tsp. plus ⅛ tsp. Morton kosher salt. Cook pasta sauce, stirring occasionally, until tomatoes burst and release their juices, 6–8 minutes.
+Toss cooked pasta with cherry tomato sauce; if needed, thin sauce with a little reserved pasta water. Toss in 1 cup coarsely chopped fresh basil and top with freshly grated Parmesan.
+# Mounted Butter
+Ingredients: 
+3 Tbsp water
+1 stick butter
+Instructions:
+Bring water to a simmer.
+Whisk in butter two tablespoons at a time. The butter must be entirely melted before the next can be added.
+# Baked Potatoes
+Instructions: 
+450 degrees 45 minutes.
+Brush oil on the skins. Pull at 205 degrees. Split open immediately
+# Panera-style mac & cheese sauce
 Author: Matt Boss
 Ingredients: 
 2 cups milk
@@ -9,7 +273,20 @@ Ingredients:
 ½ tsp nutmeg
 2 Tbsp parmesan
 50g mozzarella 
-
+# Shrimp Stir Fry
+Ingredients: 
+5 cloves garlic
+2 Tbsp soy sauce
+½ tsp fish sauce
+1 Tbsp oyster sauce
+1 Tbsp cornstarch
+1 Tbsp chili sauce
+2 Tbsp neutral oil
+1 red bell pepper
+½ pound green cabbage
+1 cup snow peas
+1 pound shrimp
+½ pound mushrooms
 # Jambalaya (actually Etouffee)
 Attribution: America’s Test Kitchen 
 Source: Restaurant Favorites
@@ -213,19 +490,20 @@ Carve and serve the turkey
 # Dynamite Stuffing
 Author: Matt Boss
 Ingredients:
-1 pint chicken or turkey stock 
+1 pint chicken stock or turkey stock 
 12 oz. Italian sausage 
 3 cloves garlic
 1 c chopped onion 
 1 c chopped celery 
 1 c chopped green pepper 
-1 T kosher salt and corn oil
+1 T kosher salt
+corn oil
 3 c Challah bread, cut into 1/2-inch cubes (from approximately 8 to 10 slices) 
 1 c chopped pecans
 2 eggs, beaten 
-2 t dried rubbed sage or double the amount of fresh
-2 t dried parsley or double the amount of fresh 
-1 t freshly ground black pepper
+2 tsp dried rubbed sage
+2 tsp dried parsley 
+1 tsp freshly ground black pepper
 Salt to taste
 Instructions:
 Brown the sausage, and at the end of the sauté, add the garlic.  Put this into a metal mixing bowl. Dice the trinity, toss with salt and oil, and roast at 400 degrees, stirring every ten minutes or so for 45 minutes, or until they start to take color, and add to the gigantic bowl, as well as the herbs and pepper.  In the last 10 minutes of roasting, add the bread and pecans and remove when they’ve turned GBD.  Add the stock a half cup every five minutes until the bread no longer feels hard in the middle. Store overnight.
@@ -241,11 +519,11 @@ cover with water, put in oven at 225 F for 12 hours
 remove and discard solids
 save as much turkey fat as possible through combination of gravy strainer and refrigeration
 
-## Gravy Broth
+## Giblet Broth
 Instructions: 
 Sear giblets
 Sear onion
-Add 1 quart (880g) broth
+Add 1 quart (880g) stock from above
 Add herb stalks
 Boil down to 400g (100%)
 Add 2% gelatin 
@@ -882,7 +1160,6 @@ BACKGROUND: [Koji \(Aspergillus oryzae\)](https://en.wikipedia.org/wiki/Aspergil
 [The recipes for Koji-Aged steak](https://www.bonappetit.com/test-kitchen/how-to/article/dry-age-shortcut-koji) all say pretty much the same thing: grind some [Koji starter](https://smile.amazon.com/Iseso-IseSo-Miyako-Koji-1kg/dp/B004FHB5OO/ref=sr_1_2?dchild=1&keywords=koji&qid=1588095680&sr=8-2), mix with water and salt, paint it onto the meat, then refrigerate for 3 days. The outcome is really a marinade, called [Shio Koji](https://www.seriouseats.com/recipes/2019/12/shio-koji-marinade-recipe.html) that, while delicious, is far from tasting dry-aged. It's also not even similar to these pictures of [fuzzy pork chops and scallops](https://www.cooksillustrated.com/science/786-articles/feature/koji) because the salt, cold, and low humidity inhibit growth if not outright kill the fungus.
 
 I came to realize that this is for liability reasons: No business entity can give people instructions to leave meat in the danger zone. So I embarked on [my own process of incubating a steak with an immersion circulator](https://imgur.com/gallery/OpyUQVq/) of using my sous vide rig as an incubator. The outcome was a tender, slightly floral and sweet, funky steak that tasted like it was coated in crispy fried cheese. Next time I do this I'm going to smoke it for an hour before finishing it.
-
 Instructions:
 salt steak heavily, refrigerate overnight
 rinse off salt, do not pat dry
@@ -2527,54 +2804,50 @@ Carrots 234g
 4 cans Chicken broth
 
 3 Tbsp Potato Starch
+# Pad Krapow Gai (Thai Basil Chicken)
+url: https://www.allrecipes.com/recipe/257938/spicy-thai-basil-chicken-pad-krapow-gai/
+Yield: 2 servings
+Ingredients:
+⅓ cup chicken broth
+1 tablespoon oyster sauce
+1 tablespoon soy sauce, or as needed
+2 teaspoons fish sauce
+1 teaspoon white sugar 
+1 teaspoon brown sugar
+2 tablespoons vegetable oil
+1 pound skinless, boneless chicken thighs, finely chopped
+¼ cup sliced shallots
+4 cloves garlic, minced
+2 tablespoons minced Thai chilies, Serrano, or other hot pepper
+1 cup very thinly sliced fresh basil leaves
+2 cups hot cooked rice
 # Pad Woon Sen
 ## Aromatics
 7 oz. chicken leg meat (about 3 drumsticks)
-
 200 grams dried bean thread noodles
-
 3 eggs
-
 1 onion (yellow)
-
 2 cloves garlic (finely chopped, approx. 2 teaspoons)
-
 ## Vegetables
-
 1 cup cabbage (shredded), about 1/4 head
-
 ½ cup carrots (shredded), about 1
-
 3 stalks celery (thinly sliced)
-
 1 cup bean sprouts
-
 ## Sauce
 Ingredients: 
 3 Tbsp oyster sauce
-
 1 Tbsp fish sauce
-
 1 Tbsp Thai seasoning sauce/maggi sauce (or soy sauce)
-
 1 Tbsp shaoxing wine
-
 2 tsp sugar
-
 3 Tbsp neutral oil (vegetable, canola, avocado)
-
 4 Tbsp water
-
 ½ tsp dark soy sauce
-
 ## Garnish
 Ingredients: 
 green onions
-
 fried onions
-
 sesame seeds
-
 hot sauce
 # Shred Head, Butter & Bread
 Author: Matt Boss
@@ -2614,27 +2887,16 @@ Attribution: Adapted from EatingWell
 URL: https://www.eatingwell.com/loaded-cabbage-soup-11838013
 Ingredients:
 3 slices bacon, finely chopped (about ½ cup)
-
 1 pound gnocchi
-
 1 medium yellow onion, chopped (about 1½ cups)
-
 4 small stalks celery, finely chopped (about ¾ cup)
-
 1/3 head chopped green cabbage
-
 2 cloves garlic
-
 ½ teaspoon salt
-
 ½ teaspoon ground pepper
-
 4 cups chicken broth
-
 ½ cup heavy cream
-
 2 ounces cheddar cheese, shredded (about 1/2 cup) 
-
 4 tablespoons chopped fresh chives
 # Broccoli Soup
 Attribution: America’s Test Kitchen
@@ -2705,31 +2967,18 @@ URL: https://www.seriouseats.com/real-deal-mapo-dofu-tofu-chinese-sichuan-recipe
 Serve With: basmati rice, short grain rice, brown rice, ramen noodles
 Ingredients:
 2 tablespoons Sichuan peppercorns, divided (see notes)
-
 1/4 cup vegetable oil
-
 1 teaspoon cornstarch
-
 2 teaspoons cold water
-
 1 1/2 pounds medium to firm silken tofu, cut into 1/2-inch cubes
-
 1/4 pound ground beef
-
 3 garlic cloves grated on a microplane grater
-
 1 tablespoon fresh ginger grated on a microplane grater
-
 2 tablespoons fermented chili bean paste (see notes)
-
 2 tablespoons Xiaoxing wine
-
 1 tablespoon dark soy sauce
-
 1/4 cup low sodium chicken stock
-
 1/4 cup roasted chili oil (see notes)
-
 1/4 cup finely sliced scallion greens
 Instructions:
 Heat half of Sichuan peppercorns in a large wok over high heat until lightly smoking. Transfer to a mortar and pestle. Pound until finely ground and set aside.
@@ -4275,7 +4524,7 @@ Instructions:
 In a wide saute pan over medium high heat, melt the butter and add the sprouts and a large pinch of kosher salt. Stir regularly until most of the sprouts have taken some browning, about 10 minutes. Add the garlic, cook another 2 minutes.
 
 Deglaze with half & half. Season to taste with salt, black pepper, and sherry vinegar.												
-# Creamy Brussels Sprout and Mushroom Lasagna Recipe
+# Creamy Brussels Sprouts and Mushroom Lasagna Recipe
 URL: https://www.seriouseats.com/creamy-brussels-sprouts-mushroom-lasagna-food-lab-recipe
 Ingredients: 
 1 package (15 sheets) no-boil lasagna noodles
@@ -4872,6 +5121,19 @@ tomatoes with green chilis
 cumin
 
 smoked chili powder												
+# Din Tai Fung Green Beans [Copycat]
+note: This adaptation is a work in progress–the original recipe is “dry fried” in a quart of oil. I prefer to parboil the green beans using the Thomas Keller Big Pot Blanching method (https://www.youtube.com/watch?v=dPGke_I7hpk) then give them a quick saute to finish. My nearby dumpling house adds mushrooms–I need to go have them again to make sure they’re wood ears and how to prepare them right.
+Ingredients:
+1 lb green beans, washed and trimmed to 3" pieces
+2 Tbsp neutral oil
+65g garlic paste
+½ tsp kosher salt, to taste
+¼ tsp white pepper
+¼ tsp MSG
+Instructions:
+Soak the green beans for half an hour. Trim ends off green beans and cut them in half to about 3" equal sized pieces.
+Parboil the green beans in batches for 2-4 minutes in saltwater then shock in icewater. This can be done far ahead of service.
+In a pan or wok, add 2 tbsp of frying oil over medium low heat and add the garlic. Sauté on medium low for 1-2 minutes. We want to release the aroma of the garlic to a pale golden color but not browned. Add the green beans and season with white pepper, msg, and salt to taste (they should have been fairly well salted during parboiling). Turn the heat to high and saute for 1-2 minutes until combined and fragrant.
 # Green Bean Casserole			
 Attribution: Serious Eats		
 URL: https://www.seriouseats.com/homemade-green-bean-casserole-recipe			Note: presuming you buy fried red onions from Uwajimaya instead of frying your own shallots.
@@ -4937,9 +5199,9 @@ Discard the onion before tossing the sauce with pasta. This recipe makes enough 
 # No-Knead Bread
 # Attribution: New York Times
 Ingredients:
-3⅓cups/430 grams all-purpose or bread flour, plus more for dusting
-Generous ¼ teaspoon/1 gram instant yeast
-2teaspoons/8 grams kosher salt
+3 ⅓ cups / 430 grams all-purpose or bread flour, plus more for dusting
+Generous ¼ teaspoon / 1 gram instant yeast
+2 teaspoons / 8 grams kosher salt
 Cornmeal or wheat bran, as needed
 Instructions:
 In a large bowl combine flour, yeast and salt. Add 1½ cups/345 grams water and stir until blended; dough will be shaggy and sticky. Cover bowl with plastic wrap. Let dough rest at least 12 hours, preferably about 18, at warm room temperature, about 70 degrees.

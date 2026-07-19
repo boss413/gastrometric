@@ -1,0 +1,53 @@
+a lot of the pairings are not ingredients, but cuisine relationships, 
+which will be valuable later, but needs to be pulled out of the ingredients tables.
+to convert the "target" dim, there ", in" or "with" are specific pairings and can include sub-regions. 
+the words "cuisine" "foods" and "dishes" are quick indicators that we're not talking about ingredients.
+
+different parts of the same leading ingredient--i'm not sure how many of them belong as their own normalized ingredient, 
+like "lime, juice" and "lime, zest" are both derived from "lime", but "lime, leaves" isn't:
+leaves, leaf, seeds, pollen, juice, bulb, fronds, whole, yolks, whites, fat, zest, legs, quarters, breast, livers, root
+
+powdered, powder, pickled, ground, dried, fresh, minced, grated, paste
+grilled, candied, roasted, poached, cooked, steamed, raw, fried, toasted, hard-boiled, scrambled, confit, preserved, smoked, baked
+tart, sweet, rich, oily, delicate, sour, stinky, soft, wild, aged, cured
+preserves, juice, compotes, sauce, whipped, cider, puree, pureed, jam
+
+there are leading categories that need to be extracted carefully, since "vinegar, balsamic" is "balsamic vinegar" and 
+is a subset of "vinegar", but "berries, strawberries" is not a "strawberry berries" even though it is a subset of "berries":
+meat, beef, beans, nuts, chile peppers, bell peppers, fish, lettuce, pepper, vinegar, wine, cheese, onions, tomato, sausage, oil, liqueur, berries
+
+varieties that appear in a separate comma delimiter (e.g., "pepper, black" is "black pepper" and is 
+related to "pink pepper" and "pepper" in general but it's useful for organization in the sheet):
+black, red, green, yellow, white, brown, light, heavy, dark, pink
+
+if i re-run extract_pdf, many sections were not captured: especially those that included the phrases 
+"in general" "see also", "see", or were part of a category, like "beef - steak".
+
+THEN, these are common line noise 
+
+(key ingredient
+(ingredient)
+(accompaniment
+esp.
+(e.g.., 
+(peak: 
+:  
+(see also
+(see 
+(garnish)
+(pinch)
+(dash)
+/
+
+ and 
+say some
+avoid (this is its own line, those ingredients below are counter-indicated as a pairing)
+
+squash
+salmon
+olives
+liver, calf's
+lettuces
+lemons
+lamb
+molasses

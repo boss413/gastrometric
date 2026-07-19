@@ -14,7 +14,20 @@
 #   imperial_volume_value/unit  cup / tbsp / tsp / …
 #   grams                       metric weight
 #   ml                          metric volume
-#   preparation                 how the ingredient is prepped
+#   preparation                 ordered JSON list of technique/state phrases,
+#                                in the order they appear in the source line
+#                                (e.g. ["peeled", "quartered lengthwise",
+#                                "cut crosswise into 0.25-inch-thick slices"]).
+#                                Each element is meant to resolve 1:1 against
+#                                the technique graph downstream — this column
+#                                intentionally holds NOTHING that isn't a
+#                                cooking technique or state.
+#   notes                       free-text asides that are useful context but
+#                                are NOT techniques, so they must not be fed
+#                                to the technique-graph lookup: parenthetical
+#                                yield/count notes ("about 3"), secondary
+#                                measures not chosen as primary, can/jar size
+#                                notes, "% by weight" notes, etc.
 #   ingredient_name_raw         everything left after all extraction
 #   optional                    1 if the line is self-declared optional
 #
@@ -23,6 +36,7 @@
 # before re-insertion.
 
 import sqlite3
+import json
 import re
 
 from gastrometric.config.paths import DB_PATH
@@ -119,6 +133,11 @@ def normalize_text(text):
     for k, v in fractions:
         text = text.replace(k, v)
 
+    # Inch mark: 1/2" or 0.5" -> 0.5-inch, so it behaves like the written-out
+    # "inch" form for every downstream -inch pattern (size descriptors,
+    # prep phrases like "cut into 1/2-inch pieces").
+    text = re.sub(r'(\d(?:\.\d+)?)\s*"', r'\1-inch', text)
+
     word_numbers = {
         "one": "1", "two": "2", "three": "3", "four": "4", "five": "5",
         "six": "6", "seven": "7", "eight": "8", "nine": "9", "ten": "10",
@@ -191,24 +210,61 @@ _OR_RELATIVE = re.compile(
     r'^(.+?)\s+or\s+(double|twice|triple|half)\s+the\s+(?:amount\s+of\s+)?(.+)$',
     re.IGNORECASE
 )
+# Shared with _clean_name's leaked-prep-clause cleanup below, so an "or"
+# that introduces a prep-method / qualifier alternative (rather than a
+# genuine second ingredient) is recognized consistently in both places.
+_OR_PREP_WORDS = (
+    r'pressed|pushed|passed|run|rubbed|blended|pureed|mashed|'
+    r'squeezed|grated|ground|minced|chopped|diced|sliced|'
+    r'low[\s-]sodium|reduced[\s-]sodium|unsalted|homemade|store[\s-]bought'
+)
 _OR_PREP_CLUES = re.compile(
-    r'\bor\s+(?:pressed|pushed|passed|run|rubbed|blended|pureed|mashed|'
-    r'low[\s-]sodium|reduced[\s-]sodium|unsalted|homemade|store[\s-]bought)',
+    r'\bor\s+(?:' + _OR_PREP_WORDS + r')', re.IGNORECASE
+)
+
+# A bare "or" whose right side isn't a real alternative ingredient — noise
+# phrases / hedges that would otherwise become a bogus, empty optional row.
+_OR_ALT_BLOCK = re.compile(
+    r'^(?:as\s+needed|as\s+desired|if\s+desired|desired|needed|required|'
+    r'to\s+taste|more|additional|so\s+desired)\b',
     re.IGNORECASE
 )
 
+_OR_TOKEN = re.compile(r'\bor\b', re.IGNORECASE)
+
 
 def _split_on_or(text):
-    if _OR_PREP_CLUES.search(text):
-        return text, None
-    m = _OR_QTY_UNIT.match(text.strip())
+    stripped = text.strip()
+    if _OR_PREP_CLUES.search(stripped):
+        return stripped, None
+
+    m = _OR_QTY_UNIT.match(stripped)
     if m and m.group(3).strip().lower() in UNIT_VOCAB:
         alt = "%s %s %s" % (m.group(2).strip(), m.group(3).strip(), m.group(4).strip())
         return m.group(1).strip(), alt
-    m = _OR_RELATIVE.match(text.strip())
+
+    m = _OR_RELATIVE.match(stripped)
     if m:
         return m.group(1).strip(), "%s the amount of %s" % (m.group(2), m.group(3))
-    return text, None
+
+    # Generic ingredient-swap split: "<primary> or <alternative>", e.g.
+    # "chicken thighs (about 3) or wings (...)" or "chicken broth or water".
+    # Only fires on a single, unambiguous "or" outside any parentheses —
+    # multiple "or"s (e.g. "2 large or 3 medium" inside a paren aside) are
+    # left alone, since it's unclear which one is the real split point.
+    paren_masked = re.sub(r'\([^)]*\)', lambda mm: 'X' * len(mm.group(0)), stripped)
+    or_matches = list(_OR_TOKEN.finditer(paren_masked))
+    if len(or_matches) == 1:
+        idx = or_matches[0]
+        primary = stripped[:idx.start()].strip().rstrip(',').strip()
+        alt = stripped[idx.end():].strip()
+        if (primary and alt
+                and re.search(r'[a-zA-Z]', primary)
+                and re.search(r'[a-zA-Z]', alt)
+                and not _OR_ALT_BLOCK.match(alt)):
+            return primary, alt
+
+    return stripped, None
 
 
 # ============================================================
@@ -242,8 +298,27 @@ _APPROX_SECONDARY = re.compile(
 _PLUS_ADDITIONAL = re.compile(r',?\s*plus\s+additional(?:\s+for\s+\w+)?', re.IGNORECASE)
 
 
+def _strip_approx_secondary_outside_parens(text):
+    """Strip a loose, non-parenthetical 'about N word...' aside (its
+    original purpose) WITHOUT reaching inside parentheses — content inside
+    parens, e.g. "(about 1/2 cup)", is deliberately preserved here so
+    _extract_parentheticals downstream can capture it as a note instead of
+    it being silently discarded before it's ever seen."""
+    parens_found = []
+
+    def _mask(m):
+        parens_found.append(m.group(0))
+        return "__PARENTOK_%d__" % (len(parens_found) - 1)
+
+    masked = re.sub(r'\([^)]*\)', _mask, text)
+    masked = _APPROX_SECONDARY.sub('', masked).strip().rstrip(',').strip()
+    for i, p in enumerate(parens_found):
+        masked = masked.replace("__PARENTOK_%d__" % i, p)
+    return masked
+
+
 def _extract_explicit_measures(text):
-    grams = ml = pct = None
+    grams = ml = pct = plus_additional_note = None
     m = _MASS_PAT.search(text)
     if m:
         grams = m.group(1)
@@ -261,9 +336,12 @@ def _extract_explicit_measures(text):
     if m:
         pct = m.group(1)
         text = (text[:m.start()] + ' ' + text[m.end():]).strip().rstrip(',').strip()
-    text = _APPROX_SECONDARY.sub('', text).strip().rstrip(',').strip()
-    text = _PLUS_ADDITIONAL.sub('', text).strip().rstrip(',').strip()
-    return text, grams, ml, pct
+    text = _strip_approx_secondary_outside_parens(text)
+    m = _PLUS_ADDITIONAL.search(text)
+    if m:
+        plus_additional_note = m.group(0).strip().lstrip(',').strip()
+        text = (text[:m.start()] + text[m.end():]).strip().rstrip(',').strip()
+    return text, grams, ml, pct, plus_additional_note
 
 
 # ============================================================
@@ -373,15 +451,28 @@ def _extract_pct_weight(text):
 
 
 # ============================================================
-# SIZE DESCRIPTOR REMOVAL
-# e.g. "1/4-inch-wide" — a measurement of cut size, not the ingredient
+# SIZE DESCRIPTOR PROTECTION
+# e.g. "1/4-inch-thick" — a measurement of cut size, not the ingredient.
+# It must NOT be visible to quantity/unit extraction (otherwise a trailing
+# word like "slices" or "strips" gets misread as a quantity_unit), but it
+# also must NOT be discarded: prep patterns (PREP_PATTERNS) need the literal
+# "N-inch..." text later to build phrases like "cut into 1/4-inch-thick
+# slices". So it's tokenized here and restored just before prep extraction.
 # ============================================================
 
 _SIZE_DESCRIPTOR = re.compile(r'\d[\d./]*-inch[a-z-]*', re.IGNORECASE)
 
 
-def _remove_size_descriptors(text):
-    return _SIZE_DESCRIPTOR.sub('', text).strip()
+def _protect_size_descriptors(text):
+    mapping = {}
+
+    def _tok(m):
+        token = "__SIZETOK_%d__" % len(mapping)
+        mapping[token] = m.group(0)
+        return token
+
+    text = _SIZE_DESCRIPTOR.sub(_tok, text)
+    return text, mapping
 
 
 # ============================================================
@@ -504,34 +595,55 @@ def _route_unit(quantity, unit, grams, ml):
 # PREP + STATE EXTRACTION
 # ============================================================
 
+# ============================================================
+# PREP + STATE EXTRACTION
+#
+# Returns phrases in the ORDER THEY APPEAR IN THE SOURCE TEXT, not in
+# PREP_PATTERNS list order. This matters because `preparation` is meant to
+# feed a technique-graph lookup downstream, and technique sequence is
+# meaningful ("peeled, then quartered, then cut into slices" is a real
+# order a cook follows).
+#
+# Implementation: PREP_PATTERNS (multi-word / more-specific first) and
+# TEMPERATURE_STATE_PATTERNS are combined into one alternation and scanned
+# with a single finditer pass. re.finditer walks left-to-right and returns
+# non-overlapping matches, so the match order IS the text order. Priority
+# between overlapping candidates at the same starting position is still
+# governed by alternation order (multi-word patterns listed first), exactly
+# as it was for the old per-pattern-loop approach.
+# ============================================================
+
+_PREP_STATE_PATTERNS = list(PREP_PATTERNS) + list(TEMPERATURE_STATE_PATTERNS)
+_PREP_STATE_COMBINED = re.compile(
+    '|'.join('(?:%s)' % pat for pat in _PREP_STATE_PATTERNS),
+    re.IGNORECASE
+)
+
+
 def _extract_prep(text):
-    found = []
-    for pat in PREP_PATTERNS:
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            found.append(m.group(0).strip())
-            text = re.sub(pat, '', text, flags=re.IGNORECASE).strip()
-    return text, (", ".join(found) if found else None)
-
-
-def _extract_state(text):
-    found = []
-    for pat in TEMPERATURE_STATE_PATTERNS:
-        m = re.search(pat, text, re.IGNORECASE)
-        if m:
-            found.append(m.group(0).strip())
-            text = re.sub(pat, '', text, flags=re.IGNORECASE).strip()
-    return text, (", ".join(found) if found else None)
+    found = [m.group(0).strip() for m in _PREP_STATE_COMBINED.finditer(text)]
+    text = _PREP_STATE_COMBINED.sub('', text).strip()
+    return text, found
 
 
 # ============================================================
-# NOISE + SYMBOL REMOVAL
+# NOISE PHRASE EXTRACTION
+# These phrases ("plus more", "to taste", "as needed", "if desired") carry
+# real cooking guidance — how flexible the amount is — so they're captured
+# as notes rather than deleted outright. "optional" is the one exception:
+# that's already represented structurally by the `optional` column, so
+# recording it again as a note would just be redundant noise.
 # ============================================================
 
-def _remove_noise(text):
+def _extract_noise(text):
+    found = []
     for phrase in NOISE_PHRASES:
-        text = re.sub(r'\b' + re.escape(phrase) + r'\b', '', text, flags=re.IGNORECASE)
-    return text.strip()
+        pat = re.compile(r'\b' + re.escape(phrase) + r'\b', re.IGNORECASE)
+        if pat.search(text):
+            if phrase.lower() != "optional":
+                found.append(phrase)
+            text = pat.sub('', text)
+    return text.strip(), found
 
 
 _LEADING_SYMBOLS = re.compile(r'^[\-\u2013\u2022\+\*•\s]+')
@@ -573,7 +685,17 @@ def _remove_size_adjectives(text):
 # NAME CLEANUP
 # ============================================================
 
+# ============================================================
+# NAME CLEANUP
+# Two of these strips ("from <N> <word>" source phrases, trailing
+# "for <purpose>" clauses) remove real information from the name text —
+# they're captured and returned as notes instead of being discarded, so a
+# line like "zest, from 2 lemons" or "butter, for greasing the pan" doesn't
+# silently lose that context.
+# ============================================================
+
 def _clean_name(text):
+    notes = []
     text = re.sub(r'[,;]', ' ', text)
     text = re.sub(r'[()]', ' ', text)
     text = " ".join(text.split())
@@ -581,23 +703,29 @@ def _clean_name(text):
     text = re.sub(r'^(?:of|from|and|or|\*|:|with)\b\s*|^[-–]\s*', '', text, flags=re.IGNORECASE)
     # Strip trailing connectors
     text = re.sub(r'\s+(and|or|\*|with|in)$', '', text, flags=re.IGNORECASE)
-    # "from <N> <word>" source phrases (e.g. "from 1 lime")
-    text = re.sub(r'\bfrom\s+\d*\s*(?:large|small|medium|fresh|whole)?\s*\w+\s*$', '', text, flags=re.IGNORECASE).strip()
+    # "from <N> <word>" source phrases (e.g. "from 1 lime") — capture before
+    # discarding, since it's the count of source items, not junk.
+    m = re.search(r'\bfrom\s+\d*\s*(?:large|small|medium|fresh|whole)?\s*\w+\s*$', text, re.IGNORECASE)
+    if m:
+        notes.append(m.group(0).strip())
+        text = text[:m.start()].strip()
     text = re.sub(r'\bfrom\s+', '', text, flags=re.IGNORECASE).strip()
     # Prep-method "or" clauses that leaked through
     text = re.sub(
-        r'\s+or\s+(?:pressed|pushed|passed|run|rubbed|blended|pureed|mashed|'
-        r'squeezed|grated|ground|minced|chopped|diced|sliced|'
-        r'low[\s-]sodium|reduced[\s-]sodium|unsalted|homemade|store[\s-]bought)[\w\s-]*$',
+        r'\s+or\s+(?:' + _OR_PREP_WORDS + r')[\w\s-]*$',
         '', text, flags=re.IGNORECASE
     ).strip()
-    # Trailing "for <purpose>"
-    text = re.sub(r'\s+for\s+\S.*$', '', text, flags=re.IGNORECASE).strip()
+    # Trailing "for <purpose>" — a usage note ("for garnish", "for greasing
+    # the pan"), not a technique, so it goes to notes rather than vanishing.
+    m = re.search(r'\s+for\s+\S.*$', text, re.IGNORECASE)
+    if m:
+        notes.append(m.group(0).strip())
+        text = text[:m.start()].strip()
     # Stray numbers, isolated punctuation, isolated single letters
     text = re.sub(r'(?<!\w)\d+(?:\.\d+)?(?!\w)', '', text).strip()
     text = re.sub(r'(?<!\w)\.(?!\w)', '', text).strip()
     text = re.sub(r'(?<!\w)[a-z](?!\w)', '', text, flags=re.IGNORECASE).strip()
-    return " ".join(text.split()).strip('*').strip()
+    return " ".join(text.split()).strip('*').strip(), notes
 
 
 def _fix_truncations(text):
@@ -639,7 +767,7 @@ def _parse_one_line(text, optional=False):
 
     text, juice_prep      = _extract_juice_form(text)
     text, pct_note        = _extract_pct_weight(text)
-    text, grams, ml, pct = _extract_explicit_measures(text)
+    text, grams, ml, pct, plus_additional_note = _extract_explicit_measures(text)
     text, parens          = _extract_parentheticals(text)
 
     # Check parentheticals for a secondary imperial measure e.g. "(1 stick)"
@@ -651,7 +779,7 @@ def _parse_one_line(text, optional=False):
             break
 
     text, can_qty, can_unit, can_size_note = _extract_can_size(text)
-    text = _remove_size_descriptors(text)
+    text, size_map = _protect_size_descriptors(text)
 
     # Strip leftover secondary measures when a gram weight was already extracted
     if grams is not None:
@@ -670,6 +798,7 @@ def _parse_one_line(text, optional=False):
     #   2. Parenthetical imperial measure
     #   3. Gram weight as sole primary measure
     unit = None
+    paren_measure_used = False
     if can_qty is not None:
         quantity, unit = can_qty, can_unit
         if can_size_note:
@@ -677,6 +806,7 @@ def _parse_one_line(text, optional=False):
     elif grams is not None:
         if paren_qty and paren_unit:
             quantity, unit = paren_qty, paren_unit
+            paren_measure_used = True
         elif quantity is None:
             quantity, unit = grams, "g"
 
@@ -684,31 +814,50 @@ def _parse_one_line(text, optional=False):
     if unit is None:
         text, unit = _extract_unit(text)
 
-    text = _remove_noise(text)
-    text, state = _extract_state(text)
-    text, prep  = _extract_prep(text)
+    # Restore size descriptors now, before prep extraction, so PREP_PATTERNS
+    # entries that reference literal "N-inch..." text can match them.
+    text = _restore_phrases(text, size_map)
+
+    text, noise_notes = _extract_noise(text)
+    text, prep_phrases = _extract_prep(text)
     text = _remove_action_words(text)
     text = _remove_size_adjectives(text)
     text = _restore_phrases(text, phrase_map)
 
-    name = _clean_name(text)
+    name, name_notes = _clean_name(text)
     name = _fix_truncations(name)
 
-    # Assemble preparation string
-    prep_parts = [p for p in [juice_prep, prep, state] if p]
-    final_prep = ", ".join(prep_parts) if prep_parts else None
+    # `preparation` is an ordered list of technique/state phrases, in the
+    # order they appeared in the source line, meant to resolve 1:1 against
+    # the technique graph downstream (e.g. ["peeled", "quartered lengthwise",
+    # "cut crosswise into 0.25-inch-thick slices"]). Juice form ("juice of")
+    # is always extracted from the very front of the line, so it always
+    # belongs at the front of the sequence.
+    preparation = list(prep_phrases)
+    if juice_prep:
+        preparation.insert(0, juice_prep)
+    final_prep = preparation if preparation else None
 
-    # Append non-measure parenthetical notes
+    # `notes` is free text that is NOT a technique — yield/count asides,
+    # secondary measures not chosen as the primary one, can/jar size,
+    # "% by weight" notes, source-quantity phrases ("from 2 lemons"), usage
+    # phrases ("for greasing the pan"), and flexible-amount phrases ("plus
+    # more", "to taste", "as needed"). Kept out of `preparation` so the
+    # technique-graph lookup downstream never has to fail-match against
+    # non-technique text — but nothing here is simply thrown away.
     notes = []
     for pc in parens:
         pq, pu = _paren_measure(pc)
-        if pq and pu and pq == paren_qty and pu == paren_unit:
+        if pq and pu and pq == paren_qty and pu == paren_unit and paren_measure_used:
             continue
         notes.append(pc)
     if pct_note:
         notes.append(pct_note.strip())
-    if notes:
-        final_prep = ((final_prep or "") + " | " + "; ".join(notes)).strip(" |")
+    if plus_additional_note:
+        notes.append(plus_additional_note)
+    notes.extend(noise_notes)
+    notes.extend(name_notes)
+    final_notes = "; ".join(notes) if notes else None
 
     routed = _route_unit(quantity, unit, grams, ml)
 
@@ -717,7 +866,8 @@ def _parse_one_line(text, optional=False):
         results.append({
             "quantity":              routed["quantity"],
             "unit":                  routed["unit"],
-            "prep":                  final_prep,
+            "preparation":           final_prep,
+            "notes":                 final_notes,
             "grams":                 routed["grams"],
             "ml":                    routed["ml"],
             "imperial_weight_value": routed["imperial_weight_value"],
@@ -748,7 +898,16 @@ def parse_ingredient_line(raw_text):
     line_optional = _is_optional(raw_text)
     primary_text, alt_text = _split_on_or(raw_text)
 
-    for is_optional, text in [(line_optional, primary_text), (True, alt_text)]:
+    _MEASURE_KEYS = (
+        "quantity", "unit", "grams", "ml",
+        "imperial_weight_value", "imperial_weight_unit",
+        "imperial_volume_value", "imperial_volume_unit",
+    )
+    primary_measure = None
+
+    for slot, (is_optional, text) in enumerate(
+        [(line_optional, primary_text), (True, alt_text)]
+    ):
         if text is None:
             continue
         sub_lines = _split_on_plus(normalize_text(text))
@@ -762,6 +921,20 @@ def parse_ingredient_line(raw_text):
             for r in sub_results:
                 if not r["ingredient_name_raw"]:
                     r["ingredient_name_raw"] = fallback
+
+        if slot == 0:
+            # Remember the primary's measurement so an "or" alternative that
+            # states no quantity of its own ("...chicken thighs or wings",
+            # "chicken broth or water") can inherit it, rather than being
+            # left with every measurement column empty.
+            if sub_results:
+                primary_measure = sub_results[0]
+        elif primary_measure is not None:
+            for r in sub_results:
+                if not any(r.get(k) for k in _MEASURE_KEYS):
+                    for k in _MEASURE_KEYS:
+                        r[k] = primary_measure.get(k)
+
         results.extend(sub_results)
     return results
 
@@ -795,7 +968,14 @@ def _ensure_schema(conn):
             grams                   REAL,
             ml                      REAL,
             scaling                 TEXT,
+            -- ordered JSON list of technique/state phrases, source-text
+            -- order, e.g. '["peeled", "cut crosswise into 0.25-inch-thick slices"]'
+            -- intended to resolve 1:1 against the technique graph
             preparation             TEXT,
+            -- free-text asides that are NOT techniques (yield/count notes,
+            -- secondary measures, can/jar size, "% by weight" notes, ...)
+            -- kept separate so they are never fed to the technique lookup
+            notes                   TEXT,
             -- name as it appears after measurement / prep extraction
             ingredient_name_raw     TEXT,
             -- flags
@@ -804,6 +984,14 @@ def _ensure_schema(conn):
             parsed_at               TEXT DEFAULT (datetime('now'))
         )
     """)
+    # Migration: tables created before this change won't have `notes` yet.
+    existing_cols = {row[1] for row in conn.execute(
+        "PRAGMA table_info(recipe_ingredient_lines_parsed)"
+    )}
+    if "notes" not in existing_cols:
+        conn.execute(
+            "ALTER TABLE recipe_ingredient_lines_parsed ADD COLUMN notes TEXT"
+        )
     conn.execute("""
         CREATE INDEX IF NOT EXISTS idx_rilp_ingredient_block_id
         ON recipe_ingredient_lines_parsed (ingredient_block_id)
@@ -866,9 +1054,9 @@ def _run(conn):
                         quantity_value, quantity_unit,
                         imperial_weight_value, imperial_weight_unit,
                         imperial_volume_value, imperial_volume_unit,
-                        grams, ml, scaling, preparation,
+                        grams, ml, scaling, preparation, notes,
                         ingredient_name_raw, optional
-                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                 """, (
                     ingredient_block_id,
                     recipe_id,
@@ -880,7 +1068,9 @@ def _run(conn):
                     r["quantity"], r["unit"],
                     r["imperial_weight_value"], r["imperial_weight_unit"],
                     r["imperial_volume_value"], r["imperial_volume_unit"],
-                    r["grams"], r["ml"], r["scaling"], r["prep"],
+                    r["grams"], r["ml"], r["scaling"],
+                    json.dumps(r["preparation"]) if r["preparation"] else None,
+                    r["notes"],
                     r["ingredient_name_raw"], r["optional"],
                 ))
                 total_lines += 1

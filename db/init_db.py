@@ -273,6 +273,19 @@ def init_db():
             )
         """)
 
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS flavor_bible_normalized (
+                id              INTEGER PRIMARY KEY,
+                ingredient      TEXT,
+                pairing         TEXT,
+                score           INTEGER,
+                key_ingredient  TEXT,
+                seasonality     TEXT,
+                accompaniment   TEXT,
+                preparation     TEXT
+            )
+        """)
+
         # ----------------------------------------------------------------
         # Pantry / fridge
         # ----------------------------------------------------------------

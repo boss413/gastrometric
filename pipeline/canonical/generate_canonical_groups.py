@@ -3,7 +3,7 @@ import os
 import re
 from collections import defaultdict
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "gastrometric.db")
+from gastrometric.config.paths import DB_PATH
 
 def generate_canonical_groups():
 

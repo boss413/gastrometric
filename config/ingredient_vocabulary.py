@@ -163,13 +163,22 @@ PREP_PATTERNS = [
     r'cut in \d+',
     r'sliced into bite[- ]sized chunks',
     r'sliced into bite[- ]sized pieces',
+    r'cut crosswise into [^,;]+',
     r'sliced crosswise into [^,;]+',
     r'crosswise into [^,;]+',
+    r'cut lengthwise into [^,;]+',
+    r'sliced lengthwise into [^,;]+',
+    r'lengthwise into [^,;]+',
+    r'quartered lengthwise',
+    r'halved lengthwise',
+    r'sliced lengthwise',
+    r'cut lengthwise',
     # --- purpose phrases ---
-    r'for dusting',
-    r'for sprinkling',
-    r'for sprinklng',   # OCR variant
-    r'for greasing',
+    # NOTE: "for dusting" / "for sprinkling" / "for greasing" etc. are
+    # intentionally NOT here. They describe what the ingredient is used
+    # for, not a technique applied to it, so they're captured whole (e.g.
+    # "for greasing the pan") as a note by _clean_name's trailing
+    # "for <purpose>" handling instead of being partially eaten here.
     # --- packing ---
     r'loosely packed',
     # --- state / cut adjectives (single-word, must come after multi-word) ---
@@ -207,6 +216,8 @@ PREP_PATTERNS = [
     r'\bdeveined\b',
     r'\bdebearded\b',
     r'\bpatted dry\b',
+    r'\blengthwise\b',
+    r'\bcrosswise\b',
 ]
 
 
@@ -448,3 +459,319 @@ QUALIFIER_STRIP_PATTERNS = [
     # --- trailing source phrases ("juice of 2 lemons" → "lemon juice") ---
     # handled in normalize_ingredient_lines.py as a special case
 ]
+
+# ---------------------------------------------------------------------------
+# ADDITIONS TO ingredient_vocabulary.py
+# ---------------------------------------------------------------------------
+# Add these constants to the NORMALIZE-TIME section.
+# Imported by normalize_flavor_bible.py.
+# ---------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------
+# NON_INGREDIENT_HINTS
+# If any of these substrings appear in a flavor bible target entry,
+# the row is a cuisine/technique/dish description — not an ingredient.
+# -----------------------------------------------------------
+
+NON_INGREDIENT_HINTS = [
+    "cuisine", "dishes", "foods", "course", "menu",
+    "technique", "cooking", "preparation",
+    "flavor", "taste", "temperature", "season",
+]
+
+
+# -----------------------------------------------------------
+# PROTECTED_PREP_PHRASES
+#
+# Atomic ingredient names that must survive normalization unchanged.
+# Checked AFTER comma resolution (since the flavor bible stores
+# "ginger, ground" not "ground ginger") but BEFORE any word stripping.
+#
+# Covers two kinds of protection:
+#   1. Modifier is identity-bearing for this specific ingredient
+#      ("ground ginger" is a different product from fresh ginger root)
+#   2. First word looks like a texture/state word but is part of the name
+#      ("sour cream", "sweet potato", "sweet pepper")
+#
+# Sorted longest-first at import time so more-specific phrases shadow
+# shorter ones sharing a keyword.
+# -----------------------------------------------------------
+
+PROTECTED_PREP_PHRASES = [
+    # dairy — "sour" and "sweet" are part of the name, not descriptors
+    "sour cream",
+    "sweet butter",
+    # vegetables where the qualifier is the variety, not a descriptor
+    "sweet potato",
+    "sweet pepper",
+    "sweet onion",
+    "sweet corn",
+    "sweet pea",
+    "wild mushroom",
+    "wild rice",
+    "wild boar",
+    "sour cherry",                 # distinct from sweet/dark cherries
+    # ginger forms — completely different products
+    "ground ginger",
+    "fresh ginger",
+    "candied ginger",
+    # pepper — ground forms are distinct from whole
+    "ground black pepper",
+    "ground white pepper",
+    "ground pepper",
+    # smoked — distinct products, not "ingredient + technique note"
+    "smoked paprika",
+    "smoked salmon",
+    "smoked trout",
+    "smoked mackerel",
+    "smoked haddock",
+    "smoked ham",
+    "smoked bacon",
+    "smoked sausage",
+    # preserved — the preservation IS the ingredient
+    "preserved lemon",
+    "preserved lime",
+    # candied
+    "candied lemon peel",
+    "candied orange peel",
+    # dried chiles — distinct from fresh
+    "dried chiles",
+    "dried chile",
+    # ground spices — "ground" is identity-bearing (dried + milled ≠ whole)
+    "ground coriander",
+    "ground cumin",
+    "ground cinnamon",
+    "ground nutmeg",
+    "ground allspice",
+    "ground cloves",
+    "ground cardamom",
+    "ground turmeric",
+    "ground paprika",
+    "ground mustard",
+    "ground fennel",
+    # ground meats
+    "ground beef",
+    "ground pork",
+    "ground turkey",
+    "ground chicken",
+    "ground lamb",
+]
+
+
+# -----------------------------------------------------------
+# DRIED_DISTINCT
+#
+# Base ingredient names (singular) for which "dried X" is a
+# genuinely separate ingredient from the fresh form.
+#
+# Rule of thumb: would a recipe that calls for the fresh form work
+# if you substituted the dried form without adjustment? If no, it
+# belongs here.
+#
+# Herbs and spices are deliberately absent — "dried thyme" and
+# "thyme" are the same ingredient with a prep note.
+# Smoked/candied/preserved forms use PROTECTED_PREP_PHRASES instead
+# because those words are technique-bearing, not just state descriptors.
+#
+# Stored as singular forms; the normalization step singularizes
+# before checking, so plurals are covered automatically.
+# -----------------------------------------------------------
+
+DRIED_DISTINCT = {
+    # stone fruits and berries — dried form is a categorically different product
+    "apricot",
+    "fig",
+    "plum",          # dried plum = prune; flavor bible may use either
+    "cherry",
+    "cranberry",
+    "blueberry",
+    "mango",
+    "pineapple",
+    "date",
+    "raisin",        # always dried, but may appear as "dried raisin"
+    "currant",
+    # ginger — "dried ginger" (not ground) is still distinct from fresh root
+    "ginger",
+    # mushrooms — dried shiitake / porcini behave differently from fresh
+    "mushroom",
+}
+
+
+# -----------------------------------------------------------
+# LEADING_CATEGORY_REVERSALS
+# Left side of a "category, specific" comma phrase where the specific
+# is appended AFTER the category to form natural English.
+# "vinegar, balsamic" → "balsamic vinegar"
+#
+# Note: "onions" is intentionally NOT here. "onions, sweet" should
+# become "sweet onions" (a taxonomy variety), not be reversed to
+# "sweet onions" via reversal logic — it gets there via COLOR_QUALIFIERS
+# being extended to cover variety qualifiers. See VARIETY_QUALIFIERS.
+# -----------------------------------------------------------
+
+LEADING_CATEGORY_REVERSALS = {
+    "bell pepper",
+    "basil",
+    "vinegar",
+    "wine",
+    "cheese",
+    "oil",
+    "chile peppers",
+    "tomato",
+    "sausage",
+    "liqueur",
+    "sauce",
+    "pepper",
+    "mushroom",
+    "mustard",
+    "stock",
+    "broth",
+}
+
+
+# -----------------------------------------------------------
+# PLURAL_CATEGORIES
+# Left side of a "category, specific" comma phrase where the right
+# side IS the ingredient and the left is only the grouping label.
+# "berries, strawberry" → "strawberry"
+# -----------------------------------------------------------
+
+PLURAL_CATEGORIES = {
+    "berries",
+    "nuts",
+    "seeds",
+    "fruits",
+    "spices",
+    "greens",
+    "herbs",
+    "fish",
+    "meat",
+    "lettuce",
+}
+
+
+# -----------------------------------------------------------
+# VARIETY_QUALIFIERS
+# When these appear as the RIGHT side of a comma phrase, they are
+# prepended to form the full variety name.
+# Extends the same mechanic as COLOR_QUALIFIERS.
+#
+# "pepper, black"      → "black pepper"      (color)
+# "onions, sweet"      → "sweet onions"      (variety)
+# "mushrooms, wild"    → "wild mushrooms"    (variety/taxonomy)
+# "onions, caramelized"→ "caramelized onions" (preparation — kept, not stripped,
+#                         because this is a prepared ingredient with distinct use)
+# -----------------------------------------------------------
+
+COLOR_QUALIFIERS = {
+    "black", "red", "green", "yellow", "white",
+    "brown", "light", "heavy", "dark", "pink", "purple",
+}
+
+VARIETY_QUALIFIERS = {
+    # taste-based variety names that are part of the ingredient name
+    "sweet", "sour", "bitter", "hot", "mild",
+    # origin/character varieties
+    "wild", "cultivated",
+    # preparation-as-variety (these are distinct culinary ingredients)
+    "caramelized", "roasted", "fried",
+    # size/age varieties
+    "baby", "young",
+}
+
+# Combined set used by _resolve_comma_phrase
+COMMA_RIGHT_QUALIFIERS = COLOR_QUALIFIERS | VARIETY_QUALIFIERS
+
+
+# -----------------------------------------------------------
+# STATE_ONLY_PREP_WORDS
+#
+# Stripped from the ingredient name AND recorded in `preparation`.
+# Only words where stripping NEVER changes the identity of the ingredient.
+#
+# Deliberately narrow. When in doubt, leave the word in the name —
+# canonicalization has more context to decide.
+#
+# NOT included:
+#   "dried"     — context-dependent; see DRIED_DISTINCT
+#   "preserved" — usually identity-bearing; see PROTECTED_PREP_PHRASES
+#   "pickled"   — pickled X ≠ X in most culinary contexts
+#   "smoked"    — graph edge; see PROTECTED_PREP_PHRASES
+#   "sweet"     — variety qualifier or part of name; see VARIETY_QUALIFIERS
+#   "sour"      — part of name (sour cream); see PROTECTED_PREP_PHRASES
+#   "wild"      — taxonomy category; see VARIETY_QUALIFIERS
+#   "aged"      — often identity-bearing (aged cheddar, aged balsamic)
+# -----------------------------------------------------------
+
+STATE_ONLY_PREP_WORDS = {
+    "fresh",    # "fresh thyme" → "thyme"; "fresh ginger" is protected above
+    "raw",      # "raw honey" → "honey"
+    "grilled",  # "grilled chicken" → "chicken"
+    "frozen",   # "frozen peas" → "peas"
+    "canned",   # "canned tomatoes" → "tomatoes"
+    "bottled",
+}
+
+
+# -----------------------------------------------------------
+# PLURAL_IRREGULAR
+# Irregular food-specific plural → singular mappings applied
+# before the suffix-rule singularizer.
+# Only covers cases the suffix rules would get wrong.
+# -----------------------------------------------------------
+
+PLURAL_IRREGULAR = {
+    "leaves":   "leaf",        # but "brussels sprouts leaves" → keep? flag for review
+    "halves":   "half",
+    "knives":   "knife",       # unlikely but present in some entries
+    "loaves":   "loaf",
+}
+
+
+# -----------------------------------------------------------
+# PLURAL_SUFFIX_RULES
+# Ordered list of (suffix_to_strip, replacement) tuples.
+# Applied only when no PLURAL_IRREGULAR match exists.
+# More-specific rules (longer suffixes) must come first.
+#
+# Each rule is applied only if the resulting stem is >= 3 chars
+# to avoid over-stripping short words.
+# -----------------------------------------------------------
+
+PLURAL_SUFFIX_RULES = [
+    ("ches",  "ch"),    # "peaches" → "peach"  (before -es rule)
+    ("shes",  "sh"),    # "radishes" → "radish"
+    ("xes",   "x"),     # "boxes" → "box"  (unlikely in food)
+    ("ies",   "y"),     # "berries" → "berry", "cherries" → "cherry"
+    ("ves",   "f"),     # "loaves" → "loaf"  (backup; irregular covers most)
+    ("es",    ""),      # "tomatoes" → "tomato", "peaches" already handled
+    ("s",     ""),      # "apricots" → "apricot", "onions" → "onion"
+]
+
+# Words that look plural but are not — never singularize these.
+PLURAL_EXCEPTIONS = {
+    "asparagus", "hummus", "couscous", "quinoa", "falafel",
+    "molasses", "oats", "grits", "greens", "bitters",
+    "lemongrass", "watercress", "endives", "vegetable", "apples",
+    # these end in -s but are already singular
+    "anise", "chives", "cloves", "dates", "limes", "olives",
+    "grapes", "capers", "truffles", "noodles", "sprouts",
+}
+
+
+# -----------------------------------------------------------
+# PREP_INFLECTIONS
+# Inflected forms of words KEPT in the name → base form.
+# Applied as a final token-level pass.
+#
+# "lime, juiced" → comma resolve → "lime juiced"
+#               → inflection    → "lime juice"
+# -----------------------------------------------------------
+
+PREP_INFLECTIONS = {
+    "juiced":   "juice",
+    "zested":   "zest",
+    "powdered": "powder",
+    "pureed":   "puree",
+}

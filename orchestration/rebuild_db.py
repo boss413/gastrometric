@@ -45,7 +45,7 @@ def main():
     from gastrometric.pipeline.entity.build_ingredients import build_ingredients
     from gastrometric.pipeline.canonical.generate_canonical_groups import generate_canonical_groups
     from gastrometric.pipeline.enrichment.flavor_bible.load_flavor_bible_raw import load_flavor_bible_raw
-#    from gastrometric.pipeline.enrichment.flavor_bible.load_flavor_bible_curated import load_flavor_bible_curated
+    from gastrometric.pipeline.enrichment.flavor_bible.load_flavor_bible_curated import load_flavor_bible_curated
 #    from gastrometric.pipeline.enrichment.flavor_bible.map_flavor_bible import map_flavor_bible
 #    from gastrometric.data.seed.seed_kitchen import seed_kitchen
     from gastrometric.db.create_views import create_views
@@ -58,7 +58,7 @@ def main():
 #    build_ingredients()
 #    generate_canonical_groups()
     load_flavor_bible_raw()
-#    load_flavor_bible_curated()
+    load_flavor_bible_curated()
 #    map_flavor_bible()
 #   seed_kitchen()
 #    create_views()
