@@ -1,1 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Windows metadata
+*.Zone.Identifier
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Large USDA raw data
 data/usda/raw/FoodData_Central_sr_legacy_food_json_2018-04.json
