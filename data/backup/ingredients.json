@@ -1,0 +1,3089 @@
+{
+  "schema_version": "1.0",
+  "description": "Recipe-facing seed ingredient identities for Gastrometric. Each identity represents a distinct ingredient concept that may appear in a recipe. Aliases represent synonymous names only. Parsed attributes modify an identity instance. Semantic relationships between identities are maintained separately in the ingredient knowledge graph.",
+  "attribute_types": {
+    "size": {
+      "value_kind": "enum",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "extra_large",
+        "jumbo",
+        "mini",
+        "baby",
+        "petite",
+        "thin",
+        "thick"
+      ]
+    },
+    "preparation": {
+      "value_kind": "enum",
+      "values": [
+        "chopped",
+        "coarsely_chopped",
+        "finely_chopped",
+        "roughly_chopped",
+        "diced",
+        "small_diced",
+        "medium_diced",
+        "large_diced",
+        "minced",
+        "sliced",
+        "thinly_sliced",
+        "thickly_sliced",
+        "julienned",
+        "shredded",
+        "grated",
+        "finely_grated",
+        "zested",
+        "peeled",
+        "trimmed",
+        "halved",
+        "quartered",
+        "cubed",
+        "crushed",
+        "mashed",
+        "pureed",
+        "ground",
+        "beaten",
+        "whipped",
+        "whisked",
+        "crumbled",
+        "torn",
+        "chiffonade",
+        "bruised",
+        "split",
+        "seeded",
+        "cored",
+        "pitted",
+        "deveined",
+        "cleaned",
+        "rinsed",
+        "drained",
+        "strained",
+        "squeezed",
+        "pressed",
+        "packed",
+        "shucked",
+        "scraped"
+      ]
+    },
+    "temperature": {
+      "value_kind": "enum",
+      "values": [
+        "frozen",
+        "thawed",
+        "ice_cold",
+        "cold",
+        "chilled",
+        "room_temperature",
+        "warm",
+        "hot"
+      ]
+    },
+    "state": {
+      "value_kind": "enum",
+      "values": [
+        "raw",
+        "partially_cooked",
+        "cooked",
+        "fully_cooked",
+        "undercooked",
+        "overcooked"
+      ]
+    },
+    "bone": {
+      "value_kind": "enum",
+      "values": [
+        "bone_in",
+        "boneless"
+      ]
+    },
+    "skin": {
+      "value_kind": "enum",
+      "values": [
+        "skin_on",
+        "skinless"
+      ]
+    },
+    "salt_content": {
+      "value_kind": "enum",
+      "values": [
+        "salted",
+        "unsalted"
+      ]
+    },
+    "sodium_level": {
+      "value_kind": "enum",
+      "values": [
+        "regular",
+        "low_sodium",
+        "reduced_sodium",
+        "no_salt_added",
+        "unsalted"
+      ]
+    },
+    "brand": {
+      "value_kind": "free_text"
+    }
+  },
+  "identities": [
+    {
+      "name": "active dry yeast",
+      "aliases": [
+        "active dry yeast"
+      ]
+    },
+    {
+      "name": "instant yeast",
+      "aliases": [
+        "instant yeast",
+        "rapid rise yeast",
+        "quick rise yeast"
+      ]
+    },
+    {
+      "name": "yeast",
+      "aliases": [
+        "yeast"
+      ]
+    },
+    {
+      "name": "agar",
+      "aliases": [
+        "agar",
+        "agar agar",
+        "agar-agar"
+      ]
+    },
+    {
+      "name": "all-purpose flour",
+      "aliases": [
+        "all-purpose flour",
+        "all purpose flour",
+        "all-purpose",
+        "ap flour"
+      ]
+    },
+    {
+      "name": "bread flour",
+      "aliases": [
+        "bread flour"
+      ]
+    },
+    {
+      "name": "cake flour",
+      "aliases": [
+        "cake flour"
+      ]
+    },
+    {
+      "name": "rye flour",
+      "aliases": [
+        "rye flour"
+      ]
+    },
+    {
+      "name": "self-raising flour",
+      "aliases": [
+        "self-raising flour",
+        "self raising flour",
+        "self-rising flour",
+        "self rising flour"
+      ]
+    },
+    {
+      "name": "whole wheat flour",
+      "aliases": [
+        "whole wheat flour",
+        "whole-wheat flour",
+        "wholemeal flour"
+      ]
+    },
+    {
+      "name": "flour",
+      "aliases": [
+        "flour"
+      ]
+    },
+    {
+      "name": "baking powder",
+      "aliases": [
+        "baking powder"
+      ]
+    },
+    {
+      "name": "aluminum-free baking powder",
+      "aliases": [
+        "aluminum-free baking powder",
+        "aluminum free baking powder"
+      ]
+    },
+    {
+      "name": "baking soda",
+      "aliases": [
+        "baking soda",
+        "bicarbonate of soda",
+        "sodium bicarbonate"
+      ]
+    },
+    {
+      "name": "bread crumbs",
+      "aliases": [
+        "bread crumbs",
+        "breadcrumbs",
+        "dry bread crumbs"
+      ]
+    },
+    {
+      "name": "panko bread crumbs",
+      "aliases": [
+        "panko",
+        "panko bread crumbs",
+        "panko breadcrumbs"
+      ]
+    },
+    {
+      "name": "potato starch",
+      "aliases": [
+        "potato starch"
+      ]
+    },
+    {
+      "name": "corn starch",
+      "aliases": [
+        "corn starch",
+        "cornstarch"
+      ]
+    },
+    {
+      "name": "cornmeal",
+      "aliases": [
+        "cornmeal",
+        "corn meal"
+      ]
+    },
+    {
+      "name": "fine yellow cornmeal",
+      "aliases": [
+        "fine yellow cornmeal",
+        "fine cornmeal"
+      ]
+    },
+    {
+      "name": "wheat bran",
+      "aliases": [
+        "wheat bran"
+      ]
+    },
+    {
+      "name": "old-fashioned oats",
+      "aliases": [
+        "old-fashioned oats",
+        "old fashioned oats"
+      ]
+    },
+    {
+      "name": "rolled oats",
+      "aliases": [
+        "rolled oats"
+      ]
+    },
+    {
+      "name": "brown sugar",
+      "aliases": [
+        "light brown sugar",
+        "dark brown sugar",
+        "brown sugar"
+      ]
+    },
+    {
+      "name": "granulated sugar",
+      "aliases": [
+        "granulated sugar"
+      ]
+    },
+    {
+      "name": "sugar",
+      "aliases": [
+        "sugar",
+        "white sugar"
+      ]
+    },
+    {
+      "name": "confectioners sugar",
+      "aliases": [
+        "confectioners sugar",
+        "confectioner's sugar",
+        "powdered sugar",
+        "icing sugar"
+      ]
+    },
+    {
+      "name": "superfine sugar",
+      "aliases": [
+        "superfine sugar",
+        "caster sugar",
+        "castor sugar"
+      ]
+    },
+    {
+      "name": "palm sugar",
+      "aliases": [
+        "palm sugar"
+      ]
+    },
+    {
+      "name": "molasses",
+      "aliases": [
+        "molasses"
+      ]
+    },
+    {
+      "name": "dark molasses",
+      "aliases": [
+        "dark molasses"
+      ]
+    },
+    {
+      "name": "unsulphured molasses",
+      "aliases": [
+        "unsulphured molasses",
+        "unsulfured molasses"
+      ]
+    },
+    {
+      "name": "sorghum molasses",
+      "aliases": [
+        "sorghum molasses"
+      ]
+    },
+    {
+      "name": "corn syrup",
+      "aliases": [
+        "corn syrup"
+      ]
+    },
+    {
+      "name": "light corn syrup",
+      "aliases": [
+        "light corn syrup"
+      ]
+    },
+    {
+      "name": "maple syrup",
+      "aliases": [
+        "maple syrup"
+      ]
+    },
+    {
+      "name": "honey",
+      "aliases": [
+        "honey"
+      ]
+    },
+    {
+      "name": "clover honey",
+      "aliases": [
+        "clover honey"
+      ]
+    },
+    {
+      "name": "vanilla",
+      "aliases": [
+        "vanilla"
+      ]
+    },
+    {
+      "name": "vanilla extract",
+      "aliases": [
+        "vanilla extract",
+        "pure vanilla extract"
+      ]
+    },
+    {
+      "name": "vanilla bean paste",
+      "aliases": [
+        "vanilla bean paste"
+      ]
+    },
+    {
+      "name": "coconut extract",
+      "aliases": [
+        "coconut extract"
+      ]
+    },
+    {
+      "name": "cocoa powder",
+      "aliases": [
+        "cocoa powder"
+      ]
+    },
+    {
+      "name": "unsweetened cocoa powder",
+      "aliases": [
+        "unsweetened cocoa powder"
+      ]
+    },
+    {
+      "name": "chocolate",
+      "aliases": [
+        "chocolate"
+      ]
+    },
+    {
+      "name": "dark chocolate",
+      "aliases": [
+        "dark chocolate"
+      ]
+    },
+    {
+      "name": "bittersweet chocolate",
+      "aliases": [
+        "bittersweet chocolate"
+      ]
+    },
+    {
+      "name": "semi-sweet chocolate",
+      "aliases": [
+        "semi-sweet chocolate",
+        "semisweet chocolate"
+      ]
+    },
+    {
+      "name": "unsweetened chocolate",
+      "aliases": [
+        "unsweetened chocolate"
+      ]
+    },
+    {
+      "name": "chocolate chips",
+      "aliases": [
+        "chocolate chips",
+        "chocolate morsels"
+      ]
+    },
+    {
+      "name": "mini chocolate chips",
+      "aliases": [
+        "mini chocolate chips",
+        "mini chocolate morsels"
+      ]
+    },
+    {
+      "name": "milk chocolate",
+      "aliases": [
+        "milk chocolate"
+      ]
+    },
+    {
+      "name": "white chocolate",
+      "aliases": [
+        "white chocolate"
+      ]
+    },
+    {
+      "name": "gelatin",
+      "aliases": [
+        "gelatin",
+        "gelatine"
+      ]
+    },
+    {
+      "name": "powdered gelatin",
+      "aliases": [
+        "powdered gelatin",
+        "gelatin powder"
+      ]
+    },
+    {
+      "name": "espresso powder",
+      "aliases": [
+        "espresso powder"
+      ]
+    },
+    {
+      "name": "instant espresso powder",
+      "aliases": [
+        "instant espresso powder"
+      ]
+    },
+    {
+      "name": "isomalt",
+      "aliases": [
+        "isomalt"
+      ]
+    },
+    {
+      "name": "shortening",
+      "aliases": [
+        "shortening"
+      ]
+    },
+    {
+      "name": "butter-flavored shortening",
+      "aliases": [
+        "butter-flavored shortening",
+        "butter flavored shortening"
+      ]
+    },
+    {
+      "name": "butter",
+      "aliases": [
+        "butter",
+        "whole butter"
+      ],
+      "attributes": {
+        "salt_content": {
+          "allowed": [
+            "salted",
+            "unsalted"
+          ],
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "egg yolks",
+      "aliases": [
+        "egg yolks",
+        "yolk"
+      ]
+    },
+    {
+      "name": "egg whites",
+      "aliases": [
+        "egg whites",
+        "egg white"
+      ]
+    },
+        {
+      "name": "eggs",
+      "aliases": [
+        "chicken eggs",
+        "egg"
+      ]
+    },
+    {
+      "name": "clarified butter",
+      "aliases": [
+        "clarified butter",
+        "ghee"
+      ]
+    },
+    {
+      "name": "coconut oil",
+      "aliases": [
+        "coconut oil"
+      ]
+    },
+    {
+      "name": "corn oil",
+      "aliases": [
+        "corn oil"
+      ]
+    },
+    {
+      "name": "duck fat",
+      "aliases": [
+        "duck fat",
+        "rendered duck fat"
+      ]
+    },
+    {
+      "name": "lard",
+      "aliases": [
+        "lard"
+      ]
+    },
+    {
+      "name": "olive oil",
+      "aliases": [
+        "olive oil"
+      ]
+    },
+    {
+      "name": "extra-virgin olive oil",
+      "aliases": [
+        "extra-virgin olive oil",
+        "extra virgin olive oil",
+        "evoo"
+      ]
+    },
+    {
+      "name": "light olive oil",
+      "aliases": [
+        "light olive oil"
+      ]
+    },
+    {
+      "name": "neutral oil",
+      "aliases": [
+        "neutral oil",
+        "neutral cooking oil"
+      ]
+    },
+    {
+      "name": "peanut oil",
+      "aliases": [
+        "peanut oil"
+      ]
+    },
+    {
+      "name": "canola oil",
+      "aliases": [
+        "canola oil",
+        "rapeseed oil"
+      ]
+    },
+    {
+      "name": "safflower oil",
+      "aliases": [
+        "safflower oil"
+      ]
+    },
+    {
+      "name": "vegetable oil",
+      "aliases": [
+        "vegetable oil"
+      ]
+    },
+    {
+      "name": "animal fat",
+      "aliases": [
+        "animal fat",
+        "rendered fat"
+      ]
+    },
+    {
+      "name": "rendered bacon fat",
+      "aliases": [
+        "rendered bacon fat",
+        "bacon fat"
+      ]
+    },
+    {
+      "name": "rendered chicken fat",
+      "aliases": [
+        "rendered chicken fat",
+        "chicken fat",
+        "schmaltz"
+      ]
+    },
+    {
+      "name": "rendered lamb fat",
+      "aliases": [
+        "rendered lamb fat",
+        "lamb fat"
+      ]
+    },
+    {
+      "name": "salt",
+      "aliases": [
+        "salt"
+      ]
+    },
+    {
+      "name": "MSG",
+      "aliases": [
+        "MSG",
+        "monosodium glutamate",
+        "Accent"
+      ]
+    },
+    {
+      "name": "kosher salt",
+      "aliases": [
+        "kosher salt"
+      ],
+      "attributes": {
+        "brand": {
+          "required": true,
+          "known_values": [
+            "Diamond Crystal",
+            "Morton"
+          ]
+        }
+      }
+    },
+    {
+      "name": "diamond crystal kosher salt",
+      "aliases": [
+        "diamond crystal kosher salt",
+        "diamond crystal"
+      ]
+    },
+    {
+      "name": "morton kosher salt",
+      "aliases": [
+        "morton kosher salt",
+        "morton kosher"
+      ]
+    },
+    {
+      "name": "canning salt",
+      "aliases": [
+        "canning salt",
+        "pickling salt"
+      ]
+    },
+    {
+      "name": "celery salt",
+      "aliases": [
+        "celery salt"
+      ]
+    },
+    {
+      "name": "coarse sea salt",
+      "aliases": [
+        "coarse sea salt"
+      ]
+    },
+    {
+      "name": "coarse smoked salt",
+      "aliases": [
+        "coarse smoked salt"
+      ]
+    },
+    {
+      "name": "garlic salt",
+      "aliases": [
+        "garlic salt"
+      ]
+    },
+    {
+      "name": "basil",
+      "aliases": [
+        "basil"
+      ]
+    },
+    {
+      "name": "fresh basil",
+      "aliases": [
+        "fresh basil"
+      ]
+    },
+    {
+      "name": "dried basil",
+      "aliases": [
+        "dried basil"
+      ]
+    },
+    {
+      "name": "italian basil",
+      "aliases": [
+        "italian basil"
+      ]
+    },
+    {
+      "name": "thai basil",
+      "aliases": [
+        "thai basil"
+      ]
+    },
+    {
+      "name": "holy basil",
+      "aliases": [
+        "holy basil",
+        "tulsi"
+      ]
+    },
+    {
+      "name": "bay leaf",
+      "aliases": [
+        "bay leaf",
+        "bay leaves"
+      ]
+    },
+    {
+      "name": "chervil",
+      "aliases": [
+        "chervil"
+      ]
+    },
+    {
+      "name": "chives",
+      "aliases": [
+        "chives",
+        "chive"
+      ]
+    },
+    {
+      "name": "cilantro",
+      "aliases": [
+        "cilantro",
+        "fresh coriander",
+        "coriander leaves"
+      ]
+    },
+    {
+      "name": "epazote",
+      "aliases": [
+        "epazote"
+      ]
+    },
+    {
+      "name": "garlic",
+      "aliases": [
+        "garlic",
+        "garlic clove",
+        "garlic cloves"
+      ]
+    },
+    {
+      "name": "garlic confit",
+      "aliases": [
+        "garlic confit"
+      ]
+    },
+    {
+      "name": "garlic paste",
+      "aliases": [
+        "garlic paste"
+      ]
+    },
+    {
+      "name": "garlic powder",
+      "aliases": [
+        "garlic powder",
+        "powdered garlic", 
+        "granulated garlic"
+      ]
+    },
+    {
+      "name": "ginger",
+      "aliases": [
+        "ginger",
+        "fresh ginger"
+      ]
+    },
+    {
+      "name": "oregano",
+      "aliases": [
+        "oregano"
+      ]
+    },
+    {
+      "name": "dried oregano",
+      "aliases": [
+        "dried oregano"
+      ]
+    },
+    {
+      "name": "parsley",
+      "aliases": [
+        "parsley",
+        "parsley leaves"
+      ]
+    },
+    {
+      "name": "italian parsley",
+      "aliases": [
+        "italian parsley",
+        "flat-leaf parsley",
+        "flat leaf parsley"
+      ]
+    },
+    {
+      "name": "dried parsley",
+      "aliases": [
+        "dried parsley",
+        "parsley flakes"
+      ]
+    },
+    {
+      "name": "rosemary",
+      "aliases": [
+        "rosemary"
+      ]
+    },
+    {
+      "name": "dried rosemary",
+      "aliases": [
+        "dried rosemary"
+      ]
+    },
+    {
+      "name": "rosemary powder",
+      "aliases": [
+        "rosemary powder"
+      ]
+    },
+    {
+      "name": "sage",
+      "aliases": [
+        "sage"
+      ]
+    },
+    {
+      "name": "dried sage",
+      "aliases": [
+        "dried sage"
+      ]
+    },
+    {
+      "name": "dried rubbed sage",
+      "aliases": [
+        "dried rubbed sage",
+        "rubbed sage"
+      ]
+    },
+    {
+      "name": "scallions",
+      "aliases": [
+        "scallions",
+        "scallion",
+        "green onions",
+        "green onion",
+        "spring onions",
+        "spring onion"
+      ]
+    },
+    {
+      "name": "shallots",
+      "aliases": [
+        "shallots",
+        "shallot"
+      ]
+    },
+    {
+      "name": "tarragon",
+      "aliases": [
+        "tarragon"
+      ]
+    },
+    {
+      "name": "thyme",
+      "aliases": [
+        "thyme"
+      ]
+    },
+    {
+      "name": "dried thyme",
+      "aliases": [
+        "dried thyme"
+      ]
+    },
+    {
+      "name": "allspice berries",
+      "aliases": [
+        "allspice berries"
+      ]
+    },
+    {
+      "name": "ground allspice",
+      "aliases": [
+        "ground allspice"
+      ]
+    },
+    {
+      "name": "black pepper",
+      "aliases": [
+        "black pepper",
+        "ground pepper",
+        "ground black pepper",
+        "black peppercorns",
+        "whole black peppercorns"
+      ]
+    },
+    {
+      "name": "white pepper",
+      "aliases": [
+        "white pepper",
+        "ground white pepper",
+        "white peppercorns",
+        "whole white peppercorns"
+      ]
+    },
+    {
+      "name": "cayenne pepper",
+      "aliases": [
+        "cayenne pepper",
+        "cayenne"
+      ]
+    },
+    {
+      "name": "chili flakes",
+      "aliases": [
+        "chili flakes",
+        "red pepper flakes",
+        "red-pepper flakes",
+        "crushed red pepper"
+      ]
+    },
+    {
+      "name": "chili powder",
+      "aliases": [
+        "chili powder"
+      ]
+    },
+    {
+      "name": "cinnamon",
+      "aliases": [
+        "cinnamon"
+      ]
+    },
+    {
+      "name": "ground cinnamon",
+      "aliases": [
+        "ground cinnamon"
+      ]
+    },
+    {
+      "name": "cinnamon sticks",
+      "aliases": [
+        "cinnamon sticks",
+        "whole cinnamon"
+      ]
+    },
+    {
+      "name": "coriander",
+      "aliases": [
+        "coriander",
+        "ground coriander"
+      ]
+    },
+    {
+      "name": "coriander seeds",
+      "aliases": [
+        "coriander seeds",
+        "whole coriander"
+      ]
+    },
+    {
+      "name": "cumin",
+      "aliases": [
+        "cumin",
+        "ground cumin"
+      ]
+    },
+    {
+      "name": "cumin seeds",
+      "aliases": [
+        "cumin seeds"
+      ]
+    },
+    {
+      "name": "curry powder",
+      "aliases": [
+        "curry powder",
+        "ground curry powder"
+      ]
+    },
+    {
+      "name": "dried dill",
+      "aliases": [
+        "dried dill"
+      ]
+    },
+    {
+      "name": "dried marjoram",
+      "aliases": [
+        "dried marjoram"
+      ]
+    },
+    {
+      "name": "dried mustard",
+      "aliases": [
+        "dried mustard",
+        "powdered mustard",
+        "dry mustard",
+        "mustard powder"
+      ]
+    },
+    {
+      "name": "fennel seeds",
+      "aliases": [
+        "fennel seeds"
+      ]
+    },
+    {
+      "name": "fennel",
+      "aliases": [
+        "fennel",
+        "fennel bulb"
+      ]
+    },
+    {
+      "name": "garam masala",
+      "aliases": [
+        "garam masala"
+      ]
+    },
+    {
+      "name": "grains of paradise",
+      "aliases": [
+        "grains of paradise"
+      ]
+    },
+    {
+      "name": "ground mushrooms",
+      "aliases": [
+        "ground mushrooms",
+        "mushroom powder"
+      ]
+    },
+    {
+      "name": "nutmeg",
+      "aliases": [
+        "nutmeg"
+      ]
+    },
+    {
+      "name": "ground nutmeg",
+      "aliases": [
+        "ground nutmeg"
+      ]
+    },
+    {
+      "name": "paprika",
+      "aliases": [
+        "paprika",
+        "ground paprika"
+      ]
+    },
+    {
+      "name": "american paprika",
+      "aliases": [
+        "american paprika"
+      ]
+    },
+    {
+      "name": "smoked paprika",
+      "aliases": [
+        "smoked paprika",
+        "spanish smoked paprika",
+        "spanish smoked paprika"
+      ]
+    },
+    {
+      "name": "spanish smoked paprika",
+      "aliases": [
+        "spanish smoked paprika"
+      ]
+    },
+    {
+      "name": "korean pepper flakes",
+      "aliases": [
+        "korean pepper flakes",
+        "gochugaru"
+      ]
+    },
+    {
+      "name": "red pepper",
+      "aliases": [
+        "red pepper"
+      ]
+    },
+    {
+      "name": "saffron",
+      "aliases": [
+        "saffron"
+      ]
+    },
+    {
+      "name": "sichuan peppercorns",
+      "aliases": [
+        "sichuan peppercorns",
+        "szechuan peppercorns"
+      ]
+    },
+    {
+      "name": "star anise",
+      "aliases": [
+        "star anise",
+        "whole star anise"
+      ]
+    },
+    {
+      "name": "turmeric",
+      "aliases": [
+        "turmeric",
+        "ground turmeric"
+      ]
+    },
+    {
+      "name": "whole black cardamom",
+      "aliases": [
+        "whole black cardamom",
+        "black cardamom"
+      ]
+    },
+    {
+      "name": "whole green cardamom",
+      "aliases": [
+        "whole green cardamom",
+        "green cardamom"
+      ]
+    },
+    {
+      "name": "yellow mustard seeds",
+      "aliases": [
+        "yellow mustard seeds",
+        "mustard seeds"
+      ]
+    },
+    {
+      "name": "asparagus",
+      "aliases": [
+        "asparagus"
+      ]
+    },
+    {
+      "name": "avocado",
+      "aliases": [
+        "avocado",
+        "avocados"
+      ]
+    },
+    {
+      "name": "bamboo shoots",
+      "aliases": [
+        "bamboo shoots",
+        "bamboo shoot"
+      ]
+    },
+    {
+      "name": "bean sprouts",
+      "aliases": [
+        "bean sprouts",
+        "mung bean sprouts"
+      ]
+    },
+    {
+      "name": "bell pepper",
+      "aliases": [
+        "bell pepper",
+        "bell peppers"
+      ]
+    },
+    {
+      "name": "green bell pepper",
+      "aliases": [
+        "green bell pepper",
+        "green bell peppers"
+      ]
+    },
+    {
+      "name": "red bell pepper",
+      "aliases": [
+        "red bell pepper",
+        "red bell peppers"
+      ]
+    },
+    {
+      "name": "broccoli",
+      "aliases": [
+        "broccoli"
+      ]
+    },
+    {
+      "name": "brussels sprouts",
+      "aliases": [
+        "brussels sprouts",
+        "brussel sprouts"
+      ]
+    },
+    {
+      "name": "cabbage",
+      "aliases": [
+        "cabbage"
+      ]
+    },
+    {
+      "name": "green cabbage",
+      "aliases": [
+        "green cabbage"
+      ]
+    },
+    {
+      "name": "carrots",
+      "aliases": [
+        "carrots",
+        "carrot",
+        "orange carrots"
+      ]
+    },
+    {
+      "name": "cauliflower",
+      "aliases": [
+        "cauliflower",
+        "cauliflower florets",
+        "cauliflower florettes"
+      ]
+    },
+    {
+      "name": "celery",
+      "aliases": [
+        "celery",
+        "celery stalks",
+        "celery stalk",
+        "celery ribs"
+      ]
+    },
+    {
+      "name": "cherry tomatoes",
+      "aliases": [
+        "cherry tomatoes",
+        "cherry tomato"
+      ]
+    },
+    {
+      "name": "green beans",
+      "aliases": [
+        "green beans",
+        "green bean",
+        "string beans",
+        "snap beans",
+        "haricot verts"
+      ]
+    },
+    {
+      "name": "green chiles",
+      "aliases": [
+        "green chiles",
+        "green chilies",
+        "green chile"
+      ]
+    },
+    {
+      "name": "japanese eggplant",
+      "aliases": [
+        "japanese eggplant"
+      ]
+    },
+    {
+      "name": "kale",
+      "aliases": [
+        "kale"
+      ]
+    },
+    {
+      "name": "lemon juice",
+      "aliases": [
+        "lemon juice",
+        "juice from a lemon"
+      ]
+    },
+    {
+      "name": "lemon",
+      "aliases": [
+        "lemon",
+        "lemons"
+      ]
+    },
+    {
+      "name": "lime juice",
+      "aliases": [
+        "lime juice",
+        "juice from a lime"
+      ]
+    },
+    {
+      "name": "lime",
+      "aliases": [
+        "lime",
+        "limes"
+      ]
+    },
+    {
+      "name": "mushrooms",
+      "aliases": [
+        "mushrooms",
+        "mushroom"
+      ]
+    },
+        {
+      "name": "crimini mushrooms",
+      "aliases": [
+        "criminis",
+        "crimini",
+        "crimini mushrooms",
+        "crimini mushroom"
+      ]
+    },
+    {
+      "name": "white mushrooms",
+      "aliases": [
+        "white mushrooms",
+        "white mushroom",
+        "button mushrooms"
+      ]
+    },
+    {
+      "name": "onion",
+      "aliases": [
+        "onion",
+        "onions"
+      ]
+    },
+    {
+      "name": "red onion",
+      "aliases": [
+        "red onion",
+        "red onions"
+      ]
+    },
+    {
+      "name": "white onion",
+      "aliases": [
+        "white onion",
+        "white onions"
+      ]
+    },
+    {
+      "name": "yellow onion",
+      "aliases": [
+        "yellow onion",
+        "yellow onions"
+      ]
+    },
+    {
+      "name": "orange",
+      "aliases": [
+        "orange",
+        "oranges"
+      ]
+    },
+    {
+      "name": "orange peel",
+      "aliases": [
+        "orange peel"
+      ]
+    },
+    {
+      "name": "lemon zest",
+      "aliases": [
+        "lemon zest",
+        "zested lemon",
+        "lemon, zested"
+      ]
+    },
+    {
+      "name": "orange zest",
+      "aliases": [
+        "orange zest"
+      ]
+    },
+    {
+      "name": "parsnips",
+      "aliases": [
+        "parsnips",
+        "parsnip"
+      ]
+    },
+    {
+      "name": "pattypan squash",
+      "aliases": [
+        "pattypan squash"
+      ]
+    },
+    {
+      "name": "snow peas",
+      "aliases": [
+        "snow peas",
+        "flat peas"
+      ]
+    },
+    {
+      "name": "snap peas",
+      "aliases": [
+        "snap peas",
+        "sugar snap peas"
+      ]
+    },
+    {
+      "name": "peas",
+      "aliases": [
+        "peas",
+        "green peas",
+        "sweet green peas",
+        "sweet peas"
+      ]
+    },
+    {
+      "name": "poblano",
+      "aliases": [
+        "poblano",
+        "poblano pepper"
+      ]
+    },
+    {
+      "name": "potatoes",
+      "aliases": [
+        "potatoes",
+        "potato"
+      ]
+    },
+    {
+      "name": "red potatoes",
+      "aliases": [
+        "red potatoes",
+        "red potato"
+      ]
+    },
+    {
+      "name": "roma tomatoes",
+      "aliases": [
+        "roma tomatoes",
+        "roma tomato"
+      ]
+    },
+    {
+      "name": "spinach",
+      "aliases": [
+        "spinach"
+      ]
+    },
+    {
+      "name": "sweet potatoes",
+      "aliases": [
+        "sweet potatoes",
+        "sweet potato"
+      ]
+    },
+    {
+      "name": "tomato",
+      "aliases": [
+        "tomato",
+        "tomatoes"
+      ]
+    },
+    {
+      "name": "turnips",
+      "aliases": [
+        "turnips",
+        "turnip"
+      ]
+    },
+    {
+      "name": "water chestnut",
+      "aliases": [
+        "water chestnut",
+        "water chestnuts"
+      ]
+    },
+    {
+      "name": "yellow squash",
+      "aliases": [
+        "yellow squash"
+      ]
+    },
+    {
+      "name": "zucchini",
+      "aliases": [
+        "zucchini",
+        "courgette"
+      ]
+    },
+    {
+      "name": "apple",
+      "aliases": [
+        "apple",
+        "apples"
+      ]
+    },
+    {
+      "name": "apricot preserves",
+      "aliases": [
+        "apricot preserves",
+        "apricot jam"
+      ]
+    },
+    {
+      "name": "banana",
+      "aliases": [
+        "banana",
+        "bananas"
+      ]
+    },
+    {
+      "name": "raisins",
+      "aliases": [
+        "raisins",
+        "raisin"
+      ]
+    },
+    {
+      "name": "strawberries",
+      "aliases": [
+        "strawberries",
+        "strawberry"
+      ]
+    },
+    {
+      "name": "canned crushed tomatoes",
+      "aliases": [
+        "canned crushed tomatoes",
+        "crushed tomatoes"
+      ]
+    },
+    {
+      "name": "canned whole tomatoes",
+      "aliases": [
+        "canned whole tomatoes",
+        "whole canned tomatoes"
+      ]
+    },
+    {
+      "name": "canned diced tomatoes",
+      "aliases": [
+        "canned diced tomatoes",
+        "diced tomatoes"
+      ]
+    },
+    {
+      "name": "condensed tomato soup",
+      "aliases": [
+        "condensed tomato soup"
+      ]
+    },
+    {
+      "name": "marinara sauce",
+      "aliases": [
+        "marinara sauce",
+        "marinara"
+      ]
+    },
+    {
+      "name": "pizza sauce",
+      "aliases": [
+        "pizza sauce"
+      ]
+    },
+    {
+      "name": "tomato juice",
+      "aliases": [
+        "tomato juice"
+      ]
+    },
+    {
+      "name": "tomato paste",
+      "aliases": [
+        "tomato paste"
+      ]
+    },
+    {
+      "name": "tomato powder",
+      "aliases": [
+        "tomato powder"
+      ]
+    },
+    {
+      "name": "tomato puree",
+      "aliases": [
+        "tomato puree",
+        "tomato pur\u00e9e"
+      ]
+    },
+    {
+      "name": "tomato sauce",
+      "aliases": [
+        "tomato sauce"
+      ]
+    },
+    {
+      "name": "tomatoes with green chiles",
+      "aliases": [
+        "tomatoes with green chiles",
+        "tomatoes and green chiles"
+      ]
+    },
+    {
+      "name": "sun-dried tomatoes",
+      "aliases": [
+        "sun-dried tomatoes",
+        "sundried tomatoes"
+      ]
+    },
+    {
+      "name": "black beans",
+      "aliases": [
+        "black beans",
+        "black bean"
+      ]
+    },
+    {
+      "name": "cannellini beans",
+      "aliases": [
+        "cannellini beans",
+        "cannellini bean"
+      ]
+    },
+    {
+      "name": "dried chickpeas",
+      "aliases": [
+        "dried chickpeas",
+        "dry chickpeas",
+        "dried garbanzo beans"
+      ]
+    },
+    {
+      "name": "dried flageolet beans",
+      "aliases": [
+        "dried flageolet beans",
+        "dry flageolet beans"
+      ]
+    },
+    {
+      "name": "dhal",
+      "aliases": [
+        "dhal",
+        "dal",
+        "daal"
+      ]
+    },
+    {
+      "name": "great northern beans",
+      "aliases": [
+        "great northern beans",
+        "great northern bean"
+      ]
+    },
+    {
+      "name": "pinto beans",
+      "aliases": [
+        "pinto beans",
+        "pinto bean"
+      ]
+    },
+    {
+      "name": "red kidney beans",
+      "aliases": [
+        "red kidney beans",
+        "kidney beans"
+      ]
+    },
+    {
+      "name": "dry soybeans",
+      "aliases": [
+        "dry soybeans",
+        "dried soybeans"
+      ]
+    },
+    {
+      "name": "bomba rice",
+      "aliases": [
+        "bomba rice"
+      ]
+    },
+    {
+      "name": "dry short-grain white rice",
+      "aliases": [
+        "dry short-grain white rice"
+      ]
+    },
+    {
+      "name": "short-grain white rice",
+      "aliases": [
+        "short-grain white rice",
+        "short grain white rice"
+      ]
+    },
+    {
+      "name": "long-grain white rice",
+      "aliases": [
+        "long-grain white rice",
+        "long grain white rice"
+      ]
+    },
+    {
+      "name": "short-grain brown rice",
+      "aliases": [
+        "short-grain brown rice"
+      ]
+    },
+    {
+      "name": "rice",
+      "aliases": [
+        "rice"
+      ]
+    },
+    {
+      "name": "pasta",
+      "aliases": [
+        "pasta"
+      ]
+    },
+    {
+      "name": "dried spaghetti",
+      "aliases": [
+        "dried spaghetti",
+        "spaghetti"
+      ]
+    },
+    {
+      "name": "dry elbow macaroni",
+      "aliases": [
+        "dry elbow macaroni",
+        "elbow macaroni"
+      ]
+    },
+    {
+      "name": "fettuccine",
+      "aliases": [
+        "fettuccine"
+      ]
+    },
+    {
+      "name": "flat rice noodles",
+      "aliases": [
+        "flat rice noodles"
+      ]
+    },
+    {
+      "name": "gnocchi",
+      "aliases": [
+        "gnocchi"
+      ]
+    },
+    {
+      "name": "pipette rigate",
+      "aliases": [
+        "pipette rigate"
+      ]
+    },
+    {
+      "name": "quinoa",
+      "aliases": [
+        "quinoa"
+      ]
+    },
+    {
+      "name": "rice cakes",
+      "aliases": [
+        "rice cakes"
+      ]
+    },
+    {
+      "name": "rice cereal",
+      "aliases": [
+        "rice cereal"
+      ]
+    },
+    {
+      "name": "sweet potato starch noodles",
+      "aliases": [
+        "sweet potato starch noodles"
+      ]
+    },
+    {
+      "name": "dried bean thread noodles",
+      "aliases": [
+        "dried bean thread noodles",
+        "bean thread noodles",
+        "glass noodles",
+        "cellophane noodles"
+      ]
+    },
+    {
+      "name": "dried rice noodles",
+      "aliases": [
+        "dried rice noodles",
+        "rice noodles"
+      ]
+    },
+    {
+      "name": "andouille sausage",
+      "aliases": [
+        "andouille sausage",
+        "andouille"
+      ]
+    },
+    {
+      "name": "bacon",
+      "aliases": [
+        "bacon"
+      ]
+    },
+    {
+      "name": "beef broth",
+      "aliases": [
+        "beef broth"
+      ]
+    },
+    {
+      "name": "beef stock",
+      "aliases": [
+        "beef stock"
+      ]
+    },
+    {
+      "name": "chicken",
+      "aliases": [
+        "chicken"
+      ]
+    },
+    {
+      "name": "chicken base",
+      "aliases": [
+        "chicken base"
+      ]
+    },
+    {
+      "name": "chicken broth",
+      "aliases": [
+        "chicken broth"
+      ],
+      "attributes": {
+        "sodium_level": {
+          "allowed": [
+            "regular",
+            "low_sodium",
+            "reduced_sodium",
+            "no_salt_added"
+          ]
+        }
+      }
+    },
+    {
+      "name": "chicken stock",
+      "aliases": [
+        "chicken stock"
+      ],
+      "attributes": {
+        "sodium_level": {
+          "allowed": [
+            "regular",
+            "low_sodium",
+            "reduced_sodium",
+            "no_salt_added"
+          ]
+        }
+      }
+    },
+    {
+      "name": "chicken breast",
+      "aliases": [
+        "chicken breast",
+        "chicken breasts"
+      ],
+      "attributes": {
+        "size": {
+          "allowed": [
+            "small",
+            "medium",
+            "large"
+          ]
+        },
+        "bone": {
+          "allowed": [
+            "bone_in",
+            "boneless"
+          ]
+        },
+        "skin": {
+          "allowed": [
+            "skin_on",
+            "skinless"
+          ]
+        },
+        "state": {
+          "allowed": [
+            "raw",
+            "cooked"
+          ],
+          "default": "raw"
+        },
+        "preparation": {
+          "allowed": [
+            "chopped",
+            "diced",
+            "sliced",
+            "cubed",
+            "shredded",
+            "ground"
+          ]
+        }
+      }
+    },
+    {
+      "name": "chicken cutlet",
+      "aliases": [
+        "chicken cutlet",
+        "chicken cutlets"
+      ]
+    },
+    {
+      "name": "chicken leg",
+      "aliases": [
+        "chicken leg",
+        "chicken legs"
+      ],
+      "attributes": {
+        "bone": {
+          "allowed": [
+            "bone_in",
+            "boneless"
+          ]
+        },
+        "skin": {
+          "allowed": [
+            "skin_on",
+            "skinless"
+          ]
+        },
+        "state": {
+          "allowed": [
+            "raw",
+            "cooked"
+          ],
+          "default": "raw"
+        }
+      }
+    },
+    {
+      "name": "whole chicken leg",
+      "aliases": [
+        "whole chicken leg",
+        "whole chicken legs"
+      ]
+    },
+    {
+      "name": "chicken leg meat",
+      "aliases": [
+        "chicken leg meat"
+      ]
+    },
+    {
+      "name": "chicken thigh",
+      "aliases": [
+        "chicken thigh",
+        "chicken thighs"
+      ],
+      "attributes": {
+        "bone": {
+          "allowed": [
+            "bone_in",
+            "boneless"
+          ]
+        },
+        "skin": {
+          "allowed": [
+            "skin_on",
+            "skinless"
+          ]
+        },
+        "state": {
+          "allowed": [
+            "raw",
+            "cooked"
+          ],
+          "default": "raw"
+        }
+      }
+    },
+    {
+      "name": "chicken wing",
+      "aliases": [
+        "chicken wing",
+        "chicken wings",
+        "wings"
+      ]
+    },
+    {
+      "name": "whole chicken",
+      "aliases": [
+        "whole chicken"
+      ]
+    },
+    {
+      "name": "chuck roast",
+      "aliases": [
+        "chuck roast"
+      ]
+    },
+    {
+      "name": "duck confit",
+      "aliases": [
+        "duck confit"
+      ]
+    },
+    {
+      "name": "ground beef",
+      "aliases": [
+        "ground beef",
+        "minced beef"
+      ]
+    },
+    {
+      "name": "ground lamb",
+      "aliases": [
+        "ground lamb",
+        "minced lamb"
+      ]
+    },
+    {
+      "name": "ground pork",
+      "aliases": [
+        "ground pork",
+        "minced pork"
+      ]
+    },
+    {
+      "name": "ground sirloin",
+      "aliases": [
+        "ground sirloin"
+      ]
+    },
+    {
+      "name": "italian sausage",
+      "aliases": [
+        "italian sausage"
+      ]
+    },
+    {
+      "name": "leg of lamb",
+      "aliases": [
+        "leg of lamb"
+      ]
+    },
+    {
+      "name": "pancetta",
+      "aliases": [
+        "pancetta"
+      ]
+    },
+    {
+      "name": "polish kielbasa",
+      "aliases": [
+        "polish kielbasa",
+        "kielbasa"
+      ]
+    },
+    {
+      "name": "polish sausage",
+      "aliases": [
+        "polish sausage"
+      ]
+    },
+    {
+      "name": "pork",
+      "aliases": [
+        "pork"
+      ]
+    },
+    {
+      "name": "pork belly",
+      "aliases": [
+        "pork belly"
+      ]
+    },
+    {
+      "name": "pork sausage",
+      "aliases": [
+        "pork sausage"
+      ]
+    },
+    {
+      "name": "ribeye steak",
+      "aliases": [
+        "ribeye steak",
+        "rib-eye steak",
+        "ribeye"
+      ]
+    },
+    {
+      "name": "turkey breast",
+      "aliases": [
+        "turkey breast"
+      ]
+    },
+    {
+      "name": "turkey leg",
+      "aliases": [
+        "turkey leg"
+      ]
+    },
+    {
+      "name": "turkey stock",
+      "aliases": [
+        "turkey stock"
+      ]
+    },
+    {
+      "name": "whole turkey",
+      "aliases": [
+        "whole turkey"
+      ]
+    },
+    {
+      "name": "veal marrow",
+      "aliases": [
+        "veal marrow"
+      ]
+    },
+    {
+      "name": "veal marrowbone",
+      "aliases": [
+        "veal marrowbone",
+        "veal marrow bone"
+      ]
+    },
+    {
+      "name": "veal shoulder bone",
+      "aliases": [
+        "veal shoulder bone"
+      ]
+    },
+    {
+      "name": "clam juice",
+      "aliases": [
+        "clam juice"
+      ]
+    },
+    {
+      "name": "clams",
+      "aliases": [
+        "clams",
+        "clam"
+      ]
+    },
+    {
+      "name": "crab meat",
+      "aliases": [
+        "crab meat"
+      ]
+    },
+    {
+      "name": "fish stock",
+      "aliases": [
+        "fish stock"
+      ]
+    },
+    {
+      "name": "flaky white fish",
+      "aliases": [
+        "flaky white fish",
+        "white fish"
+      ]
+    },
+    {
+      "name": "mussels",
+      "aliases": [
+        "mussels",
+        "mussel"
+      ]
+    },
+    {
+      "name": "shrimp",
+      "aliases": [
+        "shrimp",
+        "prawns"
+      ]
+    },
+    {
+      "name": "buttermilk",
+      "aliases": [
+        "buttermilk"
+      ]
+    },
+    {
+      "name": "buttermilk powder",
+      "aliases": [
+        "buttermilk powder"
+      ]
+    },
+    {
+      "name": "cheddar cheese",
+      "aliases": [
+        "cheddar cheese",
+        "cheddar"
+      ]
+    },
+    {
+      "name": "sharp cheddar cheese",
+      "aliases": [
+        "sharp cheddar cheese",
+        "sharp cheddar"
+      ]
+    },
+    {
+      "name": "colby jack cheese",
+      "aliases": [
+        "colby jack cheese",
+        "colby-jack"
+      ]
+    },
+    {
+      "name": "cottage cheese",
+      "aliases": [
+        "cottage cheese"
+      ]
+    },
+    {
+      "name": "cream",
+      "aliases": [
+        "cream",
+        "single cream"
+      ]
+    },
+    {
+      "name": "cream cheese",
+      "aliases": [
+        "cream cheese"
+      ]
+    },
+    {
+      "name": "evaporated milk",
+      "aliases": [
+        "evaporated milk"
+      ]
+    },
+    {
+      "name": "half-and-half",
+      "aliases": [
+        "half-and-half",
+        "half-&-half",
+        "half & half",
+        "half and half"
+      ]
+    },
+    {
+      "name": "heavy cream",
+      "aliases": [
+        "heavy cream"
+      ]
+    },
+    {
+      "name": "milk",
+      "aliases": [
+        "milk"
+      ]
+    },
+    {
+      "name": "monterey jack cheese",
+      "aliases": [
+        "monterey jack cheese",
+        "monterey jack"
+      ]
+    },
+    {
+      "name": "mozzarella cheese",
+      "aliases": [
+        "mozzarella cheese",
+        "mozzarella"
+      ]
+    },
+    {
+      "name": "muenster cheese",
+      "aliases": [
+        "muenster cheese",
+        "muenster"
+      ]
+    },
+    {
+      "name": "parmesan cheese",
+      "aliases": [
+        "parmesan cheese",
+        "parmesan"
+      ]
+    },
+    {
+      "name": "parmesan powder",
+      "aliases": [
+        "parmesan powder"
+      ]
+    },
+    {
+      "name": "parmesan rind",
+      "aliases": [
+        "parmesan rind",
+        "parmesan cheese rind"
+      ]
+    },
+    {
+      "name": "parmigiano reggiano",
+      "aliases": [
+        "parmigiano reggiano",
+        "parmigiano-reggiano"
+      ]
+    },
+    {
+      "name": "pecorino romano",
+      "aliases": [
+        "pecorino romano",
+        "pecorino"
+      ]
+    },
+    {
+      "name": "ricotta cheese",
+      "aliases": [
+        "ricotta cheese",
+        "ricotta"
+      ]
+    },
+    {
+      "name": "sour cream",
+      "aliases": [
+        "sour cream"
+      ]
+    },
+    {
+      "name": "swiss cheese",
+      "aliases": [
+        "swiss cheese",
+        "swiss"
+      ]
+    },
+    {
+      "name": "whipped cream",
+      "aliases": [
+        "whipped cream"
+      ]
+    },
+    {
+      "name": "whipping cream",
+      "aliases": [
+        "whipping cream"
+      ]
+    },
+    {
+      "name": "white american cheese",
+      "aliases": [
+        "white american cheese",
+        "american cheese"
+      ]
+    },
+    {
+      "name": "whole milk",
+      "aliases": [
+        "whole milk"
+      ]
+    },
+    {
+      "name": "whole milk mozzarella cheese",
+      "aliases": [
+        "whole milk mozzarella cheese"
+      ]
+    },
+    {
+      "name": "cashews",
+      "aliases": [
+        "cashews",
+        "cashew"
+      ]
+    },
+    {
+      "name": "coffee beans",
+      "aliases": [
+        "coffee beans",
+        "coffee bean"
+      ]
+    },
+    {
+      "name": "dry roasted peanuts",
+      "aliases": [
+        "dry roasted peanuts",
+        "dry-roasted peanuts"
+      ]
+    },
+    {
+      "name": "pecans",
+      "aliases": [
+        "pecans",
+        "pecan"
+      ]
+    },
+    {
+      "name": "pine nuts",
+      "aliases": [
+        "pine nuts",
+        "pine nut"
+      ]
+    },
+    {
+      "name": "sesame seeds",
+      "aliases": [
+        "sesame seeds",
+        "sesame seed"
+      ]
+    },
+    {
+      "name": "sesame oil",
+      "aliases": [
+        "sesame oil"
+      ]
+    },
+    {
+      "name": "walnuts",
+      "aliases": [
+        "walnuts",
+        "walnut"
+      ]
+    },
+    {
+      "name": "adobo sauce",
+      "aliases": [
+        "adobo sauce"
+      ]
+    },
+    {
+      "name": "chili sauce",
+      "aliases": [
+        "chili sauce"
+      ]
+    },
+    {
+      "name": "chili-garlic sauce",
+      "aliases": [
+        "chili-garlic sauce",
+        "chili garlic sauce"
+      ]
+    },
+    {
+      "name": "dijon mustard",
+      "aliases": [
+        "dijon mustard",
+        "dijon"
+      ]
+    },
+    {
+      "name": "fermented chili bean paste",
+      "aliases": [
+        "fermented chili bean paste",
+        "doubanjiang"
+      ]
+    },
+    {
+      "name": "fermented kimchi",
+      "aliases": [
+        "fermented kimchi",
+        "kimchi"
+      ]
+    },
+    {
+      "name": "fish sauce",
+      "aliases": [
+        "fish sauce"
+      ]
+    },
+    {
+      "name": "gochujang",
+      "aliases": [
+        "gochujang"
+      ]
+    },
+    {
+      "name": "hot sauce",
+      "aliases": [
+        "hot sauce"
+      ]
+    },
+    {
+      "name": "ketchup",
+      "aliases": [
+        "ketchup",
+        "catsup"
+      ]
+    },
+    {
+      "name": "mayonnaise",
+      "aliases": [
+        "mayonnaise",
+        "mayo"
+      ]
+    },
+    {
+      "name": "meat sauce",
+      "aliases": [
+        "meat sauce"
+      ]
+    },
+    {
+      "name": "modernist queso",
+      "aliases": [
+        "modernist queso"
+      ]
+    },
+    {
+      "name": "oyster sauce",
+      "aliases": [
+        "oyster sauce"
+      ]
+    },
+    {
+      "name": "peanut butter",
+      "aliases": [
+        "peanut butter"
+      ]
+    },
+    {
+      "name": "pepper paste",
+      "aliases": [
+        "pepper paste"
+      ]
+    },
+    {
+      "name": "pesto",
+      "aliases": [
+        "pesto"
+      ]
+    },
+    {
+      "name": "shio koji",
+      "aliases": [
+        "shio koji"
+      ]
+    },
+    {
+      "name": "soy sauce",
+      "aliases": [
+        "soy sauce",
+        "soya sauce"
+      ]
+    },
+    {
+      "name": "sriracha",
+      "aliases": [
+        "sriracha"
+      ]
+    },
+    {
+      "name": "tabasco sauce",
+      "aliases": [
+        "tabasco sauce",
+        "tabasco"
+      ]
+    },
+    {
+      "name": "tamarind paste",
+      "aliases": [
+        "tamarind paste",
+        "tamarind concentrate"
+      ]
+    },
+    {
+      "name": "thai seasoning sauce",
+      "aliases": [
+        "thai seasoning sauce"
+      ]
+    },
+    {
+      "name": "worcestershire sauce",
+      "aliases": [
+        "worcestershire sauce",
+        "worcestershire"
+      ]
+    },
+    {
+      "name": "apple cider vinegar",
+      "aliases": [
+        "apple cider vinegar"
+      ]
+    },
+    {
+      "name": "balsamic vinegar",
+      "aliases": [
+        "balsamic vinegar",
+        "balsamic"
+      ]
+    },
+    {
+      "name": "champagne vinegar",
+      "aliases": [
+        "champagne vinegar"
+      ]
+    },
+    {
+      "name": "citric acid",
+      "aliases": [
+        "citric acid"
+      ]
+    },
+    {
+      "name": "distilled white vinegar",
+      "aliases": [
+        "distilled white vinegar",
+        "white vinegar"
+      ]
+    },
+    {
+      "name": "malic acid",
+      "aliases": [
+        "malic acid"
+      ]
+    },
+    {
+      "name": "red wine vinegar",
+      "aliases": [
+        "red wine vinegar"
+      ]
+    },
+    {
+      "name": "rice vinegar",
+      "aliases": [
+        "rice vinegar"
+      ]
+    },
+    {
+      "name": "sherry vinegar",
+      "aliases": [
+        "sherry vinegar"
+      ]
+    },
+    {
+      "name": "tartaric acid",
+      "aliases": [
+        "tartaric acid"
+      ]
+    },
+    {
+      "name": "vinegar",
+      "aliases": [
+        "vinegar"
+      ]
+    },
+    {
+      "name": "white wine vinegar",
+      "aliases": [
+        "white wine vinegar"
+      ]
+    },
+    {
+      "name": "bone broth",
+      "aliases": [
+        "bone broth"
+      ]
+    },
+    {
+      "name": "mushroom cooking liquid",
+      "aliases": [
+        "mushroom cooking liquid"
+      ]
+    },
+    {
+      "name": "quick chicken stock",
+      "aliases": [
+        "quick chicken stock"
+      ]
+    },
+    {
+      "name": "vegetable stock",
+      "aliases": [
+        "vegetable stock"
+      ]
+    },
+    {
+      "name": "white veal stock",
+      "aliases": [
+        "white veal stock"
+      ]
+    },
+    {
+      "name": "almond liqueur",
+      "aliases": [
+        "almond liqueur",
+        "amaretto"
+      ]
+    },
+    {
+      "name": "american lager",
+      "aliases": [
+        "american lager"
+      ]
+    },
+    {
+      "name": "beer",
+      "aliases": [
+        "beer"
+      ]
+    },
+    {
+      "name": "bourbon",
+      "aliases": [
+        "bourbon"
+      ]
+    },
+    {
+      "name": "dry white wine",
+      "aliases": [
+        "dry white wine"
+      ]
+    },
+    {
+      "name": "fino sherry",
+      "aliases": [
+        "fino sherry"
+      ]
+    },
+    {
+      "name": "guinness stout",
+      "aliases": [
+        "guinness stout",
+        "guinness"
+      ]
+    },
+    {
+      "name": "lager",
+      "aliases": [
+        "lager"
+      ]
+    },
+    {
+      "name": "light lager",
+      "aliases": [
+        "light lager"
+      ]
+    },
+    {
+      "name": "red wine",
+      "aliases": [
+        "red wine"
+      ]
+    },
+    {
+      "name": "sherry",
+      "aliases": [
+        "sherry"
+      ]
+    },
+    {
+      "name": "shaoxing wine",
+      "aliases": [
+        "shaoxing wine",
+        "shaoxing",
+        "xiaoxing wine"
+      ]
+    },
+    {
+      "name": "sweet marsala",
+      "aliases": [
+        "sweet marsala"
+      ]
+    },
+    {
+      "name": "vodka",
+      "aliases": [
+        "vodka"
+      ]
+    },
+    {
+      "name": "white port",
+      "aliases": [
+        "white port"
+      ]
+    },
+    {
+      "name": "white wine",
+      "aliases": [
+        "white wine"
+      ]
+    },
+    {
+      "name": "albumin powder",
+      "aliases": [
+        "albumin powder"
+      ]
+    },
+    {
+      "name": "corn maltodextrin",
+      "aliases": [
+        "corn maltodextrin"
+      ]
+    },
+    {
+      "name": "high-acyl gellan",
+      "aliases": [
+        "high-acyl gellan"
+      ]
+    },
+    {
+      "name": "inosinate and guanylate",
+      "aliases": [
+        "inosinate and guanylate"
+      ]
+    },
+    {
+      "name": "low-acyl gellan",
+      "aliases": [
+        "low-acyl gellan"
+      ]
+    },
+    {
+      "name": "liquid soy lecithin",
+      "aliases": [
+        "liquid soy lecithin"
+      ]
+    },
+    {
+      "name": "propylene glycol alginate",
+      "aliases": [
+        "propylene glycol alginate"
+      ]
+    },
+    {
+      "name": "sodium citrate",
+      "aliases": [
+        "sodium citrate"
+      ]
+    },
+    {
+      "name": "transglutaminase",
+      "aliases": [
+        "transglutaminase"
+      ]
+    },
+    {
+      "name": "trisol",
+      "aliases": [
+        "trisol"
+      ]
+    },
+    {
+      "name": "xanthan gum",
+      "aliases": [
+        "xanthan gum"
+      ]
+    },
+    {
+      "name": "canned baked beans",
+      "aliases": [
+        "canned baked beans",
+        "baked beans"
+      ]
+    },
+
+    {
+      "name": "cooking spray",
+      "aliases": [
+        "cooking spray",
+        "nonstick cooking spray"
+      ]
+    },
+    {
+      "name": "crispy rice cereal",
+      "aliases": [
+        "crispy rice cereal",
+        "crisp rice cereal"
+      ]
+    },
+    {
+      "name": "fried onions",
+      "aliases": [
+        "fried onions",
+        "crispy fried onions"
+      ]
+    },
+    {
+      "name": "fried tofu",
+      "aliases": [
+        "fried tofu"
+      ]
+    },
+    {
+      "name": "mashed potatoes",
+      "aliases": [
+        "mashed potatoes",
+        "mashed potato"
+      ]
+    },
+    {
+      "name": "packaged instant ramyeon",
+      "aliases": [
+        "packaged instant ramyeon",
+        "instant ramyeon",
+        "instant ramen"
+      ]
+    },
+    {
+      "name": "pumpkin pie filling",
+      "aliases": [
+        "pumpkin pie filling"
+      ]
+    },
+    {
+      "name": "shortbread cookies",
+      "aliases": [
+        "shortbread cookies",
+        "shortbread"
+      ]
+    },
+    {
+      "name": "tater tots",
+      "aliases": [
+        "tater tots"
+      ]
+    },
+    {
+      "name": "tofu",
+      "aliases": [
+        "tofu",
+        "bean curd"
+      ]
+    },
+    {
+      "name": "extra-firm tofu",
+      "aliases": [
+        "extra-firm tofu",
+        "extra firm tofu"
+      ]
+    },
+    {
+      "name": "tortilla chips",
+      "aliases": [
+        "tortilla chips"
+      ]
+    },
+    {
+      "name": "water",
+      "aliases": [
+        "water"
+      ]
+    },
+    {
+      "name": "ice",
+      "aliases": [
+        "ice",
+        "ice cubes"
+      ]
+    },
+    {
+      "name": "ice water",
+      "aliases": [
+        "ice water"
+      ]
+    },
+    {
+      "name": "coconut",
+      "aliases": [
+        "coconut"
+      ]
+    },
+    {
+      "name": "unsweetened coconut",
+      "aliases": [
+        "unsweetened coconut"
+      ]
+    },
+    {
+      "name": "coconut milk",
+      "aliases": [
+        "coconut milk"
+      ]
+    },
+    {
+      "name": "bay leaf",
+      "aliases": [
+        "bay leaf",
+        "bay leaves",
+        "bay"
+      ]
+    },
+    {
+      "name": "cloves",
+      "aliases": [
+        "cloves",
+        "clove"
+      ]
+    },
+    {
+      "name": "oil",
+      "aliases": [
+        "cooking oil",
+        "oil"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 import sqlite3
 import os
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "gastrometric.db")
+#DB_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "gastrometric.db")
+from gastrometric.config.paths import DB_PATH
 
 conn = sqlite3.connect(DB_PATH)
 c = conn.cursor()
@@ -9,7 +10,7 @@ c = conn.cursor()
 def seed_kitchen():
 
     fridge = ['cabbage', 'scallions', 'mushrooms', 'bean sprouts',
-            'cauliflower', 'crimini', 
+            'cauliflower', 'criminis', 
             ]
 
     fridge_list = ['cabbage', 'scallions', 'bean sprouts', 'cauliflower', 'mushrooms', 'crimini']

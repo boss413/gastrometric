@@ -164,52 +164,160 @@ def init_db():
         """)
 
         # ----------------------------------------------------------------
-        # Ingredient identity + canonical resolution
+        # Ingredient identity
+        #
+        # Ingredient identity is the primary domain model: recipes
+        # reference ingredients, nutrition maps to ingredients,
+        # relationships (see below) connect ingredients. Identity is
+        # deliberately a SHORT list — two mentions are the same identity
+        # if a cook could freely substitute one for the other without
+        # changing the recipe's method or result (raw/cooked chicken
+        # breast: one identity, differ by attribute below. Bread flour
+        # vs. cake flour: different identities, protein content changes
+        # what the recipe does).
+        #
+        # Canonicalization (canonical_ingredients / canonical_lookup /
+        # canonical_id / canonical_group / entity_id) has been removed
+        # here — it was planned but never wired into a working stage
+        # (0 rows), and per the architecture decision it's being
+        # eliminated outright: subsumed by this identity model plus the
+        # separate ingredient relationships knowledge graph, rather than
+        # kept as a third, weaker grouping concept alongside them.
         # ----------------------------------------------------------------
 
-        # All unique ingredient names and their recipe appearance count.
         c.execute("""
             CREATE TABLE IF NOT EXISTS ingredients (
                 id              INTEGER PRIMARY KEY,
-                ingredient_name TEXT UNIQUE,
-                canonical_group TEXT
+                ingredient_name TEXT UNIQUE NOT NULL,
+                notes           TEXT,
+                created_at      TEXT DEFAULT (datetime('now'))
             )
         """)
 
-        c.execute("""
-            CREATE TABLE IF NOT EXISTS canonical_ingredients (
-                id          TEXT PRIMARY KEY,
-                name        TEXT,
-                base_food   TEXT,
-                state       TEXT,
-                form        TEXT
-            )
-        """)
-
-        c.execute("""
-            CREATE TABLE IF NOT EXISTS canonical_lookup (
-                normalized_alias    TEXT PRIMARY KEY,
-                canonical_id        TEXT
-            )
-        """)
-
+        # Variant spellings/names that resolve to one identity above.
+        # alias is globally UNIQUE by design: if two identities both
+        # claim the same alias, that's a curation bug to catch at
+        # load time, not something to resolve ambiguously at match time.
         c.execute("""
             CREATE TABLE IF NOT EXISTS ingredient_aliases (
                 id              INTEGER PRIMARY KEY,
-                raw_text        TEXT UNIQUE,
-                canonical_group TEXT,
-                alias           TEXT,
-                entity_id       INTEGER,
-                canonical_id    TEXT,
-                confidence      INTEGER,
-                source          TEXT    -- 'rule' | 'manual' | 'auto'
+                ingredient_id   INTEGER NOT NULL,
+                alias           TEXT UNIQUE NOT NULL,
+                confidence      REAL,
+                source          TEXT,   -- e.g. 'ingredients.json', 'manual'
+                FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
+            )
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_ingredient_aliases_ingredient_id
+                ON ingredient_aliases (ingredient_id)
+        """)
+
+        # ----------------------------------------------------------------
+        # Ingredient attributes
+        #
+        # An attribute is anything that varies about an identity WITHOUT
+        # changing what identity it is (raw/cooked, bone-in/boneless,
+        # salted/unsalted, brand). Whether an attribute is safe to ignore
+        # during fridge-matching ("decorative") or must match exactly
+        # ("required", e.g. brand for kosher salt — Diamond Crystal and
+        # Morton differ ~2x by volume) is asserted per (ingredient,
+        # attribute) pair in identity_attribute_rule, not globally per
+        # attribute — brand is decorative for canned tomatoes but
+        # required for kosher salt.
+        # ----------------------------------------------------------------
+
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS attribute_type (
+                id              INTEGER PRIMARY KEY,
+                name            TEXT UNIQUE NOT NULL,
+                value_kind      TEXT NOT NULL DEFAULT 'enum'
+                                    CHECK (value_kind IN ('enum', 'free_text')),
+                description     TEXT
+            )
+        """)
+
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS attribute_value (
+                id                  INTEGER PRIMARY KEY,
+                attribute_type_id   INTEGER NOT NULL,
+                value               TEXT NOT NULL,
+                UNIQUE (attribute_type_id, value),
+                FOREIGN KEY(attribute_type_id) REFERENCES attribute_type(id)
+            )
+        """)
+
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS identity_attribute_rule (
+                id                      INTEGER PRIMARY KEY,
+                ingredient_id           INTEGER NOT NULL,
+                attribute_type_id       INTEGER NOT NULL,
+                required_for_match      INTEGER NOT NULL DEFAULT 0,
+                default_value_id        INTEGER,
+                UNIQUE (ingredient_id, attribute_type_id),
+                FOREIGN KEY(ingredient_id)      REFERENCES ingredients(id),
+                FOREIGN KEY(attribute_type_id)  REFERENCES attribute_type(id),
+                FOREIGN KEY(default_value_id)   REFERENCES attribute_value(id)
+            )
+        """)
+
+        # Per-identity restriction of an enum attribute's otherwise-global
+        # value list (e.g. chicken breast's `state` is only ever
+        # raw/cooked, even though the global `state` vocabulary also
+        # includes partially_cooked/undercooked/overcooked for identities
+        # where those distinctions matter). No rows for a given rule
+        # means the full global value list is allowed.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS identity_attribute_allowed_value (
+                id                          INTEGER PRIMARY KEY,
+                identity_attribute_rule_id  INTEGER NOT NULL,
+                value_id                    INTEGER NOT NULL,
+                UNIQUE (identity_attribute_rule_id, value_id),
+                FOREIGN KEY(identity_attribute_rule_id) REFERENCES identity_attribute_rule(id),
+                FOREIGN KEY(value_id)                   REFERENCES attribute_value(id)
+            )
+        """)
+
+        # Attribute values actually observed on one resolved recipe
+        # ingredient mention (recipe_ingredients row below).
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS instance_attribute_value (
+                id                      INTEGER PRIMARY KEY,
+                recipe_ingredient_id    INTEGER NOT NULL,
+                attribute_type_id       INTEGER NOT NULL,
+                value_id                INTEGER,
+                value_text              TEXT,
+                source                  TEXT DEFAULT 'parsed'
+                                    CHECK (source IN ('parsed', 'defaulted', 'inferred_from_step')),
+                UNIQUE (recipe_ingredient_id, attribute_type_id),
+                FOREIGN KEY(recipe_ingredient_id) REFERENCES recipe_ingredients(id),
+                FOREIGN KEY(attribute_type_id)    REFERENCES attribute_type(id),
+                FOREIGN KEY(value_id)             REFERENCES attribute_value(id)
             )
         """)
 
         c.execute("""
             CREATE TABLE IF NOT EXISTS usda_source_map (
-                fdc_id          INTEGER,
-                canonical_id    TEXT
+                fdc_id              INTEGER,
+                ingredient_id       INTEGER,
+                fdc_description     TEXT,
+                FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
+            )
+        """)
+
+        # Which attribute values select a given usda_source_map row, for
+        # identities that fan out to more than one FDC entry (e.g. raw vs
+        # cooked chicken breast -> two different fdc_ids, same identity).
+        # A mapping row with no conditions here applies unconditionally.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS usda_mapping_condition (
+                id                  INTEGER PRIMARY KEY,
+                fdc_id              INTEGER NOT NULL,
+                attribute_type_id   INTEGER NOT NULL,
+                value_id            INTEGER NOT NULL,
+                UNIQUE (fdc_id, attribute_type_id),
+                FOREIGN KEY(attribute_type_id) REFERENCES attribute_type(id),
+                FOREIGN KEY(value_id)          REFERENCES attribute_value(id)
             )
         """)
 
@@ -229,9 +337,10 @@ def init_db():
                 raw_text            TEXT,
                 section_name        TEXT,
                 ingredient_id       INTEGER,
-                canonical_id        TEXT,
+                parsed_line_id      INTEGER    REFERENCES recipe_ingredient_lines_parsed(id),
                 FOREIGN KEY(recipe_id)         REFERENCES recipes(id),
-                FOREIGN KEY(recipe_section_id) REFERENCES recipe_sections(id)
+                FOREIGN KEY(recipe_section_id) REFERENCES recipe_sections(id),
+                FOREIGN KEY(ingredient_id)     REFERENCES ingredients(id)
             )
         """)
 

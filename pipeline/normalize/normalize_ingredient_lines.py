@@ -1,237 +1,488 @@
-# pipeline/normalize/normalize_ingredient_lines.py
-#
-# Pipeline stage: normalize
-#
-#   Reads  : recipe_ingredient_lines_parsed
-#   Writes : ingredient_normalizations
-#
-# This stage produces a clean "core ingredient" name suitable for a
-# future ingredient_id lookup.  It runs two ordered passes on
-# ingredient_name_raw:
-#
-#   Pass 1 — TYPO FIXES (from config.ingredient_vocabulary.TYPO_FIXES)
-#     Correct spelling variants, regional synonyms, and brand names.
-#     "scallions" → "green onion",  "calamari" → "squid"
-#     These unify surface forms without changing ingredient identity.
-#
-#   Pass 2 — QUALIFIER STRIPPING (config.ingredient_vocabulary.QUALIFIER_STRIP_PATTERNS)
-#     Remove words that describe HOW the ingredient was prepared,
-#     its freshness, size, cut style, or diet classification.
-#     "boneless skinless chicken breast" → "chicken breast"
-#     "slivered almonds"                 → "almonds"
-#     "extra-virgin olive oil"           → "olive oil"
-#
-# What this stage does NOT do:
-#   • Semantic grouping  ("olive oil" → "oil" is canonicalization, done downstream)
-#   • ingredient_id assignment  (no ingredient_id file available yet)
-#
-# ingredient_normalizations is a dedicated normalization log.  It holds
-# only the FK to the parsed row and the name transformation — it does not
-# duplicate measurement columns.  Join back to recipe_ingredient_lines_parsed
-# on parsed_line_id to get quantity/unit/prep/etc.
-#
-# Re-running is safe: the existing row for a given parsed_line_id is
-# deleted before re-insertion.
+"""
+normalize_ingredient_lines.py — pipeline stage: parse -> [normalize] -> entity resolution
 
-import sqlite3
+Reads recipe_ingredient_lines_parsed, resolves each ingredient_name_raw against
+the curated ingredients/ingredient_aliases tables, and writes:
+
+  - ingredient_normalizations : audit log of the NAME transformation pass only
+                                 (status = 'ok' | 'empty' | 'reduced_to_nothing')
+  - recipe_ingredients        : one row per parsed line, ingredient_id NULL if
+                                 unresolved (left for later triage)
+  - instance_attribute_value  : attribute values recognized in the parsed
+                                 preparation list / notes / stripped name
+                                 qualifiers, scoped against each ingredient's
+                                 own identity_attribute_rule set
+
+Schema ownership: this module only INSERTs into tables gastrometric/db/init_db.py
+already created. No CREATE TABLE / ALTER TABLE here.
+
+Idempotent: re-running skips any recipe_ingredient_lines_parsed row that
+already has a corresponding ingredient_normalizations row (parsed_line_id is
+UNIQUE), so partial/failed runs can simply be re-invoked.
+
+DESIGN NOTES (decided with the project owner; don't relitigate without cause)
+-------------------------------------------------------------------------
+Name matching (2-pass, matches ingredient_vocabulary.py's own PASS 1 / PASS 2
+labeling, which documents itself as being for this stage):
+  1. Try resolve_alias() on the raw name as-is.
+  2. Apply TYPO_FIXES (spelling/synonym/brand normalization that preserves
+     identity), retry resolve_alias().
+  3. Apply QUALIFIER_STRIP_PATTERNS (strips decorative/attribute-bearing
+     qualifiers down to the core ingredient), retry resolve_alias().
+  4. Still no match -> recipe_ingredients gets ingredient_id = NULL for triage.
+  ingredient_normalizations.status describes whether this pass produced a
+  usable *name*, independent of whether an identity was found:
+    'empty'            -> ingredient_name_raw was blank to begin with
+    'reduced_to_nothing' -> qualifier stripping consumed the entire name
+    'ok'                 -> a usable core name resulted (matched or not)
+
+Attribute extraction, once an ingredient_id IS resolved:
+  Text sources: the parsed `preparation` list, the parsed `notes` string, and
+  any qualifier phrases OUR OWN Pass-2 stripping removed from the name (e.g.
+  parse stage left "skin-on bone-in chicken thighs" untouched in
+  ingredient_name_raw; Pass 2 strips "skin-on"/"bone-in" to resolve the
+  identity, and those phrases still carry real attribute info, so they're
+  fed into extraction rather than discarded).
+
+  Matching is RULE-SCOPED FIRST: only attribute types this ingredient
+  actually has an identity_attribute_rule for are checked (chicken breast:
+  bone/skin/state/size/preparation; kosher salt: brand). This avoids
+  spurious cross-ingredient matches and mirrors what identity_attribute_rule
+  is for. Text is matched to attribute_value.value via a word-boundary
+  phrase match after normalizing hyphens/underscores/whitespace to single
+  spaces on both sides (so "skin-on" text matches a "skin_on" value).
+
+  If no rule-scoped match is found for a rule that has a default_value_id,
+  write that default with source='defaulted' (values like chicken breast's
+  state defaulting to raw when nothing says otherwise).
+
+  If a rule-scoped attribute type has no match and no default: nothing is
+  written for it. This is normal and expected -- most preparation phrases
+  ("cut into 0.5-inch pieces") aren't meant to map to anything.
+
+  GLOBAL FALLBACK, gap detection only: after rule-scoped matching, text is
+  additionally checked against the full global attribute_value vocabulary.
+  If it matches a value whose attribute_type has NO identity_attribute_rule
+  at all for this ingredient, that's flagged via logging.warning() as a
+  likely curation gap (the value IS still written, since the information is
+  real -- just noted for someone to add the missing rule). This fallback is
+  deliberately NOT triggered by ordinary unmatched free text -- only by text
+  that matches *some* curated attribute value somewhere, just not one this
+  ingredient has a rule for.
+"""
+
+import json
+import logging
 import re
-from collections import defaultdict
+import sqlite3
 
 from gastrometric.config.paths import DB_PATH
-from gastrometric.config.ingredient_vocabulary import TYPO_FIXES, QUALIFIER_STRIP_PATTERNS
+from gastrometric.config.ingredient_vocabulary import (
+    TYPO_FIXES,
+    QUALIFIER_STRIP_PATTERNS,
+)
+from gastrometric.pipeline.normalize.ingredient_identity import resolve_alias
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+log = logging.getLogger("normalize_ingredient_lines")
 
 
 # ============================================================
-# PASS 1 — TYPO FIXES
+# text helpers
+# ============================================================
+
+_WS_RE = re.compile(r"\s+")
+
+
+def _collapse_ws(text):
+    return _WS_RE.sub(" ", text).strip()
+
+
+def normalize_phrase(text):
+    """Lowercase, fold hyphens/underscores to spaces, collapse whitespace.
+    Used on BOTH sides of an attribute-value match (curated values use
+    underscores, e.g. 'skin_on'; parsed text uses hyphens, e.g. 'skin-on')."""
+    if not text:
+        return ""
+    text = text.lower().replace("-", " ").replace("_", " ")
+    return _collapse_ws(text)
+
+
+def _phrase_in_corpus(phrase, normalized_corpus):
+    if not phrase or not normalized_corpus:
+        return False
+    return re.search(r"\b" + re.escape(phrase) + r"\b", normalized_corpus) is not None
+
+
+def _clean_optional_text(value):
+    """NULL/blank-safe strip for notes and other free-text columns."""
+    if not value or not value.strip():
+        return ""
+    return value.strip()
+
+
+def _parse_preparation(raw_prep_json):
+    """preparation is json.dumps([...]) or NULL. Never crash the pipeline
+    on malformed JSON -- treat it as 'no preparation phrases' and move on."""
+    if not raw_prep_json or not raw_prep_json.strip():
+        return []
+    try:
+        parsed = json.loads(raw_prep_json)
+    except (ValueError, TypeError):
+        log.warning("could not parse preparation JSON: %r", raw_prep_json)
+        return []
+    if not isinstance(parsed, list):
+        return []
+    return [str(p) for p in parsed if p]
+
+
+# ============================================================
+# PASS 1 / PASS 2 name resolution
 # ============================================================
 
 def _apply_typo_fixes(text):
-    """
-    Apply spelling / synonym corrections to lowercased ingredient_name_raw.
-    Returns the corrected string (still lowercased).
-    """
     for pattern, replacement in TYPO_FIXES:
         text = pattern.sub(replacement, text)
-    return text
+    return _collapse_ws(text)
 
 
-# ============================================================
-# PASS 2 — QUALIFIER STRIPPING
-# ============================================================
-
-def _strip_qualifiers(text):
-    """
-    Remove qualifier words to expose the core ingredient.
-    Applied in order; whitespace is collapsed after each removal.
-
-    Special case handled here (not in the pattern list because it
-    needs context): "juice of/from <ingredient>" → "<ingredient> juice"
-    e.g. "juice of lemon" → "lemon juice"
-    """
-    # Reorder "juice of X" → "X juice" before stripping anything else
-    m = re.match(r'^juice\s+(?:of|from)\s+(.+)$', text, re.IGNORECASE)
-    if m:
-        text = m.group(1).strip() + " juice"
-
+def _apply_qualifier_strip(text):
+    """Returns (stripped_text, removed_phrases). removed_phrases preserves
+    the original matched surface form (e.g. 'skin-on', not 'skin_on') so it
+    can be fed into attribute-phrase matching alongside preparation/notes."""
+    removed = []
     for pattern in QUALIFIER_STRIP_PATTERNS:
-        text = pattern.sub('', text)
-        text = " ".join(text.split())   # collapse whitespace after each removal
-
-    # Drop any dangling connectors left by stripping
-    text = re.sub(r'^(?:and|or|of|with|the)\b\s*', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'\s+(?:and|or|of|with)$', '', text, flags=re.IGNORECASE)
-    text = " ".join(text.split()).strip()
-
-    return text
+        found = pattern.findall(text)
+        if found:
+            removed.extend(found)
+        text = pattern.sub(" ", text)
+    return _collapse_ws(text), removed
 
 
-# ============================================================
-# FULL NORMALIZATION PIPELINE
-# ============================================================
+def normalize_and_resolve_name(conn, name_raw):
+    """Returns (ingredient_id_or_None, final_name, status, stripped_qualifiers).
 
-def normalize_ingredient_name(ingredient_name_raw):
+    status: 'empty' | 'reduced_to_nothing' | 'ok'
+    final_name: the name text ingredient_normalizations.ingredient_name gets;
+                may be non-empty even when ingredient_id is None (unmatched,
+                but a plausible core name was produced -- fine for triage).
+    stripped_qualifiers: qualifier phrases Pass 2 removed, for attribute
+                         extraction by the caller.
     """
-    Run the full two-pass normalization on a raw ingredient name.
-    Returns (normalized_name, str: 'ok' | 'empty' | 'reduced_to_nothing').
-    normalized_name is None on failure.
+    if not name_raw or not name_raw.strip():
+        return None, "", "empty", []
+
+    lowered = _collapse_ws(name_raw.strip().lower())
+
+    ingredient_id = resolve_alias(conn, lowered)
+    if ingredient_id:
+        return ingredient_id, lowered, "ok", []
+
+    typo_fixed = _apply_typo_fixes(lowered)
+    if typo_fixed != lowered:
+        ingredient_id = resolve_alias(conn, typo_fixed)
+        if ingredient_id:
+            return ingredient_id, typo_fixed, "ok", []
+
+    stripped, removed_qualifiers = _apply_qualifier_strip(typo_fixed)
+    if not stripped:
+        return None, "", "reduced_to_nothing", removed_qualifiers
+
+    if stripped != typo_fixed:
+        ingredient_id = resolve_alias(conn, stripped)
+        if ingredient_id:
+            return ingredient_id, stripped, "ok", removed_qualifiers
+
+    # Unmatched, but we have a usable core name for triage.
+    return None, stripped, "ok", removed_qualifiers
+
+
+# ============================================================
+# attribute extraction
+# ============================================================
+
+def build_global_attribute_lookup(conn):
+    """normalized phrase -> [(attribute_type_id, value_id), ...], across the
+    ENTIRE curated attribute vocabulary. Used only for gap detection."""
+    lookup = {}
+    rows = conn.execute(
+        "SELECT id, attribute_type_id, value FROM attribute_value"
+    ).fetchall()
+    for value_id, attribute_type_id, value in rows:
+        phrase = normalize_phrase(value)
+        if not phrase:
+            continue
+        lookup.setdefault(phrase, []).append((attribute_type_id, value_id))
+    return lookup
+
+
+def get_rule_scope(conn, ingredient_id, cache):
+    """Returns (phrase_map, meta) for one ingredient, cached across the run.
+
+    phrase_map: {attribute_type_id: {normalized_phrase: value_id}}
+                (respects identity_attribute_allowed_value restriction when
+                present, else falls back to the full global value list for
+                that attribute type)
+    meta:       {attribute_type_id: {'rule_id':, 'default_value_id':}}
+                present for EVERY attribute_type this ingredient has a rule
+                for, even if phrase_map ends up empty for it.
     """
-    if not ingredient_name_raw or not ingredient_name_raw.strip():
-        return None, "empty"
+    if ingredient_id in cache:
+        return cache[ingredient_id]
 
-    text = ingredient_name_raw.lower().strip()
+    phrase_map = {}
+    meta = {}
+    rules = conn.execute(
+        "SELECT id, attribute_type_id, default_value_id "
+        "FROM identity_attribute_rule WHERE ingredient_id = ?",
+        (ingredient_id,),
+    ).fetchall()
 
-    fixed = _apply_typo_fixes(text)
-    core  = _strip_qualifiers(fixed)
+    for rule_id, attribute_type_id, default_value_id in rules:
+        meta[attribute_type_id] = {
+            "rule_id": rule_id,
+            "default_value_id": default_value_id,
+        }
+        allowed = conn.execute(
+            "SELECT av.id, av.value FROM identity_attribute_allowed_value iav "
+            "JOIN attribute_value av ON av.id = iav.value_id "
+            "WHERE iav.identity_attribute_rule_id = ?",
+            (rule_id,),
+        ).fetchall()
+        if not allowed:
+            allowed = conn.execute(
+                "SELECT id, value FROM attribute_value WHERE attribute_type_id = ?",
+                (attribute_type_id,),
+            ).fetchall()
+        phrase_dict = {}
+        for value_id, value in allowed:
+            phrase = normalize_phrase(value)
+            if phrase:
+                phrase_dict[phrase] = value_id
+        phrase_map[attribute_type_id] = phrase_dict
 
-    if not core or len(core) < 2:
-        return None, "reduced_to_nothing"
+    result = (phrase_map, meta)
+    cache[ingredient_id] = result
+    return result
 
-    return core.strip(), "ok"
+
+def _insert_instance_attribute(conn, recipe_ingredient_id, attribute_type_id,
+                                value_id, source):
+    conn.execute(
+        "INSERT OR IGNORE INTO instance_attribute_value "
+        "(recipe_ingredient_id, attribute_type_id, value_id, source) "
+        "VALUES (?, ?, ?, ?)",
+        (recipe_ingredient_id, attribute_type_id, value_id, source),
+    )
+
+
+def extract_and_write_attributes(conn, recipe_ingredient_id, ingredient_id,
+                                  corpus_phrases, rule_cache, global_lookup):
+    """corpus_phrases: raw (pre-normalization) phrases from preparation list
+    + notes + Pass-2 stripped qualifiers. Writes instance_attribute_value
+    rows directly; returns nothing."""
+    normalized_corpus = " | ".join(
+        normalize_phrase(p) for p in corpus_phrases if p and p.strip()
+    )
+    phrase_map, meta = get_rule_scope(conn, ingredient_id, rule_cache)
+
+    matched_types = set()
+
+    # Rule-scoped pass.
+    for attribute_type_id, phrase_dict in phrase_map.items():
+        found_value_id = None
+        for phrase, value_id in phrase_dict.items():
+            if _phrase_in_corpus(phrase, normalized_corpus):
+                found_value_id = value_id
+                break
+        if found_value_id is not None:
+            _insert_instance_attribute(
+                conn, recipe_ingredient_id, attribute_type_id, found_value_id, "parsed"
+            )
+            matched_types.add(attribute_type_id)
+        else:
+            default_value_id = meta[attribute_type_id]["default_value_id"]
+            if default_value_id is not None:
+                _insert_instance_attribute(
+                    conn, recipe_ingredient_id, attribute_type_id,
+                    default_value_id, "defaulted",
+                )
+                matched_types.add(attribute_type_id)
+
+    if not normalized_corpus:
+        return
+
+    # Global fallback: gap detection only. Only writes when the matched
+    # attribute_type has NO rule for this ingredient at all. No per-row
+    # logging here -- these rows are still written to instance_attribute_value
+    # (source='parsed'), so the full list is queryable after the fact via
+    # GAP_QUERY below instead of being blasted to the console mid-run.
+    for phrase, candidates in global_lookup.items():
+        if not _phrase_in_corpus(phrase, normalized_corpus):
+            continue
+        for attribute_type_id, value_id in candidates:
+            if attribute_type_id in matched_types or attribute_type_id in meta:
+                continue
+            _insert_instance_attribute(
+                conn, recipe_ingredient_id, attribute_type_id, value_id, "parsed"
+            )
+            matched_types.add(attribute_type_id)
 
 
 # ============================================================
-# DB SCHEMA
-#
-# ingredient_normalizations is a normalization log, not a row copy.
-# It records:
-#   - which parsed line was normalized (FK)
-#   - the recipe + raw text for human-readable audit
-#   - the before/after name transformation
-#   - the outcome status
-#
-# Join to recipe_ingredient_lines_parsed on parsed_line_id to get
-# quantity, unit, prep, and all other parsed dimensions.
+# main pass
 # ============================================================
 
-def _ensure_schema(conn):
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS ingredient_normalizations (
-            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
-            -- lineage
-            parsed_line_id      INTEGER NOT NULL UNIQUE
-                                REFERENCES recipe_ingredient_lines_parsed(id),
-            -- denormalized for readable audit queries without joins
-            recipe_id           INTEGER NOT NULL,
-            recipe_name         TEXT,
-            raw_text            TEXT,
-            -- name transformation
-            ingredient_name_raw TEXT,       -- as arrived from parse stage
-            ingredient_name     TEXT,       -- core ingredient after both passes
-            -- outcome
-            status              TEXT NOT NULL,  -- 'ok' | 'empty' | 'reduced_to_nothing'
-            -- audit
-            normalized_at       TEXT DEFAULT (datetime('now'))
+# Retroactive gap query -- run this any time in datasette/sqlite3 to see
+# the FULL list of attribute values that were recorded via the global
+# fallback (i.e. matched a curated attribute_value, but the ingredient in
+# question has no identity_attribute_rule for that attribute_type). This
+# is the debugging view; the console print at the end of a run is a
+# summary only.
+GAP_QUERY = """
+    SELECT ing.ingredient_name, at.name AS attribute_type, av.value,
+           ri.raw_text, ri.id AS recipe_ingredient_id
+    FROM instance_attribute_value iav
+    JOIN recipe_ingredients ri ON ri.id = iav.recipe_ingredient_id
+    JOIN ingredients ing       ON ing.id = ri.ingredient_id
+    JOIN attribute_type at     ON at.id = iav.attribute_type_id
+    JOIN attribute_value av    ON av.id = iav.value_id
+    LEFT JOIN identity_attribute_rule iar
+           ON iar.ingredient_id = ri.ingredient_id
+          AND iar.attribute_type_id = iav.attribute_type_id
+    WHERE iar.id IS NULL AND iav.source = 'parsed'
+    ORDER BY at.name, ing.ingredient_name
+"""
+
+
+def _print_gap_summary(conn, example_limit=8):
+    rows = conn.execute(GAP_QUERY).fetchall()
+    if not rows:
+        return
+    print(
+        "normalize_ingredient_lines: %d attribute value(s) matched via the "
+        "global fallback with no identity_attribute_rule for that "
+        "ingredient -- likely curation gaps. First %d:"
+        % (len(rows), min(example_limit, len(rows)))
+    )
+    for ingredient_name, attribute_type, value, raw_text, _ in rows[:example_limit]:
+        print(f"    {ingredient_name!r}: {attribute_type}={value}  ({raw_text!r})")
+    if len(rows) > example_limit:
+        print(
+            "    ... %d more. Full list: run GAP_QUERY from "
+            "normalize_ingredient_lines.py, or in datasette/sqlite3:\n"
+            "%s" % (len(rows) - example_limit, GAP_QUERY)
         )
-    """)
-    conn.execute("""
-        CREATE INDEX IF NOT EXISTS idx_ingn_parsed_line_id
-        ON ingredient_normalizations (parsed_line_id)
-    """)
-    conn.execute("""
-        CREATE INDEX IF NOT EXISTS idx_ingn_recipe_id
-        ON ingredient_normalizations (recipe_id)
-    """)
-    conn.execute("""
-        CREATE INDEX IF NOT EXISTS idx_ingn_ingredient_name
-        ON ingredient_normalizations (ingredient_name)
-    """)
-    conn.commit()
 
 
-# ============================================================
-# DB EXECUTION
-# ============================================================
+def get_unprocessed_lines(conn):
+    return conn.execute(
+        """
+        SELECT p.id, p.recipe_id, p.recipe_section_id, p.section_name,
+               p.line_index, p.raw_text, p.preparation, p.ingredient_name_raw,
+               p.notes, p.recipe_name
+        FROM recipe_ingredient_lines_parsed p
+        LEFT JOIN ingredient_normalizations n ON n.parsed_line_id = p.id
+        WHERE n.id IS NULL
+        ORDER BY p.id
+        """
+    ).fetchall()
 
-def normalize_ingredient_lines():
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        _normalize(conn)
-    finally:
+
+def _canonical_ingredient_name(conn, ingredient_id):
+    row = conn.execute(
+        "SELECT ingredient_name FROM ingredients WHERE id = ?", (ingredient_id,)
+    ).fetchone()
+    return row[0] if row else None
+
+
+def normalize_ingredient_lines(db_path=None):
+    db_path = db_path or DB_PATH
+    conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")
+
+    rows = get_unprocessed_lines(conn)
+    if not rows:
+        print("normalize_ingredient_lines: nothing new to process")
         conn.close()
+        return
 
+    global_lookup = build_global_attribute_lookup(conn)
+    rule_cache = {}
 
-def _normalize(conn):
-    _ensure_schema(conn)
-    c = conn.cursor()
+    ok_count = 0
+    empty_count = 0
+    reduced_count = 0
+    unmatched_count = 0
 
-    c.execute("""
-        SELECT id, recipe_id, recipe_name, raw_text, ingredient_name_raw
-        FROM   recipe_ingredient_lines_parsed
-        WHERE  ingredient_name_raw IS NOT NULL
-        ORDER  BY id
-    """)
-    parsed_rows = c.fetchall()
+    for (parsed_line_id, recipe_id, recipe_section_id, section_name,
+         line_index, raw_text, prep_json, name_raw, notes_raw,
+         recipe_name) in rows:
 
-    stats = defaultdict(int)
-    review = []
-
-    for parsed_id, recipe_id, recipe_name, raw_text, ingredient_name_raw in parsed_rows:
-        # Idempotent: replace existing normalization for this parsed line
-        c.execute(
-            "DELETE FROM ingredient_normalizations WHERE parsed_line_id = ?",
-            (parsed_id,)
+        ingredient_id, final_name, status, stripped_qualifiers = (
+            normalize_and_resolve_name(conn, name_raw)
         )
 
-        ingredient_name, status = normalize_ingredient_name(ingredient_name_raw)
-
-        stats["total"] += 1
-        stats[status]  += 1
-
-        if status != "ok":
-            review.append((parsed_id, recipe_name, raw_text, ingredient_name_raw, status))
-
-        c.execute("""
+        conn.execute(
+            """
             INSERT INTO ingredient_normalizations
                 (parsed_line_id, recipe_id, recipe_name, raw_text,
                  ingredient_name_raw, ingredient_name, status)
-            VALUES (?,?,?,?,?,?,?)
-        """, (
-            parsed_id, recipe_id, recipe_name, raw_text,
-            ingredient_name_raw, ingredient_name, status,
-        ))
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (parsed_line_id, recipe_id, recipe_name, raw_text,
+             name_raw, final_name, status),
+        )
+
+        if status == "empty":
+            empty_count += 1
+        elif status == "reduced_to_nothing":
+            reduced_count += 1
+        else:
+            ok_count += 1
+        if status == "ok" and ingredient_id is None:
+            unmatched_count += 1
+
+        display_name = (
+            _canonical_ingredient_name(conn, ingredient_id)
+            if ingredient_id is not None
+            else final_name
+        )
+
+        cur = conn.execute(
+            """
+            INSERT INTO recipe_ingredients
+                (parsed_line_id, ingredient_name, preparation, recipe_id,
+                 recipe_section_id, line_index, raw_text, section_name,
+                 ingredient_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (parsed_line_id, display_name, prep_json, recipe_id, recipe_section_id,
+             line_index, raw_text, section_name, ingredient_id),
+        )
+        recipe_ingredient_id = cur.lastrowid
+
+        if ingredient_id is not None:
+            corpus_phrases = list(_parse_preparation(prep_json))
+            corpus_phrases.extend(stripped_qualifiers)
+            notes_text = _clean_optional_text(notes_raw)
+            if notes_text:
+                corpus_phrases.append(notes_text)
+            extract_and_write_attributes(
+                conn, recipe_ingredient_id, ingredient_id,
+                corpus_phrases, rule_cache, global_lookup,
+            )
 
     conn.commit()
 
-    print("\n=== normalize_ingredient_lines REPORT ===")
-    print("Total             : %d" % stats["total"])
-    print("ok                : %d" % stats["ok"])
-    print("empty             : %d" % stats["empty"])
-    print("reduced_to_nothing: %d" % stats["reduced_to_nothing"])
+    print(
+        "normalize_ingredient_lines: %d rows processed "
+        "(%d ok / %d empty / %d reduced_to_nothing, %d unmatched for triage)"
+        % (len(rows), ok_count, empty_count, reduced_count, unmatched_count)
+    )
+    _print_gap_summary(conn)
 
-    if review:
-        print("\n--- Rows needing review (up to 30) ---")
-        print("  %-6s  %-30s  %-40s  %-25s  %s"
-              % ("id", "recipe", "raw_text", "name_raw", "status"))
-        for parsed_id, rname, rtxt, nraw, st in review[:30]:
-            print("  %-6d  %-30s  %-40s  %-25s  %s" % (
-                parsed_id,
-                (rname or "")[:30],
-                (rtxt  or "")[:40],
-                (nraw  or "")[:25],
-                st,
-            ))
-
-    print("\nnormalize_ingredient_lines: done → ingredient_normalizations")
+    conn.close()
 
 
 if __name__ == "__main__":

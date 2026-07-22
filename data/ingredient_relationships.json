@@ -1,0 +1,811 @@
+{
+  "relationships": [
+    {
+      "source": "active dry yeast",
+      "relationship": "IS_A",
+      "target": "yeast"
+    },
+    {
+      "source": "instant yeast",
+      "relationship": "IS_A",
+      "target": "yeast"
+    },
+
+    {
+      "source": "all-purpose flour",
+      "relationship": "IS_A",
+      "target": "flour"
+    },
+    {
+      "source": "bread flour",
+      "relationship": "IS_A",
+      "target": "flour"
+    },
+    {
+      "source": "cake flour",
+      "relationship": "IS_A",
+      "target": "flour"
+    },
+    {
+      "source": "rye flour",
+      "relationship": "IS_A",
+      "target": "flour"
+    },
+    {
+      "source": "self-raising flour",
+      "relationship": "IS_A",
+      "target": "flour"
+    },
+    {
+      "source": "whole wheat flour",
+      "relationship": "IS_A",
+      "target": "flour"
+    },
+
+    {
+      "source": "dried spaghetti",
+      "relationship": "IS_A",
+      "target": "pasta"
+    },
+    {
+      "source": "dry elbow macaroni",
+      "relationship": "IS_A",
+      "target": "pasta"
+    },
+    {
+      "source": "fettuccine",
+      "relationship": "IS_A",
+      "target": "pasta"
+    },
+    {
+      "source": "pipette rigate",
+      "relationship": "IS_A",
+      "target": "pasta"
+    },
+    {
+      "source": "flat rice noodles",
+      "relationship": "IS_A",
+      "target": "rice noodles"
+    },
+    {
+      "source": "dried rice noodles",
+      "relationship": "IS_A",
+      "target": "rice noodles"
+    },
+    {
+      "source": "dried bean thread noodles",
+      "relationship": "IS_A",
+      "target": "bean thread noodles"
+    },
+
+    {
+      "source": "panko bread crumbs",
+      "relationship": "IS_A",
+      "target": "bread crumbs"
+    },
+
+    {
+      "source": "bomba rice",
+      "relationship": "IS_A",
+      "target": "rice"
+    },
+    {
+      "source": "short-grain white rice",
+      "relationship": "IS_A",
+      "target": "rice"
+    },
+    {
+      "source": "long-grain white rice",
+      "relationship": "IS_A",
+      "target": "rice"
+    },
+    {
+      "source": "short-grain brown rice",
+      "relationship": "IS_A",
+      "target": "rice"
+    },
+    {
+      "source": "fine yellow cornmeal",
+      "relationship": "IS_A",
+      "target": "cornmeal"
+    },
+
+    {
+      "source": "granulated sugar",
+      "relationship": "IS_A",
+      "target": "sugar"
+    },
+    {
+      "source": "confectioners sugar",
+      "relationship": "IS_A",
+      "target": "sugar"
+    },
+    {
+      "source": "superfine sugar",
+      "relationship": "IS_A",
+      "target": "sugar"
+    },
+    {
+      "source": "palm sugar",
+      "relationship": "IS_A",
+      "target": "sugar"
+    },
+
+    {
+      "source": "dark molasses",
+      "relationship": "IS_A",
+      "target": "molasses"
+    },
+    {
+      "source": "unsulphured molasses",
+      "relationship": "IS_A",
+      "target": "molasses"
+    },
+    {
+      "source": "sorghum molasses",
+      "relationship": "IS_A",
+      "target": "molasses"
+    },
+
+    {
+      "source": "onion",
+      "relationship": "IS_A",
+      "target": "allium"
+    },
+    {
+      "source": "yellow onion",
+      "relationship": "IS_A",
+      "target": "onion"
+    },
+    {
+      "source": "red onion",
+      "relationship": "IS_A",
+      "target": "onion"
+    },
+    {
+      "source": "white onion",
+      "relationship": "IS_A",
+      "target": "onion"
+    },
+    {
+      "source": "scallions",
+      "relationship": "IS_A",
+      "target": "allium"
+    },
+    {
+      "source": "shallots",
+      "relationship": "IS_A",
+      "target": "allium"
+    },
+    {
+      "source": "garlic",
+      "relationship": "IS_A",
+      "target": "allium"
+    },
+    {
+      "source": "chives",
+      "relationship": "IS_A",
+      "target": "allium"
+    },
+
+    {
+      "source": "green cabbage",
+      "relationship": "IS_A",
+      "target": "cabbage"
+    },
+    {
+      "source": "red cabbage",
+      "relationship": "IS_A",
+      "target": "cabbage"
+    },
+    {
+      "source": "green bell pepper",
+      "relationship": "IS_A",
+      "target": "bell pepper"
+    },
+    {
+      "source": "red bell pepper",
+      "relationship": "IS_A",
+      "target": "bell pepper"
+    },
+    {
+      "source": "red potatoes",
+      "relationship": "IS_A",
+      "target": "potatoes"
+    },
+    {
+      "source": "roma tomatoes",
+      "relationship": "IS_A",
+      "target": "tomato"
+    },
+    {
+      "source": "cherry tomatoes",
+      "relationship": "IS_A",
+      "target": "tomato"
+    },
+    {
+      "source": "crimini mushrooms",
+      "relationship": "IS_A",
+      "target": "mushrooms"
+    },
+    {
+      "source": "white mushrooms",
+      "relationship": "IS_A",
+      "target": "mushrooms"
+    },
+    {
+      "source": "japanese eggplant",
+      "relationship": "IS_A",
+      "target": "eggplant"
+    },
+    {
+      "source": "zucchini",
+      "relationship": "IS_A",
+      "target": "summer squash"
+    },
+    {
+      "source": "yellow squash",
+      "relationship": "IS_A",
+      "target": "summer squash"
+    },
+    {
+      "source": "pattypan squash",
+      "relationship": "IS_A",
+      "target": "summer squash"
+    },
+
+    {
+      "source": "black beans",
+      "relationship": "IS_A",
+      "target": "beans"
+    },
+    {
+      "source": "cannellini beans",
+      "relationship": "IS_A",
+      "target": "beans"
+    },
+    {
+      "source": "dried flageolet beans",
+      "relationship": "IS_A",
+      "target": "beans"
+    },
+    {
+      "source": "great northern beans",
+      "relationship": "IS_A",
+      "target": "beans"
+    },
+    {
+      "source": "pinto beans",
+      "relationship": "IS_A",
+      "target": "beans"
+    },
+    {
+      "source": "red kidney beans",
+      "relationship": "IS_A",
+      "target": "beans"
+    },
+    {
+      "source": "dried chickpeas",
+      "relationship": "IS_A",
+      "target": "chickpeas"
+    },
+    {
+      "source": "dry soybeans",
+      "relationship": "IS_A",
+      "target": "soybeans"
+    },
+
+    {
+      "source": "sharp cheddar cheese",
+      "relationship": "IS_A",
+      "target": "cheddar cheese"
+    },
+    {
+      "source": "whole milk",
+      "relationship": "IS_A",
+      "target": "milk"
+    },
+    {
+      "source": "heavy cream",
+      "relationship": "IS_A",
+      "target": "cream"
+    },
+    {
+      "source": "whipping cream",
+      "relationship": "IS_A",
+      "target": "cream"
+    },
+    {
+      "source": "whole milk mozzarella cheese",
+      "relationship": "IS_A",
+      "target": "mozzarella cheese"
+    },
+    {
+      "source": "parmigiano reggiano",
+      "relationship": "IS_A",
+      "target": "parmesan cheese"
+    },
+
+    {
+      "source": "chicken breast",
+      "relationship": "IS_A",
+      "target": "chicken"
+    },
+    {
+      "source": "chicken thigh",
+      "relationship": "IS_A",
+      "target": "dark meat chicken"
+    },
+    {
+      "source": "chicken leg",
+      "relationship": "IS_A",
+      "target": "dark meat chicken"
+    },
+    {
+      "source": "dark meat chicken",
+      "relationship": "IS_A",
+      "target": "chicken"
+    },
+    {
+      "source": "chicken wing",
+      "relationship": "IS_A",
+      "target": "chicken"
+    },
+    {
+      "source": "whole chicken",
+      "relationship": "IS_A",
+      "target": "chicken"
+    },
+    {
+      "source": "ground beef",
+      "relationship": "IS_A",
+      "target": "beef"
+    },
+    {
+      "source": "ground sirloin",
+      "relationship": "IS_A",
+      "target": "ground beef"
+    },
+    {
+      "source": "ribeye steak",
+      "relationship": "IS_A",
+      "target": "beef"
+    },
+    {
+      "source": "chuck roast",
+      "relationship": "IS_A",
+      "target": "beef"
+    },
+    {
+      "source": "ground pork",
+      "relationship": "IS_A",
+      "target": "pork"
+    },
+    {
+      "source": "pork belly",
+      "relationship": "IS_A",
+      "target": "pork"
+    },
+    {
+      "source": "ground lamb",
+      "relationship": "IS_A",
+      "target": "lamb"
+    },
+    {
+      "source": "leg of lamb",
+      "relationship": "IS_A",
+      "target": "lamb"
+    },
+
+    {
+      "source": "andouille sausage",
+      "relationship": "IS_A",
+      "target": "sausage"
+    },
+    {
+      "source": "italian sausage",
+      "relationship": "IS_A",
+      "target": "sausage"
+    },
+    {
+      "source": "pork sausage",
+      "relationship": "IS_A",
+      "target": "sausage"
+    },
+    {
+      "source": "polish sausage",
+      "relationship": "IS_A",
+      "target": "sausage"
+    },
+    {
+      "source": "polish kielbasa",
+      "relationship": "IS_A",
+      "target": "polish sausage"
+    },
+
+    {
+      "source": "crab meat",
+      "relationship": "IS_A",
+      "target": "crab"
+    },
+    {
+      "source": "crab",
+      "relationship": "IS_A",
+      "target": "shellfish"
+    },
+    {
+      "source": "mussels",
+      "relationship": "IS_A",
+      "target": "shellfish"
+    },
+    {
+      "source": "shrimp",
+      "relationship": "IS_A",
+      "target": "shellfish"
+    },
+
+    {
+      "source": "apple cider vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+    {
+      "source": "balsamic vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+    {
+      "source": "champagne vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+    {
+      "source": "distilled white vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+    {
+      "source": "red wine vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+    {
+      "source": "rice vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+    {
+      "source": "sherry vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+    {
+      "source": "white wine vinegar",
+      "relationship": "IS_A",
+      "target": "vinegar"
+    },
+
+    {
+      "source": "beef broth",
+      "relationship": "IS_A",
+      "target": "broth"
+    },
+    {
+      "source": "chicken broth",
+      "relationship": "IS_A",
+      "target": "broth"
+    },
+    {
+      "source": "bone broth",
+      "relationship": "IS_A",
+      "target": "broth"
+    },
+    {
+      "source": "beef stock",
+      "relationship": "IS_A",
+      "target": "stock"
+    },
+    {
+      "source": "chicken stock",
+      "relationship": "IS_A",
+      "target": "stock"
+    },
+    {
+      "source": "fish stock",
+      "relationship": "IS_A",
+      "target": "stock"
+    },
+    {
+      "source": "vegetable stock",
+      "relationship": "IS_A",
+      "target": "stock"
+    },
+    {
+      "source": "turkey stock",
+      "relationship": "IS_A",
+      "target": "stock"
+    },
+
+
+    {
+      "source": "fresh basil",
+      "relationship": "FORM_OF",
+      "target": "basil"
+    },
+    {
+      "source": "dried basil",
+      "relationship": "FORM_OF",
+      "target": "basil"
+    },
+    {
+      "source": "italian basil",
+      "relationship": "FORM_OF",
+      "target": "basil"
+    },
+
+    {
+      "source": "italian parsley",
+      "relationship": "FORM_OF",
+      "target": "parsley"
+    },
+    {
+      "source": "dried parsley",
+      "relationship": "FORM_OF",
+      "target": "parsley"
+    },
+
+    {
+      "source": "dried oregano",
+      "relationship": "FORM_OF",
+      "target": "oregano"
+    },
+
+    {
+      "source": "dried rosemary",
+      "relationship": "FORM_OF",
+      "target": "rosemary"
+    },
+    {
+      "source": "rosemary powder",
+      "relationship": "FORM_OF",
+      "target": "rosemary"
+    },
+
+    {
+      "source": "dried sage",
+      "relationship": "FORM_OF",
+      "target": "sage"
+    },
+    {
+      "source": "dried rubbed sage",
+      "relationship": "FORM_OF",
+      "target": "sage"
+    },
+
+    {
+      "source": "dried thyme",
+      "relationship": "FORM_OF",
+      "target": "thyme"
+    },
+
+    {
+      "source": "dried dill",
+      "relationship": "FORM_OF",
+      "target": "dill"
+    },
+
+    {
+      "source": "ground black pepper",
+      "relationship": "FORM_OF",
+      "target": "black pepper"
+    },
+    {
+      "source": "black peppercorns",
+      "relationship": "FORM_OF",
+      "target": "black pepper"
+    },
+
+    {
+      "source": "ground cinnamon",
+      "relationship": "FORM_OF",
+      "target": "cinnamon"
+    },
+    {
+      "source": "cinnamon sticks",
+      "relationship": "FORM_OF",
+      "target": "cinnamon"
+    },
+
+    {
+      "source": "ground nutmeg",
+      "relationship": "FORM_OF",
+      "target": "nutmeg"
+    },
+
+    {
+      "source": "ground turmeric",
+      "relationship": "FORM_OF",
+      "target": "turmeric"
+    },
+
+    {
+      "source": "garlic paste",
+      "relationship": "FORM_OF",
+      "target": "garlic"
+    },
+    {
+      "source": "garlic confit",
+      "relationship": "FORM_OF",
+      "target": "garlic"
+    },
+
+    {
+      "source": "whole black cardamom",
+      "relationship": "FORM_OF",
+      "target": "cardamom"
+    },
+    {
+      "source": "whole green cardamom",
+      "relationship": "FORM_OF",
+      "target": "cardamom"
+    },
+
+    {
+      "source": "canned crushed tomatoes",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+    {
+      "source": "canned whole tomatoes",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+    {
+      "source": "canned diced tomatoes",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+    {
+      "source": "tomato paste",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+    {
+      "source": "tomato puree",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+    {
+      "source": "tomato powder",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+    {
+      "source": "tomato juice",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+    {
+      "source": "sun-dried tomatoes",
+      "relationship": "DERIVED_FROM",
+      "target": "tomato"
+    },
+
+    {
+      "source": "peanut butter",
+      "relationship": "DERIVED_FROM",
+      "target": "peanuts"
+    },
+
+    {
+      "source": "fried tofu",
+      "relationship": "DERIVED_FROM",
+      "target": "tofu"
+    },
+
+    {
+      "source": "mashed potatoes",
+      "relationship": "DERIVED_FROM",
+      "target": "potatoes"
+    },
+
+    {
+      "source": "fried onions",
+      "relationship": "DERIVED_FROM",
+      "target": "onion"
+    },
+
+    {
+      "source": "coconut milk",
+      "relationship": "DERIVED_FROM",
+      "target": "coconut"
+    },
+    {
+      "source": "unsweetened coconut",
+      "relationship": "DERIVED_FROM",
+      "target": "coconut"
+    },
+
+    {
+      "source": "egg",
+      "relationship": "CONTAINS",
+      "target": "egg white"
+    },
+    {
+      "source": "egg",
+      "relationship": "CONTAINS",
+      "target": "egg yolk"
+    },
+
+    {
+      "source": "scallions",
+      "relationship": "CONTAINS",
+      "target": "green onion greens"
+    },
+    {
+      "source": "scallions",
+      "relationship": "CONTAINS",
+      "target": "green onion whites"
+    },
+
+    {
+      "source": "garlic",
+      "relationship": "CONTAINS",
+      "target": "garlic clove"
+    },
+
+    {
+      "source": "broccoli",
+      "relationship": "CONTAINS",
+      "target": "broccoli floret"
+    },
+    {
+      "source": "broccoli",
+      "relationship": "CONTAINS",
+      "target": "broccoli stalk"
+    },
+
+    {
+      "source": "orange",
+      "relationship": "CONTAINS",
+      "target": "orange peel"
+    },
+
+
+    {
+      "source": "all-purpose flour",
+      "relationship": "DEFAULT_FOR",
+      "target": "flour"
+    },
+
+    {
+      "source": "yellow onion",
+      "relationship": "DEFAULT_FOR",
+      "target": "onion"
+    },
+
+    {
+      "source": "granulated sugar",
+      "relationship": "DEFAULT_FOR",
+      "target": "sugar"
+    },
+
+    {
+      "source": "dark molasses",
+      "relationship": "DEFAULT_FOR",
+      "target": "molasses"
+    },
+
+    {
+      "source": "clover honey",
+      "relationship": "DEFAULT_FOR",
+      "target": "honey"
+    },
+
+    {
+      "source": "distilled white vinegar",
+      "relationship": "DEFAULT_FOR",
+      "target": "vinegar"
+    }
+  ]
+}

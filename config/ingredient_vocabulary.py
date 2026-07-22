@@ -115,7 +115,7 @@ PROTECTED_PHRASES = [
 
 NOISE_PHRASES = [
     "plus more", "as needed", "to taste", "if desired",
-    "as desired", "optional",
+    "as desired", "optional", "if needed", "add more"
 ]
 
 
