@@ -1,0 +1,2922 @@
+{
+  "schema_version": "1.0",
+  "description": "Approved default nutrition mappings for Gastrometric recipe-facing ingredient identities. Mappings reference USDA Legacy food records. Unresolved mappings indicate that no sufficiently close USDA Legacy representation was identified.",
+  "mappings": {
+    "salt": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173468,
+      "portions": [
+        {
+          "usda_portion_id": 92594,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 92595,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 92596,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 92597,
+          "modifier": "dash"
+        }
+      ]
+    },
+    "butter": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173410,
+      "portions": [
+        {
+          "usda_portion_id": 92456,
+          "modifier": "pat (1\" sq, 1/3\" high)"
+        },
+        {
+          "usda_portion_id": 92457,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 92458,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 92459,
+          "modifier": "stick"
+        }
+      ]
+    },
+    "sugar": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169655,
+      "portions": [
+        {
+          "usda_portion_id": 85286,
+          "modifier": "serving packet"
+        },
+        {
+          "usda_portion_id": 85287,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 85288,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 85289,
+          "modifier": "serving 1 cube"
+        }
+      ]
+    },
+    "eggs": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 171287,
+          "portions": [
+            {
+              "usda_portion_id": 88374,
+              "modifier": "large"
+            },
+            {
+              "usda_portion_id": 88375,
+              "modifier": "extra large"
+            },
+            {
+              "usda_portion_id": 88376,
+              "modifier": "jumbo"
+            },
+            {
+              "usda_portion_id": 88377,
+              "modifier": "cup (4.86 large eggs)"
+            },
+            {
+              "usda_portion_id": 88378,
+              "modifier": "medium"
+            },
+            {
+              "usda_portion_id": 88379,
+              "modifier": "small"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 172187,
+          "portions": [
+            {
+              "usda_portion_id": 90050,
+              "modifier": "large"
+            },
+            {
+              "usda_portion_id": 90051,
+              "modifier": "tbsp"
+            },
+            {
+              "usda_portion_id": 90052,
+              "modifier": "cup"
+            }
+          ]
+        }
+      }
+    },
+    "garlic": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169230,
+      "portions": [
+        {
+          "usda_portion_id": 84478,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 84479,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 84480,
+          "modifier": "clove"
+        },
+        {
+          "usda_portion_id": 84481,
+          "modifier": "cloves"
+        }
+      ]
+    },
+    "black pepper": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170931,
+      "portions": [
+        {
+          "usda_portion_id": 87560,
+          "modifier": "tsp, ground"
+        },
+        {
+          "usda_portion_id": 87561,
+          "modifier": "tbsp, ground"
+        },
+        {
+          "usda_portion_id": 87562,
+          "modifier": "tsp, whole"
+        },
+        {
+          "usda_portion_id": 87563,
+          "modifier": "dash"
+        }
+      ]
+    },
+    "water": {
+      "status": "unresolved"
+    },
+    "all-purpose flour": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168894,
+      "portions": [
+        {
+          "usda_portion_id": 83944,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "kosher salt": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173468,
+      "portions": [
+        {
+          "usda_portion_id": 92594,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 92595,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 92596,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 92597,
+          "modifier": "dash"
+        }
+      ]
+    },
+    "onion": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170000,
+          "portions": [
+            {
+              "usda_portion_id": 85855,
+              "modifier": "cup, chopped"
+            },
+            {
+              "usda_portion_id": 85856,
+              "modifier": "cup, sliced"
+            },
+            {
+              "usda_portion_id": 85857,
+              "modifier": "tbsp chopped"
+            },
+            {
+              "usda_portion_id": 85858,
+              "modifier": "large"
+            },
+            {
+              "usda_portion_id": 85859,
+              "modifier": "slice, large (1/4\" thick)"
+            },
+            {
+              "usda_portion_id": 85860,
+              "modifier": "medium (2-1/2\" dia)"
+            },
+            {
+              "usda_portion_id": 85861,
+              "modifier": "slice, medium (1/8\" thick)"
+            },
+            {
+              "usda_portion_id": 85862,
+              "modifier": "small"
+            },
+            {
+              "usda_portion_id": 85863,
+              "modifier": "slice, thin"
+            },
+            {
+              "usda_portion_id": 85864,
+              "modifier": "rings"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170004,
+          "portions": [
+            {
+              "usda_portion_id": 85877,
+              "modifier": "cup chopped"
+            }
+          ]
+        }
+      }
+    },
+    "vanilla": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172235,
+      "portions": [
+        {
+          "usda_portion_id": 90132,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 90133,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "brown sugar": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168833,
+      "portions": [
+        {
+          "usda_portion_id": 83854,
+          "modifier": "tsp unpacked"
+        },
+        {
+          "usda_portion_id": 83855,
+          "modifier": "cup packed"
+        },
+        {
+          "usda_portion_id": 83856,
+          "modifier": "cup unpacked"
+        },
+        {
+          "usda_portion_id": 83857,
+          "modifier": "tsp packed"
+        },
+        {
+          "usda_portion_id": 83858,
+          "modifier": "tsp brownulated"
+        }
+      ]
+    },
+    "flour": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168894,
+      "portions": [
+        {
+          "usda_portion_id": 83944,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "egg yolks": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172184,
+      "portions": [
+        {
+          "usda_portion_id": 90045,
+          "modifier": "large"
+        },
+        {
+          "usda_portion_id": 90046,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "baking soda": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 175040,
+      "portions": [
+        {
+          "usda_portion_id": 95484,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 95485,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "vanilla extract": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172235,
+      "portions": [
+        {
+          "usda_portion_id": 90132,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 90133,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "thyme": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170938,
+      "portions": [
+        {
+          "usda_portion_id": 87578,
+          "modifier": "tsp, leaves"
+        },
+        {
+          "usda_portion_id": 87579,
+          "modifier": "tbsp, leaves"
+        },
+        {
+          "usda_portion_id": 87580,
+          "modifier": "tsp, ground"
+        },
+        {
+          "usda_portion_id": 87581,
+          "modifier": "tbsp, ground"
+        }
+      ]
+    },
+    "baking powder": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172803,
+      "portions": [
+        {
+          "usda_portion_id": 91437,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 91438,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "MSG": {
+      "status": "unresolved"
+    },
+    "heavy cream": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170859,
+      "portions": [
+        {
+          "usda_portion_id": 87432,
+          "modifier": "cup, whipped"
+        },
+        {
+          "usda_portion_id": 87433,
+          "modifier": "cup, fluid (yields 2 cups whipped)"
+        },
+        {
+          "usda_portion_id": 87434,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 87435,
+          "modifier": "fl oz"
+        }
+      ]
+    },
+    "bay leaf": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170917,
+      "portions": [
+        {
+          "usda_portion_id": 87532,
+          "modifier": "tsp, crumbled"
+        },
+        {
+          "usda_portion_id": 87533,
+          "modifier": "tbsp, crumbled"
+        }
+      ]
+    },
+    "parmesan cheese": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171247,
+      "portions": [
+        {
+          "usda_portion_id": 88261,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 88262,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 88263,
+          "modifier": "oz"
+        }
+      ]
+    },
+    "milk": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172217,
+      "portions": [
+        {
+          "usda_portion_id": 90101,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 90102,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 90103,
+          "modifier": "fl oz"
+        },
+        {
+          "usda_portion_id": 90104,
+          "modifier": "quart"
+        }
+      ]
+    },
+    "extra-virgin olive oil": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171413,
+      "portions": [
+        {
+          "usda_portion_id": 88667,
+          "modifier": "tablespoon"
+        },
+        {
+          "usda_portion_id": 88668,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 88669,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "carrots": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170393,
+          "portions": [
+            {
+              "usda_portion_id": 86555,
+              "modifier": "cup chopped"
+            },
+            {
+              "usda_portion_id": 86556,
+              "modifier": "cup grated"
+            },
+            {
+              "usda_portion_id": 86557,
+              "modifier": "cup strips or slices"
+            },
+            {
+              "usda_portion_id": 86558,
+              "modifier": "large (7-1/4\" to 8-/1/2\" long)"
+            },
+            {
+              "usda_portion_id": 86559,
+              "modifier": "medium"
+            },
+            {
+              "usda_portion_id": 86560,
+              "modifier": "small (5-1/2\" long)"
+            },
+            {
+              "usda_portion_id": 86561,
+              "modifier": "slice"
+            },
+            {
+              "usda_portion_id": 86562,
+              "modifier": "strip large (3\" long)"
+            },
+            {
+              "usda_portion_id": 86563,
+              "modifier": "strip medium"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 169339,
+          "portions": [
+            {
+              "usda_portion_id": 84671,
+              "modifier": "tbsp"
+            },
+            {
+              "usda_portion_id": 84672,
+              "modifier": "cup slices"
+            },
+            {
+              "usda_portion_id": 84673,
+              "modifier": "carrot"
+            }
+          ]
+        }
+      }
+    },
+    "yellow onion": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170000,
+          "portions": [
+            {
+              "usda_portion_id": 85855,
+              "modifier": "cup, chopped"
+            },
+            {
+              "usda_portion_id": 85856,
+              "modifier": "cup, sliced"
+            },
+            {
+              "usda_portion_id": 85857,
+              "modifier": "tbsp chopped"
+            },
+            {
+              "usda_portion_id": 85858,
+              "modifier": "large"
+            },
+            {
+              "usda_portion_id": 85859,
+              "modifier": "slice, large (1/4\" thick)"
+            },
+            {
+              "usda_portion_id": 85860,
+              "modifier": "medium (2-1/2\" dia)"
+            },
+            {
+              "usda_portion_id": 85861,
+              "modifier": "slice, medium (1/8\" thick)"
+            },
+            {
+              "usda_portion_id": 85862,
+              "modifier": "small"
+            },
+            {
+              "usda_portion_id": 85863,
+              "modifier": "slice, thin"
+            },
+            {
+              "usda_portion_id": 85864,
+              "modifier": "rings"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170004,
+          "portions": [
+            {
+              "usda_portion_id": 85877,
+              "modifier": "cup chopped"
+            }
+          ]
+        }
+      }
+    },
+    "vegetable oil": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169867,
+      "portions": [
+        {
+          "usda_portion_id": 85577,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 85578,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 85579,
+          "modifier": "teaspoon"
+        }
+      ]
+    },
+    "soy sauce": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 174277,
+      "portions": [
+        {
+          "usda_portion_id": 94068,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 94069,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 94070,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 94071,
+          "modifier": "individual packet"
+        }
+      ]
+    },
+    "oil": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169867,
+      "portions": [
+        {
+          "usda_portion_id": 85577,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 85578,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 85579,
+          "modifier": "teaspoon"
+        }
+      ]
+    },
+    "corn starch": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169698,
+      "portions": [
+        {
+          "usda_portion_id": 85370,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "chicken broth": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171609,
+      "portions": [
+        {
+          "usda_portion_id": 89069,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "celery": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 169988,
+          "portions": [
+            {
+              "usda_portion_id": 85824,
+              "modifier": "cup chopped"
+            },
+            {
+              "usda_portion_id": 85825,
+              "modifier": "NLEA serving"
+            },
+            {
+              "usda_portion_id": 85826,
+              "modifier": "tbsp"
+            },
+            {
+              "usda_portion_id": 85827,
+              "modifier": "stalk, large (11\"-12\" long)"
+            },
+            {
+              "usda_portion_id": 85828,
+              "modifier": "stalk, medium (7-1/2\" - 8\" long)"
+            },
+            {
+              "usda_portion_id": 85829,
+              "modifier": "stalk, small (5\" long)"
+            },
+            {
+              "usda_portion_id": 85830,
+              "modifier": "strip (4\" long)"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 169342,
+          "portions": [
+            {
+              "usda_portion_id": 84677,
+              "modifier": "cup, diced"
+            },
+            {
+              "usda_portion_id": 84678,
+              "modifier": "stalks"
+            }
+          ]
+        }
+      }
+    },
+    "parsley": {
+      "status": "unresolved"
+    },
+    "lemon juice": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 167747,
+      "portions": [
+        {
+          "usda_portion_id": 81887,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 81888,
+          "modifier": "fl oz"
+        },
+        {
+          "usda_portion_id": 81889,
+          "modifier": "lemon yields"
+        },
+        {
+          "usda_portion_id": 81890,
+          "modifier": "wedge yields"
+        }
+      ]
+    },
+    "green onion": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170005,
+      "portions": [
+        {
+          "usda_portion_id": 85878,
+          "modifier": "cup, chopped"
+        },
+        {
+          "usda_portion_id": 85879,
+          "modifier": "tbsp chopped"
+        },
+        {
+          "usda_portion_id": 85880,
+          "modifier": "large"
+        },
+        {
+          "usda_portion_id": 85881,
+          "modifier": "medium (4-1/8\" long)"
+        },
+        {
+          "usda_portion_id": 85882,
+          "modifier": "small (3\" long)"
+        }
+      ]
+    },
+    "fish sauce": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 174531,
+      "portions": [
+        {
+          "usda_portion_id": 94526,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "cumin": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170923,
+      "portions": [
+        {
+          "usda_portion_id": 87544,
+          "modifier": "tsp, whole"
+        },
+        {
+          "usda_portion_id": 87545,
+          "modifier": "tbsp, whole"
+        }
+      ]
+    },
+    "chili flakes": {
+      "status": "unresolved"
+    },
+    "canned crushed tomatoes": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170501,
+      "portions": [
+        {
+          "usda_portion_id": 86769,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "tomato paste": {
+      "status": "unresolved"
+    },
+    "olive oil": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 167737,
+      "portions": [
+        {
+          "usda_portion_id": 81867,
+          "modifier": "tablespoon"
+        },
+        {
+          "usda_portion_id": 81868,
+          "modifier": "teaspoon"
+        }
+      ]
+    },
+    "basil": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172232,
+      "portions": [
+        {
+          "usda_portion_id": 90125,
+          "modifier": "leaves"
+        },
+        {
+          "usda_portion_id": 90126,
+          "modifier": "tbsp, chopped"
+        },
+        {
+          "usda_portion_id": 90127,
+          "modifier": "cup leaves, whole"
+        }
+      ]
+    },
+    "shallots": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170499,
+      "portions": [
+        {
+          "usda_portion_id": 86767,
+          "modifier": "tbsp chopped"
+        }
+      ]
+    },
+    "oyster sauce": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 174529,
+      "portions": [
+        {
+          "usda_portion_id": 94524,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "honey": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169640,
+      "portions": [
+        {
+          "usda_portion_id": 85264,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 85265,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 85266,
+          "modifier": "packet (0.5 oz)"
+        }
+      ]
+    },
+    "ground beef": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 174036,
+          "portions": [
+            {
+              "usda_portion_id": 93671,
+              "modifier": "oz"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 171798,
+          "portions": [
+            {
+              "usda_portion_id": 89383,
+              "modifier": "oz"
+            }
+          ]
+        }
+      }
+    },
+    "garlic powder": {
+      "status": "unresolved"
+    },
+    "cinnamon": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171320,
+      "portions": [
+        {
+          "usda_portion_id": 88429,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 88430,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "bacon": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 168382,
+          "portions": [
+            {
+              "usda_portion_id": 82998,
+              "modifier": "slice"
+            },
+            {
+              "usda_portion_id": 82999,
+              "modifier": "package"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168322,
+          "portions": [
+            {
+              "usda_portion_id": 82890,
+              "modifier": "oz"
+            },
+            {
+              "usda_portion_id": 82891,
+              "modifier": "slice"
+            }
+          ]
+        }
+      }
+    },
+    "sour cream": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171257,
+      "portions": [
+        {
+          "usda_portion_id": 88296,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 88297,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "paprika": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171329,
+      "portions": [
+        {
+          "usda_portion_id": 88447,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 88448,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "mushrooms": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 169251,
+          "portions": [
+            {
+              "usda_portion_id": 84526,
+              "modifier": "cup, pieces or slices"
+            },
+            {
+              "usda_portion_id": 84527,
+              "modifier": "cup, whole"
+            },
+            {
+              "usda_portion_id": 84528,
+              "modifier": "large"
+            },
+            {
+              "usda_portion_id": 84529,
+              "modifier": "medium"
+            },
+            {
+              "usda_portion_id": 84530,
+              "modifier": "slice"
+            },
+            {
+              "usda_portion_id": 84531,
+              "modifier": "small"
+            },
+            {
+              "usda_portion_id": 84532,
+              "modifier": "cup pieces"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168537,
+          "portions": [
+            {
+              "usda_portion_id": 83260,
+              "modifier": "cup pieces"
+            },
+            {
+              "usda_portion_id": 83261,
+              "modifier": "tbsp"
+            },
+            {
+              "usda_portion_id": 83262,
+              "modifier": "mushroom"
+            }
+          ]
+        }
+      }
+    },
+    "ginger": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169231,
+      "portions": [
+        {
+          "usda_portion_id": 84482,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 84483,
+          "modifier": "cup slices (1\" dia)"
+        },
+        {
+          "usda_portion_id": 84484,
+          "modifier": "slices (1\" dia)"
+        }
+      ]
+    },
+    "cream": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170859,
+      "portions": [
+        {
+          "usda_portion_id": 87432,
+          "modifier": "cup, whipped"
+        },
+        {
+          "usda_portion_id": 87433,
+          "modifier": "cup, fluid (yields 2 cups whipped)"
+        },
+        {
+          "usda_portion_id": 87434,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 87435,
+          "modifier": "fl oz"
+        }
+      ]
+    },
+    "coriander seeds": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170922,
+      "portions": [
+        {
+          "usda_portion_id": 87542,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 87543,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "cilantro": {
+      "status": "unresolved"
+    },
+    "bread flour": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168896,
+      "portions": [
+        {
+          "usda_portion_id": 83946,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "whole milk": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172217,
+      "portions": [
+        {
+          "usda_portion_id": 90101,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 90102,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 90103,
+          "modifier": "fl oz"
+        },
+        {
+          "usda_portion_id": 90104,
+          "modifier": "quart"
+        }
+      ]
+    },
+    "red bell pepper": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170108,
+          "portions": [
+            {
+              "usda_portion_id": 86062,
+              "modifier": "cup, chopped"
+            },
+            {
+              "usda_portion_id": 86063,
+              "modifier": "cup, sliced"
+            },
+            {
+              "usda_portion_id": 86064,
+              "modifier": "tablespoon"
+            },
+            {
+              "usda_portion_id": 86065,
+              "modifier": "large (2-1/4 per pound, approx 3-3/4\" long, 3\" dia.)"
+            },
+            {
+              "usda_portion_id": 86066,
+              "modifier": "medium (approx 2-3/4\" long, 2-1/2 dia.)"
+            },
+            {
+              "usda_portion_id": 86067,
+              "modifier": "small"
+            },
+            {
+              "usda_portion_id": 86068,
+              "modifier": "ring (3\" dia., 1/4\" thick)"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168550,
+          "portions": [
+            {
+              "usda_portion_id": 83295,
+              "modifier": "cup chopped"
+            }
+          ]
+        }
+      }
+    },
+    "neutral oil": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169867,
+      "portions": [
+        {
+          "usda_portion_id": 85577,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 85578,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 85579,
+          "modifier": "teaspoon"
+        }
+      ]
+    },
+    "half-and-half": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171255,
+      "portions": [
+        {
+          "usda_portion_id": 88290,
+          "modifier": "fl oz"
+        },
+        {
+          "usda_portion_id": 88291,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 88292,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 88293,
+          "modifier": "container, individual (.5 fl oz)"
+        }
+      ]
+    },
+    "dried mustard": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170929,
+      "portions": [
+        {
+          "usda_portion_id": 87556,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 87557,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "cocoa powder": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169594,
+      "portions": [
+        {
+          "usda_portion_id": 85188,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 85189,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "chocolate chips": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 167976,
+      "portions": [
+        {
+          "usda_portion_id": 82315,
+          "modifier": "serving"
+        },
+        {
+          "usda_portion_id": 82316,
+          "modifier": "cup large chips"
+        },
+        {
+          "usda_portion_id": 82317,
+          "modifier": "cup mini chips"
+        },
+        {
+          "usda_portion_id": 82318,
+          "modifier": "oz (approx 60 pcs)"
+        },
+        {
+          "usda_portion_id": 82319,
+          "modifier": "cup chips (6 oz package)"
+        }
+      ]
+    },
+    "cayenne pepper": {
+      "status": "unresolved"
+    },
+    "brussels sprouts": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170383,
+          "portions": [
+            {
+              "usda_portion_id": 86540,
+              "modifier": "cup"
+            },
+            {
+              "usda_portion_id": 86541,
+              "modifier": "sprout"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168513,
+          "portions": [
+            {
+              "usda_portion_id": 83221,
+              "modifier": "sprout"
+            },
+            {
+              "usda_portion_id": 83222,
+              "modifier": "cup"
+            }
+          ]
+        }
+      }
+    },
+    "worcestershire sauce": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171610,
+      "portions": [
+        {
+          "usda_portion_id": 89070,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 89071,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "white wine": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 174837,
+      "portions": [
+        {
+          "usda_portion_id": 94976,
+          "modifier": "fl oz"
+        },
+        {
+          "usda_portion_id": 94977,
+          "modifier": "serving (5 fl oz)"
+        }
+      ]
+    },
+    "white pepper": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170933,
+      "portions": [
+        {
+          "usda_portion_id": 87566,
+          "modifier": "tsp, ground"
+        },
+        {
+          "usda_portion_id": 87567,
+          "modifier": "tbsp, ground"
+        }
+      ]
+    },
+    "walnuts": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170187,
+          "portions": [
+            {
+              "usda_portion_id": 86201,
+              "modifier": "cup, chopped"
+            },
+            {
+              "usda_portion_id": 86202,
+              "modifier": "cup, ground"
+            },
+            {
+              "usda_portion_id": 86203,
+              "modifier": "cup, in shell, edible yield (7 nuts)"
+            },
+            {
+              "usda_portion_id": 86204,
+              "modifier": "cup shelled (50 halves)"
+            },
+            {
+              "usda_portion_id": 86205,
+              "modifier": "cup pieces or chips"
+            },
+            {
+              "usda_portion_id": 86206,
+              "modifier": "oz (14 halves)"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170594,
+          "portions": [
+            {
+              "usda_portion_id": 86921,
+              "modifier": "oz"
+            }
+          ]
+        }
+      }
+    },
+    "tomato": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170457,
+          "portions": [
+            {
+              "usda_portion_id": 86681,
+              "modifier": "cup cherry tomatoes"
+            },
+            {
+              "usda_portion_id": 86682,
+              "modifier": "cup, chopped or sliced"
+            },
+            {
+              "usda_portion_id": 86683,
+              "modifier": "Italian tomato"
+            },
+            {
+              "usda_portion_id": 86684,
+              "modifier": "cherry"
+            },
+            {
+              "usda_portion_id": 86685,
+              "modifier": "large whole (3\" dia)"
+            },
+            {
+              "usda_portion_id": 86686,
+              "modifier": "medium whole (2-3/5\" dia)"
+            },
+            {
+              "usda_portion_id": 86687,
+              "modifier": "slice, medium (1/4\" thick)"
+            },
+            {
+              "usda_portion_id": 86688,
+              "modifier": "plum tomato"
+            },
+            {
+              "usda_portion_id": 86689,
+              "modifier": "small whole (2-2/5\" dia)"
+            },
+            {
+              "usda_portion_id": 86690,
+              "modifier": "slice, thick/large (1/2\" thick)"
+            },
+            {
+              "usda_portion_id": 86691,
+              "modifier": "wedge (1/4 of medium tomato)"
+            },
+            {
+              "usda_portion_id": 86692,
+              "modifier": "slice, thin/small"
+            },
+            {
+              "usda_portion_id": 86693,
+              "modifier": "NLEA serving"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170050,
+          "portions": [
+            {
+              "usda_portion_id": 85961,
+              "modifier": "cup"
+            },
+            {
+              "usda_portion_id": 85962,
+              "modifier": "medium"
+            }
+          ]
+        }
+      }
+    },
+    "sesame oil": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171016,
+      "portions": [
+        {
+          "usda_portion_id": 87777,
+          "modifier": "tablespoon"
+        },
+        {
+          "usda_portion_id": 87778,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 87779,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "rosemary": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173473,
+      "portions": [
+        {
+          "usda_portion_id": 92608,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 92609,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "red wine": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173190,
+      "portions": [
+        {
+          "usda_portion_id": 92066,
+          "modifier": "fl oz"
+        },
+        {
+          "usda_portion_id": 92067,
+          "modifier": "serving (5 fl oz)"
+        }
+      ]
+    },
+    "ground ginger": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170926,
+      "portions": [
+        {
+          "usda_portion_id": 87550,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 87551,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "ground cinnamon": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171320,
+      "portions": [
+        {
+          "usda_portion_id": 88429,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 88430,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "green cabbage": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 169335,
+          "portions": [
+            {
+              "usda_portion_id": 84665,
+              "modifier": "cup, shredded"
+            },
+            {
+              "usda_portion_id": 84666,
+              "modifier": "head"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168514,
+          "portions": [
+            {
+              "usda_portion_id": 83223,
+              "modifier": "cup, shredded"
+            },
+            {
+              "usda_portion_id": 83224,
+              "modifier": "head"
+            }
+          ]
+        }
+      }
+    },
+    "cream cheese": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173418,
+      "portions": [
+        {
+          "usda_portion_id": 92481,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 92482,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 92483,
+          "modifier": "tbsp, whipped"
+        },
+        {
+          "usda_portion_id": 92484,
+          "modifier": "oz"
+        },
+        {
+          "usda_portion_id": 92485,
+          "modifier": "cubic inch"
+        },
+        {
+          "usda_portion_id": 92486,
+          "modifier": "package, small (3 oz)"
+        }
+      ]
+    },
+    "cloves": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171321,
+      "portions": [
+        {
+          "usda_portion_id": 88431,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 88432,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "chili powder": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171319,
+      "portions": [
+        {
+          "usda_portion_id": 88427,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 88428,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "chicken stock": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172884,
+      "portions": [
+        {
+          "usda_portion_id": 91631,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "cabbage": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 169335,
+          "portions": [
+            {
+              "usda_portion_id": 84665,
+              "modifier": "cup, shredded"
+            },
+            {
+              "usda_portion_id": 84666,
+              "modifier": "head"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168514,
+          "portions": [
+            {
+              "usda_portion_id": 83223,
+              "modifier": "cup, shredded"
+            },
+            {
+              "usda_portion_id": 83224,
+              "modifier": "head"
+            }
+          ]
+        }
+      }
+    },
+    "buttermilk": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172225,
+      "portions": [
+        {
+          "usda_portion_id": 90117,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "beef broth": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172889,
+      "portions": [
+        {
+          "usda_portion_id": 91636,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 91637,
+          "modifier": "can (14.5 oz)"
+        },
+        {
+          "usda_portion_id": 91638,
+          "modifier": "carton (32 oz)"
+        }
+      ]
+    },
+    "tomato puree": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170460,
+      "portions": [
+        {
+          "usda_portion_id": 86700,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 86701,
+          "modifier": "can (29 oz) (401 x 411)"
+        }
+      ]
+    },
+    "sweet potatoes": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170541,
+      "portions": [
+        {
+          "usda_portion_id": 86823,
+          "modifier": "cup, mashed"
+        },
+        {
+          "usda_portion_id": 86824,
+          "modifier": "medium"
+        }
+      ]
+    },
+    "stock": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172884,
+      "portions": [
+        {
+          "usda_portion_id": 91631,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "sodium citrate": {
+      "status": "unresolved"
+    },
+    "sharp cheddar cheese": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170899,
+      "portions": [
+        {
+          "usda_portion_id": 87520,
+          "modifier": "slice (2/3 oz)"
+        },
+        {
+          "usda_portion_id": 87521,
+          "modifier": "slice (3/4 oz)"
+        },
+        {
+          "usda_portion_id": 87522,
+          "modifier": "slice (1 oz)"
+        }
+      ]
+    },
+    "red onion": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170008,
+      "portions": [
+        {
+          "usda_portion_id": 85886,
+          "modifier": "NLEA serving"
+        },
+        {
+          "usda_portion_id": 85887,
+          "modifier": "onion"
+        }
+      ]
+    },
+    "pecans": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170182,
+          "portions": [
+            {
+              "usda_portion_id": 86188,
+              "modifier": "cup, chopped"
+            },
+            {
+              "usda_portion_id": 86189,
+              "modifier": "cup, halves"
+            },
+            {
+              "usda_portion_id": 86190,
+              "modifier": "oz (19 halves)"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170183,
+          "portions": [
+            {
+              "usda_portion_id": 86191,
+              "modifier": "oz"
+            }
+          ]
+        }
+      }
+    },
+    "oregano": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171328,
+      "portions": [
+        {
+          "usda_portion_id": 88445,
+          "modifier": "tsp, leaves"
+        },
+        {
+          "usda_portion_id": 88446,
+          "modifier": "tsp, ground"
+        }
+      ]
+    },
+    "nutmeg": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171326,
+      "portions": [
+        {
+          "usda_portion_id": 88441,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 88442,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "mozzarella cheese": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170900,
+      "portions": [
+        {
+          "usda_portion_id": 87523,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "mayonnaise": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 167736,
+      "portions": [
+        {
+          "usda_portion_id": 81865,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 81866,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "lime juice": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168157,
+      "portions": [
+        {
+          "usda_portion_id": 82575,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 82576,
+          "modifier": "fl oz"
+        }
+      ]
+    },
+    "light corn syrup": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168837,
+      "portions": [
+        {
+          "usda_portion_id": 83864,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 83865,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "lemon zest": {
+      "status": "unresolved"
+    },
+    "hot sauce": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 174527,
+      "portions": [
+        {
+          "usda_portion_id": 94520,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 94521,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "ground pork": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 168372,
+          "portions": [
+            {
+              "usda_portion_id": 82982,
+              "modifier": "oz"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168374,
+          "portions": [
+            {
+              "usda_portion_id": 82984,
+              "modifier": "oz grilled patties"
+            }
+          ]
+        }
+      }
+    },
+    "green bell pepper": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170427,
+          "portions": [
+            {
+              "usda_portion_id": 86623,
+              "modifier": "cup, chopped"
+            },
+            {
+              "usda_portion_id": 86624,
+              "modifier": "cup, sliced"
+            },
+            {
+              "usda_portion_id": 86625,
+              "modifier": "tbsp"
+            },
+            {
+              "usda_portion_id": 86626,
+              "modifier": "large (2-1/4 per lb, approx 3-3/4\" long, 3\" dia)"
+            },
+            {
+              "usda_portion_id": 86627,
+              "modifier": "medium (approx 2-3/4\" long, 2-1/2\" dia)"
+            },
+            {
+              "usda_portion_id": 86628,
+              "modifier": "ring (3\" dia, 1/4\" thick)"
+            },
+            {
+              "usda_portion_id": 86629,
+              "modifier": "small"
+            },
+            {
+              "usda_portion_id": 86630,
+              "modifier": "strips"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170109,
+          "portions": [
+            {
+              "usda_portion_id": 86069,
+              "modifier": "tbsp"
+            },
+            {
+              "usda_portion_id": 86070,
+              "modifier": "pepper"
+            },
+            {
+              "usda_portion_id": 86071,
+              "modifier": "cup, chopped"
+            }
+          ]
+        }
+      }
+    },
+    "garam masala": {
+      "status": "unresolved"
+    },
+    "egg whites": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172183,
+      "portions": [
+        {
+          "usda_portion_id": 90043,
+          "modifier": "large"
+        },
+        {
+          "usda_portion_id": 90044,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "dry white wine": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 174837,
+      "portions": [
+        {
+          "usda_portion_id": 94976,
+          "modifier": "fl oz"
+        },
+        {
+          "usda_portion_id": 94977,
+          "modifier": "serving (5 fl oz)"
+        }
+      ]
+    },
+    "dry elbow macaroni": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 168903,
+          "portions": [
+            {
+              "usda_portion_id": 83954,
+              "modifier": "cup spiral shaped"
+            },
+            {
+              "usda_portion_id": 83955,
+              "modifier": "oz"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168904,
+          "portions": [
+            {
+              "usda_portion_id": 83956,
+              "modifier": "cup spiral shaped"
+            }
+          ]
+        }
+      }
+    },
+    "dried oregano": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171328,
+      "portions": [
+        {
+          "usda_portion_id": 88445,
+          "modifier": "tsp, leaves"
+        },
+        {
+          "usda_portion_id": 88446,
+          "modifier": "tsp, ground"
+        }
+      ]
+    },
+    "diamond crystal kosher salt": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173468,
+      "portions": [
+        {
+          "usda_portion_id": 92594,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 92595,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 92596,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 92597,
+          "modifier": "dash"
+        }
+      ]
+    },
+    "dark soy sauce": {
+      "status": "unresolved"
+    },
+    "cheddar cheese": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 173440,
+      "portions": [
+        {
+          "usda_portion_id": 92537,
+          "modifier": "cup, diced"
+        },
+        {
+          "usda_portion_id": 92538,
+          "modifier": "cup, shredded"
+        },
+        {
+          "usda_portion_id": 92539,
+          "modifier": "oz"
+        },
+        {
+          "usda_portion_id": 92540,
+          "modifier": "cubic inch"
+        },
+        {
+          "usda_portion_id": 92541,
+          "modifier": "slice (1 oz)"
+        }
+      ]
+    },
+    "bourbon": {
+      "status": "unresolved"
+    },
+    "bean sprouts": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169957,
+      "portions": [
+        {
+          "usda_portion_id": 85751,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 85752,
+          "modifier": "package (12 oz)"
+        }
+      ]
+    },
+    "balsamic vinegar": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172241,
+      "portions": [
+        {
+          "usda_portion_id": 90145,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 90146,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 90147,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "xanthan gum": {
+      "status": "unresolved"
+    },
+    "white mushrooms": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 169251,
+          "portions": [
+            {
+              "usda_portion_id": 84526,
+              "modifier": "cup, pieces or slices"
+            },
+            {
+              "usda_portion_id": 84527,
+              "modifier": "cup, whole"
+            },
+            {
+              "usda_portion_id": 84528,
+              "modifier": "large"
+            },
+            {
+              "usda_portion_id": 84529,
+              "modifier": "medium"
+            },
+            {
+              "usda_portion_id": 84530,
+              "modifier": "slice"
+            },
+            {
+              "usda_portion_id": 84531,
+              "modifier": "small"
+            },
+            {
+              "usda_portion_id": 84532,
+              "modifier": "cup pieces"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168537,
+          "portions": [
+            {
+              "usda_portion_id": 83260,
+              "modifier": "cup pieces"
+            },
+            {
+              "usda_portion_id": 83261,
+              "modifier": "tbsp"
+            },
+            {
+              "usda_portion_id": 83262,
+              "modifier": "mushroom"
+            }
+          ]
+        }
+      }
+    },
+    "unsweetened chocolate": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 167568,
+      "portions": [
+        {
+          "usda_portion_id": 81654,
+          "modifier": "oz square Bakers"
+        },
+        {
+          "usda_portion_id": 81655,
+          "modifier": "cup, grated"
+        },
+        {
+          "usda_portion_id": 81656,
+          "modifier": "oz Hersheys"
+        }
+      ]
+    },
+    "star anise": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171316,
+      "portions": [
+        {
+          "usda_portion_id": 88419,
+          "modifier": "tsp, whole"
+        },
+        {
+          "usda_portion_id": 88420,
+          "modifier": "tbsp, whole"
+        }
+      ]
+    },
+    "spinach": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 168462,
+          "portions": [
+            {
+              "usda_portion_id": 83132,
+              "modifier": "cup"
+            },
+            {
+              "usda_portion_id": 83133,
+              "modifier": "bunch"
+            },
+            {
+              "usda_portion_id": 83134,
+              "modifier": "leaf"
+            },
+            {
+              "usda_portion_id": 83135,
+              "modifier": "package (10 oz)"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170531,
+          "portions": [
+            {
+              "usda_portion_id": 86811,
+              "modifier": "cup"
+            }
+          ]
+        }
+      }
+    },
+    "semi-sweet chocolate": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 167976,
+      "portions": [
+        {
+          "usda_portion_id": 82315,
+          "modifier": "serving"
+        },
+        {
+          "usda_portion_id": 82316,
+          "modifier": "cup large chips"
+        },
+        {
+          "usda_portion_id": 82317,
+          "modifier": "cup mini chips"
+        },
+        {
+          "usda_portion_id": 82318,
+          "modifier": "oz (approx 60 pcs)"
+        },
+        {
+          "usda_portion_id": 82319,
+          "modifier": "cup chips (6 oz package)"
+        }
+      ]
+    },
+    "savory salt": {
+      "status": "unresolved"
+    },
+    "sage": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170935,
+      "portions": [
+        {
+          "usda_portion_id": 87570,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 87571,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "russet potatoes": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170030,
+      "portions": [
+        {
+          "usda_portion_id": 85933,
+          "modifier": "potato large (3\" to 4-1/4\" dia."
+        },
+        {
+          "usda_portion_id": 85934,
+          "modifier": "potato medium (2-1/4\" to 3-1/4\" dia.)"
+        },
+        {
+          "usda_portion_id": 85935,
+          "modifier": "potato small (1-3/4\" to 2-1/2\" dia.)"
+        }
+      ]
+    },
+    "ribs removed": {
+      "status": "unresolved"
+    },
+    "red wine vinegar": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172240,
+      "portions": [
+        {
+          "usda_portion_id": 90142,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 90143,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 90144,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "potatoes": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170026,
+          "portions": [
+            {
+              "usda_portion_id": 85917,
+              "modifier": "cup, diced"
+            },
+            {
+              "usda_portion_id": 85918,
+              "modifier": "Potato large (3\" to 4-1/4\" dia)"
+            },
+            {
+              "usda_portion_id": 85919,
+              "modifier": "Potato medium (2-1/4\" to 3-1/4\" dia)"
+            },
+            {
+              "usda_portion_id": 85920,
+              "modifier": "Potato small (1-3/4\" to 2-1/2\" dia)"
+            }
+          ]
+        }
+      }
+    },
+    "potato starch": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168446,
+      "portions": [
+        {
+          "usda_portion_id": 83110,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "pinto beans": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "cooked": {
+          "source_id": 173796,
+          "portions": [
+            {
+              "usda_portion_id": 93268,
+              "modifier": "cup"
+            }
+          ]
+        }
+      }
+    },
+    "peas": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 170419,
+          "portions": [
+            {
+              "usda_portion_id": 86613,
+              "modifier": "cup"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 170105,
+          "portions": [
+            {
+              "usda_portion_id": 86056,
+              "modifier": "cup"
+            },
+            {
+              "usda_portion_id": 86057,
+              "modifier": "package (10 oz) yields"
+            }
+          ]
+        }
+      }
+    },
+    "parmigiano reggiano": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170848,
+      "portions": [
+        {
+          "usda_portion_id": 87387,
+          "modifier": "oz"
+        },
+        {
+          "usda_portion_id": 87388,
+          "modifier": "cubic inch"
+        },
+        {
+          "usda_portion_id": 87389,
+          "modifier": "package (5 oz)"
+        }
+      ]
+    },
+    "molasses": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168820,
+      "portions": [
+        {
+          "usda_portion_id": 83829,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 83830,
+          "modifier": "serving 1 tbsp"
+        }
+      ]
+    },
+    "mexican cheese blend": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171288,
+      "portions": [
+        {
+          "usda_portion_id": 88380,
+          "modifier": "cup shredded"
+        }
+      ]
+    },
+    "memphis dust": {
+      "status": "unresolved"
+    },
+    "lime": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168155,
+      "portions": [
+        {
+          "usda_portion_id": 82570,
+          "modifier": "fruit (2\" dia)"
+        },
+        {
+          "usda_portion_id": 82571,
+          "modifier": "NLEA serving"
+        }
+      ]
+    },
+    "light soy sauce": {
+      "status": "unresolved"
+    },
+    "lard": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171401,
+      "portions": [
+        {
+          "usda_portion_id": 88638,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 88639,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "kosher salt and black pepper": {
+      "status": "unresolved"
+    },
+    "ketchup": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168556,
+      "portions": [
+        {
+          "usda_portion_id": 83301,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 83302,
+          "modifier": "packet"
+        },
+        {
+          "usda_portion_id": 83303,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "italian sausage": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 171631,
+          "portions": [
+            {
+              "usda_portion_id": 89105,
+              "modifier": "link"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 174586,
+          "portions": [
+            {
+              "usda_portion_id": 94630,
+              "modifier": "link"
+            }
+          ]
+        }
+      }
+    },
+    "italian parsley": {
+      "status": "unresolved"
+    },
+    "green chiles": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 168577,
+      "portions": [
+        {
+          "usda_portion_id": 83358,
+          "modifier": "cup"
+        }
+      ]
+    },
+    "green beans": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 169961,
+          "portions": [
+            {
+              "usda_portion_id": 85758,
+              "modifier": "cup 1/2\" pieces"
+            },
+            {
+              "usda_portion_id": 85759,
+              "modifier": "beans (4\" long)"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 169325,
+          "portions": [
+            {
+              "usda_portion_id": 84656,
+              "modifier": "cup"
+            }
+          ]
+        }
+      }
+    },
+    "gelatin": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169599,
+      "portions": [
+        {
+          "usda_portion_id": 85198,
+          "modifier": "envelope (1 tbsp)"
+        },
+        {
+          "usda_portion_id": 85199,
+          "modifier": "package (1 oz)"
+        }
+      ]
+    },
+    "fennel seeds": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 171323,
+      "portions": [
+        {
+          "usda_portion_id": 88435,
+          "modifier": "tsp, whole"
+        },
+        {
+          "usda_portion_id": 88436,
+          "modifier": "tbsp, whole"
+        }
+      ]
+    },
+    "dried spaghetti": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 168937,
+          "portions": [
+            {
+              "usda_portion_id": 84025,
+              "modifier": "oz"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168934,
+          "portions": [
+            {
+              "usda_portion_id": 84022,
+              "modifier": "cup"
+            }
+          ]
+        }
+      }
+    },
+    "dried parsley": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170930,
+      "portions": [
+        {
+          "usda_portion_id": 87558,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 87559,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "dried marjoram": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170928,
+      "portions": [
+        {
+          "usda_portion_id": 87554,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 87555,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "distilled white vinegar": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 172237,
+      "portions": [
+        {
+          "usda_portion_id": 90136,
+          "modifier": "tbsp"
+        },
+        {
+          "usda_portion_id": 90137,
+          "modifier": "cup"
+        },
+        {
+          "usda_portion_id": 90138,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "dijon mustard": {
+      "status": "unresolved"
+    },
+    "curry powder": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 170924,
+      "portions": [
+        {
+          "usda_portion_id": 87546,
+          "modifier": "tsp"
+        },
+        {
+          "usda_portion_id": 87547,
+          "modifier": "tbsp"
+        }
+      ]
+    },
+    "cream of tartar": {
+      "status": "unresolved"
+    },
+    "confectioners sugar": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 169656,
+      "portions": [
+        {
+          "usda_portion_id": 85290,
+          "modifier": "cup unsifted"
+        },
+        {
+          "usda_portion_id": 85291,
+          "modifier": "cup sifted"
+        },
+        {
+          "usda_portion_id": 85292,
+          "modifier": "tbsp unsifted"
+        },
+        {
+          "usda_portion_id": 85293,
+          "modifier": "tsp"
+        }
+      ]
+    },
+    "chicken leg meat": {
+      "status": "unresolved"
+    },
+    "cauliflower": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "state_mappings": {
+        "raw": {
+          "source_id": 169986,
+          "portions": [
+            {
+              "usda_portion_id": 85818,
+              "modifier": "cup chopped (1/2\" pieces)"
+            },
+            {
+              "usda_portion_id": 85819,
+              "modifier": "floweret"
+            },
+            {
+              "usda_portion_id": 85820,
+              "modifier": "head large (6-7\" dia.)"
+            },
+            {
+              "usda_portion_id": 85821,
+              "modifier": "head medium (5-6\" dia.)"
+            },
+            {
+              "usda_portion_id": 85822,
+              "modifier": "head small (4\" dia.)"
+            }
+          ]
+        },
+        "cooked": {
+          "source_id": 168520,
+          "portions": [
+            {
+              "usda_portion_id": 83234,
+              "modifier": "cup (1\" pieces)"
+            },
+            {
+              "usda_portion_id": 83235,
+              "modifier": "flowerets"
+            }
+          ]
+        }
+      }
+    },
+    "bread crumbs": {
+      "status": "approved",
+      "source": "usda_legacy",
+      "source_id": 174928,
+      "portions": [
+        {
+          "usda_portion_id": 95193,
+          "modifier": "oz"
+        },
+        {
+          "usda_portion_id": 95194,
+          "modifier": "cup"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1825 @@
+{
+  "source": "usda_food_portions",
+  "portions": [
+    {
+      "usda_portion_id": 81654,
+      "fdc_id": 167568,
+      "modifier": "oz square Bakers"
+    },
+    {
+      "usda_portion_id": 81655,
+      "fdc_id": 167568,
+      "modifier": "cup, grated"
+    },
+    {
+      "usda_portion_id": 81656,
+      "fdc_id": 167568,
+      "modifier": "oz Hersheys"
+    },
+    {
+      "usda_portion_id": 81865,
+      "fdc_id": 167736,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 81866,
+      "fdc_id": 167736,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 81867,
+      "fdc_id": 167737,
+      "modifier": "tablespoon"
+    },
+    {
+      "usda_portion_id": 81868,
+      "fdc_id": 167737,
+      "modifier": "teaspoon"
+    },
+    {
+      "usda_portion_id": 81887,
+      "fdc_id": 167747,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 81888,
+      "fdc_id": 167747,
+      "modifier": "fl oz"
+    },
+    {
+      "usda_portion_id": 81889,
+      "fdc_id": 167747,
+      "modifier": "lemon yields"
+    },
+    {
+      "usda_portion_id": 81890,
+      "fdc_id": 167747,
+      "modifier": "wedge yields"
+    },
+    {
+      "usda_portion_id": 82315,
+      "fdc_id": 167976,
+      "modifier": "serving"
+    },
+    {
+      "usda_portion_id": 82316,
+      "fdc_id": 167976,
+      "modifier": "cup large chips"
+    },
+    {
+      "usda_portion_id": 82317,
+      "fdc_id": 167976,
+      "modifier": "cup mini chips"
+    },
+    {
+      "usda_portion_id": 82318,
+      "fdc_id": 167976,
+      "modifier": "oz (approx 60 pcs)"
+    },
+    {
+      "usda_portion_id": 82319,
+      "fdc_id": 167976,
+      "modifier": "cup chips (6 oz package)"
+    },
+    {
+      "usda_portion_id": 82570,
+      "fdc_id": 168155,
+      "modifier": "fruit (2\" dia)"
+    },
+    {
+      "usda_portion_id": 82571,
+      "fdc_id": 168155,
+      "modifier": "NLEA serving"
+    },
+    {
+      "usda_portion_id": 82575,
+      "fdc_id": 168157,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 82576,
+      "fdc_id": 168157,
+      "modifier": "fl oz"
+    },
+    {
+      "usda_portion_id": 82890,
+      "fdc_id": 168322,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 82891,
+      "fdc_id": 168322,
+      "modifier": "slice"
+    },
+    {
+      "usda_portion_id": 82982,
+      "fdc_id": 168372,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 82984,
+      "fdc_id": 168374,
+      "modifier": "oz grilled patties"
+    },
+    {
+      "usda_portion_id": 82998,
+      "fdc_id": 168382,
+      "modifier": "slice"
+    },
+    {
+      "usda_portion_id": 82999,
+      "fdc_id": 168382,
+      "modifier": "package"
+    },
+    {
+      "usda_portion_id": 83110,
+      "fdc_id": 168446,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83132,
+      "fdc_id": 168462,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83133,
+      "fdc_id": 168462,
+      "modifier": "bunch"
+    },
+    {
+      "usda_portion_id": 83134,
+      "fdc_id": 168462,
+      "modifier": "leaf"
+    },
+    {
+      "usda_portion_id": 83135,
+      "fdc_id": 168462,
+      "modifier": "package (10 oz)"
+    },
+    {
+      "usda_portion_id": 83221,
+      "fdc_id": 168513,
+      "modifier": "sprout"
+    },
+    {
+      "usda_portion_id": 83222,
+      "fdc_id": 168513,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83223,
+      "fdc_id": 168514,
+      "modifier": "cup, shredded"
+    },
+    {
+      "usda_portion_id": 83224,
+      "fdc_id": 168514,
+      "modifier": "head"
+    },
+    {
+      "usda_portion_id": 83234,
+      "fdc_id": 168520,
+      "modifier": "cup (1\" pieces)"
+    },
+    {
+      "usda_portion_id": 83235,
+      "fdc_id": 168520,
+      "modifier": "flowerets"
+    },
+    {
+      "usda_portion_id": 83260,
+      "fdc_id": 168537,
+      "modifier": "cup pieces"
+    },
+    {
+      "usda_portion_id": 83261,
+      "fdc_id": 168537,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 83262,
+      "fdc_id": 168537,
+      "modifier": "mushroom"
+    },
+    {
+      "usda_portion_id": 83295,
+      "fdc_id": 168550,
+      "modifier": "cup chopped"
+    },
+    {
+      "usda_portion_id": 83301,
+      "fdc_id": 168556,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 83302,
+      "fdc_id": 168556,
+      "modifier": "packet"
+    },
+    {
+      "usda_portion_id": 83303,
+      "fdc_id": 168556,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83358,
+      "fdc_id": 168577,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83829,
+      "fdc_id": 168820,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83830,
+      "fdc_id": 168820,
+      "modifier": "serving 1 tbsp"
+    },
+    {
+      "usda_portion_id": 83854,
+      "fdc_id": 168833,
+      "modifier": "tsp unpacked"
+    },
+    {
+      "usda_portion_id": 83855,
+      "fdc_id": 168833,
+      "modifier": "cup packed"
+    },
+    {
+      "usda_portion_id": 83856,
+      "fdc_id": 168833,
+      "modifier": "cup unpacked"
+    },
+    {
+      "usda_portion_id": 83857,
+      "fdc_id": 168833,
+      "modifier": "tsp packed"
+    },
+    {
+      "usda_portion_id": 83858,
+      "fdc_id": 168833,
+      "modifier": "tsp brownulated"
+    },
+    {
+      "usda_portion_id": 83864,
+      "fdc_id": 168837,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83865,
+      "fdc_id": 168837,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 83944,
+      "fdc_id": 168894,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83946,
+      "fdc_id": 168896,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 83954,
+      "fdc_id": 168903,
+      "modifier": "cup spiral shaped"
+    },
+    {
+      "usda_portion_id": 83955,
+      "fdc_id": 168903,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 83956,
+      "fdc_id": 168904,
+      "modifier": "cup spiral shaped"
+    },
+    {
+      "usda_portion_id": 84022,
+      "fdc_id": 168934,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 84025,
+      "fdc_id": 168937,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 84478,
+      "fdc_id": 169230,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 84479,
+      "fdc_id": 169230,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 84480,
+      "fdc_id": 169230,
+      "modifier": "clove"
+    },
+    {
+      "usda_portion_id": 84481,
+      "fdc_id": 169230,
+      "modifier": "cloves"
+    },
+    {
+      "usda_portion_id": 84482,
+      "fdc_id": 169231,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 84483,
+      "fdc_id": 169231,
+      "modifier": "cup slices (1\" dia)"
+    },
+    {
+      "usda_portion_id": 84484,
+      "fdc_id": 169231,
+      "modifier": "slices (1\" dia)"
+    },
+    {
+      "usda_portion_id": 84526,
+      "fdc_id": 169251,
+      "modifier": "cup, pieces or slices"
+    },
+    {
+      "usda_portion_id": 84527,
+      "fdc_id": 169251,
+      "modifier": "cup, whole"
+    },
+    {
+      "usda_portion_id": 84528,
+      "fdc_id": 169251,
+      "modifier": "large"
+    },
+    {
+      "usda_portion_id": 84529,
+      "fdc_id": 169251,
+      "modifier": "medium"
+    },
+    {
+      "usda_portion_id": 84530,
+      "fdc_id": 169251,
+      "modifier": "slice"
+    },
+    {
+      "usda_portion_id": 84531,
+      "fdc_id": 169251,
+      "modifier": "small"
+    },
+    {
+      "usda_portion_id": 84532,
+      "fdc_id": 169251,
+      "modifier": "cup pieces"
+    },
+    {
+      "usda_portion_id": 84656,
+      "fdc_id": 169325,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 84665,
+      "fdc_id": 169335,
+      "modifier": "cup, shredded"
+    },
+    {
+      "usda_portion_id": 84666,
+      "fdc_id": 169335,
+      "modifier": "head"
+    },
+    {
+      "usda_portion_id": 84671,
+      "fdc_id": 169339,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 84672,
+      "fdc_id": 169339,
+      "modifier": "cup slices"
+    },
+    {
+      "usda_portion_id": 84673,
+      "fdc_id": 169339,
+      "modifier": "carrot"
+    },
+    {
+      "usda_portion_id": 84677,
+      "fdc_id": 169342,
+      "modifier": "cup, diced"
+    },
+    {
+      "usda_portion_id": 84678,
+      "fdc_id": 169342,
+      "modifier": "stalks"
+    },
+    {
+      "usda_portion_id": 85188,
+      "fdc_id": 169594,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 85189,
+      "fdc_id": 169594,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 85198,
+      "fdc_id": 169599,
+      "modifier": "envelope (1 tbsp)"
+    },
+    {
+      "usda_portion_id": 85199,
+      "fdc_id": 169599,
+      "modifier": "package (1 oz)"
+    },
+    {
+      "usda_portion_id": 85264,
+      "fdc_id": 169640,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 85265,
+      "fdc_id": 169640,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 85266,
+      "fdc_id": 169640,
+      "modifier": "packet (0.5 oz)"
+    },
+    {
+      "usda_portion_id": 85286,
+      "fdc_id": 169655,
+      "modifier": "serving packet"
+    },
+    {
+      "usda_portion_id": 85287,
+      "fdc_id": 169655,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 85288,
+      "fdc_id": 169655,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 85289,
+      "fdc_id": 169655,
+      "modifier": "serving 1 cube"
+    },
+    {
+      "usda_portion_id": 85290,
+      "fdc_id": 169656,
+      "modifier": "cup unsifted"
+    },
+    {
+      "usda_portion_id": 85291,
+      "fdc_id": 169656,
+      "modifier": "cup sifted"
+    },
+    {
+      "usda_portion_id": 85292,
+      "fdc_id": 169656,
+      "modifier": "tbsp unsifted"
+    },
+    {
+      "usda_portion_id": 85293,
+      "fdc_id": 169656,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 85370,
+      "fdc_id": 169698,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 85577,
+      "fdc_id": 169867,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 85578,
+      "fdc_id": 169867,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 85579,
+      "fdc_id": 169867,
+      "modifier": "teaspoon"
+    },
+    {
+      "usda_portion_id": 85751,
+      "fdc_id": 169957,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 85752,
+      "fdc_id": 169957,
+      "modifier": "package (12 oz)"
+    },
+    {
+      "usda_portion_id": 85758,
+      "fdc_id": 169961,
+      "modifier": "cup 1/2\" pieces"
+    },
+    {
+      "usda_portion_id": 85759,
+      "fdc_id": 169961,
+      "modifier": "beans (4\" long)"
+    },
+    {
+      "usda_portion_id": 85818,
+      "fdc_id": 169986,
+      "modifier": "cup chopped (1/2\" pieces)"
+    },
+    {
+      "usda_portion_id": 85819,
+      "fdc_id": 169986,
+      "modifier": "floweret"
+    },
+    {
+      "usda_portion_id": 85820,
+      "fdc_id": 169986,
+      "modifier": "head large (6-7\" dia.)"
+    },
+    {
+      "usda_portion_id": 85821,
+      "fdc_id": 169986,
+      "modifier": "head medium (5-6\" dia.)"
+    },
+    {
+      "usda_portion_id": 85822,
+      "fdc_id": 169986,
+      "modifier": "head small (4\" dia.)"
+    },
+    {
+      "usda_portion_id": 85824,
+      "fdc_id": 169988,
+      "modifier": "cup chopped"
+    },
+    {
+      "usda_portion_id": 85825,
+      "fdc_id": 169988,
+      "modifier": "NLEA serving"
+    },
+    {
+      "usda_portion_id": 85826,
+      "fdc_id": 169988,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 85827,
+      "fdc_id": 169988,
+      "modifier": "stalk, large (11\"-12\" long)"
+    },
+    {
+      "usda_portion_id": 85828,
+      "fdc_id": 169988,
+      "modifier": "stalk, medium (7-1/2\" - 8\" long)"
+    },
+    {
+      "usda_portion_id": 85829,
+      "fdc_id": 169988,
+      "modifier": "stalk, small (5\" long)"
+    },
+    {
+      "usda_portion_id": 85830,
+      "fdc_id": 169988,
+      "modifier": "strip (4\" long)"
+    },
+    {
+      "usda_portion_id": 85855,
+      "fdc_id": 170000,
+      "modifier": "cup, chopped"
+    },
+    {
+      "usda_portion_id": 85856,
+      "fdc_id": 170000,
+      "modifier": "cup, sliced"
+    },
+    {
+      "usda_portion_id": 85857,
+      "fdc_id": 170000,
+      "modifier": "tbsp chopped"
+    },
+    {
+      "usda_portion_id": 85858,
+      "fdc_id": 170000,
+      "modifier": "large"
+    },
+    {
+      "usda_portion_id": 85859,
+      "fdc_id": 170000,
+      "modifier": "slice, large (1/4\" thick)"
+    },
+    {
+      "usda_portion_id": 85860,
+      "fdc_id": 170000,
+      "modifier": "medium (2-1/2\" dia)"
+    },
+    {
+      "usda_portion_id": 85861,
+      "fdc_id": 170000,
+      "modifier": "slice, medium (1/8\" thick)"
+    },
+    {
+      "usda_portion_id": 85862,
+      "fdc_id": 170000,
+      "modifier": "small"
+    },
+    {
+      "usda_portion_id": 85863,
+      "fdc_id": 170000,
+      "modifier": "slice, thin"
+    },
+    {
+      "usda_portion_id": 85864,
+      "fdc_id": 170000,
+      "modifier": "rings"
+    },
+    {
+      "usda_portion_id": 85877,
+      "fdc_id": 170004,
+      "modifier": "cup chopped"
+    },
+    {
+      "usda_portion_id": 85878,
+      "fdc_id": 170005,
+      "modifier": "cup, chopped"
+    },
+    {
+      "usda_portion_id": 85879,
+      "fdc_id": 170005,
+      "modifier": "tbsp chopped"
+    },
+    {
+      "usda_portion_id": 85880,
+      "fdc_id": 170005,
+      "modifier": "large"
+    },
+    {
+      "usda_portion_id": 85881,
+      "fdc_id": 170005,
+      "modifier": "medium (4-1/8\" long)"
+    },
+    {
+      "usda_portion_id": 85882,
+      "fdc_id": 170005,
+      "modifier": "small (3\" long)"
+    },
+    {
+      "usda_portion_id": 85886,
+      "fdc_id": 170008,
+      "modifier": "NLEA serving"
+    },
+    {
+      "usda_portion_id": 85887,
+      "fdc_id": 170008,
+      "modifier": "onion"
+    },
+    {
+      "usda_portion_id": 85917,
+      "fdc_id": 170026,
+      "modifier": "cup, diced"
+    },
+    {
+      "usda_portion_id": 85918,
+      "fdc_id": 170026,
+      "modifier": "Potato large (3\" to 4-1/4\" dia)"
+    },
+    {
+      "usda_portion_id": 85919,
+      "fdc_id": 170026,
+      "modifier": "Potato medium (2-1/4\" to 3-1/4\" dia)"
+    },
+    {
+      "usda_portion_id": 85920,
+      "fdc_id": 170026,
+      "modifier": "Potato small (1-3/4\" to 2-1/2\" dia)"
+    },
+    {
+      "usda_portion_id": 85933,
+      "fdc_id": 170030,
+      "modifier": "potato large (3\" to 4-1/4\" dia."
+    },
+    {
+      "usda_portion_id": 85934,
+      "fdc_id": 170030,
+      "modifier": "potato medium (2-1/4\" to 3-1/4\" dia.)"
+    },
+    {
+      "usda_portion_id": 85935,
+      "fdc_id": 170030,
+      "modifier": "potato small (1-3/4\" to 2-1/2\" dia.)"
+    },
+    {
+      "usda_portion_id": 85961,
+      "fdc_id": 170050,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 85962,
+      "fdc_id": 170050,
+      "modifier": "medium"
+    },
+    {
+      "usda_portion_id": 86056,
+      "fdc_id": 170105,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 86057,
+      "fdc_id": 170105,
+      "modifier": "package (10 oz) yields"
+    },
+    {
+      "usda_portion_id": 86062,
+      "fdc_id": 170108,
+      "modifier": "cup, chopped"
+    },
+    {
+      "usda_portion_id": 86063,
+      "fdc_id": 170108,
+      "modifier": "cup, sliced"
+    },
+    {
+      "usda_portion_id": 86064,
+      "fdc_id": 170108,
+      "modifier": "tablespoon"
+    },
+    {
+      "usda_portion_id": 86065,
+      "fdc_id": 170108,
+      "modifier": "large (2-1/4 per pound, approx 3-3/4\" long, 3\" dia.)"
+    },
+    {
+      "usda_portion_id": 86066,
+      "fdc_id": 170108,
+      "modifier": "medium (approx 2-3/4\" long, 2-1/2 dia.)"
+    },
+    {
+      "usda_portion_id": 86067,
+      "fdc_id": 170108,
+      "modifier": "small"
+    },
+    {
+      "usda_portion_id": 86068,
+      "fdc_id": 170108,
+      "modifier": "ring (3\" dia., 1/4\" thick)"
+    },
+    {
+      "usda_portion_id": 86069,
+      "fdc_id": 170109,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 86070,
+      "fdc_id": 170109,
+      "modifier": "pepper"
+    },
+    {
+      "usda_portion_id": 86071,
+      "fdc_id": 170109,
+      "modifier": "cup, chopped"
+    },
+    {
+      "usda_portion_id": 86188,
+      "fdc_id": 170182,
+      "modifier": "cup, chopped"
+    },
+    {
+      "usda_portion_id": 86189,
+      "fdc_id": 170182,
+      "modifier": "cup, halves"
+    },
+    {
+      "usda_portion_id": 86190,
+      "fdc_id": 170182,
+      "modifier": "oz (19 halves)"
+    },
+    {
+      "usda_portion_id": 86191,
+      "fdc_id": 170183,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 86201,
+      "fdc_id": 170187,
+      "modifier": "cup, chopped"
+    },
+    {
+      "usda_portion_id": 86202,
+      "fdc_id": 170187,
+      "modifier": "cup, ground"
+    },
+    {
+      "usda_portion_id": 86203,
+      "fdc_id": 170187,
+      "modifier": "cup, in shell, edible yield (7 nuts)"
+    },
+    {
+      "usda_portion_id": 86204,
+      "fdc_id": 170187,
+      "modifier": "cup shelled (50 halves)"
+    },
+    {
+      "usda_portion_id": 86205,
+      "fdc_id": 170187,
+      "modifier": "cup pieces or chips"
+    },
+    {
+      "usda_portion_id": 86206,
+      "fdc_id": 170187,
+      "modifier": "oz (14 halves)"
+    },
+    {
+      "usda_portion_id": 86540,
+      "fdc_id": 170383,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 86541,
+      "fdc_id": 170383,
+      "modifier": "sprout"
+    },
+    {
+      "usda_portion_id": 86555,
+      "fdc_id": 170393,
+      "modifier": "cup chopped"
+    },
+    {
+      "usda_portion_id": 86556,
+      "fdc_id": 170393,
+      "modifier": "cup grated"
+    },
+    {
+      "usda_portion_id": 86557,
+      "fdc_id": 170393,
+      "modifier": "cup strips or slices"
+    },
+    {
+      "usda_portion_id": 86558,
+      "fdc_id": 170393,
+      "modifier": "large (7-1/4\" to 8-/1/2\" long)"
+    },
+    {
+      "usda_portion_id": 86559,
+      "fdc_id": 170393,
+      "modifier": "medium"
+    },
+    {
+      "usda_portion_id": 86560,
+      "fdc_id": 170393,
+      "modifier": "small (5-1/2\" long)"
+    },
+    {
+      "usda_portion_id": 86561,
+      "fdc_id": 170393,
+      "modifier": "slice"
+    },
+    {
+      "usda_portion_id": 86562,
+      "fdc_id": 170393,
+      "modifier": "strip large (3\" long)"
+    },
+    {
+      "usda_portion_id": 86563,
+      "fdc_id": 170393,
+      "modifier": "strip medium"
+    },
+    {
+      "usda_portion_id": 86613,
+      "fdc_id": 170419,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 86623,
+      "fdc_id": 170427,
+      "modifier": "cup, chopped"
+    },
+    {
+      "usda_portion_id": 86624,
+      "fdc_id": 170427,
+      "modifier": "cup, sliced"
+    },
+    {
+      "usda_portion_id": 86625,
+      "fdc_id": 170427,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 86626,
+      "fdc_id": 170427,
+      "modifier": "large (2-1/4 per lb, approx 3-3/4\" long, 3\" dia)"
+    },
+    {
+      "usda_portion_id": 86627,
+      "fdc_id": 170427,
+      "modifier": "medium (approx 2-3/4\" long, 2-1/2\" dia)"
+    },
+    {
+      "usda_portion_id": 86628,
+      "fdc_id": 170427,
+      "modifier": "ring (3\" dia, 1/4\" thick)"
+    },
+    {
+      "usda_portion_id": 86629,
+      "fdc_id": 170427,
+      "modifier": "small"
+    },
+    {
+      "usda_portion_id": 86630,
+      "fdc_id": 170427,
+      "modifier": "strips"
+    },
+    {
+      "usda_portion_id": 86681,
+      "fdc_id": 170457,
+      "modifier": "cup cherry tomatoes"
+    },
+    {
+      "usda_portion_id": 86682,
+      "fdc_id": 170457,
+      "modifier": "cup, chopped or sliced"
+    },
+    {
+      "usda_portion_id": 86683,
+      "fdc_id": 170457,
+      "modifier": "Italian tomato"
+    },
+    {
+      "usda_portion_id": 86684,
+      "fdc_id": 170457,
+      "modifier": "cherry"
+    },
+    {
+      "usda_portion_id": 86685,
+      "fdc_id": 170457,
+      "modifier": "large whole (3\" dia)"
+    },
+    {
+      "usda_portion_id": 86686,
+      "fdc_id": 170457,
+      "modifier": "medium whole (2-3/5\" dia)"
+    },
+    {
+      "usda_portion_id": 86687,
+      "fdc_id": 170457,
+      "modifier": "slice, medium (1/4\" thick)"
+    },
+    {
+      "usda_portion_id": 86688,
+      "fdc_id": 170457,
+      "modifier": "plum tomato"
+    },
+    {
+      "usda_portion_id": 86689,
+      "fdc_id": 170457,
+      "modifier": "small whole (2-2/5\" dia)"
+    },
+    {
+      "usda_portion_id": 86690,
+      "fdc_id": 170457,
+      "modifier": "slice, thick/large (1/2\" thick)"
+    },
+    {
+      "usda_portion_id": 86691,
+      "fdc_id": 170457,
+      "modifier": "wedge (1/4 of medium tomato)"
+    },
+    {
+      "usda_portion_id": 86692,
+      "fdc_id": 170457,
+      "modifier": "slice, thin/small"
+    },
+    {
+      "usda_portion_id": 86693,
+      "fdc_id": 170457,
+      "modifier": "NLEA serving"
+    },
+    {
+      "usda_portion_id": 86700,
+      "fdc_id": 170460,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 86701,
+      "fdc_id": 170460,
+      "modifier": "can (29 oz) (401 x 411)"
+    },
+    {
+      "usda_portion_id": 86767,
+      "fdc_id": 170499,
+      "modifier": "tbsp chopped"
+    },
+    {
+      "usda_portion_id": 86769,
+      "fdc_id": 170501,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 86811,
+      "fdc_id": 170531,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 86823,
+      "fdc_id": 170541,
+      "modifier": "cup, mashed"
+    },
+    {
+      "usda_portion_id": 86824,
+      "fdc_id": 170541,
+      "modifier": "medium"
+    },
+    {
+      "usda_portion_id": 86921,
+      "fdc_id": 170594,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 87387,
+      "fdc_id": 170848,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 87388,
+      "fdc_id": 170848,
+      "modifier": "cubic inch"
+    },
+    {
+      "usda_portion_id": 87389,
+      "fdc_id": 170848,
+      "modifier": "package (5 oz)"
+    },
+    {
+      "usda_portion_id": 87432,
+      "fdc_id": 170859,
+      "modifier": "cup, whipped"
+    },
+    {
+      "usda_portion_id": 87433,
+      "fdc_id": 170859,
+      "modifier": "cup, fluid (yields 2 cups whipped)"
+    },
+    {
+      "usda_portion_id": 87434,
+      "fdc_id": 170859,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87435,
+      "fdc_id": 170859,
+      "modifier": "fl oz"
+    },
+    {
+      "usda_portion_id": 87520,
+      "fdc_id": 170899,
+      "modifier": "slice (2/3 oz)"
+    },
+    {
+      "usda_portion_id": 87521,
+      "fdc_id": 170899,
+      "modifier": "slice (3/4 oz)"
+    },
+    {
+      "usda_portion_id": 87522,
+      "fdc_id": 170899,
+      "modifier": "slice (1 oz)"
+    },
+    {
+      "usda_portion_id": 87523,
+      "fdc_id": 170900,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 87532,
+      "fdc_id": 170917,
+      "modifier": "tsp, crumbled"
+    },
+    {
+      "usda_portion_id": 87533,
+      "fdc_id": 170917,
+      "modifier": "tbsp, crumbled"
+    },
+    {
+      "usda_portion_id": 87542,
+      "fdc_id": 170922,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 87543,
+      "fdc_id": 170922,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87544,
+      "fdc_id": 170923,
+      "modifier": "tsp, whole"
+    },
+    {
+      "usda_portion_id": 87545,
+      "fdc_id": 170923,
+      "modifier": "tbsp, whole"
+    },
+    {
+      "usda_portion_id": 87546,
+      "fdc_id": 170924,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 87547,
+      "fdc_id": 170924,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87550,
+      "fdc_id": 170926,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 87551,
+      "fdc_id": 170926,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87554,
+      "fdc_id": 170928,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 87555,
+      "fdc_id": 170928,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87556,
+      "fdc_id": 170929,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 87557,
+      "fdc_id": 170929,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87558,
+      "fdc_id": 170930,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 87559,
+      "fdc_id": 170930,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87560,
+      "fdc_id": 170931,
+      "modifier": "tsp, ground"
+    },
+    {
+      "usda_portion_id": 87561,
+      "fdc_id": 170931,
+      "modifier": "tbsp, ground"
+    },
+    {
+      "usda_portion_id": 87562,
+      "fdc_id": 170931,
+      "modifier": "tsp, whole"
+    },
+    {
+      "usda_portion_id": 87563,
+      "fdc_id": 170931,
+      "modifier": "dash"
+    },
+    {
+      "usda_portion_id": 87566,
+      "fdc_id": 170933,
+      "modifier": "tsp, ground"
+    },
+    {
+      "usda_portion_id": 87567,
+      "fdc_id": 170933,
+      "modifier": "tbsp, ground"
+    },
+    {
+      "usda_portion_id": 87570,
+      "fdc_id": 170935,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 87571,
+      "fdc_id": 170935,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 87578,
+      "fdc_id": 170938,
+      "modifier": "tsp, leaves"
+    },
+    {
+      "usda_portion_id": 87579,
+      "fdc_id": 170938,
+      "modifier": "tbsp, leaves"
+    },
+    {
+      "usda_portion_id": 87580,
+      "fdc_id": 170938,
+      "modifier": "tsp, ground"
+    },
+    {
+      "usda_portion_id": 87581,
+      "fdc_id": 170938,
+      "modifier": "tbsp, ground"
+    },
+    {
+      "usda_portion_id": 87777,
+      "fdc_id": 171016,
+      "modifier": "tablespoon"
+    },
+    {
+      "usda_portion_id": 87778,
+      "fdc_id": 171016,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 87779,
+      "fdc_id": 171016,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 88261,
+      "fdc_id": 171247,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 88262,
+      "fdc_id": 171247,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88263,
+      "fdc_id": 171247,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 88290,
+      "fdc_id": 171255,
+      "modifier": "fl oz"
+    },
+    {
+      "usda_portion_id": 88291,
+      "fdc_id": 171255,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88292,
+      "fdc_id": 171255,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 88293,
+      "fdc_id": 171255,
+      "modifier": "container, individual (.5 fl oz)"
+    },
+    {
+      "usda_portion_id": 88296,
+      "fdc_id": 171257,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88297,
+      "fdc_id": 171257,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 88374,
+      "fdc_id": 171287,
+      "modifier": "large"
+    },
+    {
+      "usda_portion_id": 88375,
+      "fdc_id": 171287,
+      "modifier": "extra large"
+    },
+    {
+      "usda_portion_id": 88376,
+      "fdc_id": 171287,
+      "modifier": "jumbo"
+    },
+    {
+      "usda_portion_id": 88377,
+      "fdc_id": 171287,
+      "modifier": "cup (4.86 large eggs)"
+    },
+    {
+      "usda_portion_id": 88378,
+      "fdc_id": 171287,
+      "modifier": "medium"
+    },
+    {
+      "usda_portion_id": 88379,
+      "fdc_id": 171287,
+      "modifier": "small"
+    },
+    {
+      "usda_portion_id": 88380,
+      "fdc_id": 171288,
+      "modifier": "cup shredded"
+    },
+    {
+      "usda_portion_id": 88419,
+      "fdc_id": 171316,
+      "modifier": "tsp, whole"
+    },
+    {
+      "usda_portion_id": 88420,
+      "fdc_id": 171316,
+      "modifier": "tbsp, whole"
+    },
+    {
+      "usda_portion_id": 88427,
+      "fdc_id": 171319,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 88428,
+      "fdc_id": 171319,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88429,
+      "fdc_id": 171320,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 88430,
+      "fdc_id": 171320,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88431,
+      "fdc_id": 171321,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 88432,
+      "fdc_id": 171321,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88435,
+      "fdc_id": 171323,
+      "modifier": "tsp, whole"
+    },
+    {
+      "usda_portion_id": 88436,
+      "fdc_id": 171323,
+      "modifier": "tbsp, whole"
+    },
+    {
+      "usda_portion_id": 88441,
+      "fdc_id": 171326,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 88442,
+      "fdc_id": 171326,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88445,
+      "fdc_id": 171328,
+      "modifier": "tsp, leaves"
+    },
+    {
+      "usda_portion_id": 88446,
+      "fdc_id": 171328,
+      "modifier": "tsp, ground"
+    },
+    {
+      "usda_portion_id": 88447,
+      "fdc_id": 171329,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 88448,
+      "fdc_id": 171329,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88638,
+      "fdc_id": 171401,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 88639,
+      "fdc_id": 171401,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 88667,
+      "fdc_id": 171413,
+      "modifier": "tablespoon"
+    },
+    {
+      "usda_portion_id": 88668,
+      "fdc_id": 171413,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 88669,
+      "fdc_id": 171413,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 89069,
+      "fdc_id": 171609,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 89070,
+      "fdc_id": 171610,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 89071,
+      "fdc_id": 171610,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 89105,
+      "fdc_id": 171631,
+      "modifier": "link"
+    },
+    {
+      "usda_portion_id": 89383,
+      "fdc_id": 171798,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 90043,
+      "fdc_id": 172183,
+      "modifier": "large"
+    },
+    {
+      "usda_portion_id": 90044,
+      "fdc_id": 172183,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90045,
+      "fdc_id": 172184,
+      "modifier": "large"
+    },
+    {
+      "usda_portion_id": 90046,
+      "fdc_id": 172184,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90050,
+      "fdc_id": 172187,
+      "modifier": "large"
+    },
+    {
+      "usda_portion_id": 90051,
+      "fdc_id": 172187,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 90052,
+      "fdc_id": 172187,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90101,
+      "fdc_id": 172217,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90102,
+      "fdc_id": 172217,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 90103,
+      "fdc_id": 172217,
+      "modifier": "fl oz"
+    },
+    {
+      "usda_portion_id": 90104,
+      "fdc_id": 172217,
+      "modifier": "quart"
+    },
+    {
+      "usda_portion_id": 90117,
+      "fdc_id": 172225,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90125,
+      "fdc_id": 172232,
+      "modifier": "leaves"
+    },
+    {
+      "usda_portion_id": 90126,
+      "fdc_id": 172232,
+      "modifier": "tbsp, chopped"
+    },
+    {
+      "usda_portion_id": 90127,
+      "fdc_id": 172232,
+      "modifier": "cup leaves, whole"
+    },
+    {
+      "usda_portion_id": 90132,
+      "fdc_id": 172235,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 90133,
+      "fdc_id": 172235,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 90136,
+      "fdc_id": 172237,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 90137,
+      "fdc_id": 172237,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90138,
+      "fdc_id": 172237,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 90142,
+      "fdc_id": 172240,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 90143,
+      "fdc_id": 172240,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90144,
+      "fdc_id": 172240,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 90145,
+      "fdc_id": 172241,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 90146,
+      "fdc_id": 172241,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 90147,
+      "fdc_id": 172241,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 91437,
+      "fdc_id": 172803,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 91438,
+      "fdc_id": 172803,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 91631,
+      "fdc_id": 172884,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 91636,
+      "fdc_id": 172889,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 91637,
+      "fdc_id": 172889,
+      "modifier": "can (14.5 oz)"
+    },
+    {
+      "usda_portion_id": 91638,
+      "fdc_id": 172889,
+      "modifier": "carton (32 oz)"
+    },
+    {
+      "usda_portion_id": 92066,
+      "fdc_id": 173190,
+      "modifier": "fl oz"
+    },
+    {
+      "usda_portion_id": 92067,
+      "fdc_id": 173190,
+      "modifier": "serving (5 fl oz)"
+    },
+    {
+      "usda_portion_id": 92456,
+      "fdc_id": 173410,
+      "modifier": "pat (1\" sq, 1/3\" high)"
+    },
+    {
+      "usda_portion_id": 92457,
+      "fdc_id": 173410,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 92458,
+      "fdc_id": 173410,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 92459,
+      "fdc_id": 173410,
+      "modifier": "stick"
+    },
+    {
+      "usda_portion_id": 92481,
+      "fdc_id": 173418,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 92482,
+      "fdc_id": 173418,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 92483,
+      "fdc_id": 173418,
+      "modifier": "tbsp, whipped"
+    },
+    {
+      "usda_portion_id": 92484,
+      "fdc_id": 173418,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 92485,
+      "fdc_id": 173418,
+      "modifier": "cubic inch"
+    },
+    {
+      "usda_portion_id": 92486,
+      "fdc_id": 173418,
+      "modifier": "package, small (3 oz)"
+    },
+    {
+      "usda_portion_id": 92537,
+      "fdc_id": 173440,
+      "modifier": "cup, diced"
+    },
+    {
+      "usda_portion_id": 92538,
+      "fdc_id": 173440,
+      "modifier": "cup, shredded"
+    },
+    {
+      "usda_portion_id": 92539,
+      "fdc_id": 173440,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 92540,
+      "fdc_id": 173440,
+      "modifier": "cubic inch"
+    },
+    {
+      "usda_portion_id": 92541,
+      "fdc_id": 173440,
+      "modifier": "slice (1 oz)"
+    },
+    {
+      "usda_portion_id": 92594,
+      "fdc_id": 173468,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 92595,
+      "fdc_id": 173468,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 92596,
+      "fdc_id": 173468,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 92597,
+      "fdc_id": 173468,
+      "modifier": "dash"
+    },
+    {
+      "usda_portion_id": 92608,
+      "fdc_id": 173473,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 92609,
+      "fdc_id": 173473,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 93268,
+      "fdc_id": 173796,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 93671,
+      "fdc_id": 174036,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 94068,
+      "fdc_id": 174277,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 94069,
+      "fdc_id": 174277,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 94070,
+      "fdc_id": 174277,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 94071,
+      "fdc_id": 174277,
+      "modifier": "individual packet"
+    },
+    {
+      "usda_portion_id": 94520,
+      "fdc_id": 174527,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 94521,
+      "fdc_id": 174527,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 94524,
+      "fdc_id": 174529,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 94526,
+      "fdc_id": 174531,
+      "modifier": "tbsp"
+    },
+    {
+      "usda_portion_id": 94630,
+      "fdc_id": 174586,
+      "modifier": "link"
+    },
+    {
+      "usda_portion_id": 94976,
+      "fdc_id": 174837,
+      "modifier": "fl oz"
+    },
+    {
+      "usda_portion_id": 94977,
+      "fdc_id": 174837,
+      "modifier": "serving (5 fl oz)"
+    },
+    {
+      "usda_portion_id": 95193,
+      "fdc_id": 174928,
+      "modifier": "oz"
+    },
+    {
+      "usda_portion_id": 95194,
+      "fdc_id": 174928,
+      "modifier": "cup"
+    },
+    {
+      "usda_portion_id": 95484,
+      "fdc_id": 175040,
+      "modifier": "tsp"
+    },
+    {
+      "usda_portion_id": 95485,
+      "fdc_id": 175040,
+      "modifier": "tsp"
+    }
+  ]
+}

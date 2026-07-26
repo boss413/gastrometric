@@ -102,6 +102,7 @@ def normalize_text(text):
 
     text = text.lower()
     text = re.sub(r'^[\u2022\u2013•\-–]\s*', '', text)  # leading bullets
+    text = text.replace('&', ' and ')
 
     text, phrase_map = _protect_phrases(text, PROTECTED_PHRASES)
 
@@ -136,7 +137,7 @@ def normalize_text(text):
     # Inch mark: 1/2" or 0.5" -> 0.5-inch, so it behaves like the written-out
     # "inch" form for every downstream -inch pattern (size descriptors,
     # prep phrases like "cut into 1/2-inch pieces").
-    text = re.sub(r'(\d(?:\.\d+)?)\s*"', r'\1-inch', text)
+    text = re.sub(r'(\d(?:\.\d+)?)\s*["\u201d\u2033]', r'\1-inch', text)
 
     word_numbers = {
         "one": "1", "two": "2", "three": "3", "four": "4", "five": "5",
@@ -215,7 +216,7 @@ _OR_RELATIVE = re.compile(
 # genuine second ingredient) is recognized consistently in both places.
 _OR_PREP_WORDS = (
     r'pressed|pushed|passed|run|rubbed|blended|pureed|mashed|'
-    r'squeezed|grated|ground|minced|chopped|diced|sliced|'
+    r'squeezed|grated|ground|minced|chopped|diced|sliced|shredded|'
     r'low[\s-]sodium|reduced[\s-]sodium|unsalted|homemade|store[\s-]bought'
 )
 _OR_PREP_CLUES = re.compile(
@@ -226,7 +227,8 @@ _OR_PREP_CLUES = re.compile(
 # phrases / hedges that would otherwise become a bogus, empty optional row.
 _OR_ALT_BLOCK = re.compile(
     r'^(?:as\s+needed|as\s+desired|if\s+desired|desired|needed|required|'
-    r'to\s+taste|more|additional|so\s+desired)\b',
+    r'to\s+taste|more|additional|so\s+desired|'
+    r'\d+(?:\.\d+)?%\s+by\s+weight)\b',
     re.IGNORECASE
 )
 
@@ -275,12 +277,13 @@ def _split_on_or(text):
 _APPROX = r'(?:approximately|approx\.?|about)?\s*'
 
 _MASS_PAT = re.compile(
-    r'[\(\s,/|]*' + _APPROX + r'(\d+(?:\.\d+)?)\s*(?:grams?|g(?![a-zA-Z]))\s*\)?(?:\s*,)?',
+    r'(?P<open>\()?[\s,/|]*' + _APPROX +
+    r'(\d+(?:\.\d+)?)\s*(?:grams?|g(?![a-zA-Z]))\s*(?(open)\)|)(?:\s*,)?',
     re.IGNORECASE
 )
 _ML_PAT = re.compile(
-    r'\(?\s*,?\s*' + _APPROX +
-    r'(\d+(?:\.\d+)?)\s*(?:ml|milliliters?|millilitres?|mls?)\s*\)?(?:\s*,)?',
+    r'(?P<open>\()?\s*,?\s*' + _APPROX +
+    r'(\d+(?:\.\d+)?)\s*(?:ml|milliliters?|millilitres?|mls?)\s*(?(open)\)|)(?:\s*,)?',
     re.IGNORECASE
 )
 _LITER_PAT = re.compile(
@@ -321,11 +324,11 @@ def _extract_explicit_measures(text):
     grams = ml = pct = plus_additional_note = None
     m = _MASS_PAT.search(text)
     if m:
-        grams = m.group(1)
+        grams = m.group(2)
         text = (text[:m.start()] + ' ' + text[m.end():]).strip().rstrip(',').strip()
     m = _ML_PAT.search(text)
     if m:
-        ml = m.group(1)
+        ml = m.group(2)
         text = (text[:m.start()] + ' ' + text[m.end():]).strip().rstrip(',').strip()
     else:
         m = _LITER_PAT.search(text)
@@ -506,7 +509,17 @@ def _extract_quantity(text):
 # UNIT EXTRACTION
 # ============================================================
 
-_GARLIC_CONTEXT = re.compile(r'\bcloves?\s+(garlic|shallot)\b', re.IGNORECASE)
+_GARLIC_CONTEXT = re.compile(r'\bcloves?\s+(?:of\s+)?(garlic|shallot)\b', re.IGNORECASE)
+_CLOVES_OF = re.compile(r'\bcloves?\s+of\b', re.IGNORECASE)
+# Descriptors that can precede "cloves" as the ingredient itself (e.g. "10
+# whole cloves" = the spice), as opposed to "cloves" counting some other
+# named ingredient (garlic, shallot). If, after removing "cloves" and any
+# recognized unit word, only these descriptors are left, "cloves" is the
+# ingredient, not a unit.
+_CLOVE_BARE_DESCRIPTORS = re.compile(
+    r'\b(?:whole|large|medium|small|extra[- ]large|jumbo|fresh)\b',
+    re.IGNORECASE
+)
 
 _UNIT_PAT = re.compile(
     r'\b(cup|cups|quart|quarts|qt|part|pinch|pinches|handful|recipe|'
@@ -519,11 +532,36 @@ _UNIT_PAT = re.compile(
 
 
 def _extract_unit(text):
-    # "cloves" by itself is the ingredient, not a unit
     if re.search(r'\bcloves?\b', text, re.IGNORECASE):
-        if not _GARLIC_CONTEXT.search(text):
+        if _GARLIC_CONTEXT.search(text):
+            # "N cloves of garlic" — remove "cloves of" as a unit, so "of"
+            # isn't left stranded once "garlic"'s neighboring adjective
+            # (e.g. "medium") is later stripped at normalize time.
+            if _CLOVES_OF.search(text):
+                text = _CLOVES_OF.sub('', text, count=1).strip()
+                return text, "clove"
+            # "N cloves garlic" (no "of") falls through to the standard
+            # unit-word extraction below, which already handles this fine.
+        else:
             without = re.sub(r'\bcloves?\b', '', text, flags=re.IGNORECASE).strip()
-            if not _UNIT_PAT.sub('', without).strip():
+            without_units = _UNIT_PAT.sub('', without).strip()
+            if not without_units:
+                # Nothing but "cloves" (+ maybe a real unit) is here — e.g.
+                # "1/4 tsp cloves" (the spice). Pull out the real unit if
+                # there is one, but leave "cloves" itself in the name.
+                m = _UNIT_PAT.search(without)
+                if m:
+                    real_unit = m.group(0)
+                    new_text = re.sub(
+                        r'\b' + re.escape(real_unit) + r'\b', '', text,
+                        count=1, flags=re.IGNORECASE
+                    ).strip()
+                    return new_text, real_unit
+                return text, None
+            if not _CLOVE_BARE_DESCRIPTORS.sub('', without_units).strip():
+                # Only size/state descriptors (e.g. "whole") remain once
+                # "cloves" is removed — "cloves" is the ingredient itself
+                # (whole cloves, the spice), not a counting unit.
                 return text, None
     m = _UNIT_PAT.search(text)
     if m:
@@ -721,8 +759,16 @@ def _clean_name(text):
     if m:
         notes.append(m.group(0).strip())
         text = text[:m.start()].strip()
+    # Unresolved "N/N" count ranges that aren't recognized fractions (e.g.
+    # "16/20" shrimp-per-pound sizing) — the digits get stripped below but
+    # the "/" would otherwise be left stranded.
+    text = re.sub(r'(?<!\w)\d+/\d+(?!\w)', '', text).strip()
     # Stray numbers, isolated punctuation, isolated single letters
     text = re.sub(r'(?<!\w)\d+(?:\.\d+)?(?!\w)', '', text).strip()
+    # A hyphen left dangling after its neighboring word was extracted as
+    # prep (e.g. "medium-diced" -> "medium-" once "diced" is pulled out).
+    text = re.sub(r'(?<=[a-z])-(?=\s|$)', '', text).strip()
+    text = re.sub(r'(?:^|\s)-(?=[a-z])', ' ', text).strip()
     text = re.sub(r'(?<!\w)\.(?!\w)', '', text).strip()
     text = re.sub(r'(?<!\w)[a-z](?!\w)', '', text, flags=re.IGNORECASE).strip()
     return " ".join(text.split()).strip('*').strip(), notes
@@ -734,11 +780,18 @@ def _fix_truncations(text):
     return text
 
 
+_BARE_SIZE_WORDS = {
+    "large", "extra-large", "extra large", "medium", "small", "jumbo",
+    "very", "quite", "rather", "fairly", "slightly",
+}
+
+
 def _split_multi_ingredients(text):
     """Split "salt and pepper" → ["salt", "pepper"] only for short, digit-free names."""
     if " and " in text:
         parts = [p.strip() for p in text.split(" and ", 1)]
-        if all(not re.search(r'\d', p) for p in parts) and len(text.split()) <= 6:
+        if (all(not re.search(r'\d', p) for p in parts) and len(text.split()) <= 6
+                and all(p.lower() not in _BARE_SIZE_WORDS and p for p in parts)):
             return parts
     return [text]
 
@@ -784,7 +837,7 @@ def _parse_one_line(text, optional=False):
     # Strip leftover secondary measures when a gram weight was already extracted
     if grams is not None:
         text = re.sub(
-            r'(?<=\s)(\d+(?:\.\d+)?)\s*'
+            r'(?:^|(?<=\s))(\d+(?:\.\d+)?)\s*'
             r'(cup|cups|tbsp|tsp|tablespoon|tablespoons|teaspoon|teaspoons|'
             r'oz|ounce|ounces|lb|pound|pounds|pint|pints|quart|quarts|'
             r'ml|liter|litre|g|kg)(?!\w)',

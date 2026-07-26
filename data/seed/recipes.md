@@ -19,13 +19,13 @@ Ingredients:
 3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup)
 ½ cup small cauliflower florets
 2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup)
-2 oz. Romano or other snap beans, trimmed, cut into 1½" pieces (about ½ cup)
+2 oz. Romano beans or other snap beans, trimmed, cut into 1½" pieces (about ½ cup)
 1 tsp. smoked Spanish paprika
 ½ cup coarsely grated tomato or canned crushed tomatoes
 Pinch of saffron (about 8 threads)
 2 sprigs rosemary
 5 cups low-sodium chicken broth or water
-1 cup paella or bomba rice
+1 cup calasparra or bomba rice
 Instructions:
 Preparation
 If using 1 lb. skin-on, bone-in chicken thighs (about 3), arrange a thigh skin side down on a cutting board. Using a sharp knife, cut along both sides of bone to release from flesh (do not cut all the way through; you want to keep thigh intact). Work knife underneath bone and cut flesh away from bone; remove bone from thigh and discard. Cut thigh into quarters. Repeat with remaining thighs.
@@ -83,6 +83,19 @@ Strain the liquid through a fine-mesh strainer or through cheesecloth into a lar
 In a 2-quart saucepan, bring 2 cups of water to a boil with the sugar. Continue to cook, stirring, until sugar has completely dissolved. Remove simple syrup from heat.
 Stir simple syrup into the strained sorrel, 1/2 cup at a time, until desired sweetness level is reached.
 Chill until ready to drink. Serve over ice.
+# brookies
+1 c ap flour
+¼ cocoa (¾ oz)
+1 tap powder
+¼ soda
+¾ tsp salt
+10 oz bittersweet chocolate (4 oz as chunks, 6 oz melting)
+3 Tbsp vegetable oil 
+1 Tbsp butter
+1 oz whole milk
+1 c sugar
+2 eggs
+300 F 16 minutes 
 # Buddae Jjigae (Korean Army Stew)
 url: https://www.maangchi.com/recipe/budae-jjigae
 Yield: Serves 4
@@ -237,14 +250,17 @@ Instructions:
 While cioppino simmers, mix 4 Tbsp. unsalted butter, room temperature, 1 Tbsp. chopped parsley, ½ tsp. finely grated lemon zest, and a pinch of kosher salt in a small bowl. Taste gremolata butter and season with more salt if needed.
 Heat broiler. Arrange 1 baguette, sliced, on a rimmed baking sheet and toast bread, turning halfway through, until light golden, about 4 minutes. Rub cut sides of 1 garlic clove, halved, over toasts.
 Spread gremolata butter over toasts. Ladle cioppino into shallow bowls and serve with toasts.
-# 15-Minute Cherry Tomato Pasta
+# 15-Minute Cherry Tomato Angel Hair (burst tomato pasta)
 Attribution: Epicurious
 Yield: 4–6 servings
+note: when making this with cherry tomatoes the skins separate and litter the finished dish.
 url: https://www.epicurious.com/recipes/food/views/pasta-with-15-minute-burst-cherry-tomato-sauce-56390060
 Ingredients:
-1 lb. pasta
+1 lb. angel hair
 1 tsp. Diamond Crystal Kosher salt plus more for pasta pot
+½ cup olive oil
 2 large garlic cloves, finely chopped
+3 pints cherry tomatoes or 1 28-oz. can crushed tomatoes
 ½ tsp. freshly ground black pepper
 1 cup coarsely chopped fresh basil
 Freshly grated Parmesan (for serving)
@@ -418,7 +434,7 @@ Paprika
 ¼ c beef broth
 2 T potato starch
 1 egg
-2 T ground mushrooms
+2 T mushrooms, minced
 3 c Tater tots
 1 c Mexican cheese blend
 # Oven Wings
@@ -1313,7 +1329,7 @@ Instructions:
 Combine the olive oil, red pepper flakes, sea salt, and garlic in a cold saucepan. Stir while you heat the saucepan over medium-high heat, sauté just 45 seconds or so until everything is fragrant. Stir in the tomatoes and heat to a gentle simmer. Remove from heat and stir in the lemon zest.
 # Bacon Potato Pancakes
 Ingredients: 
-• 2 c coarse grated starchy potatoes 
+• 2 c coarsely grated starchy potatoes 
 • 2 strips bacon
 • 1 egg 
 • 1 green onion, finely chopped
@@ -1700,7 +1716,7 @@ Ingredients:
 •  ¾ c butter flavored shortening 
 •  7 oz sugar
 •  ½ c cake flour
-•  2 c whole wheat flour, graham flour, or rye flour
+•  2 c graham flour, or rye flour
 •  3 t baking powder
 •  ¼ t salt
 •  ½ t cinnamon
@@ -1710,7 +1726,7 @@ Ingredients:
 •  3 T molasses
 •  1 t vanilla 
 5 ounces mini marshmallows
-1 stick butter. 
+1 stick butter
 •  8 oz chocolate
 •  8 oz cream
 •  pinch salt 
@@ -1734,14 +1750,14 @@ pie crust, blind baked
 ¼ c brown sugar
 
 20 oz sweet potatoes, cooked
-2 T butter
-2 t cinnamon
-2 t ground ginger
-1 t nutmeg
-¼ t cloves
+2 Tbsp butter
+2 tsp cinnamon
+2 tsp ground ginger
+1 tsp nutmeg
+¼ tsp cloves
 ⅔ c half & half
 ¾ c sugar
-2 T molasses
+2 Tbsp molasses
 1 oz bourbon
 ¼ t salt (if sweet potatoes are unseasoned)
 
@@ -1754,11 +1770,11 @@ Ingredients:
 • 1 egg
 • 2 ½ c flour
 • 1 ½ t baking soda
-• 1 t cinnamon
-• 1 t ginger
-• ½ t cloves
-• ½ t salt
-• 1 c molasses, light or dark
+• 1 tsp cinnamon
+• 1 tsp ginger
+• ½ tsp cloves
+• ½ tsp salt
+• 1 c molasses
 • 1 c hot water
 
 • 1 (5.1-ounce) box cook-and-serve vanilla pudding mix 
@@ -1958,7 +1974,7 @@ Instructions:
 # Brown Sugar Cookies
 Attribution: America’s Test Kitchen
 Ingredients: 
-14 T butter sugar 
+14 T butter
 •  1/4 c sugar 
 •  2 c brown sugar 
 •  2 c + 2 T AP flour
@@ -2215,7 +2231,7 @@ Ingredients:
 1/8 teaspoon cream of tartar
 1 teaspoon vanilla
 2/3 c regular or superfine sugar
-6 ounces chocolate chips, miniature chips or finely diced semi or bittersweet chocolate
+6 ounces chocolate chips
 1/4 chopped pecans or walnuts
 Instructions:
 Heat oven to 300°F.  Beat egg whites until foamy. Add salt and cream of tartar, and beat mixture again until it holds soft peaks. Add the sugar, gradually, beating the batter until it is stiff. Fold in the nuts and chocolate chips. Spoon batter onto parchment paper-lined baking sheets. Bake for 25 minutes. 
@@ -2345,7 +2361,7 @@ Note: These are not for kids. They’re designed to be eaten with a glass of bou
 Ingredients:
 8 ounces unsalted butter (2 sticks; 225g)
 
-1 standard ice cube (about 2 tablespoons; 30mL frozen water)
+1 ice cube (about 2 tablespoons; 30mL frozen water)
 Instructions: 
 Melt butter in a medium saucepan over medium-high heat. Add it to a hotel pan and smoke it.
 
@@ -2589,16 +2605,16 @@ Instructions:
 Ingredients: 
 2 c cream
 1 package instant vanilla pudding mix
-1 T honey3 ½ 
-T almond liqueur
+1 T honey
+3 ½ T almond liqueur
 Instructions: 
 Whip cream to stiff peaks, add other ingredients, beat until mixture holds stiff peaks again
 
 # Banana Nut Cake
 Ingredients: 
 2 ½ c flour
-1 t powder
-1 t soda
+1 t baking powder
+1 t baking soda
 ½ t salt
 ¾ c butter
 1 ¼ c honey
@@ -2637,7 +2653,7 @@ arrange 1 1/2 c. pecans on top, bake 45 minutes in 375°F
 Note: 1% salt (perfect for pork belly as an entree, not salty enough as bacon)
 
 Ingredients
-10 lbs pork belly from C&C cut into 5 sections (~1,000g)
+10 lbs pork belly cut into 5 sections (~1,000g)
 Packaged into zip lock bags with 100g water
 salt (perfect for pork belly as an entree, not salty enough as bacon)
 Instacure / Prague powder / sodium nitrite (reserved from ONE “Fat Duck” belly), 0.25%
@@ -2818,7 +2834,7 @@ Ingredients:
 1 pound skinless, boneless chicken thighs, finely chopped
 ¼ cup sliced shallots
 4 cloves garlic, minced
-2 tablespoons minced Thai chilies, Serrano, or other hot pepper
+2 tablespoons minced Thai chilies, or Serrano
 1 cup very thinly sliced fresh basil leaves
 2 cups hot cooked rice
 # Pad Woon Sen
@@ -2997,7 +3013,7 @@ Ingredients:
 
 ½ lime, juiced
 
-pinch of salt, more to taste
+salt to taste
 
 2 cups cooked chicken 
 
@@ -3009,7 +3025,7 @@ pinch of salt, more to taste
 
 ¼ cup raisins 
 
-¼ cup dry-roasted cashews, roughly chopped
+¼ cup roasted cashews, roughly chopped
 # Tomato Supercharger
 Attribution: America's Test Kitchen
 URL: https://www.americastestkitchen.com/cooksillustrated/articles/5915-even-perfect-tomatoes-can-use-a-little-cream-of-tartar
@@ -3029,7 +3045,7 @@ Ingredients:
 
 3g MSG
 
-1g inosinate + guanylate (a.k.a. I+G)
+1g Sodium Inosinate and Guanylate
 # KFC Seasoning	
 Ingredients:
 1 tsp salt
@@ -3094,6 +3110,11 @@ Attribution: Sally's Baking Addiction
 URL: https://sallysbakingaddiction.com/flaky-buttermilk-biscuits/#tasty-recipes-66534			
 Notes: These have to be cut with round cutters inside of the edges; the folding means that they expand longitudinally, so the folds on the sides will cause them to open like a book.
 Yield: 12 photogenic biscuits plus one scrappy boy
+## optional honey butter topping
+ingredients: 
+2 Tablespoons melted butter 
+1 Tablespoon honey
+## make the biscuits
 Ingredients:
 2 and 1/2 cups (313g) all-purpose flour (spooned & leveled), plus more as needed for hands and work surface
 
@@ -3107,7 +3128,6 @@ Ingredients:
 
 2 teaspoons (14g) honey
 
-optional honey butter topping: 2 Tablespoons melted butter mixed with 1 Tablespoon honey
 Instructions:
 Preheat oven to 425°F (218°C).
 
@@ -3608,8 +3628,6 @@ Crushed peeled tomato 28 oz
 1-3 tsp. Chili flakes
 
 17g Vodka
-
-optional: tomato leaves
 Instructions:
 Dump in the tomatoes, worchestershire, vinegar, chili flakes, and stir until homogenous. If using, add the tomato leaves. Bring to a light simmer. Remove from heat and add vodka.
 # New York Style Pizza Sauce
@@ -3864,7 +3882,7 @@ When the sauce has been cooking for 2 1/2 hours, place the 4-quart saute pan ove
 Stir in evaporated milk and parmesan. Bring to a boil on stovetop, stirring constantly to emulsify. Season to taste with fish sauce. Turn off the heat and add the basil and parsley. Bolognese can be cooled and stored in sealed containers in the refrigerator for up to 1 week, or frozen for later use.									
 # Red Enchilada Sauce	
 Ingredients:
-2 tablespoons oil, butter, or lard
+2 tablespoons oil, or lard
 
 2 tablespoons all-purpose flour
 
@@ -3964,7 +3982,7 @@ Over high heat, bring to a boil, stir, top with lid, drop heat down to low. Simm
 Yield: SERVES 4 ΤΟ 6
 Note: Base your decision on whether to use oil or butter in the recipe on the dish the rice will accompany; for example, if you are serving a stir-fry, use oil for the rice. To minimize any loss of water through evaporation, cover the saucepan as the water is heating, and use the water as soon as it reaches a boil. If you own an 8-inch ceramic baking dish with a lid, use it instead of the glass baking dish and foil. To double the recipe, use a 13 by 9-inch baking dish; the baking time need not be increased.
 Ingredients:
-1 ½ cups long-, medium-, or short-grain brown rice
+1 ½ cups brown rice
 2 ⅓ cups water
 2 teaspoons unsalted butter or vegetable oil
 ½ teaspoon salt	
@@ -3990,7 +4008,7 @@ Transfer to a bowl or, if making ahead, cool completely and transfer to a soup c
 # Garbanzo Beans / Chickpeas
 ## Pressure Cooker Method
 Ingredients:
-1/2 pound dried chickpeas (1 generous cup; 225g)
+1/2 pound dried chickpeas (1 cup; 225g)
 
 2 teaspoons (12g) baking soda, divided
 
@@ -4016,37 +4034,6 @@ Instructions:
 Combine beans, 1 teaspoon (6g) baking soda, and 2 tablespoons (24g) kosher salt in a large bowl and cover with 6 cups (1.4L) cold water. Stir to dissolve salt and baking soda. Let stand at room temperature overnight. Drain and rinse beans thoroughly.
 
 Place beans in a large Dutch oven or saucepan. Add remaining baking soda, 1 tablespoon (12g) salt, onion, celery, carrot, garlic, and bay leaves. Add 6 cups (1.4L) water and bring to a boil over high heat. Reduce to a simmer, cover with lid slightly cracked, and cook until beans are completely tender, to the point of falling apart, about 2 hours. Check on beans occasionally and top up with more water if necessary; they should be completely submerged at all times. 												
-# Burst Tomato Angel Hair
-Attribution: Last Ingredient
-URL: https://www.lastingredient.com/burst-tomato-pasta/#wprm-recipe-container-10773
-Instructions:
-8 ounces Angel Hair
-
-1/4 cup olive oil plus more for pasta
-
-2 pints cherry tomatoes
-
-3 garlic cloves, thinly sliced
-
-1/4 teaspoon red pepper flakes
-
-1 teaspoon kosher salt
-
-1/2 teaspoon black pepper
-
-1 ounce shaved Parmesan
-
-Chopped basil, parsley or chives
-Instructions:
-Cook the spaghetti in a large pot of salted boiling water until al dente according to package instructions. Drain and toss with a splash of olive oil in a bowl to prevent the pasta from sticking together.
-
-Heat 1/4 cup olive oil in a large skillet over medium heat. Add the tomatoes and stir them around frequently. After 3-4 minutes, the skin of some of the tomatoes will start to split. Use the back of a wooden spoon or a potato masher to carefully press them down, helping them burst.
-
-Add the garlic, red pepper flakes, salt and pepper to the skillet, and continue cooking for a few more minutes until the tomatoes turn a bit saucy but are still very chunky.
-
-Stir in the pasta coating it in the tomatoes.
-
-Fold in the Parmesan cheese.
 # Fresh Pasta
 Ingredients:
 12 oz all-purpose flour
@@ -4148,7 +4135,8 @@ Salt
 6 sprigs fresh parsley
 4 sprigs fresh thyme
 2 bay leaves
-½ cup frozen peas Ground black pepper
+½ cup frozen peas 
+Ground black pepper
 4 large russet potatoes (about 2 1/2 pounds), peeled and cut into 2-inch pieces
 2 tablespoons unsalted butter, cut into 2 pieces
 ⅓ cup heavy cream, warmed
@@ -4246,7 +4234,7 @@ Ingredients:
 ½ teaspoon salt
 2 large eggs
 ¾ cup (51/4 ounces) sugar
-8 tablespoons (I stick) unsalted butter, melted and cooled slightly
+8 tablespoons (I stick) unsalted butter, melted and cooled
 ¾ cup sour cream
 ½ cup milk
 Instructions: 
@@ -4265,7 +4253,7 @@ Ingredients:
 
 2 tsp. (9g) MSG
 
-1/2 yellow or white onion (optional: cut into two pieces with root attached, seared on flat sides)
+1/2 yellow onion cut into two pieces with root attached
 
 2 cloves garlic, peeled and lightly crushed
 
@@ -4306,7 +4294,7 @@ Ingredients:
 
 Salt to taste
 
-6 tablespoons (77g) lard, bacon drippings, or butter (see notes)
+6 tablespoons (77g) lard or bacon drippings
 Instructions:
 If making straight from the fridge, reserve the bean cooking liquid and microwave the beans and onions + garlic to at least 150 F. In a glass, microwave the fat until liquid and add to the beans. Add 1/4 cup of reserved bean-cooking liquid. 
 
@@ -4846,7 +4834,7 @@ Ingredients:
 
 2 tbsp unsalted butter
 
-ginger?
+ginger
 
 12 oz 16/20 extra jumbo shrimp, peeled & deveined OR cooked crab
 
@@ -4854,7 +4842,7 @@ ginger?
 
 2 1/2 cups day old cold jasmine rice, separated by hand
 
-handful holy basil, Thai basil or Italian basil
+handful holy basil, or Thai basil
 Instructions:
 Pound garlic and thai chili together in a mortar and pestle. This way the natural oil from chili and garlic will be released and will make the fried rice more fragrant. You could carefully smash with knife and chop if you don’t have mortar and pestle. Set aside. Slice shallot and set aside along with garlic and chili.
 
@@ -4871,10 +4859,9 @@ Add cold rice and pour sauce mixture. Toss everything together until rice is coa
 Toss in basil and turn off the heat. Keep tossing until basil is well combined with the fried rice.
 # Chinese Fried Rice			
 Attribution: Chef Savvy		
+Author: Matt Boss
 URL: https://chefsavvy.com/the-best-fried-rice/#recipe			
-Note: measure the amount of oil used
-ginger
-measure the amount of MSG
+Note: measure the amount of oil, ginger, and MSG next time
 Ingredients:
 2 tablespoons butter, divided
 
@@ -4890,7 +4877,7 @@ Ingredients:
 
 1 egg
 
-4 cups cooked and chilled rice, separated by hand. Restaurants use Jasmine
+4 cups cooked and chilled jasmine rice, separated by hand
 
 3 tablespoons low sodium soy sauce
 
@@ -5033,7 +5020,7 @@ Ingredients:
 
 2 carrots, chopped into large chunks
 
-medium soup container of low-sodium stock
+24 oz low-sodium stock
 Instructions:
 Heat the oven to 250F
 
@@ -5161,7 +5148,9 @@ Ingredients:
 
 2 Tbsp (15 g) flour
 
-Freshly ground black pepper, Thyme, and white pepper to taste
+Freshly ground black pepper
+Thyme
+white pepper to taste
 Instructions:
 Food processor the mushrooms badly into pieces approximately 1/8 to 1/4 inch in size then use the Mushroom method to cook them up to a week in advance. 
 

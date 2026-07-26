@@ -133,8 +133,21 @@ PREP_PATTERNS = [
     r'chopped into bite[- ]sized pieces',
     r'chopped into chunks',
     r'chopped into pieces',
-    r'sliced into \d[\d./]*-inch[a-z-]* rounds',
-    r'sliced into \d[\d./]*-inch[a-z-]* pieces',
+    # --- generalized "<verb> in/into <size>-inch <shape>" cut patterns ---
+    # Covers cut/sliced/chopped/torn, "in" or "into", an optional "N by "
+    # cross-dimension prefix (e.g. "1 by 1/8-inch"), and any of the common
+    # trailing shape nouns (singular or plural). One flexible family here
+    # replaces what used to be a dozen near-duplicate, easy-to-miss entries
+    # (e.g. no "dice"/"cubes"/"rings"/"wedges" variant existed before,
+    # which left the "-inch" token stranded in ingredient_name_raw).
+    r'(?:cut|sliced|chopped|torn)\s+(?:crosswise\s+|lengthwise\s+)?'
+    r'(?:in|into)\s+(?:\d[\d./]*\s*(?:x|by)\s*)?\d[\d./]*-inch[a-z-]*\s+'
+    r'(?:rounds?|pieces?|chunks?|strips?|cubes?|dice|wedges?|'
+    r'matchsticks?|batons?|slices?|rings?)',
+    r'(?:cut|sliced|chopped|torn)\s+(?:crosswise\s+|lengthwise\s+)?'
+    r'(?:in|into)\s+(?:\d[\d./]*\s*(?:x|by)\s*)?\d[\d./]*"[a-z-]*\s+'
+    r'(?:rounds?|pieces?|chunks?|strips?|cubes?|dice|wedges?|'
+    r'matchsticks?|batons?|slices?|rings?)',
     r'very thinly sliced',
     r'thinly sliced',
     r'roughly chopped',
@@ -146,12 +159,10 @@ PREP_PATTERNS = [
     r'finely sliced',
     r'finely minced',
     r'diced fine',
-    r'cut into \d[\d./]*-inch[a-z-]* rounds',
-    r'cut into \d[\d./]*-inch[a-z-]* pieces',
-    r'cut into \d[\d./]*-inch[a-z-]* chunks',
-    r'cut into \d[\d./]*-inch[a-z-]* strips',
-    r'cut into \d[\d./]* pieces',
-    r'cut into \d[\d./]* chunks',
+    r'(?:cut|sliced|chopped|torn)\s+(?:crosswise\s+|lengthwise\s+)?'
+    r'(?:in|into)\s+\d[\d./]*\s+'
+    r'(?:rounds?|pieces?|chunks?|strips?|cubes?|dice|wedges?|'
+    r'matchsticks?|batons?|slices?|rings?)',
     r'cut into pieces',
     r'cut into chunks',
     r'cut into strips',
@@ -173,6 +184,8 @@ PREP_PATTERNS = [
     r'halved lengthwise',
     r'sliced lengthwise',
     r'cut lengthwise',
+    r'stems removed',
+    r'crust removed',
     # --- purpose phrases ---
     # NOTE: "for dusting" / "for sprinkling" / "for greasing" etc. are
     # intentionally NOT here. They describe what the ingredient is used
@@ -199,6 +212,8 @@ PREP_PATTERNS = [
     r'\bseeded\b',
     r'\bbeaten\b',
     r'\bwashed\b',
+    r'\bmashed\b',
+    r'\bscrubbed\b',
     r'\btrimmed\b',
     r'\bseparated\b',
     r'\bdivided\b',
@@ -228,6 +243,8 @@ PREP_PATTERNS = [
 TEMPERATURE_STATE_PATTERNS = [
     r'at\s+room[\s-]temperature',
     r'room[\s-]temperature',
+    r'very\s+cold',
+    r'very\s+hot',
     r'\bboiling\b(?!\s+water)',   # "boiling water" is protected above
     r'\bchilled\b',
     r'\bcold\b',
@@ -349,10 +366,13 @@ TYPO_FIXES = [
     # misc
     (re.compile(r'\bguacamole\b',         re.I), "avocado"),
     (re.compile(r'\bbrusselss?\b(?!\s+sprouts?)', re.I), "brussels sprouts"),
-    (re.compile(r'\bporcini\b',           re.I), "porcini mushroom"),
-    (re.compile(r'\bportobello\b',        re.I), "portobello mushroom"),
-    (re.compile(r'\bshiitake\b',          re.I), "shiitake mushroom"),
-    (re.compile(r'\bcrimini\b',           re.I), "crimini mushroom"),
+    # (?:s)? on "mushroom" absorbs an already-present "mushroom"/"mushrooms"
+    # right after the variety name, so "porcini mushrooms" doesn't become
+    # "porcini mushroom mushrooms".
+    (re.compile(r'\bporcini\b(?:\s+mushrooms?)?',    re.I), "porcini mushroom"),
+    (re.compile(r'\bportobello\b(?:\s+mushrooms?)?', re.I), "portobello mushroom"),
+    (re.compile(r'\bshiitake\b(?:\s+mushrooms?)?',   re.I), "shiitake mushroom"),
+    (re.compile(r'\bcrimini\b(?:\s+mushrooms?)?',    re.I), "crimini mushroom"),
     (re.compile(r'\bmahi[- ]?mahi\b|\bmahi\b', re.I), "tuna"),
     (re.compile(r'\bpancetta\b',          re.I), "bacon"),
     (re.compile(r'\bbasil pesto\b',       re.I), "pesto"),

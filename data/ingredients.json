@@ -301,16 +301,11 @@
       ]
     },
     {
-      "name": "granulated sugar",
-      "aliases": [
-        "granulated sugar"
-      ]
-    },
-    {
       "name": "sugar",
       "aliases": [
         "sugar",
-        "white sugar"
+        "white sugar",
+        "granulated sugar"
       ]
     },
     {
@@ -407,6 +402,13 @@
       ]
     },
     {
+      "name": "vanilla bean",
+      "aliases": [
+        "vanilla bean",
+        "vanilla beans"
+      ]
+    },
+    {
       "name": "vanilla bean paste",
       "aliases": [
         "vanilla bean paste"
@@ -415,21 +417,34 @@
     {
       "name": "coconut extract",
       "aliases": [
-        "coconut extract"
+        "coconut extract",
+        "coconut flavor",
+        "coconut flavoring",
+        "artificial coconut flavor"
       ]
     },
     {
       "name": "cocoa powder",
       "aliases": [
         "cocoa",
-        "cocoa powder"
+        "cocoa powder",
+        "unsweetened cocoa powder"
       ]
     },
     {
-      "name": "unsweetened cocoa powder",
+      "name": "natural cocoa powder",
       "aliases": [
-        "unsweetened cocoa powder",
-        "unsweetened dutch process cocoa"
+        "natural cocoa powder",
+        "natural cocoa"
+      ]
+    },
+    {
+      "name": "dutch process cocoa powder",
+      "aliases": [
+        "dutch process cocoa powder",
+        "dutch processed cocoa powder",
+        "dutch-process cocoa powder",
+        "dutch-processed cocoa powder"
       ]
     },
     {
@@ -460,14 +475,19 @@
     {
       "name": "unsweetened chocolate",
       "aliases": [
-        "unsweetened chocolate"
+        "unsweetened chocolate",
+        "baking chocolate",
+        "bakers chocolate",
+        "baker's chocolate"
       ]
     },
     {
       "name": "chocolate chips",
       "aliases": [
         "chocolate chips",
-        "chocolate morsels"
+        "chocolate morsels",
+        "semisweet chocolate chips",
+        "bittersweet chocolate chips"
       ]
     },
     {
@@ -493,26 +513,20 @@
       "name": "gelatin",
       "aliases": [
         "gelatin",
-        "gelatine"
-      ]
-    },
-    {
-      "name": "powdered gelatin",
-      "aliases": [
+        "gelatine",
+        "bloom gelatin",
         "powdered gelatin",
-        "gelatin powder"
+        "gelatin powder",
+        "gelatin sheet",
+        "sheet gelatin"
       ]
     },
     {
       "name": "espresso powder",
       "aliases": [
-        "espresso powder"
-      ]
-    },
-    {
-      "name": "instant espresso powder",
-      "aliases": [
-        "instant espresso powder"
+        "espresso powder",
+        "instant espresso powder",
+        "instant espresso"
       ]
     },
     {
@@ -555,20 +569,23 @@
       "aliases": [
         "egg yolk",
         "egg yolks",
-        "yolk"
+        "yolk",
+        "yolks"
       ]
     },
     {
       "name": "egg whites",
       "aliases": [
         "egg whites",
-        "egg white"
+        "egg white",
+        "whites"
       ]
     },
     {
       "name": "eggs",
       "aliases": [
         "chicken eggs",
+        "chicken egg",
         "egg"
       ]
     },
@@ -602,6 +619,38 @@
       "name": "lard",
       "aliases": [
         "lard"
+      ]
+    },
+    {
+      "name": "olives",
+      "aliases": [
+        "olives",
+        "olive",
+        "pitted olives"
+      ]
+    },
+    {
+      "name": "green olives",
+      "aliases": [
+        "green olive",
+        "green olives",
+        "pitted green olives"
+      ]
+    },
+    {
+      "name": "kalamata olives",
+      "aliases": [
+        "kalamata olive",
+        "kalamata olives",
+        "pitted kalamata olives"
+      ]
+    },
+    {
+      "name": "black olives",
+      "aliases": [
+        "black olive",
+        "black olives",
+        "pitted black olives"
       ]
     },
     {
@@ -693,6 +742,7 @@
     {
       "name": "salt",
       "aliases": [
+        "table salt",
         "salt"
       ]
     },
@@ -703,6 +753,15 @@
         "MSG",
         "monosodium glutamate",
         "msg"
+      ]
+    },
+    {
+      "name": "Inosinate & Guanylate",
+      "aliases": [
+        "Inosinate & Guanylate",
+        "Sodium Inosinate and Guanylate",
+        "I+G",
+        "sodium inosinate and guanylate"
       ]
     },
     {
@@ -755,9 +814,10 @@
       ]
     },
     {
-      "name": "coarse smoked salt",
+      "name": "smoked salt",
       "aliases": [
-        "coarse smoked salt"
+        "coarse smoked salt",
+        "smoked salt"
       ]
     },
     {
@@ -769,19 +829,19 @@
     {
       "name": "basil",
       "aliases": [
-        "basil"
-      ]
-    },
-    {
-      "name": "fresh basil",
-      "aliases": [
-        "fresh basil"
+        "basil",
+        "fresh basil",
+        "basil leaves",
+        "basil leaf"
       ]
     },
     {
       "name": "dried basil",
       "aliases": [
-        "dried basil"
+        "dried basil",
+        "basil, dry",
+        "ground basil",
+        "dry basil"
       ]
     },
     {
@@ -808,13 +868,19 @@
       "aliases": [
         "bay",
         "bay leaf",
-        "bay leaves"
+        "bay leaves",
+        "turkish bay leaf",
+        "turkish bay leaves",
+        "california bay leaf",
+        "california bay leaves"
       ]
     },
     {
       "name": "chervil",
       "aliases": [
-        "chervil"
+        "chervil",
+        "chervil leaves",
+        "chervil leaf"
       ]
     },
     {
@@ -828,6 +894,7 @@
       "name": "cilantro",
       "aliases": [
         "cilantro",
+        "cilantro leaves",
         "fresh coriander",
         "coriander leaves"
       ]
@@ -843,13 +910,21 @@
       "aliases": [
         "garlic",
         "garlic clove",
-        "garlic cloves"
+        "garlic cloves",
+        "cloves of garlic",
+        "garlic head",
+        "heads of garlic",
+        "head of garlic"
       ]
     },
     {
-      "name": "garlic confit",
+      "name": "gellan",
       "aliases": [
-        "garlic confit"
+        "high acyl gellan",
+        "high-acyl gellan",
+        "gellan",
+        "low acyl gellan",
+        "low-acyl gellan"
       ]
     },
     {
@@ -870,21 +945,32 @@
       "name": "ginger",
       "aliases": [
         "fresh ginger",
-        "ginger",
+        "ginger"
+      ]
+    },
+    {
+      "name": "ground ginger",
+      "aliases": [
         "ground ginger",
-        "ground ginger powder"
+        "ground ginger powder",
+        "dry ginger",
+        "ginger powder",
+        "powdered ginger"
       ]
     },
     {
       "name": "oregano",
       "aliases": [
-        "oregano"
+        "oregano",
+        "oregano leaves",
+        "oregano leaf"
       ]
     },
     {
       "name": "dried oregano",
       "aliases": [
-        "dried oregano"
+        "dried oregano",
+        "oregano flakes"
       ]
     },
     {
@@ -898,6 +984,8 @@
       "name": "italian parsley",
       "aliases": [
         "italian parsley",
+        "italian parsley leaves",
+        "italian parsley leaf",
         "flat-leaf parsley",
         "flat leaf parsley"
       ]
@@ -932,18 +1020,17 @@
       "name": "sage",
       "aliases": [
         "sage",
-        "sage leaves"
+        "sage leaves",
+        "sage leaf",
+        "fresh sage",
+        "fresh sage leaves",
+        "fresh sage leaf"
       ]
     },
     {
       "name": "dried sage",
       "aliases": [
-        "dried sage"
-      ]
-    },
-    {
-      "name": "dried rubbed sage",
-      "aliases": [
+        "dried sage",
         "dried rubbed sage",
         "rubbed sage"
       ]
@@ -960,6 +1047,13 @@
       ]
     },
     {
+      "name": "spring onion",
+      "aliases": [
+        "spring onion",
+        "spring onions"
+      ]
+    },
+    {
       "name": "shallots",
       "aliases": [
         "shallots",
@@ -969,7 +1063,9 @@
     {
       "name": "tarragon",
       "aliases": [
-        "tarragon"
+        "tarragon",
+        "tarragon leaves",
+        "tarragon leaf"
       ]
     },
     {
@@ -994,8 +1090,10 @@
       ]
     },
     {
-      "name": "ground allspice",
+      "name": "allspice",
       "aliases": [
+        "allspice",
+        "allspice berries",
         "ground allspice"
       ]
     },
@@ -1007,7 +1105,8 @@
         "black peppercorns",
         "ground black pepper",
         "ground pepper",
-        "whole black peppercorns"
+        "whole black peppercorns",
+        "pepper"
       ]
     },
     {
@@ -1039,7 +1138,8 @@
     {
       "name": "chili powder",
       "aliases": [
-        "chili powder"
+        "chili powder",
+        "chile powder"
       ]
     },
     {
@@ -1051,7 +1151,9 @@
     {
       "name": "ground cinnamon",
       "aliases": [
-        "ground cinnamon"
+        "ground cinnamon",
+        "cinnamon powder",
+        "powdered cinnamon"
       ]
     },
     {
@@ -1063,29 +1165,21 @@
       ]
     },
     {
-      "name": "coriander",
-      "aliases": [
-        "coriander",
-        "ground coriander"
-      ]
-    },
-    {
       "name": "coriander seeds",
       "aliases": [
         "coriander seeds",
-        "whole coriander"
+        "coriander seed",
+        "whole coriander seeds",
+        "coriander",
+        "ground coriander"
       ]
     },
     {
       "name": "cumin",
       "aliases": [
         "cumin",
-        "ground cumin"
-      ]
-    },
-    {
-      "name": "cumin seeds",
-      "aliases": [
+        "ground cumin",
+        "cumin seed",
         "cumin seeds"
       ]
     },
@@ -1093,7 +1187,8 @@
       "name": "curry powder",
       "aliases": [
         "curry powder",
-        "ground curry powder"
+        "ground curry powder",
+        "powdered curry"
       ]
     },
     {
@@ -1105,7 +1200,10 @@
     {
       "name": "dried marjoram",
       "aliases": [
-        "dried marjoram"
+        "dried marjoram",
+        "marjoram",
+        "marjoram leaf",
+        "marjoram leaves"
       ]
     },
     {
@@ -1114,20 +1212,25 @@
         "dried mustard",
         "powdered mustard",
         "dry mustard",
-        "mustard powder"
+        "mustard powder",
+        "ground mustard seed",
+        "dry mustard seeds",
+        "mustard seed"
       ]
     },
     {
       "name": "fennel seeds",
       "aliases": [
-        "fennel seeds"
+        "fennel seeds",
+        "fennel seed"
       ]
     },
     {
       "name": "fennel",
       "aliases": [
         "fennel",
-        "fennel bulb"
+        "fennel bulb",
+        "fresh fennel"
       ]
     },
     {
@@ -1143,22 +1246,11 @@
       ]
     },
     {
-      "name": "ground mushrooms",
-      "aliases": [
-        "ground mushrooms",
-        "mushroom powder"
-      ]
-    },
-    {
       "name": "nutmeg",
       "aliases": [
-        "nutmeg"
-      ]
-    },
-    {
-      "name": "ground nutmeg",
-      "aliases": [
-        "ground nutmeg"
+        "nutmeg",
+        "whole nutmeg",
+        "grated nutmeg"
       ]
     },
     {
@@ -1220,14 +1312,17 @@
       "aliases": [
         "star anise",
         "star anise pod",
-        "whole star anise"
+        "whole star anise",
+        "anise pod"
       ]
     },
     {
       "name": "turmeric",
       "aliases": [
         "turmeric",
-        "ground turmeric"
+        "ground turmeric",
+        "dry tumeric",
+        "powdered tumeric"
       ]
     },
     {
@@ -1238,17 +1333,14 @@
       ]
     },
     {
-      "name": "whole green cardamom",
+      "name": "green cardamom",
       "aliases": [
         "whole green cardamom",
-        "green cardamom"
-      ]
-    },
-    {
-      "name": "yellow mustard seeds",
-      "aliases": [
-        "yellow mustard seeds",
-        "mustard seeds"
+        "green cardamom",
+        "whole green cardamom pods",
+        "green cardamom pods",
+        "cardamom pods",
+        "cardamom pod"
       ]
     },
     {
@@ -1261,7 +1353,8 @@
       "name": "avocado",
       "aliases": [
         "avocado",
-        "avocados"
+        "avocados",
+        "avocadoes"
       ]
     },
     {
@@ -1283,14 +1376,18 @@
       "name": "bell pepper",
       "aliases": [
         "bell pepper",
-        "bell peppers"
+        "bell peppers",
+        "sweet pepper",
+        "sweet peppers"
       ]
     },
     {
       "name": "green bell pepper",
       "aliases": [
         "green bell pepper",
-        "green bell peppers"
+        "green bell peppers",
+        "green peppers",
+        "green pepper"
       ]
     },
     {
@@ -1305,8 +1402,7 @@
       "aliases": [
         "broccoli",
         "broccoli floret",
-        "broccoli florets",
-        "roasted broccoli"
+        "broccoli florets"
       ]
     },
     {
@@ -1325,8 +1421,10 @@
     {
       "name": "green cabbage",
       "aliases": [
-        "cabbage green",
-        "green cabbage"
+        "cabbage, green",
+        "green cabbage",
+        "cabbage leaf",
+        "cabbage leaves"
       ]
     },
     {
@@ -1342,7 +1440,9 @@
       "aliases": [
         "cauliflower",
         "cauliflower florets",
-        "cauliflower florettes"
+        "cauliflower florettes",
+        "head cauliflower",
+        "head of cauliflower"
       ]
     },
     {
@@ -1353,7 +1453,11 @@
         "celery ribs",
         "celery stalk",
         "celery stalks",
-        "stalk celery"
+        "stalk celery",
+        "heart of celery",
+        "hearts of celery",
+        "leafy heart of celery",
+        "leafy hearts of celery"
       ]
     },
     {
@@ -1408,7 +1512,6 @@
       "name": "lemon",
       "aliases": [
         "lemon",
-        "lemon zested",
         "lemons"
       ]
     },
@@ -1478,8 +1581,6 @@
       "name": "yellow onion",
       "aliases": [
         "yellow onion",
-        "yellow onion -",
-        "yellow onion fine",
         "yellow onions"
       ]
     },
@@ -1497,11 +1598,19 @@
       ]
     },
     {
+      "name": "lemon peel",
+      "aliases": [
+        "lemon peel",
+        "lemon rind"
+      ]
+    },
+    {
       "name": "lemon zest",
       "aliases": [
         "lemon zest",
         "zested lemon",
-        "lemon, zested"
+        "lemon, zested",
+        "zest of lemon"
       ]
     },
     {
@@ -1639,7 +1748,9 @@
       "name": "banana",
       "aliases": [
         "banana",
-        "bananas"
+        "bananas",
+        "gros michel",
+        "cavendish"
       ]
     },
     {
@@ -1807,9 +1918,17 @@
       ]
     },
     {
+      "name": "calasparra rice",
+      "aliases": [
+        "calasparra rice",
+        "calasparra"
+      ]
+    },
+    {
       "name": "bomba rice",
       "aliases": [
-        "bomba rice"
+        "bomba rice",
+        "bomba"
       ]
     },
     {
@@ -1849,6 +1968,16 @@
       "name": "pasta",
       "aliases": [
         "pasta"
+      ]
+    },
+    {
+      "name": "angel hair",
+      "aliases": [
+        "angel hair",
+        "angel hair pasta",
+        "angel hair noodles",
+        "dry angel hair",
+        "dry angel hair pasta"
       ]
     },
     {
@@ -1920,7 +2049,8 @@
         "dried bean thread noodles",
         "bean thread noodles",
         "glass noodles",
-        "cellophane noodles"
+        "cellophane noodles",
+        "bean threads"
       ]
     },
     {
@@ -1938,10 +2068,24 @@
       ]
     },
     {
+      "name": "chorizo sausage",
+      "aliases": [
+        "chorizo sausage",
+        "chorizo",
+        "spanish chorizo"
+      ]
+    },
+    {
+      "name": "pancetta",
+      "aliases": [
+        "pancetta"
+      ]
+    },
+    {
       "name": "bacon",
       "aliases": [
         "bacon",
-        "pancetta"
+        "bacon strips"
       ]
     },
     {
@@ -2085,7 +2229,10 @@
       "name": "whole chicken leg",
       "aliases": [
         "whole chicken leg",
-        "whole chicken legs"
+        "whole chicken legs",
+        "whole chicken leg quarters",
+        "leg quarters",
+        "leg quarter"
       ]
     },
     {
@@ -2152,9 +2299,10 @@
       "name": "ground beef",
       "aliases": [
         "ground beef",
-        "ground beef chuck",
         "lean ground beef",
-        "minced beef"
+        "minced beef",
+        "beef mince",
+        "80-20 ground beef"
       ]
     },
     {
@@ -2184,7 +2332,8 @@
       "name": "italian sausage",
       "aliases": [
         "italian sausage",
-        "italian sausages"
+        "italian sausages",
+        "bulk italian sausage"
       ]
     },
     {
@@ -2279,6 +2428,12 @@
       ]
     },
     {
+      "name": "veal",
+      "aliases": [
+        "veal"
+      ]
+    },
+    {
       "name": "clam juice",
       "aliases": [
         "clam juice"
@@ -2294,7 +2449,8 @@
     {
       "name": "crab meat",
       "aliases": [
-        "crab meat"
+        "crab meat",
+        "crab"
       ]
     },
     {
@@ -2323,6 +2479,14 @@
       "aliases": [
         "shrimp",
         "prawns"
+      ]
+    },
+    {
+      "name": "butter flavoring",
+      "aliases": [
+        "butter flavoring",
+        "butter flavor",
+        "butter extract"
       ]
     },
     {
@@ -2516,6 +2680,15 @@
       "aliases": [
         "cashews",
         "cashew"
+      ]
+    },
+    {
+      "name": "coffee",
+      "aliases": [
+        "black coffee",
+        "strong black coffee",
+        "americano coffee",
+        "coffee"
       ]
     },
     {
@@ -3156,7 +3329,7 @@
       ]
     },
     {
-      "name": "better than bouillon",
+      "name": "base",
       "aliases": [
         "better than bouillon"
       ]
@@ -3184,6 +3357,13 @@
       "name": "cream of tartar",
       "aliases": [
         "cream of tartar"
+      ]
+    },
+    {
+      "name": "light soy sauce",
+      "aliases": [
+        "light soy sauce",
+        "light soy"
       ]
     },
     {
@@ -3293,9 +3473,20 @@
       ]
     },
     {
-      "name": "orange cheddar powder",
+      "name": "cheddar powder",
       "aliases": [
-        "orange cheddar powder"
+        "orange cheddar powder",
+        "powdered cheese",
+        "sharp cheddar powder",
+        "sharp white cheddar powder"
+      ]
+    },
+    {
+      "name": "vinegar powder",
+      "aliases": [
+        "vinegar powder",
+        "white vinegar powder",
+        "distilled white vinegar powder"
       ]
     },
     {
@@ -3312,6 +3503,13 @@
       ]
     },
     {
+      "name": "russet potatoes",
+      "aliases": [
+        "russet potatoes",
+        "russet potato"
+      ]
+    },
+    {
       "name": "red-skinned potatoes",
       "aliases": [
         "red-skinned potatoes",
@@ -3325,10 +3523,18 @@
       ]
     },
     {
+      "name": "romano beans",
+      "aliases": [
+        "romano beans",
+        "romano bean"
+      ]
+    },
+    {
       "name": "romano cheese",
       "aliases": [
         "romano cheese",
-        "romano"
+        "pecorino romano",
+        "pecorino romano cheese"
       ]
     },
     {
@@ -3355,6 +3561,28 @@
       "name": "savory salt",
       "aliases": [
         "savory salt"
+      ]
+    },
+    {
+      "name": "thai chile",
+      "aliases": [
+        "thai chile",
+        "thai chiles",
+        "thai chili",
+        "thai chilies"
+      ]
+    },
+    {
+      "name": "birds eye chile",
+      "aliases": [
+        "birds eye chile",
+        "birds eye chiles",
+        "birds eye chili",
+        "birds eye chilies",
+        "bird's eye chile",
+        "bird's eye chiles",
+        "bird's eye chili",
+        "bird's eye chilies"
       ]
     },
     {
@@ -3412,12 +3640,6 @@
       "name": "white cake mix",
       "aliases": [
         "white cake mix"
-      ]
-    },
-    {
-      "name": "wine reduction",
-      "aliases": [
-        "wine reduction"
       ]
     },
     {
@@ -3496,6 +3718,13 @@
       "aliases": [
         "croutons",
         "seasoned croutons"
+      ]
+    },
+    {
+      "name": "stock",
+      "aliases": [
+        "stock",
+        "bone broth"
       ]
     },
     {

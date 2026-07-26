@@ -7,3 +7,4 @@ playwright
 pyarrow
 python-dotenv
 requests
+sqlite3

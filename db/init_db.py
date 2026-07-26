@@ -296,30 +296,8 @@ def init_db():
             )
         """)
 
-        c.execute("""
-            CREATE TABLE IF NOT EXISTS usda_source_map (
-                fdc_id              INTEGER,
-                ingredient_id       INTEGER,
-                fdc_description     TEXT,
-                FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
-            )
-        """)
-
-        # Which attribute values select a given usda_source_map row, for
-        # identities that fan out to more than one FDC entry (e.g. raw vs
-        # cooked chicken breast -> two different fdc_ids, same identity).
-        # A mapping row with no conditions here applies unconditionally.
-        c.execute("""
-            CREATE TABLE IF NOT EXISTS usda_mapping_condition (
-                id                  INTEGER PRIMARY KEY,
-                fdc_id              INTEGER NOT NULL,
-                attribute_type_id   INTEGER NOT NULL,
-                value_id            INTEGER NOT NULL,
-                UNIQUE (fdc_id, attribute_type_id),
-                FOREIGN KEY(attribute_type_id) REFERENCES attribute_type(id),
-                FOREIGN KEY(value_id)          REFERENCES attribute_value(id)
-            )
-        """)
+        from gastrometric.pipeline.enrichment.usda.schema_usda import create_usda_tables
+        create_usda_tables(conn)
 
         # ----------------------------------------------------------------
         # Resolved recipe ingredients
@@ -421,6 +399,212 @@ def init_db():
 
         conn.commit()
 
+        # ----------------------------------------------------------------
+        # Nutrition Calculation
+        # ----------------------------------------------------------------
+
+       # One row per approved ingredient -> USDA mapping. Only mappings
+        # with status = 'approved' in data/nutrition_mappings.json are
+        # ever persisted here; 'unresolved' / missing mappings are
+        # skipped entirely by the ingestion step.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS nutrition_ingredient_mappings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ingredient_id INTEGER NOT NULL REFERENCES ingredients(id),
+                mapping_key TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'approved' CHECK (status = 'approved'),
+                source TEXT NOT NULL,
+                -- default_fdc_id/raw_fdc_id/cooked_fdc_id are NOT DB-level
+                -- foreign keys: usda_foods is a pre-existing table built by
+                -- the USDA ingestion script, and we can't assume fdc_id
+                -- carries a declared PRIMARY KEY / UNIQUE constraint there
+                -- (usda_food_portions.id turned out not to -- see the
+                -- comment on nutrition_mapping_portions below). A REFERENCES
+                -- clause against a column without such a constraint raises
+                -- "foreign key mismatch" the first time the table is
+                -- touched under PRAGMA foreign_keys = ON.
+                default_fdc_id INTEGER,
+                raw_fdc_id INTEGER,
+                cooked_fdc_id INTEGER,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                CHECK (default_fdc_id IS NOT NULL OR raw_fdc_id IS NOT NULL)
+            )
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_nutrition_mappings_ingredient_id
+            ON nutrition_ingredient_mappings(ingredient_id)
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_nutrition_mappings_default_fdc_id
+            ON nutrition_ingredient_mappings(default_fdc_id)
+        """)
+        # Not UNIQUE: two distinct mapping_key entries in
+        # nutrition_mappings.json could plausibly resolve to the same
+        # canonical ingredient_id (e.g. near-duplicate ingredient
+        # names). Ingestion enforces "at most one mapping per
+        # ingredient per rebuild" deterministically in Python (see
+        # ingest_mappings.py) rather than via a DB constraint, so a
+        # data-quality collision surfaces as a diagnostic instead of a
+        # crash.
+ 
+        # Declares which specific usda_food_portions row satisfies which
+        # nominal recipe measurement ("modifier") for a mapped USDA
+        # food -- e.g. "tbsp" -> usda_food_portions row 85577. The gram
+        # weight itself always lives in usda_food_portions; this table
+        # only records which portion row applies. No food-specific
+        # conversion factors are hard-coded here or in Python.
+        #
+        # state ties each portion to the specific fdc_id it was declared
+        # under in nutrition_mappings.json ('default' -> default_fdc_id,
+        # 'raw' -> raw_fdc_id, 'cooked' -> cooked_fdc_id). This is required
+        # because a single ingredient mapping can have different USDA
+        # portions per state (e.g. brussels sprouts "cup, raw" vs
+        # "cup, cooked" are different usda_food_portions rows with
+        # different gram weights) -- without this column there would be
+        # no way to tell a raw portion from a cooked one once both are
+        # persisted under the same mapping_id.
+        #
+        # usda_portion_id is NOT a DB-level foreign key: usda_food_portions
+        # is a pre-existing table populated by the USDA ingestion script,
+        # and its "id" column isn't declared PRIMARY KEY / UNIQUE there,
+        # so SQLite can't validate a REFERENCES clause against it
+        # ("foreign key mismatch"). Referential integrity is instead
+        # enforced in Python at ingestion time (see ingest_mappings.py),
+        # which checks the portion exists and belongs to the exact fdc_id
+        # for its declared state before inserting.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS nutrition_mapping_portions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                mapping_id INTEGER NOT NULL REFERENCES nutrition_ingredient_mappings(id)
+                    ON DELETE CASCADE,
+                state TEXT NOT NULL DEFAULT 'default'
+                    CHECK (state IN ('default', 'raw', 'cooked')),
+                usda_portion_id INTEGER NOT NULL,
+                modifier TEXT,
+                notes TEXT
+            )
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_nutrition_mapping_portions_mapping_state
+            ON nutrition_mapping_portions(mapping_id, state)
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_nutrition_mapping_portions_usda_portion_id
+            ON nutrition_mapping_portions(usda_portion_id)
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_nutrition_mapping_portions_mapping_id
+            ON nutrition_mapping_portions(mapping_id)
+        """)
+ 
+        # -------------------------------------------------------------
+        # NEW: nutrition result tables (line / section / recipe)
+        # -------------------------------------------------------------
+ 
+        # Level 1: per ingredient-line nutrition. Preserves everything
+        # needed to debug a single line's resolution independent of
+        # section/recipe aggregation.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS recipe_ingredient_line_nutrition (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                recipe_ingredient_id INTEGER NOT NULL REFERENCES recipe_ingredients(id),
+                recipe_id INTEGER NOT NULL,
+                recipe_section_id INTEGER,
+                ingredient_id INTEGER REFERENCES ingredients(id),
+                mapping_id INTEGER REFERENCES nutrition_ingredient_mappings(id),
+                -- Not a DB-level FK for the same reason as
+                -- nutrition_ingredient_mappings.default_fdc_id above.
+                resolved_fdc_id INTEGER,
+                resolved_state TEXT CHECK (resolved_state IN ('raw', 'cooked')),
+                resolved_grams REAL,
+                calories REAL,
+                protein REAL,
+                total_fat REAL,
+                saturated_fat REAL,
+                monounsaturated_fat REAL,
+                polyunsaturated_fat REAL,
+                carbohydrates REAL,
+                sugars REAL,
+                fiber REAL,
+                sodium REAL,
+                status TEXT NOT NULL,
+                source TEXT,
+                diagnostic_notes TEXT,
+                calculated_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_line_nutrition_recipe_ingredient_id
+            ON recipe_ingredient_line_nutrition(recipe_ingredient_id)
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_line_nutrition_recipe_id
+            ON recipe_ingredient_line_nutrition(recipe_id)
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_line_nutrition_section_id
+            ON recipe_ingredient_line_nutrition(recipe_section_id)
+        """)
+ 
+        # Level 2: per recipe-section nutrition, aggregated from
+        # recipe_ingredient_line_nutrition. Persisted as a first-class
+        # result so other Gastrometric tools can substitute/reuse a
+        # section's nutrition without recomputing it.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS recipe_section_nutrition (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                recipe_id INTEGER NOT NULL,
+                recipe_section_id INTEGER NOT NULL,
+                section_name TEXT,
+                total_grams REAL,
+                calories REAL,
+                protein REAL,
+                total_fat REAL,
+                saturated_fat REAL,
+                monounsaturated_fat REAL,
+                polyunsaturated_fat REAL,
+                carbohydrates REAL,
+                sugars REAL,
+                fiber REAL,
+                sodium REAL,
+                status TEXT NOT NULL,
+                calculated_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_section_nutrition_recipe_id
+            ON recipe_section_nutrition(recipe_id)
+        """)
+        c.execute("""
+            CREATE UNIQUE INDEX IF NOT EXISTS uq_section_nutrition_recipe_section
+            ON recipe_section_nutrition(recipe_id, recipe_section_id)
+        """)
+ 
+        # Level 3: whole-recipe nutrition, aggregated from
+        # recipe_section_nutrition. No per-serving math happens here.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS recipe_nutrition (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                recipe_id INTEGER NOT NULL,
+                total_grams REAL,
+                calories REAL,
+                protein REAL,
+                total_fat REAL,
+                saturated_fat REAL,
+                monounsaturated_fat REAL,
+                polyunsaturated_fat REAL,
+                carbohydrates REAL,
+                sugars REAL,
+                fiber REAL,
+                sodium REAL,
+                status TEXT NOT NULL,
+                calculated_at TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+        c.execute("""
+            CREATE UNIQUE INDEX IF NOT EXISTS uq_recipe_nutrition_recipe_id
+            ON recipe_nutrition(recipe_id)
+        """)
 
 def main():
     try:
