@@ -1,0 +1,14 @@
+[
+  {
+    "name": "USDA FoodData Central",
+    "version": "Legacy",
+    "description": "USDA food portion terminology",
+    "authority_level": 100
+  },
+  {
+    "name": "Gastrometric",
+    "version": "1",
+    "description": "Curated culinary knowledge",
+    "authority_level": 1000
+  }
+]

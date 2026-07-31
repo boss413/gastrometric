@@ -1,7 +1,7 @@
 # ============================================================
 # BUILD INGREDIENTS
 #
-# Loads data/ingredients.json (the curated seed of ingredient identities)
+# Loads data/seed/ingredients.json (the curated seed of ingredient identities)
 # into ingredients / ingredient_aliases / attribute_type / attribute_value
 # / identity_attribute_rule / identity_attribute_allowed_value.
 #
@@ -17,7 +17,7 @@
 
 import json
 
-from gastrometric.config.paths import DATA_DIR, DB_PATH
+from gastrometric.config.paths import SEED_DIR, DB_PATH
 from gastrometric.pipeline.normalize.ingredient_identity import (
     get_or_create_ingredient,
     add_alias,
@@ -27,7 +27,7 @@ from gastrometric.pipeline.normalize.ingredient_identity import (
     set_allowed_values,
 )
 
-INGREDIENTS_JSON_PATH = DATA_DIR / "ingredients.json"
+INGREDIENTS_JSON_PATH = SEED_DIR / "ingredients.json"
 
 
 def build_ingredients(conn=None):
@@ -39,26 +39,26 @@ def build_ingredients(conn=None):
     with open(INGREDIENTS_JSON_PATH) as f:
         data = json.load(f)
 
-    # --- 1. attribute vocabulary first: identities reference these by name ---
-    attr_type_ids = {}       # type_name -> attribute_type.id
-    attr_value_ids = {}      # (type_name, value) -> attribute_value.id
+    # # --- 1. attribute vocabulary first: identities reference these by name ---
+    # attr_type_ids = {}       # type_name -> attribute_type.id
+    # attr_value_ids = {}      # (type_name, value) -> attribute_value.id
 
-    for type_name, spec in data["attribute_types"].items():
-        type_id = get_or_create_attribute_type(
-            conn, type_name, value_kind=spec["value_kind"]
-        )
-        attr_type_ids[type_name] = type_id
-        if spec["value_kind"] == "enum":
-            for v in spec.get("values", []):
-                attr_value_ids[(type_name, v)] = get_or_create_attribute_value(
-                    conn, type_id, v
-                )
-        # free_text types (e.g. "brand") have no fixed value list —
-        # any "known_values" given per-identity below are illustrative
-        # only (e.g. "Diamond Crystal"/"Morton" for kosher salt's
-        # brand), not a closed set to validate against, so they are
-        # NOT loaded into attribute_value. They stay visible in
-        # ingredients.json itself as curation-time reference.
+    # for type_name, spec in data["attribute_types"].items():
+    #     type_id = get_or_create_attribute_type(
+    #         conn, type_name, value_kind=spec["value_kind"]
+    #     )
+    #     attr_type_ids[type_name] = type_id
+    #     if spec["value_kind"] == "enum":
+    #         for v in spec.get("values", []):
+    #             attr_value_ids[(type_name, v)] = get_or_create_attribute_value(
+    #                 conn, type_id, v
+    #             )
+    #     # free_text types (e.g. "brand") have no fixed value list —
+    #     # any "known_values" given per-identity below are illustrative
+    #     # only (e.g. "Diamond Crystal"/"Morton" for kosher salt's
+    #     # brand), not a closed set to validate against, so they are
+    #     # NOT loaded into attribute_value. They stay visible in
+    #     # ingredients.json itself as curation-time reference.
 
     # --- 2. identities, aliases, attribute rules ---
     identities_loaded = 0
@@ -77,37 +77,37 @@ def build_ingredients(conn=None):
             else:
                 alias_collisions.append((alias, name))
 
-        for attr_name, spec in ident.get("attributes", {}).items():
-            if attr_name not in attr_type_ids:
-                unknown_attr_refs.append((name, attr_name))
-                continue
-            type_id = attr_type_ids[attr_name]
-            required = bool(spec.get("required", False))
+        # for attr_name, spec in ident.get("attributes", {}).items():
+        #     if attr_name not in attr_type_ids:
+        #         unknown_attr_refs.append((name, attr_name))
+        #         continue
+        #     type_id = attr_type_ids[attr_name]
+        #     required = bool(spec.get("required", False))
 
-            default_value_id = None
-            default_val = spec.get("default")
-            if default_val:
-                default_value_id = attr_value_ids.get((attr_name, default_val))
+        #     default_value_id = None
+        #     default_val = spec.get("default")
+        #     if default_val:
+        #         default_value_id = attr_value_ids.get((attr_name, default_val))
 
-            rule_id = add_attribute_rule(
-                conn, ingredient_id, type_id,
-                required_for_match=required,
-                default_value_id=default_value_id,
-            )
+        #     rule_id = add_attribute_rule(
+        #         conn, ingredient_id, type_id,
+        #         required_for_match=required,
+        #         default_value_id=default_value_id,
+        #     )
 
-            # "allowed" (enum types) restricts the otherwise-global value
-            # list for this identity specifically (e.g. chicken breast's
-            # `state` is only ever raw/cooked, not the full global list
-            # that also includes partially_cooked/undercooked/etc. for
-            # identities where those distinctions matter).
-            allowed = spec.get("allowed")
-            if allowed:
-                value_ids = [
-                    attr_value_ids[(attr_name, v)]
-                    for v in allowed
-                    if (attr_name, v) in attr_value_ids
-                ]
-                set_allowed_values(conn, rule_id, value_ids)
+            # # "allowed" (enum types) restricts the otherwise-global value
+            # # list for this identity specifically (e.g. chicken breast's
+            # # `state` is only ever raw/cooked, not the full global list
+            # # that also includes partially_cooked/undercooked/etc. for
+            # # identities where those distinctions matter).
+            # allowed = spec.get("allowed")
+            # if allowed:
+            #     value_ids = [
+            #         attr_value_ids[(attr_name, v)]
+            #         for v in allowed
+            #         if (attr_name, v) in attr_value_ids
+            #     ]
+            #     set_allowed_values(conn, rule_id, value_ids)
 
         identities_loaded += 1
 

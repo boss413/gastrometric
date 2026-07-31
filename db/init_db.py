@@ -1,20 +1,16 @@
 import sqlite3
 from gastrometric.config.paths import DB_PATH, DATA_DIR
-
-
+from pathlib import Path
+DEFAULT_DB_PATH = Path("gastrometric.db")
 def init_db():
     print(f"Building gastrometric.db at: {DB_PATH}")
-
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
-
         # ----------------------------------------------------------------
         # Core recipe tables
         # Creation order matters: parent tables before child tables.
         # ----------------------------------------------------------------
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS recipes (
                 id                      INTEGER PRIMARY KEY,
@@ -30,7 +26,6 @@ def init_db():
                 recipe_ingestion_method TEXT        -- 'manual'
             )
         """)
-
         # One row per named section (e.g. "Cook the aromatics").
         # ingredient_block and instruction_block stored as raw blobs — no splitting here.
         c.execute("""
@@ -45,7 +40,6 @@ def init_db():
                 FOREIGN KEY(recipe_id) REFERENCES recipes(id)
             )
         """)
-
         # One row per section — raw ingredient blob, unsplit.
         # Sole input to parse_ingredient_lines.
         c.execute("""
@@ -60,7 +54,6 @@ def init_db():
                 FOREIGN KEY(recipe_section_id) REFERENCES recipe_sections(id)
             )
         """)
-
         # One row per section — raw instruction blob, unsplit.
         c.execute("""
             CREATE TABLE IF NOT EXISTS recipe_instruction_blocks (
@@ -74,14 +67,81 @@ def init_db():
                 FOREIGN KEY(recipe_section_id) REFERENCES recipe_sections(id)
             )
         """)
-
+        # ----------------------------------------------------------------
+        # Knowledge Tables
+        # ----------------------------------------------------------------
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS culinary_sources (
+                source_id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                name                TEXT NOT NULL UNIQUE,
+                version             TEXT,
+                description         TEXT,
+                authority_level     INTEGER NOT NULL DEFAULT 100,
+                created_at          TEXT DEFAULT (datetime('now'))
+            )  
+        """)
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS culinary_vocabulary (
+                vocabulary_id       INTEGER PRIMARY KEY AUTOINCREMENT,
+                term                TEXT NOT NULL UNIQUE,
+                vocabulary_class    TEXT NOT NULL,
+                observation_id      INTEGER REFERENCES culinary_observations(observation_id),
+                description         TEXT,
+                created_at          TEXT NOT NULL DEFAULT (datetime('now'))
+            )
+        """)
+                  
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_cv_class
+            ON culinary_vocabulary(vocabulary_class)      
+        """)
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS culinary_aliases (
+                alias_id            INTEGER PRIMARY KEY AUTOINCREMENT,
+                vocabulary_id       INTEGER NOT NULL
+                                        REFERENCES culinary_vocabulary(vocabulary_id),
+                alias_text          TEXT NOT NULL UNIQUE,
+                source_id           INTEGER
+                                        REFERENCES culinary_sources(source_id),
+                created_at          TEXT NOT NULL DEFAULT (datetime('now')))
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_ca_alias
+            ON culinary_aliases(alias_text)       
+        """)
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS culinary_observations (
+            observation_id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            source_id               INTEGER NOT NULL
+                                        REFERENCES culinary_sources(source_id),
+            source_record_type      TEXT,
+            source_record_id        TEXT,
+            field_name              TEXT,
+            raw_text                TEXT NOT NULL,
+            normalized_text         TEXT,
+            created_at              TEXT DEFAULT (datetime('now')),
+            UNIQUE (source_id, normalized_text, field_name))
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_co_source
+            ON culinary_observations(source_id)
+        """)
+        c.execute("""      
+            CREATE INDEX IF NOT EXISTS idx_co_normalized
+            ON culinary_observations(normalized_text)
+        """)
+        c.execute("""      
+            CREATE INDEX IF NOT EXISTS idx_observations_field ON culinary_observations(field_name)
+        """)
+        c.execute("""      
+            CREATE INDEX IF NOT EXISTS idx_aliases_vocabulary ON culinary_aliases(vocabulary_id)
+        """)
         # ----------------------------------------------------------------
         # Ingredient parse pipeline
         # recipe_ingredient_blocks
         #   → recipe_ingredient_lines_parsed  (parse_ingredient_lines)
         #   → ingredient_normalizations       (normalize_ingredient_lines)
         # ----------------------------------------------------------------
-
         # One row per ingredient line split from a block.
         # All enrichment columns start NULL; filled by downstream stages.
         c.execute("""
@@ -108,9 +168,31 @@ def init_db():
                 grams                   REAL,
                 ml                      REAL,
                 scaling                 TEXT,
+                -- ordered JSON list of technique/state phrases, source-text
+                -- order, e.g. '["peeled", "cut crosswise into 0.25-inch-thick slices"]'
+                -- intended to resolve 1:1 against the technique graph
                 preparation             TEXT,
+                -- free-text asides that are NOT techniques (yield/count notes,
+                -- secondary measures, can/jar size, "% by weight" notes, ...)
+                -- kept separate so they are never fed to the technique lookup
+                notes                   TEXT,
                 -- name as it appears after measurement / prep extraction
+                -- (lowercased, numbers rewritten — parser output, NOT
+                -- normalized or identity-resolved)
                 ingredient_name_raw     TEXT,
+                -- the same span sliced verbatim out of the ORIGINAL source
+                -- line: original casing/wording/hyphenation preserved.
+                -- Best-effort (see _recover_original_span); falls back to
+                -- ingredient_name_raw if no source words could be located.
+                ingredient_name_original TEXT,
+                -- non-NULL and shared between rows produced from the same
+                -- "X or Y" source line (mutual-exclusion relationship).
+                -- NULL for ordinary, non-alternative lines.
+                alt_group_id            TEXT,
+                -- which grammatical pattern produced the alt_group_id split:
+                -- 'ingredient' | 'measure' | 'scale' | NULL. See module
+                -- docstring. A syntactic classification, not an identity claim.
+                alt_kind                TEXT,
                 -- flags
                 optional                INTEGER DEFAULT 0,
                 -- audit
@@ -132,7 +214,6 @@ def init_db():
             CREATE INDEX IF NOT EXISTS idx_rilp_recipe_section_id
                 ON recipe_ingredient_lines_parsed (recipe_section_id)
         """)
-
         # Normalization log — name transformation only.
         # Join to recipe_ingredient_lines_parsed on parsed_line_id for all
         # other dimensions.
@@ -162,7 +243,6 @@ def init_db():
             CREATE INDEX IF NOT EXISTS idx_ingn_ingredient_name
                 ON ingredient_normalizations (ingredient_name)
         """)
-
         # ----------------------------------------------------------------
         # Ingredient identity
         #
@@ -184,16 +264,14 @@ def init_db():
         # separate ingredient relationships knowledge graph, rather than
         # kept as a third, weaker grouping concept alongside them.
         # ----------------------------------------------------------------
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS ingredients (
-                id              INTEGER PRIMARY KEY,
+                id              STR PRIMARY KEY,
                 ingredient_name TEXT UNIQUE NOT NULL,
                 notes           TEXT,
                 created_at      TEXT DEFAULT (datetime('now'))
             )
         """)
-
         # Variant spellings/names that resolve to one identity above.
         # alias is globally UNIQUE by design: if two identities both
         # claim the same alias, that's a curation bug to catch at
@@ -201,7 +279,7 @@ def init_db():
         c.execute("""
             CREATE TABLE IF NOT EXISTS ingredient_aliases (
                 id              INTEGER PRIMARY KEY,
-                ingredient_id   INTEGER NOT NULL,
+                ingredient_id   STR NOT NULL,
                 alias           TEXT UNIQUE NOT NULL,
                 confidence      REAL,
                 source          TEXT,   -- e.g. 'ingredients.json', 'manual'
@@ -212,7 +290,6 @@ def init_db():
             CREATE INDEX IF NOT EXISTS idx_ingredient_aliases_ingredient_id
                 ON ingredient_aliases (ingredient_id)
         """)
-
         # ----------------------------------------------------------------
         # Ingredient attributes
         #
@@ -226,7 +303,6 @@ def init_db():
         # attribute — brand is decorative for canned tomatoes but
         # required for kosher salt.
         # ----------------------------------------------------------------
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS attribute_type (
                 id              INTEGER PRIMARY KEY,
@@ -236,7 +312,6 @@ def init_db():
                 description     TEXT
             )
         """)
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS attribute_value (
                 id                  INTEGER PRIMARY KEY,
@@ -246,7 +321,6 @@ def init_db():
                 FOREIGN KEY(attribute_type_id) REFERENCES attribute_type(id)
             )
         """)
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS identity_attribute_rule (
                 id                      INTEGER PRIMARY KEY,
@@ -260,7 +334,6 @@ def init_db():
                 FOREIGN KEY(default_value_id)   REFERENCES attribute_value(id)
             )
         """)
-
         # Per-identity restriction of an enum attribute's otherwise-global
         # value list (e.g. chicken breast's `state` is only ever
         # raw/cooked, even though the global `state` vocabulary also
@@ -277,7 +350,6 @@ def init_db():
                 FOREIGN KEY(value_id)                   REFERENCES attribute_value(id)
             )
         """)
-
         # Attribute values actually observed on one resolved recipe
         # ingredient mention (recipe_ingredients row below).
         c.execute("""
@@ -295,10 +367,14 @@ def init_db():
                 FOREIGN KEY(value_id)             REFERENCES attribute_value(id)
             )
         """)
-
         from gastrometric.pipeline.enrichment.usda.schema_usda import create_usda_tables
         create_usda_tables(conn)
-
+        # usda_food_portions now exists (created by create_usda_tables above) —
+        # this index must be created after that call, not before it.
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_usda_portions_modifier
+            ON usda_food_portions(modifier)
+        """)
         # ----------------------------------------------------------------
         # Resolved recipe ingredients
         # Populated after canonical resolution — one row per ingredient
@@ -321,11 +397,9 @@ def init_db():
                 FOREIGN KEY(ingredient_id)     REFERENCES ingredients(id)
             )
         """)
-
         # ----------------------------------------------------------------
         # Flavor relationships
         # ----------------------------------------------------------------
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS relationships (
                 id          INTEGER PRIMARY KEY,
@@ -337,7 +411,6 @@ def init_db():
                 FOREIGN KEY(target_id) REFERENCES ingredients(id)
             )
         """)
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS flavor_bible_raw (
                 id          INTEGER PRIMARY KEY,
@@ -346,7 +419,6 @@ def init_db():
                 score       INTEGER
             )
         """)
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS flavor_bible_curated (
                 id              INTEGER PRIMARY KEY,
@@ -359,7 +431,6 @@ def init_db():
                 accompaniment   TEXT
             )
         """)
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS flavor_bible_normalized (
                 id              INTEGER PRIMARY KEY,
@@ -372,11 +443,9 @@ def init_db():
                 preparation     TEXT
             )
         """)
-
         # ----------------------------------------------------------------
         # Pantry / fridge
         # ----------------------------------------------------------------
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS pantry_items (
                 id              INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -387,7 +456,6 @@ def init_db():
                 FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
             )
         """)
-
         c.execute("""
             CREATE TABLE IF NOT EXISTS fridge_items (
                 id              INTEGER PRIMARY KEY,
@@ -396,13 +464,10 @@ def init_db():
                 FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
             )
         """)
-
         conn.commit()
-
         # ----------------------------------------------------------------
         # Nutrition Calculation
         # ----------------------------------------------------------------
-
        # One row per approved ingredient -> USDA mapping. Only mappings
         # with status = 'approved' in data/nutrition_mappings.json are
         # ever persisted here; 'unresolved' / missing mappings are
@@ -605,11 +670,9 @@ def init_db():
             CREATE UNIQUE INDEX IF NOT EXISTS uq_recipe_nutrition_recipe_id
             ON recipe_nutrition(recipe_id)
         """)
-
 def main():
     try:
         init_db()
-
         with sqlite3.connect(DB_PATH) as conn:
             c = conn.cursor()
             c.execute("""
@@ -618,13 +681,9 @@ def main():
                 WHERE type = 'table'
             """)
             table_count = c.fetchone()[0]
-
         print(f"{DB_PATH.name} initialised with {table_count} tables")
-
     except Exception:
         print("database failed to initialise")
         raise
-
-
 if __name__ == "__main__":
     main()

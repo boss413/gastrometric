@@ -1,312 +1,136 @@
 # ingredient_vocabulary.py
 #
-# Shared vocabulary for the ingredient parsing pipeline.
-# Imported by parse_ingredient_lines.py and normalize_ingredient_lines.py.
+# Vocabulary for NORMALIZE-TIME surface-form cleanup, plus a layer of
+# rules (flagged explicitly below) that are NOT normalization at all —
+# they are identity decisions that were incorrectly encoded as text
+# rules and have not yet been migrated to the identity-resolution stage.
 #
-# Two clearly separate sections:
+# Pipeline position:
 #
-#   PARSE-TIME  (used by parse_ingredient_lines.py)
-#     Controls how raw text is split into qty / unit / prep / name.
+#   RAW RECIPE -> INGEST -> PARSE -> NORMALIZE -> IDENTITY RESOLUTION -> ...
+#                                     ^^^^^^^^^     ^^^^^^^^^^^^^^^^^^
+#                              this file, mostly     this file, partly
+#                                                     (flagged, to be moved)
 #
-#   NORMALIZE-TIME  (used by normalize_ingredient_lines.py)
-#     Pass 1 — TYPO_FIXES: correct spelling variants before any stripping.
-#     Pass 2 — QUALIFIER_STRIP_PATTERNS: remove words that wrap the core
-#               ingredient without being part of it.
+# THIS FILE IS NOT IMPORTED BY THE PARSER. Since the parser boundary
+# refactor, the PARSE stage (parse_ingredient_lines.py) gets its
+# vocabulary from two places, neither of which is this file:
 #
-# What "core ingredient" means here
-# ----------------------------------
-# The goal of normalization is a name clean enough for a human to recognize
-# and for a future ingredient_id lookup to match against.  Examples:
+#   parser_vocabulary.py              Permanent, parser-owned grammar:
+#                                       noise phrases, closed-class
+#                                       measurement units, truncation
+#                                       fixes. Not culinary knowledge,
+#                                       never sourced from the database.
 #
-#   "freshly ground black pepper"  →  "black pepper"
-#   "boneless skinless chicken breast"  →  "chicken breast"
-#   "extra-virgin olive oil"  →  "olive oil"
-#   "slivered almonds"  →  "almonds"      ← cut descriptor stripped
-#   "low-sodium chicken broth"  →  "chicken broth"
+#   culinary_vocabulary_bootstrap.py   Temporary static fallback for
+#                                       PARSE-time culinary knowledge
+#                                       (protected ingredient-name
+#                                       phrases, preparation/state
+#                                       vocabulary, portion terms),
+#                                       consumed only through
+#                                       vocabulary_provider.py, which is
+#                                       what actually lets that data come
+#                                       from `ingredients`/
+#                                       `ingredient_aliases`/
+#                                       `attribute_type`/`attribute_value`
+#                                       instead once seeded.
+#
+# THIS file remains the source for the NORMALIZE stage
+# (normalize_ingredient_lines.py) and is unaffected by that refactor —
+# TYPO_FIXES, QUALIFIER_STRIP_PATTERNS, DRIED_DISTINCT,
+# PROTECTED_PREP_PHRASES, and the plural/inflection rules below all still
+# live here, because normalize-time ownership wasn't in scope for the
+# parser boundary work. The re-exports below exist only so any existing
+# `from ingredient_vocabulary import NOISE_PHRASES` (etc.) style import
+# in the normalize stage keeps working; the canonical source for those
+# specific names is parser_vocabulary.py.
+#
+# ---------------------------------------------------------------------
+# IMPORTANT: identity decisions living in this file (not yet migrated)
+# ---------------------------------------------------------------------
+# A review found that several entries below don't just clean up surface
+# form — they decide that two DIFFERENT culinary ingredients are the
+# same thing, or replace one ingredient's name with another's. That is
+# identity resolution, and it belongs in a future identity-resolution
+# stage that consults the ingredient identity resource (ingredients.json)
+# as its source of truth, not in a hardcoded text-substitution list here.
+#
+# Each such entry is marked inline with:
+#     # IDENTITY DECISION — see file header
+#
+# Known examples (not exhaustive — this list is illustrative of the
+# category, not a complete audit):
+#   - TYPO_FIXES: "mahi mahi" -> "tuna"            (biologically wrong —
+#         a direct symptom of doing identity work by regex instead of by
+#         a real lookup against an identity resource)
+#   - TYPO_FIXES: "pancetta" -> "bacon"
+#   - TYPO_FIXES: "haddock|tilapia|sole" -> "whitefish"
+#   - TYPO_FIXES: "schmaltz|drippings" -> "rendered fat"
+#   - TYPO_FIXES: "v8" -> "tomato juice"
+#   - TYPO_FIXES: "guacamole" -> "avocado"
+#   - DRIED_DISTINCT (whole constant): "is dried-X a different ingredient
+#         than X" is an identity/substitutability judgment, not a surface-
+#         form rule.
+#   - PROTECTED_PREP_PHRASES (whole constant): the mirror-image judgment
+#         ("is ground-ginger a different ingredient than ginger").
+#
+# These are NOT being removed or fixed in this refactor — this pass is
+# scoped to the PARSE stage only. They are flagged so:
+#   (a) nothing new gets added to this category by accident, and
+#   (b) the eventual normalize/identity-resolution refactor has a map of
+#       what to migrate and where it should end up (identity resolution,
+#       consulting ingredients.json's identities + aliases, NOT a static
+#       list here).
+#
+# What normalization *should* be doing instead, for the genuinely-surface
+# entries in TYPO_FIXES (spelling, punctuation, regional spelling of the
+# SAME word — e.g. "chilli" -> "chili", "worchestershire" -> "worcestershire
+# sauce"): that part is fine to keep as-is; it's real normalization.
+#
+# What "core ingredient" means for QUALIFIER_STRIP_PATTERNS
+# -----------------------------------------------------------
+#   "freshly ground black pepper"  ->  "black pepper"
+#   "boneless skinless chicken breast"  ->  "chicken breast"
+#   "extra-virgin olive oil"  ->  "olive oil"
+#   "slivered almonds"  ->  "almonds"      <- cut descriptor stripped
+#   "low-sodium chicken broth"  ->  "chicken broth"
 #
 # What normalization must NOT do:
-#   "olive oil"  →  "oil"      ← that is canonicalization (downstream)
-#   "chicken breast"  →  "chicken"  ← same
+#   "olive oil"  ->  "oil"          <- that is identity resolution (downstream)
+#   "chicken breast"  ->  "chicken" <- same
 #
 # HOW TO EXTEND
 # -------------
-#   PROTECTED_PHRASES   Append phrases whose internal words must survive
-#                       prep/unit extraction unchanged.  Longer phrases
-#                       should come first (sorted at runtime anyway).
-#
-#   NOISE_PHRASES       Strings erased entirely from the name during parsing.
-#
-#   PREP_PATTERNS       Ordered list of regex strings.  Multi-word / more-
-#                       specific patterns MUST precede single-word patterns
-#                       that share a keyword with them.
-#
-#   TYPO_FIXES          List of (compiled_re, replacement) pairs.
-#                       Matched against lowercased ingredient_name_raw.
+#   TYPO_FIXES          List of (compiled_re, replacement) pairs, for
+#                       GENUINE spelling/punctuation variants only. If
+#                       the rule would make two different ingredients
+#                       resolve to the same name, it does not belong
+#                       here — flag it and route it to identity
+#                       resolution instead.
 #
 #   QUALIFIER_STRIP_PATTERNS
-#                       List of compiled regexes stripped from the name to
-#                       expose the core ingredient.  Applied in order;
-#                       whitespace is collapsed after each.
+#                       List of compiled regexes stripped from the name
+#                       to expose the core ingredient. Applied in order;
+#                       whitespace is collapsed after each. Only for
+#                       descriptors that are identity-neutral in all
+#                       cases (fresh/frozen/organic/boneless/...).
 
 import re
 
-
-# ============================================================
-# PARSE-TIME VOCABULARY
-# ============================================================
-
-# -----------------------------------------------------------
-# PROTECTED PHRASES
-# Temporarily tokenized so their internal words survive
-# prep/unit extraction (e.g. "ground" in "ground beef").
-# -----------------------------------------------------------
-
-PROTECTED_PHRASES = [
-    # dairy
-    "half-and-half", "half and half", "half & half",
-    "heavy cream", "whipping cream",
-    "cream of tartar", "cream of wheat", "cream of mushroom soup",
-    # flour
-    "all purpose flour", "all-purpose flour", "bread flour", "cake flour",
-    "whole wheat flour", "self rising flour", "self-rising flour",
-    # pepper compounds — longest first so "freshly ground black pepper" beats "black pepper"
-    "freshly ground black pepper", "freshly ground pepper",
-    "ground black pepper", "ground white pepper",
-    "crushed red pepper flakes", "crushed red pepper", "red pepper flakes",
-    # ground meats
-    "ground beef", "ground pork", "ground turkey",
-    "ground chicken", "ground lamb", "pork ribs", "beef ribs", "baby back ribs", 
-    "spare ribs", "short ribs", "style ribs",
-    # ground spices
-    "ground coriander", "ground cumin", "ground ginger", "ground cinnamon",
-    "ground nutmeg", "ground allspice", "ground cloves", "ground cardamom",
-    "ground turmeric", "ground paprika", "ground mustard", "ground fennel",
-    # dried herbs
-    "dried thyme", "dried oregano", "dried basil", "dried rosemary",
-    "dried sage", "dried parsley", "dried dill", "dried mint", "dried chili",
-    "dried rubbed sage",
-    # oils (protect "extra virgin" from being parsed as size + adj)
-    "extra virgin olive oil", "extra-virgin olive oil",
-    "olive oil", "vegetable oil", "canola oil",
-    "sesame oil", "coconut oil",
-    # sugars
-    "brown sugar", "white sugar", "granulated sugar",
-    "powdered sugar", "confectioners sugar", "confectioners' sugar",
-    # sauces
-    "soy sauce", "fish sauce", "hot sauce", "worcestershire sauce",
-    # cheeses
-    "parmesan cheese", "cheddar cheese", "mozzarella cheese",
-    # onions
-    "green onions", "spring onions",
-    "red onion", "yellow onion", "white onion",
-    # tomatoes
-    "crushed tomatoes", "diced tomatoes", "tomato paste", "tomato sauce",
-    # water compounds (protect "boiling" from being extracted as a state adj)
-    "boiling water", "cold water", "ice water", "warm water",
-    # other
-    "spanish chorizo",
-]
-
-
-# -----------------------------------------------------------
-# NOISE PHRASES
-# Removed entirely from ingredient text (not moved to prep).
-# -----------------------------------------------------------
-
-NOISE_PHRASES = [
-    "plus more", "as needed", "to taste", "if desired",
-    "as desired", "optional", "if needed", "add more"
-]
-
-
-# -----------------------------------------------------------
-# PREP PATTERNS
-# Multi-word / more-specific patterns MUST precede the single-word
-# patterns that share a keyword with them.
-# -----------------------------------------------------------
-
-PREP_PATTERNS = [
-    # --- multi-word cut patterns ---
-    r'chopped into large chunks',
-    r'chopped into small chunks',
-    r'chopped into bite[- ]sized chunks',
-    r'chopped into bite[- ]sized pieces',
-    r'chopped into chunks',
-    r'chopped into pieces',
-    # --- generalized "<verb> in/into <size>-inch <shape>" cut patterns ---
-    # Covers cut/sliced/chopped/torn, "in" or "into", an optional "N by "
-    # cross-dimension prefix (e.g. "1 by 1/8-inch"), and any of the common
-    # trailing shape nouns (singular or plural). One flexible family here
-    # replaces what used to be a dozen near-duplicate, easy-to-miss entries
-    # (e.g. no "dice"/"cubes"/"rings"/"wedges" variant existed before,
-    # which left the "-inch" token stranded in ingredient_name_raw).
-    r'(?:cut|sliced|chopped|torn)\s+(?:crosswise\s+|lengthwise\s+)?'
-    r'(?:in|into)\s+(?:\d[\d./]*\s*(?:x|by)\s*)?\d[\d./]*-inch[a-z-]*\s+'
-    r'(?:rounds?|pieces?|chunks?|strips?|cubes?|dice|wedges?|'
-    r'matchsticks?|batons?|slices?|rings?)',
-    r'(?:cut|sliced|chopped|torn)\s+(?:crosswise\s+|lengthwise\s+)?'
-    r'(?:in|into)\s+(?:\d[\d./]*\s*(?:x|by)\s*)?\d[\d./]*"[a-z-]*\s+'
-    r'(?:rounds?|pieces?|chunks?|strips?|cubes?|dice|wedges?|'
-    r'matchsticks?|batons?|slices?|rings?)',
-    r'very thinly sliced',
-    r'thinly sliced',
-    r'roughly chopped',
-    r'finely chopped',
-    r'coarsely chopped',
-    r'chopped fine',
-    r'sliced thinly',
-    r'sliced thin',
-    r'finely sliced',
-    r'finely minced',
-    r'diced fine',
-    r'(?:cut|sliced|chopped|torn)\s+(?:crosswise\s+|lengthwise\s+)?'
-    r'(?:in|into)\s+\d[\d./]*\s+'
-    r'(?:rounds?|pieces?|chunks?|strips?|cubes?|dice|wedges?|'
-    r'matchsticks?|batons?|slices?|rings?)',
-    r'cut into pieces',
-    r'cut into chunks',
-    r'cut into strips',
-    r'cut into rounds',
-    r'cut into bite[- ]sized chunks',
-    r'cut into bite[- ]sized pieces',
-    r'cut in half',
-    r'cut in \d+ pieces',
-    r'cut in \d+',
-    r'sliced into bite[- ]sized chunks',
-    r'sliced into bite[- ]sized pieces',
-    r'cut crosswise into [^,;]+',
-    r'sliced crosswise into [^,;]+',
-    r'crosswise into [^,;]+',
-    r'cut lengthwise into [^,;]+',
-    r'sliced lengthwise into [^,;]+',
-    r'lengthwise into [^,;]+',
-    r'quartered lengthwise',
-    r'halved lengthwise',
-    r'sliced lengthwise',
-    r'cut lengthwise',
-    r'stems removed',
-    r'crust removed',
-    # --- purpose phrases ---
-    # NOTE: "for dusting" / "for sprinkling" / "for greasing" etc. are
-    # intentionally NOT here. They describe what the ingredient is used
-    # for, not a technique applied to it, so they're captured whole (e.g.
-    # "for greasing the pan") as a note by _clean_name's trailing
-    # "for <purpose>" handling instead of being partially eaten here.
-    # --- packing ---
-    r'loosely packed',
-    # --- state / cut adjectives (single-word, must come after multi-word) ---
-    r'\bde-stemmed\b',
-    r'\bde-veined\b',
-    r'\bboneless\b',
-    r'\bskinless\b',
-    r'\bdiced?\b',
-    r'\bfinely\b',
-    r'\bcoarsely\b',
-    r'\broughly\b',
-    r'\bchopped\b',
-    r'\bminced\b',
-    r'\bsliced\b',
-    r'\bpeeled\b',
-    r'\bgrated\b',
-    r'\bcrushed\b',
-    r'\bseeded\b',
-    r'\bbeaten\b',
-    r'\bwashed\b',
-    r'\bmashed\b',
-    r'\bscrubbed\b',
-    r'\btrimmed\b',
-    r'\bseparated\b',
-    r'\bdivided\b',
-    r'\bmelted\b',
-    r'\bcubed\b',
-    r'\bsifted\b',
-    r'\bpacked\b',
-    r'\bsoftened\b',
-    r'\bshredded\b',
-    r'\bcut\b',
-    r'\bhalved\b',
-    r'\bquartered\b',
-    r'\bcracked\b',
-    r'\bcored\b',
-    r'\bdeveined\b',
-    r'\bdebearded\b',
-    r'\bpatted dry\b',
-    r'\blengthwise\b',
-    r'\bcrosswise\b',
-]
-
-
-# -----------------------------------------------------------
-# TEMPERATURE / STATE PATTERNS  (moved to prep, not name)
-# -----------------------------------------------------------
-
-TEMPERATURE_STATE_PATTERNS = [
-    r'at\s+room[\s-]temperature',
-    r'room[\s-]temperature',
-    r'very\s+cold',
-    r'very\s+hot',
-    r'\bboiling\b(?!\s+water)',   # "boiling water" is protected above
-    r'\bchilled\b',
-    r'\bcold\b',
-    r'\bwarmed?\b',
-    r'\bhot\b',
-    r'\bfrozen\b',
-    r'\bthawed\b',
-    r'\biced\b',
-    r'\brefrigerated\b',
-    r'\bfresh(?:ly)?\b',
-]
-
-
-# -----------------------------------------------------------
-# UNIT SETS
-# -----------------------------------------------------------
-
-GRAM_UNITS = frozenset({
-    'g', 'kg', 'gram', 'grams', 'kilogram', 'kilograms',
-})
-ML_UNITS = frozenset({
-    'ml', 'mls', 'milliliter', 'milliliters', 'millilitre', 'millilitres',
-    'liter', 'liters', 'litre', 'litres', 'l',
-})
-IMPERIAL_WEIGHT_UNITS = frozenset({
-    'oz', 'ounce', 'ounces', 'lb', 'pound', 'pounds',
-})
-IMPERIAL_VOLUME_UNITS = frozenset({
-    'cup', 'cups',
-    'tbsp', 'tablespoon', 'tablespoons',
-    'tsp', 'teaspoon', 'teaspoons',
-    'pint', 'pints',
-    'quart', 'quarts', 'qt',
-    'gallon', 'gallons',
-    'fl oz', 'fluid ounce', 'fluid ounces',
-})
-
-# Full recognized unit token set (used in or-alternative splitting)
-UNIT_VOCAB = (
-    GRAM_UNITS | ML_UNITS | IMPERIAL_WEIGHT_UNITS | IMPERIAL_VOLUME_UNITS | {
-        'part', 'pinch', 'pinches', 'handful', 'recipe',
-        'sprig', 'sprigs', 'head', 'bunch', 'stalks',
-        'leaf', 'clove', 'cloves', 'stick', 'sticks', 'riibs', 'ribs', 'rib', 'slice', 'slices', 'strip',
-        'strips', 'slices', 'box', 'can', 'cans', 'jar', 'bottle',
-    }
+from gastrometric.config.parser_vocabulary import (  # noqa: F401  (re-exported for compatibility)
+    NOISE_PHRASES,
+    GRAM_UNITS,
+    ML_UNITS,
+    IMPERIAL_WEIGHT_UNITS,
+    IMPERIAL_VOLUME_UNITS,
+    
 )
-
-
-# -----------------------------------------------------------
-# TRUNCATION FIXES  (OCR / copy-paste truncation repair)
-# Applied as a final pass during parsing, before writing ingredient_name_raw.
-# -----------------------------------------------------------
-
-TRUNCATION_FIXES = {
-    r'\boi\b':           "oil",
-    r'\bsausag\b':       "sausage",
-    r'\bleav\b':         "leaves",
-    r'\bnoodl\b':        "noodle",
-    r'\bchiv\b':         "chive",
-    r'\bparsley leav\b': "parsley leaves",
-}
-
+from gastrometric.config.culinary_vocabulary_bootstrap import (  # noqa: F401
+    PROTECTED_PHRASES,
+    PREP_PATTERNS,
+    TEMPERATURE_STATE_PATTERNS,
+    PORTION_TERMS,
+)
 
 # ============================================================
 # NORMALIZE-TIME VOCABULARY
@@ -338,13 +162,13 @@ TYPO_FIXES = [
     (re.compile(r'\byams?\b',             re.I), "sweet potato"),
     (re.compile(r'\bprawns?\b',           re.I), "shrimp"),
     (re.compile(r'\bcalamari\b',          re.I), "squid"),
-    (re.compile(r'\bhaddock\b|\btilapia\b|\bsole\b', re.I), "whitefish"),
-    (re.compile(r'\bschmaltz?\b|\bdrippings\b', re.I), "rendered fat"),
+    (re.compile(r'\bhaddock\b|\btilapia\b|\bsole\b', re.I), "whitefish"),  # IDENTITY DECISION — see file header
+    (re.compile(r'\bschmaltz?\b|\bdrippings\b', re.I), "rendered fat"),  # IDENTITY DECISION — see file header
     # brand / trade names → generic
     (re.compile(r'\btabasco sauce\b',           re.I), "hot sauce"),
     (re.compile(r'\btabasco\b',           re.I), "hot sauce"),
     (re.compile(r'\bgrey poupon\b',       re.I), "dijon mustard"),
-    (re.compile(r'\bv8\b',               re.I), "tomato juice"),
+    (re.compile(r'\bv8\b',               re.I), "tomato juice"),  # IDENTITY DECISION — see file header
     (re.compile(r'\bpanko\b',            re.I), "bread crumbs"),
     # alternate spellings of flour types
     (re.compile(r'\bap flour\b',          re.I), "all-purpose flour"),
@@ -364,7 +188,7 @@ TYPO_FIXES = [
                 r'|\bchocolate chunks?\b|\bchocolate drops?\b', re.I), "chocolate chips"),
     (re.compile(r'\bsemi-?sweet chocolate\b|\bbittersweet chocolate\b', re.I), "chocolate"),
     # misc
-    (re.compile(r'\bguacamole\b',         re.I), "avocado"),
+    (re.compile(r'\bguacamole\b',         re.I), "avocado"),  # IDENTITY DECISION — see file header
     (re.compile(r'\bbrusselss?\b(?!\s+sprouts?)', re.I), "brussels sprouts"),
     # (?:s)? on "mushroom" absorbs an already-present "mushroom"/"mushrooms"
     # right after the variety name, so "porcini mushrooms" doesn't become
@@ -373,8 +197,8 @@ TYPO_FIXES = [
     (re.compile(r'\bportobello\b(?:\s+mushrooms?)?', re.I), "portobello mushroom"),
     (re.compile(r'\bshiitake\b(?:\s+mushrooms?)?',   re.I), "shiitake mushroom"),
     (re.compile(r'\bcrimini\b(?:\s+mushrooms?)?',    re.I), "crimini mushroom"),
-    (re.compile(r'\bmahi[- ]?mahi\b|\bmahi\b', re.I), "tuna"),
-    (re.compile(r'\bpancetta\b',          re.I), "bacon"),
+    (re.compile(r'\bmahi[- ]?mahi\b|\bmahi\b', re.I), "tuna"),  # IDENTITY DECISION — see file header
+    (re.compile(r'\bpancetta\b',          re.I), "bacon"),  # IDENTITY DECISION — see file header
     (re.compile(r'\bbasil pesto\b',       re.I), "pesto"),
     (re.compile(r'\bporkchop\b|\bloin chop\b', re.I), "pork chop"),
     (re.compile(r'\bleg quarter\b|\bdrumstick\b', re.I), "chicken leg"),
@@ -518,6 +342,10 @@ NON_INGREDIENT_HINTS = [
 # shorter ones sharing a keyword.
 # -----------------------------------------------------------
 
+# IDENTITY DECISION — see file header. This entire constant is a
+# same-vs-different-ingredient judgment (e.g. "is ground ginger a
+# different ingredient than ginger?") and belongs in identity
+# resolution, consulting ingredients.json's identities, not here.
 PROTECTED_PREP_PHRASES = [
     # dairy — "sour" and "sweet" are part of the name, not descriptors
     "sour cream",
@@ -598,6 +426,10 @@ PROTECTED_PREP_PHRASES = [
 # before checking, so plurals are covered automatically.
 # -----------------------------------------------------------
 
+# IDENTITY DECISION — see file header. Whether "dried X" is a distinct
+# ingredient from "X" is a substitutability/identity judgment, not a
+# surface-form rule. Belongs in identity resolution, consulting
+# ingredients.json's identities, not here.
 DRIED_DISTINCT = {
     # stone fruits and berries — dried form is a categorically different product
     "apricot",
