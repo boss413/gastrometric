@@ -34,7 +34,7 @@ from __future__ import annotations
 import json
 import sqlite3
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from ..builder import KnowledgeBuilder
 from ..models import BuildResult
@@ -55,6 +55,9 @@ VALID_VOCABULARY_CLASSES = {
     "brand",
     "seasoning",
     "state",
+    "grammar",
+    "tool",
+    "component"
 }
 
 
@@ -92,9 +95,21 @@ def _normalize(term: str, *, vocabulary_class: str) -> str:
     return normalized
 
 
-def _validate_and_normalize(raw: object) -> Dict[str, List[str]]:
+def _pluralize(term: str) -> str:
+    """Applies basic pluralization rules to singular nouns."""
+    if term.endswith("s"):
+        return term + "es"
+    elif term.endswith("fe"):
+        return term[:-2] + "ves"
+    elif term.endswith("f"):
+        return term[:-1] + "ves"
+    else:
+        return term + "s"
+
+
+def _validate_and_normalize(raw: object) -> Tuple[Dict[str, List[str]], List[str]]:
     """Validate the raw seed JSON and return normalized, deduplicated,
-    per-class term lists.
+    per-class term lists alongside any duplicate warnings.
 
     Raises SeedDataError on structural problems (bad top-level type, an
     unknown vocabulary class, a non-list value, or a non-string/empty
@@ -116,6 +131,10 @@ def _validate_and_normalize(raw: object) -> Dict[str, List[str]]:
         )
 
     normalized_by_class: Dict[str, List[str]] = {}
+    duplicate_warnings: List[str] = []
+    
+    # Classes that require automatic pluralization
+    PLURAL_TARGET_CLASSES = {"natural_portion", "measurement", "tool", "packaging", "component"}
 
     for vocabulary_class, entries in raw.items():
         if not isinstance(entries, list):
@@ -127,13 +146,30 @@ def _validate_and_normalize(raw: object) -> Dict[str, List[str]]:
         seen_in_class: Dict[str, None] = {}
         for entry in entries:
             normalized = _normalize(entry, vocabulary_class=vocabulary_class)
-            # Duplicate within the same class: import once, silently.
-            if normalized not in seen_in_class:
+            
+            # Check for standard duplicates
+            if normalized in seen_in_class:
+                duplicate_warnings.append(
+                    f'Duplicate term detected and deleted: "{normalized}" '
+                    f'in class "{vocabulary_class}"'
+                )
+            else:
                 seen_in_class[normalized] = None
+                
+            # Apply auto-pluralization for target noun classes
+            if vocabulary_class in PLURAL_TARGET_CLASSES:
+                plural = _pluralize(normalized)
+                if plural in seen_in_class:
+                    duplicate_warnings.append(
+                        f'Duplicate auto-plural detected and deleted: "{plural}" '
+                        f'in class "{vocabulary_class}"'
+                    )
+                else:
+                    seen_in_class[plural] = None
 
         normalized_by_class[vocabulary_class] = list(seen_in_class.keys())
 
-    return normalized_by_class
+    return normalized_by_class, duplicate_warnings
 
 
 def _find_ambiguous_terms(
@@ -168,7 +204,7 @@ class SeedCulinaryVocabularyBuilder(KnowledgeBuilder):
         with open(self.seed_path, "r", encoding="utf-8") as f:
             raw = json.load(f)
 
-        normalized_by_class = _validate_and_normalize(raw)
+        normalized_by_class, duplicate_warnings = _validate_and_normalize(raw)
 
         distinct_inputs = sum(len(terms) for terms in normalized_by_class.values())
         result.distinct_inputs = distinct_inputs
@@ -225,7 +261,7 @@ class SeedCulinaryVocabularyBuilder(KnowledgeBuilder):
         summary_lines.append(f"Already present (skipped): {already_present:,}")
 
         summary_lines.append("")
-        if ambiguous_in_seed or db_conflicts:
+        if ambiguous_in_seed or db_conflicts or duplicate_warnings:
             summary_lines.append("Warnings:")
             for term in sorted(ambiguous_in_seed):
                 classes = ", ".join(ambiguous_in_seed[term])
@@ -238,6 +274,8 @@ class SeedCulinaryVocabularyBuilder(KnowledgeBuilder):
                     f'  "{term}" already exists under a different class '
                     f"than the seed file specifies ({classes}); not changed"
                 )
+            for warning in duplicate_warnings:
+                summary_lines.append(f"  {warning}")
         else:
             summary_lines.append("Warnings: none")
 

@@ -1,40 +1,174 @@
-# Coleslaw (Applebee's)
+# Test Recipe
 Ingredients:
-14 oz. coleslaw mix
-¼ cup Freshly chopped cilantro
-¾ cup mayonnaise, add more if needed
-2 Tbsp sugar
-1 teaspoon white vinegar
-# Paella
-url: https://www.bonappetit.com/recipe/paella-de-pollo-con-verduras
-Author: Jose Andres
-Attribution: Bon Appetit
-Note: A 15" paella pan will provide the appropriate circumference to make a thin, even layer of seasoned rice. Because of its size, it’s important to move it around as you cook to ensure the entire surface of the dish gets time under direct heat. If you do not have a paella pan, use a comparably sized two-handled cast-iron or cast-aluminum skillet to make thin rice dishes that cook like paella, but ultimately, if you want to make a true paella, you should go and get yourself a paella pan.
+1 clove garlic
+1 garlic clove
+
+2 cups flour
+2 flour
+1 head lettuce
+3 sprigs thyme
+
+2 14-ounce cans tomatoes
+2 (14-ounce) cans tomatoes
+2 14 oz cans tomatoes
+3 750-ml bottles wine
+4 (6 oz.) bottles hot sauce
+
+2 medium carrots, peeled and diced
+2 carrots, peeled and seeded
+bell pepper, seeds and ribs removed
+corn, husks and silk removed
+
+salt and pepper
+salt or pepper
+peeled and seeded
+minced or pressed
+small and firm
+
+1 cup milk or cream
+2 cans tomatoes or 1 jar sauce
+
+xyz powder
+2 tbsp xyz powder
+xyz, minced
+# Chicken Marsala
+Attribution: America’s Test Kitchen
+Source: The Best Recipe
+Note: Our wine of choice for this dish is Sweet Marsala Fine, an Italian wine that gives the sauce body, soft edges, and a smooth finish. Because these cutlets spend about 15 minutes in the oven while the sauce is being prepared, there's no need to pound the cutlets or remove the tenderloins.
+Yield: SERVES 4
 Ingredients:
-1 lb. skin-on, bone-in chicken thighs (about 3) or wings (drumettes and flats separated; 8–10)
-2 Tbsp. extra-virgin olive oil
-1 tsp. Diamond Crystal or ½ tsp. Morton kosher salt, plus more
-2 oz. mushrooms, preferably chanterelles, cut into ½" pieces (about ½ cup)
-3 oz. carrots (1–2 small), peeled, trimmed, cut into ½" pieces (about ½ cup)
-3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup)
-½ cup small cauliflower florets
-2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup)
-2 oz. Romano beans or other snap beans, trimmed, cut into 1½" pieces (about ½ cup)
-1 tsp. smoked Spanish paprika
-½ cup coarsely grated tomato or canned crushed tomatoes
-Pinch of saffron (about 8 threads)
-2 sprigs rosemary
-5 cups low-sodium chicken broth or water
-1 cup calasparra or bomba rice
+4 boneless, skinless chicken breasts (5 to 6 ounces each), fat trimmed 
+1 cup unbleached all-purpose flour 
+Salt and ground black pepper
+2 tablespoons vegetable oil
+2 ½ ounces (about 3 slices) pancetta, cut into 1 by 1/8 -inch pieces
+8 ounces white mushrooms, sliced (about 2 cups)
+1 medium garlic clove, minced or pressed through a garlic press
+1 teaspoon tomato paste
+1 ½ cups sweet Marsala
+1 ½  tablespoons juice from 1 large lemon
+4 tablespoons (1/2 stick) unsalted butter, cut into 4 pieces
+2 tablespoons minced fresh parsley leaves
+Instructions: 
+1. Adjust an oven rack to the lower-middle position, place a large heatproof dinner plate on the rack, and heat the oven to 200 degrees.
+2. Pat the chicken breasts dry. Place the flour in a shallow baking dish or pie plate. Season both sides of the chicken cutlets with salt and pepper to taste. Working with one cutlet at a time, coat both sides with flour. Lift the breast from the tapered end and shake to remove excess flour; set aside.
+3. Meanwhile, heat the oil in a 12-inch heavy-bottomed skillet over medium-high heat until shimmering. Place the floured cutlets in a single layer in the skillet and cook until golden brown, about 3 minutes. Using tongs, turn the cutlets and cook on the second side until golden brown and the meat feels firm when pressed with a finger, about 3 minutes longer. Transfer the chicken to the heated plate and return the plate to the oven.
+4. Return the skillet to low heat and add the pancetta. Sauté, stirring occasionally and scraping the pan bottom with a wooden spoon to loosen the browned bits, until the pancetta is browned and crisp, about 4 minutes. With a slotted spoon, transfer the pancetta to paper towels to drain.
+5. Add the mushrooms to the pan and increase the heat to medium-high. Sauté, stirring occasion-ally and scraping the pan bottom, until the liquid released by the mushrooms evaporates and the mushrooms begin to brown, about 8 minutes. Add the garlic, tomato paste, and cooked pancetta and cook, stirring constantly, until the tomato paste begins to brown, about 1 minute. Off the heat, add the Marsala. Return the pan to high heat and simmer vigorously, scraping the browned bits from the pan bottom, until the sauce is slightly syrupy and reduced to about 1½ cups, about 5 minutes. Off the heat, add the lemon juice and any accu-mulated juices from the chicken. Whisk in the butter, 1 tablespoon at a time, until incorporated. Stir in the parsley and season with salt and pepper to taste. Pour the sauce over the chicken and serve immediately.
+# Chicken Empanadas
+## Make Dough
+Ingredients: 
+4 1/2 cups unbleached all-purpose flour
+3 teaspoons salt
+2 sticks (1 cup) cold unsalted butter, cut into 1/2-inch cubes
+2 large eggs
+⅔ cup ice water
+2 tablespoons distilled white vinegar
+Instructions: 
+Sift flour with salt into a large bowl and blend in butter with your fingertips or a pastry blender until mixture resembles coarse meal with some (roughly pea-size) butter lumps. Beat together egg, water, and vinegar in a small bowl with a fork. Add to flour mixture, stirring with fork until just incorporated. (Mixture will look shaggy.) Turn out mixture onto a lightly floured surface and gather together, then knead gently with heel of your hand once or twice, just enough to bring dough together. (Deb note: If you use a large-ish bowl, you can do this step in-bowl.) Form dough into two flat rectangles and chill them, each wrapped in plastic wrap, at least 1 hour. Dough can be chilled up to 6 hours total. 
+
+##Make Filling
+Ingredients: 
+3 whole chicken legs, including thighs (2 to 2 1/4 lb total)
+1 teaspoon salt
+1/4 teaspoon black pepper
+4 1/2 tablespoons extra-virgin olive oil
+2 large onions, halved lengthwise, then cut lengthwise into 1/4-inch-wide strips
+2 large garlic cloves, minced
+2 Turkish bay leaves or 1 California
+1/3 cup finely diced Spanish chorizo (cured spiced pork sausage; 1 1/2 oz; casings discarded if desired)
+1/2 teaspoon Spanish smoked paprika (not hot)
+1/4 cup chopped pitted green olives
+1/2 cup dry white wine
+1/2 cup reduced-sodium chicken broth
+Instructions: 
+Pat chicken dry and sprinkle with salt and pepper. Heat 2 tablespoons oil in a 12-inch heavy skillet over moderately high heat until hot but not smoking, then brown chicken, turning over once, about 6 minutes total, and transfer to a plate. SautÃ© onions, garlic, and bay leaves in fat remaining in skillet, stirring frequently, until onions are softened, 4 to 5 minutes. 
+Add chorizo and paprika and cook, stirring, 1 minute. Add olives, wine, and broth and bring to a boil, stirring and scraping up any brown bits. Return chicken to skillet along with any juices accumulated on plate, then reduce heat to moderately low and simmer chicken, covered, turning over once, until tender, 25 to 30 minutes total.
+Transfer chicken to a clean plate. (Sauce in skillet should be the consistency of heavy cream; if it’s not, briskly simmer until slightly thickened, about 5 minutes.) When chicken is cool enough to handle, discard skin and bones and coarsely chop meat. Stir chicken into sauce and discard bay leaves. Season with salt and pepper, then cool filling, uncovered, about 30 minutes.
+
+
+
+## Form Empanadas
+Ingredients:
+1 egg, lightly beaten with 1 tablespoon water
+Instructions: 
+Put oven racks in upper and lower thirds of oven and preheat oven to 400°F. Divide first dough and half of second dough into 18 equal pieces and form each into a disk. (The remaining dough can be stored in the freezer for future use.) Keeping remaining pieces covered, roll out 1 piece on a lightly floured surface with a lightly floured rolling pin into a 5-inch round (about 1/8 inch thick).
+Spoon about 2 tablespoons filling onto center and fold dough in half, enclosing filling. Press edges together to seal, then crimp decoratively with your fingers or tines of a fork. Transfer empanada to a baking sheet. Make 17 more empanadas in same manner, arranging on 2 parchment-lined baking sheets.
+Lightly brush empanadas with some of egg wash and bake in upper and lower thirds of oven, switching position of sheets halfway through baking, until golden, about 25 minutes. Transfer empanadas to a rack to cool at least 5 minutes. Serve warm or at room temperature. 
+
+
+# Goulash
+Ingredients: 
+• 5 slices bacon, chopped
+• 3 lb boneless chuck, cut into 1/2” cubes
+• 2 T vegetable oil
+• 1½ lb onions, chopped fine
+• 3 garlic cloves, minced
+• 3 T paprika
+• 1½ t caraway seeds
+• 1/3 c flour
+• ¼ c red-wine vinegar
+• ¼ c tomato paste
+• 5 c beef broth
+• 1 to 5 cups water or beer (use the former to make a stew, the latter to make a soup)
+• 1 t salt
+• 2 red bell peppers, chopped fine
+Instructions: 
+In an 8-quart heavy kettle cook bacon over moderate heat, stirring, until crisp and transfer with a slotted spoon to a large bowl. In fat remaining in kettle brown chuck in small batches over high heat, transferring it as browned with slotted spoon to bowl.
+Reduce heat to moderate and add oil. Add onions and garlic and cook, stirring, until golden. Stir in paprika, caraway seeds, and flour and cook, stirring, 2 minutes. Whisk in vinegar and tomato paste and cook, whisking, 1 minute. (Mixture will be very thick.) Stir in broth, water, salt, bell peppers, bacon, and chuck and bring to a boil, stirring. Simmer soup, covered, stirring occasionally, 60 to 75 minutes.
+Season soup with salt and pepper. Soup may be made 3 days ahead and cooled, uncovered, before chilling, covered. Reheat soup, thinning with water if desired.
+# Panera Mac and Cheese
+URL: https://amandascookin.com/panera-mac-and-cheese-recipe/
+Ingredients: 
+16 ounce pipette rigate or elbow macaroni
+¼ cup butter
+¼ cup all-purpose flour
+2 ½ cup milk
+6 Slices white American cheese sliced into thin strips
+8 oz Vermont extra-sharp white cheddar shredded
+½ teaspoon Dijon mustard
+1 teaspoon kosher salt
+¼ teaspoon hot sauce
+
+Instructions: 
+Follow the directions on the package of pasta to cook al dente.
+Meanwhile, melt the butter in a large saucepan over low heat. Whisk in the flour and cook for about 1 minute, whisking constantly.
+Gradually whisk in the milk; cook over medium heat, whisking until mixture thickens and bubbles. Remove from heat.
+Add cheeses, mustard, salt, and hot sauce, stirring until cheese melts and cheese sauce is smooth.
+Stir in the cooked pasta and cook over medium heat for 1 minute (or until thoroughly heated). Serve immediately.
+# Crusty Bread (Over-night)
+Author: Matt Boss
+## Mix the bread dough
+Ingredients:
+3 cups (450g) unbleached bread flour
+
+1 3/4 teaspoons salt
+
+1/2 teaspoon yeast
+1-1/4 c of warm water 
+1 T sugar
+
+
 Instructions:
-Preparation
-If using 1 lb. skin-on, bone-in chicken thighs (about 3), arrange a thigh skin side down on a cutting board. Using a sharp knife, cut along both sides of bone to release from flesh (do not cut all the way through; you want to keep thigh intact). Work knife underneath bone and cut flesh away from bone; remove bone from thigh and discard. Cut thigh into quarters. Repeat with remaining thighs.
-Heat 2 Tbsp. extra-virgin olive oil in a 15" paella pan or two-handled cast-iron or cast-aluminum skillet over medium-high until just beginning to smoke, 1–2 minutes. Add chicken thighs or 1 lb. chicken wings (drumettes and flats separated; 8–10) and cook, turning about every 3 minutes and moving pan around on burner every 2 minutes or so to ensure even cooking, until deeply browned all over, 7–9 minutes. Season chicken with a big pinch of kosher salt and push to edges of pan.
-Add 2 oz. mushrooms, preferably chanterelles, cut into ½" pieces (about ½ cup), to center of pan and cook, stirring, until just turning golden, about 1 minute. Add 3 oz. carrots (1–2 small), peeled, trimmed, cut into ½" pieces (about ½ cup), 3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup), and ½ cup small cauliflower florets and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Add 2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup), and 2 oz. Romano or other snap beans, trimmed, cut into 1½" pieces (about ½ cup), and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Push vegetables to edges of pan with chicken.
-Add 1 tsp. smoked Spanish paprika to center of pan and cook, stirring constantly, 15 seconds to toast. Add ½ cup coarsely grated tomato or canned crushed tomatoes and cook, stirring occasionally, until thickened, about 2 minutes. Mix chicken and vegetables into tomato sauce in center of pan and cook until sauce is slightly thickened and caramelized, about 3 minutes.
-Crumble pinch of saffron (about 8 threads) into sauce and stir to combine. Add 2 sprigs rosemary, 5 cups low-sodium chicken broth or water, and 1 tsp. Diamond Crystal or ½ tsp. Morton kosher salt. Increase heat to high and bring to a boil, moving pan around on burner once or twice to ensure even cooking. Cook until sauce is reduced by about one quarter, about 5 minutes.
-Remove rosemary from pan; discard. Add 1 cup paella or bomba rice and spread evenly around pan to incorporate with chicken and vegetables. Cook, stirring often with a wooden spoon and moving pan around on burner every 2 minutes or so, until rice is starting to swell as it absorbs some liquid, 7–9 minutes.
-Reduce heat to medium-low and stir to evenly distribute rice, chicken, and vegetables across bottom of pan. Cook, undisturbed, moving pan around on burner every 2 minutes or so, until rice is slightly al dente and liquid is almost completely evaporated, about 5 minutes. Increase heat to high; cook until a crunchy socarrat (caramelized crust) forms underneath. Let paella cool 3 minutes before serving.
+Warm the water with sugar to body temperature, stir in yeast.
+
+In a large mixing bowl, whisk together flour, salt, and yeasted water.
+
+Add water and mix until a shaggy mixture forms. Up to additional 1/4 cup water, add in batches until shaggy dough.
+
+Cover bowl with plastic wrap and set aside for 12 - 18 hours.  Overnight works great. 
+## Bake the bread
+Pour dough onto a heavily floured surface and fold 12-15 times, shape into a ball. Place in greased pan or proofing bowl and cover with a towel.
+
+After 90 minutes, place lidded cast iron pot in oven and pre-heat to 450 degrees for 30 minutes.
+
+Remove hot pot from the oven and drop in the dough. Sprinkle sea salt over the top.
+
+Cover and return to oven for 30 minutes. Internal temp of 190.
+
+If crusty loaf is preferred, remove the lid and bake 5-10 minutes before bread should be done, depending on how crusty you prefer the top. (In Northup house, 30 mins gets to internal temp of 195-200, which is fine. Girls like soft crust.)
+
+Remove bread from oven and place on a cooling rack. Let cool before slicing.
 # Cabbage Rolls
 url: https://www.spendwithpennies.com/easy-cabbage-rolls/#wprm-recipe-container-122147
 Author: Holly Nilsson
@@ -67,6 +201,77 @@ Cook pork (or turkey), beef, onions, garlic, & seasonings in a pan until no pink
 Mix the remaining tomato sauce and tomato soup in a bowl. Spread a very thin layer of the tomato sauce mixture in a 9x13 pan.
 Remove or thin any thick stem on cabbage leaves. Lay the cabbage leaf flat and add ¼ to ⅓ cup filling to the center of the leaf. Fold in the sides and roll the cabbage up. Place seam side down in the pan. (See note for small leaves). Repeat with remaining cabbage.
 Pour sauce over the cabbage and cover tightly with foil. Bake for 75-90 minutes. Let cool for 15 minutes before serving.
+# Fresh Corn Chowder
+Attribution: America's Test Kitchen
+url: https://www.americastestkitchen.com/recipes/692-fresh-corn-chowder
+Time: 1¼ hours
+Yield: Serves 6 (Makes about 2 quarts)
+Note: Be sure to use salt pork, not fatback, for the chowder. Streaks of lean meat distinguish salt pork from fatback; fatback is pure fat. We prefer Spanish onions for their sweet, mild flavor, but all-purpose yellow onions will work fine too.
+Ingredients:
+10 ears corn (medium), husks and silks removed
+3 ounces Salt pork rind removed, cut into two 1-inch cubes
+1 tablespoon unsalted butter
+1 large onion, chopped fine
+1 teaspoon table salt
+2 garlic cloves, minced
+3 tablespoons all-purpose flour
+3 cups chicken broth
+2 cups whole milk
+12 ounces red potatoes, unpeeled, cut into ¼-inch cubes
+1 teaspoon minced fresh thyme leaves or ¼ teaspoon dried
+1 bay leaf
+1 cup heavy cream
+2 tablespoons minced fresh parsley
+Instructions:
+Using chef’s knife, cut kernels from 4 ears corn (you should have about 3 cups). Grate kernels from remaining 6 ears on large holes of box grater into bowl, then firmly scrape any pulp remaining on cobs with back of butter knife or vegetable peeler (you should have 2 generous cups grated kernels and pulp).
+Cook salt pork in Dutch oven over medium-high heat, turning with tongs and pressing down on pieces to render fat, until cubes are crisp and golden brown, about 10 minutes. Reduce heat to low, stir in butter, onion, and salt, cover, and cook until onion is softened, about 12 minutes. Remove salt pork and reserve. Add garlic and cook until fragrant, about 1 minute. Whisk in flour and cook, stirring constantly, about 2 minutes. Whisking constantly, gradually add broth. Add milk, potatoes, thyme, bay leaf, grated corn and pulp, and reserved salt pork and bring to boil. Reduce heat to medium-low and simmer until potatoes are almost tender, 8 to 10 minutes. Add reserved corn kernels and heavy cream and return to simmer. Simmer until corn kernels are tender yet still slightly crunchy, about 5 minutes. Discard bay leaf and salt pork. Stir in parsley, season with salt and pepper to taste, and serve immediately.
+# Coleslaw (Applebee's)
+Ingredients:
+14 oz. coleslaw mix
+¼ cup Freshly chopped cilantro
+¾ cup mayonnaise, add more if needed
+2 Tbsp sugar
+1 teaspoon white vinegar
+# Jiffy Cornbread 
+Ingredients:
+Boxed Jiffy Cornbread mix
+Ingredients in the instructions 
+½ c sour cream
+Honey to taste 
+Instructions:
+Follow the instructions on the box. 
+After baking, while still warm, drizzle honey on the cornbread.
+# Paella
+url: https://www.bonappetit.com/recipe/paella-de-pollo-con-verduras
+Author: Jose Andres
+Attribution: Bon Appetit
+Note: A 15" paella pan will provide the appropriate circumference to make a thin, even layer of seasoned rice. Because of its size, it’s important to move it around as you cook to ensure the entire surface of the dish gets time under direct heat. If you do not have a paella pan, use a comparably sized two-handled cast-iron or cast-aluminum skillet to make thin rice dishes that cook like paella, but ultimately, if you want to make a true paella, you should go and get yourself a paella pan.
+Ingredients:
+1 lb. skin-on, bone-in chicken thighs (about 3) or wings (drumettes and flats separated; 8–10)
+2 Tbsp. extra-virgin olive oil
+1 tsp. Diamond Crystal or ½ tsp. Morton kosher salt, plus more
+2 oz. mushrooms, preferably chanterelles, cut into ½" pieces (about ½ cup)
+3 oz. carrots (1–2 small), peeled, trimmed, cut into ½" pieces (about ½ cup)
+3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup)
+½ cup small cauliflower florets
+2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup)
+2 oz. Romano beans or other snap beans, trimmed, cut into 1½" pieces (about ½ cup)
+1 tsp. smoked Spanish paprika
+½ cup coarsely grated tomato or canned crushed tomatoes
+Pinch of saffron (about 8 threads)
+2 sprigs rosemary
+5 cups low-sodium chicken broth or water
+1 cup calasparra or bomba rice
+Instructions:
+Preparation
+If using 1 lb. skin-on, bone-in chicken thighs (about 3), arrange a thigh skin side down on a cutting board. Using a sharp knife, cut along both sides of bone to release from flesh (do not cut all the way through; you want to keep thigh intact). Work knife underneath bone and cut flesh away from bone; remove bone from thigh and discard. Cut thigh into quarters. Repeat with remaining thighs.
+Heat 2 Tbsp. extra-virgin olive oil in a 15" paella pan or two-handled cast-iron or cast-aluminum skillet over medium-high until just beginning to smoke, 1–2 minutes. Add chicken thighs or 1 lb. chicken wings (drumettes and flats separated; 8–10) and cook, turning about every 3 minutes and moving pan around on burner every 2 minutes or so to ensure even cooking, until deeply browned all over, 7–9 minutes. Season chicken with a big pinch of kosher salt and push to edges of pan.
+Add 2 oz. mushrooms, preferably chanterelles, cut into ½" pieces (about ½ cup), to center of pan and cook, stirring, until just turning golden, about 1 minute. Add 3 oz. carrots (1–2 small), peeled, trimmed, cut into ½" pieces (about ½ cup), 3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup), and ½ cup small cauliflower florets and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Add 2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup), and 2 oz. Romano or other snap beans, trimmed, cut into 1½" pieces (about ½ cup), and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Push vegetables to edges of pan with chicken.
+Add 1 tsp. smoked Spanish paprika to center of pan and cook, stirring constantly, 15 seconds to toast. Add ½ cup coarsely grated tomato or canned crushed tomatoes and cook, stirring occasionally, until thickened, about 2 minutes. Mix chicken and vegetables into tomato sauce in center of pan and cook until sauce is slightly thickened and caramelized, about 3 minutes.
+Crumble pinch of saffron (about 8 threads) into sauce and stir to combine. Add 2 sprigs rosemary, 5 cups low-sodium chicken broth or water, and 1 tsp. Diamond Crystal or ½ tsp. Morton kosher salt. Increase heat to high and bring to a boil, moving pan around on burner once or twice to ensure even cooking. Cook until sauce is reduced by about one quarter, about 5 minutes.
+Remove rosemary from pan; discard. Add 1 cup paella or bomba rice and spread evenly around pan to incorporate with chicken and vegetables. Cook, stirring often with a wooden spoon and moving pan around on burner every 2 minutes or so, until rice is starting to swell as it absorbs some liquid, 7–9 minutes.
+Reduce heat to medium-low and stir to evenly distribute rice, chicken, and vegetables across bottom of pan. Cook, undisturbed, moving pan around on burner every 2 minutes or so, until rice is slightly al dente and liquid is almost completely evaporated, about 5 minutes. Increase heat to high; cook until a crunchy socarrat (caramelized crust) forms underneath. Let paella cool 3 minutes before serving.
+
 # Jamaican Sorrel (Hibiscus Punch)
 Yield: 3 quarts
 Attribution: Serious Eats
@@ -83,7 +288,9 @@ Strain the liquid through a fine-mesh strainer or through cheesecloth into a lar
 In a 2-quart saucepan, bring 2 cups of water to a boil with the sugar. Continue to cook, stirring, until sugar has completely dissolved. Remove simple syrup from heat.
 Stir simple syrup into the strained sorrel, 1/2 cup at a time, until desired sweetness level is reached.
 Chill until ready to drink. Serve over ice.
-# brookies
+# Brookies
+Attribution: America’s Test Kitchen
+Ingredients:
 1 c ap flour
 ¼ cocoa (¾ oz)
 1 tap powder
@@ -95,6 +302,7 @@ Chill until ready to drink. Serve over ice.
 1 oz whole milk
 1 c sugar
 2 eggs
+Instructions:
 300 F 16 minutes 
 # Buddae Jjigae (Korean Army Stew)
 url: https://www.maangchi.com/recipe/budae-jjigae
@@ -1502,112 +1710,6 @@ Transfer the chicken to a carving board and allow to rest for 15 to 20 minutes.
 Just before serving, set the pan of vegetables over medium heat and reheat the vegetables, turning them to coat with the pan juices.
 
 Finish with a squeeze of lemon. Carve the chicken into serving pieces, arrange over the vegetables, finish with grey sea salt, and serve.
-# Chicken Marsala
-Attribution: America’s Test Kitchen
-Source: The Best Recipe
-Note: Our wine of choice for this dish is Sweet Marsala Fine, an Italian wine that gives the sauce body, soft edges, and a smooth finish. Because these cutlets spend about 15 minutes in the oven while the sauce is being prepared, there's no need to pound the cutlets or remove the tenderloins.
-Yield: SERVES 4
-Ingredients:
-4 boneless, skinless chicken breasts (5 to 6 ounces each), fat trimmed 
-1 cup unbleached all-purpose flour 
-Salt and ground black pepper
-2 tablespoons vegetable oil
-2 ½ ounces (about 3 slices) pancetta, cut into 1 by 1/8 -inch pieces
-8 ounces white mushrooms, sliced (about 2 cups)
-1 medium garlic clove, minced or pressed through a garlic press
-1 teaspoon tomato paste
-1 ½ cups sweet Marsala
-1 ½  tablespoons juice from 1 large lemon
-4 tablespoons (1/2 stick) unsalted butter, cut into 4 pieces
-2 tablespoons minced fresh parsley leaves
-Instructions: 
-1. Adjust an oven rack to the lower-middle position, place a large heatproof dinner plate on the rack, and heat the oven to 200 degrees.
-2. Pat the chicken breasts dry. Place the flour in a shallow baking dish or pie plate. Season both sides of the chicken cutlets with salt and pepper to taste. Working with one cutlet at a time, coat both sides with flour. Lift the breast from the tapered end and shake to remove excess flour; set aside.
-al 's n T
-3. Meanwhile, heat the oil in a 12-inch heavy-bottomed skillet over medium-high heat until shimmering. Place the floured cutlets in a single layer in the skillet and cook until golden brown, about 3 minutes. Using tongs, turn the cutlets and cook on the second side until golden brown and the meat feels firm when pressed with a finger, about 3 minutes longer. Transfer the chicken to the heated plate and return the plate to the oven.
-4. Return the skillet to low heat and add the pancetta. Sauté, stirring occasionally and scraping the pan bottom with a wooden spoon to loosen the browned bits, until the pancetta is browned and crisp, about 4 minutes. With a slotted spoon, transfer the pancetta to paper towels to drain.
-5. Add the mushrooms to the pan and increase the heat to medium-high. Sauté, stirring occasion-ally and scraping the pan bottom, until the liquid released by the mushrooms evaporates and the mushrooms begin to brown, about 8 minutes. Add the garlic, tomato paste, and cooked pancetta and cook, stirring constantly, until the tomato paste begins to brown, about 1 minute. Off the heat, add the Marsala. Return the pan to high heat and simmer vigorously, scraping the browned bits from the pan bottom, until the sauce is slightly syrupy and reduced to about 1½ cups, about 5 minutes. Off the heat, add the lemon juice and any accu-mulated juices from the chicken. Whisk in the butter, 1 tablespoon at a time, until incorporated. Stir in the parsley and season with salt and pepper to taste. Pour the sauce over the chicken and serve immediately.
-# Chicken Empanadas
-## Make Dough
-Ingredients: 
-4 1/2 cups unbleached all-purpose flour (Deb note: I used 1/2 cup whole wheat flour)
-3 teaspoons salt
-2 sticks (1 cup) cold unsalted butter, cut into 1/2-inch cubes
-2 large eggs
-⅔ cup ice water
-2 tablespoons distilled white vinegar
-Instructions: 
-Sift flour with salt into a large bowl and blend in butter with your fingertips or a pastry blender until mixture resembles coarse meal with some (roughly pea-size) butter lumps. Beat together egg, water, and vinegar in a small bowl with a fork. Add to flour mixture, stirring with fork until just incorporated. (Mixture will look shaggy.) Turn out mixture onto a lightly floured surface and gather together, then knead gently with heel of your hand once or twice, just enough to bring dough together. (Deb note: If you use a large-ish bowl, you can do this step in-bowl.) Form dough into two flat rectangles and chill them, each wrapped in plastic wrap, at least 1 hour. Dough can be chilled up to 6 hours total. 
-
-##Make Filling
-Ingredients: 
-3 whole chicken legs, including thighs (2 to 2 1/4 lb total)
-1 teaspoon salt
-1/4 teaspoon black pepper
-4 1/2 tablespoons extra-virgin olive oil
-2 large onions, halved lengthwise, then cut lengthwise into 1/4-inch-wide strips
-2 large garlic cloves, minced
-2 Turkish bay leaves or 1 California
-1/3 cup finely diced Spanish chorizo (cured spiced pork sausage; 1 1/2 oz; casings discarded if desired)
-1/2 teaspoon Spanish smoked paprika (not hot)
-1/4 cup chopped pitted green olives
-1/2 cup dry white wine
-1/2 cup reduced-sodium chicken broth
-Instructions: 
-Pat chicken dry and sprinkle with salt and pepper. Heat 2 tablespoons oil in a 12-inch heavy skillet over moderately high heat until hot but not smoking, then brown chicken, turning over once, about 6 minutes total, and transfer to a plate. SautÃ© onions, garlic, and bay leaves in fat remaining in skillet, stirring frequently, until onions are softened, 4 to 5 minutes. 
-Add chorizo and paprika and cook, stirring, 1 minute. Add olives, wine, and broth and bring to a boil, stirring and scraping up any brown bits. Return chicken to skillet along with any juices accumulated on plate, then reduce heat to moderately low and simmer chicken, covered, turning over once, until tender, 25 to 30 minutes total.
-Transfer chicken to a clean plate. (Sauce in skillet should be the consistency of heavy cream; if it’s not, briskly simmer until slightly thickened, about 5 minutes.) When chicken is cool enough to handle, discard skin and bones and coarsely chop meat. Stir chicken into sauce and discard bay leaves. Season with salt and pepper, then cool filling, uncovered, about 30 minutes.
-
-
-
-## Form Empanadas
-Ingredients:
-1 egg, lightly beaten with 1 tablespoon water
-Instructions: 
-Put oven racks in upper and lower thirds of oven and preheat oven to 400°F. Divide first dough and half of second dough into 18 equal pieces and form each into a disk. (The remaining dough can be stored in the freezer for future use.) Keeping remaining pieces covered, roll out 1 piece on a lightly floured surface with a lightly floured rolling pin into a 5-inch round (about 1/8 inch thick).
-Spoon about 2 tablespoons filling onto center and fold dough in half, enclosing filling. Press edges together to seal, then crimp decoratively with your fingers or tines of a fork. Transfer empanada to a baking sheet. Make 17 more empanadas in same manner, arranging on 2 parchment-lined baking sheets.
-Lightly brush empanadas with some of egg wash and bake in upper and lower thirds of oven, switching position of sheets halfway through baking, until golden, about 25 minutes. Transfer empanadas to a rack to cool at least 5 minutes. Serve warm or at room temperature. 
-
-
-# Goulash
-Ingredients: 
-• 5 slices bacon, chopped
-• 3 lb boneless chuck, cut into 1/2” cubes
-• 2 T vegetable oil
-• 1½ lb onions, chopped fine
-• 3 garlic cloves, minced
-• 3 T paprika
-• 1½ t caraway seeds
-• 1/3 c flour
-• ¼ c red-wine vinegar
-• ¼ c tomato paste
-• 5 c beef broth
-• 1 to 5 cups water or beer (use the former to make a stew, the latter to make a soup)
-• 1 t salt
-• 2 red bell peppers, chopped fine
-Instructions: 
-In an 8-quart heavy kettle cook bacon over moderate heat, stirring, until crisp and transfer with a slotted spoon to a large bowl. In fat remaining in kettle brown chuck in small batches over high heat, transferring it as browned with slotted spoon to bowl.
-Reduce heat to moderate and add oil. Add onions and garlic and cook, stirring, until golden. Stir in paprika, caraway seeds, and flour and cook, stirring, 2 minutes. Whisk in vinegar and tomato paste and cook, whisking, 1 minute. (Mixture will be very thick.) Stir in broth, water, salt, bell peppers, bacon, and chuck and bring to a boil, stirring. Simmer soup, covered, stirring occasionally, 60 to 75 minutes.
-Season soup with salt and pepper. Soup may be made 3 days ahead and cooled, uncovered, before chilling, covered. Reheat soup, thinning with water if desired.
-# Panera Mac and Cheese
-URL: https://amandascookin.com/panera-mac-and-cheese-recipe/
-Ingredients: 
-16 ounce pipette rigate or elbow macaroni
-¼ cup butter
-¼ cup all-purpose flour
-2 ½ cup milk
-6 Slices white American cheese sliced into thin strips
-8 oz Vermont extra-sharp white cheddar shredded
-½ teaspoon Dijon mustard
-1 teaspoon kosher salt
-¼ teaspoon hot sauce
-
-Instructions: 
-Follow the directions on the package of pasta to cook al dente.
-Meanwhile, melt the butter in a large saucepan over low heat. Whisk in the flour and cook for about 1 minute, whisking constantly.
-Gradually whisk in the milk; cook over medium heat, whisking until mixture thickens and bubbles. Remove from heat.
-Add cheeses, mustard, salt, and hot sauce, stirring until cheese melts and cheese sauce is smooth.
-Stir in the cooked pasta and cook over medium heat for 1 minute (or until thoroughly heated). Serve immediately.
 
 # Ivonne’s Mother’s Lasagna
 Ingredients:
@@ -1675,38 +1777,6 @@ Kosher salt and freshly ground black pepper.
 Instructions: 
 combine reserved piperade, oil, vinegar, herbs, and salt and pepper to taste in a bowl. 
 To serve, heat broiler and place byaldi underneath until lightly browned. Slice in quarters and very carefully lift onto plate with offset spatula. Turn spatula 90 degrees, guiding byaldi into fan shape. Drizzle vinaigrette around plate. Serve hot.
-# Crusty Bread (Over-night)
-## Mix the bread dough
-Ingredients:
-3 cups (450g) unbleached bread flour
-
-1 3/4 teaspoons salt
-
-1/2 teaspoon yeast
-1-1/4 c of warm water 
-1 T sugar
-
-
-Instructions:
-Warm the water with sugar to body temperature, stir in yeast.
-
-In a large mixing bowl, whisk together flour, salt, and yeasted water.
-
-Add water and mix until a shaggy mixture forms. Up to additional 1/4 cup water, add in batches until shaggy dough.
-
-Cover bowl with plastic wrap and set aside for 12 - 18 hours.  Overnight works great. 
-## Bake the bread
-Pour dough onto a heavily floured surface and fold 12-15 times, shape into a ball. Place in greased pan or proofing bowl and cover with a towel.
-
-After 90 minutes, place lidded cast iron pot in oven and pre-heat to 450 degrees for 30 minutes.
-
-Remove hot pot from the oven and drop in the dough. Sprinkle sea salt over the top.
-
-Cover and return to oven for 30 minutes. Internal temp of 190.
-
-If crusty loaf is preferred, remove the lid and bake 5-10 minutes before bread should be done, depending on how crusty you prefer the top. (In Northup house, 30 mins gets to internal temp of 195-200, which is fine. Girls like soft crust.)
-
-Remove bread from oven and place on a cooling rack. Let cool before slicing.
 
 Sweet
 Original Recipes

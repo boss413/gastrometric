@@ -54,6 +54,21 @@ def init_db():
                 FOREIGN KEY(recipe_section_id) REFERENCES recipe_sections(id)
             )
         """)
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_raw (
+                id                  INTEGER PRIMARY KEY,
+                ingredient_block_id INTEGER NOT NULL,
+                recipe_id           INTEGER NOT NULL,
+                recipe_section_id   INTEGER NOT NULL,
+                recipe_name         TEXT NOT NULL,
+                section_name        TEXT,
+                line_index          INTEGER NOT NULL,
+                raw_text            TEXT NOT NULL,
+
+                FOREIGN KEY (ingredient_block_id) REFERENCES recipe_ingredient_blocks(id),
+                FOREIGN KEY (recipe_id)           REFERENCES recipes(id),
+                FOREIGN KEY (recipe_section_id)   REFERENCES recipe_sections(id))
+        """)
         # One row per section — raw instruction blob, unsplit.
         c.execute("""
             CREATE TABLE IF NOT EXISTS recipe_instruction_blocks (
@@ -146,62 +161,41 @@ def init_db():
         # All enrichment columns start NULL; filled by downstream stages.
         c.execute("""
             CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_parsed (
-                id                      INTEGER PRIMARY KEY AUTOINCREMENT,
-                -- source
-                ingredient_block_id     INTEGER NOT NULL
-                                            REFERENCES recipe_ingredient_blocks(id),
-                recipe_id               INTEGER NOT NULL,
-                recipe_section_id       INTEGER NOT NULL,
-                recipe_name             TEXT,
-                section_name            TEXT,
-                -- position within the block
-                line_index              INTEGER NOT NULL,
-                -- original text (never modified)
-                raw_text                TEXT NOT NULL,
-                -- parsed dimensions
-                quantity_value          TEXT,
-                quantity_unit           TEXT,
-                imperial_weight_value   TEXT,
-                imperial_weight_unit    TEXT,
-                imperial_volume_value   TEXT,
-                imperial_volume_unit    TEXT,
-                grams                   REAL,
-                ml                      REAL,
-                scaling                 TEXT,
-                -- ordered JSON list of technique/state phrases, source-text
-                -- order, e.g. '["peeled", "cut crosswise into 0.25-inch-thick slices"]'
-                -- intended to resolve 1:1 against the technique graph
-                preparation             TEXT,
-                -- free-text asides that are NOT techniques (yield/count notes,
-                -- secondary measures, can/jar size, "% by weight" notes, ...)
-                -- kept separate so they are never fed to the technique lookup
-                notes                   TEXT,
-                -- name as it appears after measurement / prep extraction
-                -- (lowercased, numbers rewritten — parser output, NOT
-                -- normalized or identity-resolved)
-                ingredient_name_raw     TEXT,
-                -- the same span sliced verbatim out of the ORIGINAL source
-                -- line: original casing/wording/hyphenation preserved.
-                -- Best-effort (see _recover_original_span); falls back to
-                -- ingredient_name_raw if no source words could be located.
-                ingredient_name_original TEXT,
-                -- non-NULL and shared between rows produced from the same
-                -- "X or Y" source line (mutual-exclusion relationship).
-                -- NULL for ordinary, non-alternative lines.
-                alt_group_id            TEXT,
-                -- which grammatical pattern produced the alt_group_id split:
-                -- 'ingredient' | 'measure' | 'scale' | NULL. See module
-                -- docstring. A syntactic classification, not an identity claim.
-                alt_kind                TEXT,
-                -- flags
-                optional                INTEGER DEFAULT 0,
-                -- audit
-                parsed_at               TEXT DEFAULT (datetime('now')),
-                FOREIGN KEY(recipe_id)           REFERENCES recipes(id),
-                FOREIGN KEY(recipe_section_id)   REFERENCES recipe_sections(id),
-                FOREIGN KEY(ingredient_block_id) REFERENCES recipe_ingredient_blocks(id)
-            )
+            id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+            ingredient_block_id   INTEGER NOT NULL,
+            recipe_id             INTEGER,
+            recipe_section_id     INTEGER,
+            recipe_name           TEXT,
+            section_name          TEXT,
+            line_index            INTEGER,
+            raw_text              TEXT,
+            alt_group_id          TEXT,
+            alt_kind              TEXT,
+            optional              INTEGER,
+            parsed_at             TEXT)
         """)
+
+        c.execute("""
+           CREATE TABLE IF NOT EXISTS lexical_spans (
+            span_id                     INTEGER PRIMARY KEY AUTOINCREMENT,
+            recipe_ingredient_line_id   INTEGER NOT NULL
+                REFERENCES recipe_ingredient_lines_raw(id),
+            span_order                  INTEGER NOT NULL,
+            start_offset                INTEGER NOT NULL,
+            end_offset                  INTEGER NOT NULL,
+            text                        TEXT NOT NULL,
+            normalized_value            TEXT,
+            span_type                   TEXT NOT NULL,
+            knowledge_id                TEXT,
+            source_vocabulary           TEXT)
+        """)
+
+        c.execute("""
+            CREATE INDEX idx_lexical_spans_line
+                ON lexical_spans(recipe_ingredient_line_id, span_order);
+        """)
+
+
         c.execute("""
             CREATE INDEX IF NOT EXISTS idx_rilp_ingredient_block_id
                 ON recipe_ingredient_lines_parsed (ingredient_block_id)
@@ -214,6 +208,78 @@ def init_db():
             CREATE INDEX IF NOT EXISTS idx_rilp_recipe_section_id
                 ON recipe_ingredient_lines_parsed (recipe_section_id)
         """)
+
+# Parser refactor to perform no semantic understanding, only grammatical, outputs to these tables
+
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS ingredient_parse_trees (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                recipe_ingredient_line_id INTEGER NOT NULL,
+                parse_tree_json TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY(recipe_ingredient_line_id) REFERENCES recipe_ingredient_lines_raw(id))
+        """)
+
+        c.execute("""
+            CREATE INDEX idx_ingredient_parse_trees_line
+                ON ingredient_parse_trees(recipe_ingredient_line_id);
+        """)
+
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS observation_roles (
+            role_code             TEXT PRIMARY KEY,
+            description           TEXT NOT NULL)
+        """)
+        for role_code, description in [
+            ("primary_ingredient", "Span identifying the candidate ingredient itself"),
+            ("quantity",           "Span supplying the numeric quantity"),
+            ("measurement",        "Span supplying the unit of measurement"),
+            ("package",            "Span describing packaging (e.g. \"can\", \"jar\")"),
+            ("preparation",        "Span describing preparation (e.g. \"finely diced\")"),
+            ("modifier",           "Span describing a descriptive attribute (e.g. \"yellow\")"),
+            ("dimension",          "Span describing size/dimension (e.g. \"large\")"),
+            ("temperature",        "Span describing temperature (e.g. \"room temperature\")"),
+            ("brand",              "Span naming a brand"),
+            ("unknown",            "Span the builder attached but could not classify further"),
+        ]:
+            c.execute("""
+                INSERT OR IGNORE INTO observation_roles (role_code, description)
+                VALUES (?, ?)
+            """, (role_code, description))
+
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS ingredient_observations (
+            observation_id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            recipe_ingredient_id  INTEGER NOT NULL
+                REFERENCES recipe_ingredient_lines_parsed(id),
+            observation_index     INTEGER NOT NULL,
+            UNIQUE (recipe_ingredient_id, observation_index))
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_ingredient_observations_line
+                ON ingredient_observations(recipe_ingredient_id)
+        """)
+
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS observation_spans (
+            id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+            observation_id        INTEGER NOT NULL
+                REFERENCES ingredient_observations(observation_id),
+            span_id               INTEGER NOT NULL
+                REFERENCES recipe_ingredient_spans(span_id),
+            role_code             TEXT NOT NULL
+                REFERENCES observation_roles(role_code),
+            UNIQUE (observation_id, span_id, role_code))
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_observation_spans_observation
+                ON observation_spans(observation_id)
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_observation_spans_span
+                ON observation_spans(span_id)
+        """)
+
         # Normalization log — name transformation only.
         # Join to recipe_ingredient_lines_parsed on parsed_line_id for all
         # other dimensions.
@@ -279,7 +345,7 @@ def init_db():
         c.execute("""
             CREATE TABLE IF NOT EXISTS ingredient_aliases (
                 id              INTEGER PRIMARY KEY,
-                ingredient_id   STR NOT NULL,
+                ingredient_id   INTEGER NOT NULL,
                 alias           TEXT UNIQUE NOT NULL,
                 confidence      REAL,
                 source          TEXT,   -- e.g. 'ingredients.json', 'manual'

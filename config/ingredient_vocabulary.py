@@ -123,14 +123,14 @@ from gastrometric.config.parser_vocabulary import (  # noqa: F401  (re-exported 
     ML_UNITS,
     IMPERIAL_WEIGHT_UNITS,
     IMPERIAL_VOLUME_UNITS,
-    
+
 )
-from gastrometric.config.culinary_vocabulary_bootstrap import (  # noqa: F401
-    PROTECTED_PHRASES,
-    PREP_PATTERNS,
-    TEMPERATURE_STATE_PATTERNS,
-    PORTION_TERMS,
-)
+# from gastrometric.config.culinary_vocabulary_bootstrap import (  # noqa: F401
+#     PROTECTED_PHRASES,
+#     PREP_PATTERNS,
+#     TEMPERATURE_STATE_PATTERNS,
+#     PORTION_TERMS,
+# )
 
 # ============================================================
 # NORMALIZE-TIME VOCABULARY

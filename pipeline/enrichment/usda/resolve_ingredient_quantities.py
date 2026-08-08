@@ -88,7 +88,7 @@ _FAILURE_STATUSES = (STATUS_UNRESOLVED,) + _SKIPPED_MAPPING_STATUSES
 # variants for the purpose of matching a recipe quantity's unit
 # against a mapped USDA portion. It is not a replacement for, or a
 # competitor to, the parser's own unit vocabulary
-# (ingredient_vocabulary.py), which is not visible to this module.
+# which is not visible to this module.
 # ============================================================
 
 _UNIT_SYNONYMS = {

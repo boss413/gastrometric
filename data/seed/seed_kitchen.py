@@ -63,7 +63,7 @@ def seed_kitchen():
 #Dry Goods
         "all purpose flour", "bread flour", "quinoa", "millet", "brown basmati rice",
         "brown rice", "potato starch", "corn starch", "corn flour", "corn meal", "gelatin",
-        "long grain rice", "basmati rice", "sushi rice", "short grain rice", "dry short grain white rice"
+        "long grain rice", "basmati rice", "sushi rice", "short grain rice", "dry short grain white rice",
         "black beans", "pinto beans", "garbanzo beans", "chickpeas",
         "bread crumbs", "instant potato flakes", "sliced wheat bread", "flour tortillas",
         "macaroni", "rigatoni", "spaghetti", "fettuccini", "ramen noodles",

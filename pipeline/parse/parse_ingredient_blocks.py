@@ -1,7 +1,8 @@
 # pipeline/parse/parse_ingredient_blocks.py
 
-# this file is deprecated and will be removed in favor of parse_ingredient_lines.py, 
-# which performs the same function but with a more robust and flexible implementation.
+# this file was deprecated in favor of parse_ingredient_lines.py, 
+# which grew to over-act. it is being reintroduced to provide a more focused 
+# and efficient implementation of ingredient line parsing.
 
 import sqlite3
 import re
