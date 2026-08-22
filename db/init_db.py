@@ -140,18 +140,46 @@ def init_db():
         # All enrichment columns start NULL; filled by downstream stages.
         c.execute("""
             CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_parsed (
-            id                    INTEGER PRIMARY KEY AUTOINCREMENT,
-            ingredient_block_id   INTEGER NOT NULL,
-            recipe_id             INTEGER,
-            recipe_section_id     INTEGER,
-            recipe_name           TEXT,
-            section_name          TEXT,
-            line_index            INTEGER,
-            raw_text              TEXT,
-            alt_group_id          TEXT,
-            alt_kind              TEXT,
-            optional              INTEGER,
-            parsed_at             TEXT)
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            recipe_id                 INTEGER NOT NULL,
+            recipe_section_id         INTEGER NOT NULL,
+            ingredient_block_id       INTEGER NOT NULL,
+            recipe_ingredient_line_id INTEGER NOT NULL,
+
+            ingredient_id TEXT,
+            ingredient_phrase TEXT,
+            ingredient_name_original TEXT,
+
+            grams REAL,
+            ml REAL,
+
+            imperial_weight_value REAL,
+            imperial_weight_unit TEXT,
+
+            imperial_volume_value REAL,
+            imperial_volume_unit TEXT,
+
+            natural_portion_value REAL,
+            natural_portion TEXT,
+
+            packaging_count REAL,
+            packaging TEXT,
+
+            preparation TEXT,  
+            notes TEXT,
+
+            optional INTEGER NOT NULL DEFAULT 0,
+            alt_group_id TEXT,
+            alt_kind TEXT,
+
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+            FOREIGN KEY(recipe_ingredient_line_id) REFERENCES recipe_ingredient_lines_raw(id),
+            FOREIGN KEY(ingredient_block_id)       REFERENCES recipe_ingredient_blocks(id),
+            FOREIGN KEY(recipe_id)                 REFERENCES recipes(id),
+            FOREIGN KEY(recipe_section_id)         REFERENCES recipe_sections(id)
+            )
         """)
 
         c.execute("""

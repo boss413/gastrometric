@@ -18,7 +18,7 @@
     {
       "id": "black-pepper",
       "name": "black pepper",
-      "aliases": ["black pepper", "ground black pepper", "black peppercorns", "blk pepper"]
+      "aliases": ["black pepper", "ground black pepper", "black peppercorns", "blk pepper", "pepper"]
     },
     {
       "id": "unsalted-butter",
@@ -51,8 +51,8 @@
       "aliases": ["all-purpose flour", "all purpose flour", "ap flour", "plain flour"]
     },
     {
-      "id": "salted-butter",
-      "name": "salted butter",
+      "id": "butter",
+      "name": "butter",
       "aliases": ["salted butter", "butter"]
     },
     {
@@ -131,8 +131,8 @@
       "aliases": ["brown sugar", "light brown sugar", "dark brown sugar"]
     },
     {
-      "id": "chicken-thighs",
-      "name": "chicken thighs",
+      "id": "chicken-thigh",
+      "name": "chicken thigh",
       "aliases": ["boneless skinless chicken thighs", "chicken thighs", "chicken thigh"]
     },
     {
@@ -186,8 +186,8 @@
       "aliases": ["vanilla extract", "pure vanilla extract", "vanilla"]
     },
     {
-      "id": "carrots",
-      "name": "carrots",
+      "id": "carrot",
+      "name": "carrot",
       "aliases": ["carrots", "carrot"]
     },
     {
@@ -466,13 +466,13 @@
       "aliases": ["vegetable broth", "vegetable stock"]
     },
     {
-      "id": "canned-crushed-tomatoes",
-      "name": "canned crushed tomatoes",
+      "id": "canned-crushed-tomato",
+      "name": "canned crushed tomato",
       "aliases": ["canned crushed tomatoes", "crushed tomatoes"]
     },
     {
-      "id": "canned-whole-peeled-tomatoes",
-      "name": "canned whole peeled tomatoes",
+      "id": "canned-whole-peeled-tomato",
+      "name": "canned whole peeled tomato",
       "aliases": ["canned whole peeled tomatoes", "whole peeled tomatoes", "san marzano tomatoes"]
     },
     {
@@ -481,18 +481,18 @@
       "aliases": ["tomato sauce", "canned tomato sauce"]
     },
     {
-      "id": "roma-tomatoes",
-      "name": "roma tomatoes",
+      "id": "roma-tomato",
+      "name": "roma tomato",
       "aliases": ["roma tomatoes", "plum tomatoes"]
     },
     {
-      "id": "cherry-tomatoes",
-      "name": "cherry tomatoes",
+      "id": "cherry-tomato",
+      "name": "cherry tomato",
       "aliases": ["cherry tomatoes", "cherry tomato"]
     },
     {
-      "id": "grape-tomatoes",
-      "name": "grape tomatoes",
+      "id": "grape-tomato",
+      "name": "grape tomato",
       "aliases": ["grape tomatoes", "grape tomato"]
     },
     {
@@ -891,29 +891,29 @@
       "aliases": ["peanut butter", "creamy peanut butter"]
     },
     {
-      "id": "almonds",
-      "name": "almonds",
+      "id": "almond",
+      "name": "almond",
       "aliases": ["almonds", "almond", "sliced almonds", "slivered almonds"]
     },
     {
-      "id": "walnuts",
-      "name": "walnuts",
-      "aliases": ["walnuts", "chopped walnuts"]
+      "id": "walnut",
+      "name": "walnut",
+      "aliases": ["walnuts", "chopped walnuts", "walnut"]
     },
     {
-      "id": "pecans",
-      "name": "pecans",
-      "aliases": ["pecans", "pecan halves"]
+      "id": "pecan",
+      "name": "pecan",
+      "aliases": ["pecans", "pecan halves", "pecan"]
     },
     {
-      "id": "pine-nuts",
-      "name": "pine nuts",
-      "aliases": ["pine nuts", "pignoli"]
+      "id": "pine-nut",
+      "name": "pine nut",
+      "aliases": ["pine nuts", "pignoli", "pine nut"]
     },
     {
-      "id": "cashews",
-      "name": "cashews",
-      "aliases": ["cashews", "raw cashews"]
+      "id": "cashew",
+      "name": "cashew",
+      "aliases": ["cashews", "raw cashews", "cashew"]
     },
     {
       "id": "raisins",
@@ -1881,9 +1881,9 @@
       "aliases": ["snap peas", "sugar snap peas"]
     },
     {
-      "id": "peppers",
-      "name": "peppers",
-      "aliases": ["peppers", "pepper"]
+      "id": "chili-pepper",
+      "name": "chili-pepper",
+      "aliases": ["chili pepper", "chili peppers", "chile peppers", "chilie pepper", "peppers", "chili", "chile", "chilis", "chiles"]
     },
     {
       "id": "poblano-peppers",
@@ -2789,11 +2789,6 @@
       "id": "apple-pie-spice",
       "name": "apple pie spice",
       "aliases": ["apple pie spice"]
-    },
-    {
-      "id": "chili-paste",
-      "name": "chili paste",
-      "aliases": ["chili paste", "sambal oelek"]
     },
     {
       "id": "sweet-chili-sauce",

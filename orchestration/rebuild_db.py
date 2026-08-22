@@ -61,8 +61,8 @@ def main():
     process_recipe_lines()
 
     from gastrometric.understanding.analyzer import persist_all_lines
-
     persist_all_lines()
+
 
 #    from gastrometric.pipeline.observations.build_ingredient_observations import build_all_observations
 #    build_all_observations()

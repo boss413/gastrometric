@@ -89,14 +89,32 @@ beyond passing it through unchanged if some future parser version emits it
 (`_relation_type_for` treats an unrecognized wrapper type conservatively).
 ===========================================================================
 
-What this module does NOT do (RO-10 boundary, unchanged):
+This module produces TWO outputs, per the current RO-10 revision: the
+complete Canonical Semantic Result described above (unchanged), and a
+projection of it into a primary downstream relational table,
+`recipe_ingredient_lines_parsed`. The semantic-construction logic above
+this line is entirely unaffected by that projection -- it performs no new
+interpretation, only reshapes decisions already made above. See the
+"PRIMARY DOWNSTREAM OUTPUT" section further down (before `main()`) for the
+target DDL and a list of FLAGGED GAPS specific to that projection (unit
+classification, preparation-list granularity, `ingredient_phrase` vs.
+`ingredient_name_original`, package.size, optionality detection, and
+alt-group id generation) -- distinct from the four mismatches above, which
+are about the parser/Analyzer boundary, not the downstream projection.
+
+What this module does NOT do (RO-10 boundary):
 lex text; generate parser candidates; modify the parse tree; create
 vocabulary/ingredients; modify relationship knowledge; query SQLite for
 knowledge (all knowledge access goes through the injected `RuntimeKnowledge`);
 invent missing relationships or entities; perform statistical inference or
 confidence calibration; select among ambiguous interpretations; silently
-discard candidates; convert measurements to grams; persist analysis records
-(that is RO-8's responsibility -- see `analyze_all_lines`'s docstring).
+discard candidates; convert measurements to grams or perform any other
+unit conversion (see FLAGGED GAP #2); create columns for every parser
+concept in the downstream table, or make the downstream table a dump of
+the parser AST. It DOES now persist both outputs (`persist_all_lines`) --
+this was RO-8/RO-10's explicit responsibility once the persistence schema
+was confirmed; it is no longer a functional read-only boundary the way
+`analyze_all_lines`/`analyze_parse_result` remain.
 """
 
 from __future__ import annotations
@@ -104,6 +122,7 @@ from __future__ import annotations
 import json
 import re
 import sqlite3
+from collections import Counter
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
 # ---------------------------------------------------------------------------
@@ -1418,116 +1437,873 @@ def analyze_line(parse_tree_json: str, knowledge: Optional[Any] = None) -> dict:
 # ---------------------------------------------------------------------------
 
 
-def _read_parse_trees(conn: sqlite3.Connection) -> Iterable[sqlite3.Row]:
+def _read_parse_trees(
+    conn: sqlite3.Connection, line_ids: Optional[Iterable[int]] = None
+) -> Iterable[sqlite3.Row]:
     cursor = conn.cursor()
-    cursor.execute(
-        """
-        SELECT id, recipe_ingredient_line_id, parse_tree_json
-        FROM ingredient_parse_trees
-        ORDER BY recipe_ingredient_line_id, id
-        """
-    )
+    if line_ids is not None:
+        line_ids = list(line_ids)
+        placeholders = ",".join("?" for _ in line_ids)
+        cursor.execute(
+            f"""
+            SELECT id, recipe_ingredient_line_id, parse_tree_json
+            FROM ingredient_parse_trees
+            WHERE recipe_ingredient_line_id IN ({placeholders})
+            ORDER BY recipe_ingredient_line_id, id
+            """,
+            line_ids,
+        )
+    else:
+        cursor.execute(
+            """
+            SELECT id, recipe_ingredient_line_id, parse_tree_json
+            FROM ingredient_parse_trees
+            ORDER BY recipe_ingredient_line_id, id
+            """
+        )
     return cursor.fetchall()
 
 
-def analyze_all_lines(db_path: Optional[Any] = None) -> Iterable[Tuple[int, int, dict]]:
-    """Reads every persisted parse tree from `ingredient_parse_trees` and
-    yields `(recipe_ingredient_line_id, parse_tree_id, canonical_semantic_result)`
-    triples. parse_tree_id is the id of the exact `ingredient_parse_trees` row
-    the result was produced from, so a persistence layer can populate
-    analysis_records.parse_tree_id without a second lookup.
-    Read-only: see module docstring above.
+def analyze_all_lines(
+    db_path: Optional[Any] = None, line_ids: Optional[Iterable[int]] = None
+) -> Iterable[Tuple[int, int, dict]]:
+    """Reads persisted parse trees from `ingredient_parse_trees` and yields
+    `(recipe_ingredient_line_id, parse_tree_id, canonical_semantic_result)`
+    triples. `parse_tree_id` is the id of the exact `ingredient_parse_trees`
+    row the result was produced from, so a persistence layer can populate
+    `analysis_records.parse_tree_id` without a second lookup. Read-only:
+    see module docstring above.
+
+    `line_ids=None` (default) reads every persisted line -- the current
+    whole-database debugging convenience (RO-10 SS15). Passing an explicit
+    iterable of `recipe_ingredient_line_id` values restricts the read to
+    just those lines, without changing anything else about this function's
+    behavior -- this is the "clean invocation boundary" SS15 asks for, so
+    a future targeted-pipeline caller can reuse this unchanged.
     """
     from gastrometric.config.paths import DB_PATH
     from gastrometric.knowledge.loader import knowledge as runtime_knowledge
+
     path = str(db_path or DB_PATH)
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     try:
-        for row in _read_parse_trees(conn):
+        for row in _read_parse_trees(conn, line_ids):
             parse_result = json.loads(row["parse_tree_json"])
             result = analyze_parse_result(parse_result, runtime_knowledge)
             yield row["recipe_ingredient_line_id"], row["id"], result
     finally:
         conn.close()
-        
-from collections import Counter
-
-KNOWN_UNRESOLVED_REASONS = (
-    "ingredient_not_resolved",
-    "quantity_not_resolved",
-    "measurement_not_resolved",
-    "relationship_unresolved",
-    "unresolved_material",
-    "range_quantity_not_representable",
-)
 
 
-def _has_multiple_references(result: dict) -> bool:
-    """True if any interpretation in this result has more than one
-    reference (e.g. a conjunction like "onions and garlic" split into two
-    references within one interpretation). Assumption: scoped across all
-    interpretations, not just the selected one -- adjust if that's wrong.
+_STATUS_ORDER = ["resolved", "ambiguous", "unresolved", "invalid"]
+
+# Every `unresolved[].reason` string this Analyzer can currently emit,
+# verified by direct inspection of the source (grep '"reason":'), not
+# guessed or restated from an external description. Kept here purely as
+# documentation -- the report below tallies whatever actually appears via
+# a Counter, so this list is a reading aid, not a hardcoded bucket set,
+# and a reason absent from this list would still show up correctly if the
+# analyzer ever grew one.
+#
+#   unrecognized_span                    -- _resolve_ingredient,
+#                                            _build_preparation_modifier,
+#                                            _resolve_component,
+#                                            _carry_through_unresolved
+#   unknown_ingredient                   -- _resolve_ingredient
+#   unrecognized_measurement_structure   -- _resolve_dangling_ranges
+#   range_quantity_not_representable     -- _resolve_dangling_ranges (mismatch #1)
+#   dangling_range                       -- _build_scalar_quantity (mismatch #1)
+#   no_quantity_value                    -- _build_scalar_quantity
+#   unparseable_quantity_value           -- _build_scalar_quantity
+#   missing_unit                         -- _build_scalar_quantity
+#   unparseable_quantity                 -- _assign_quantities' fallback;
+#                                            currently unreachable, since
+#                                            _build_scalar_quantity always
+#                                            returns one of the four
+#                                            specific reasons above rather
+#                                            than None -- kept as a
+#                                            defensive catch-all, not dead
+#                                            code to be relied on staying
+#                                            empty if that contract changes.
+#   additional_measurement_unsupported   -- _assign_quantities
+#   package_count_or_term_not_determined -- _build_package
+#   no_references_produced               -- _evaluate_candidate (empty candidate)
+#   no_parser_candidates                 -- analyze_parse_result (empty ParseResult)
+
+
+# ===========================================================================
+# PRIMARY DOWNSTREAM OUTPUT: recipe_ingredient_lines_parsed
+# ===========================================================================
+#
+# Everything below this point implements RO-10's second work order: a
+# projection from the already-complete Canonical Semantic Result (built
+# entirely above, unchanged) into flat rows for a NEW downstream table,
+# `recipe_ingredient_lines_parsed`. This performs no new semantic
+# interpretation -- it only reshapes decisions the Analyzer already made.
+#
+# Target DDL (not applied here -- init_db.py is not an artifact available
+# to this module; this is the authoritative reference the projection code
+# below assumes). SS1/SS2 of the work order ask for the recipe/section/
+# block lineage FKs to match the PROJECT'S EXISTING convention rather than
+# be invented fresh; the existing convention, confirmed by inspecting
+# `recipe_ingredient_lines_raw`'s own DDL and the code that populates it
+# (`parse_ingredient_blocks.py`), denormalizes THREE lineage FKs directly
+# onto every line row: `ingredient_block_id`, `recipe_id`, and
+# `recipe_section_id` (NOT `section_id` -- that column name in the work
+# order's draft DDL does not match anything in the existing schema). This
+# reproduces that exact convention rather than the work order's literal
+# draft column names, per the instruction to default to the real schema
+# on conflict.
+#
+#   CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_parsed (
+#       id INTEGER PRIMARY KEY AUTOINCREMENT,
+#
+#       recipe_ingredient_line_id INTEGER NOT NULL,
+#       ingredient_block_id       INTEGER NOT NULL,
+#       recipe_id                 INTEGER NOT NULL,
+#       recipe_section_id         INTEGER NOT NULL,
+#
+#       ingredient_id TEXT,
+#       ingredient_phrase TEXT,
+#       ingredient_name_original TEXT,
+#
+#       grams REAL,
+#       ml REAL,
+#
+#       imperial_weight_value REAL,
+#       imperial_weight_unit TEXT,
+#
+#       imperial_volume_value REAL,
+#       imperial_volume_unit TEXT,
+#
+#       natural_portion_value REAL,
+#       natural_portion TEXT,
+#
+#       packaging_count REAL,
+#       packaging TEXT,
+#
+#       preparation TEXT,   -- JSON array (see FLAGGED GAP #3 below)
+#       notes TEXT,
+#
+#       optional INTEGER NOT NULL DEFAULT 0,
+#       alt_group_id TEXT,
+#       alt_kind TEXT,
+#
+#       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+#
+#       FOREIGN KEY(recipe_ingredient_line_id) REFERENCES recipe_ingredient_lines_raw(id),
+#       FOREIGN KEY(ingredient_block_id)       REFERENCES recipe_ingredient_blocks(id),
+#       FOREIGN KEY(recipe_id)                 REFERENCES recipes(id),
+#       FOREIGN KEY(recipe_section_id)         REFERENCES recipe_sections(id)
+#   );
+#
+# No column here links back to `analysis_records` -- one isn't needed.
+# Both this table and `analysis_records` already share
+# `recipe_ingredient_line_id` as a natural join key back to the full
+# diagnostic artifact for any row a curator wants to drill into; adding a
+# second FK would be exactly the kind of column-for-every-concept the
+# work order prohibits (SS "What RO-10 should NOT do").
+#
+# ---------------------------------------------------------------------------
+# FLAGGED GAPS -- read before trusting this projection's output
+# ---------------------------------------------------------------------------
+#
+# 1. UNIT CLASSIFICATION HAS NO KNOWLEDGE-SYSTEM SOURCE.
+#    Routing a `quantity` with unit_type="measurement" into
+#    grams/ml/imperial_weight_*/imperial_volume_* requires knowing whether
+#    a unit term (e.g. "cup", "ounce", "gram") is metric or imperial and
+#    weight or volume. `RuntimeKnowledge`, per everything inspected in
+#    this codebase, exposes ingredient/alias/relationship/phrase-matching
+#    data but no unit-family/-system classification API. The work order
+#    itself states the opposite principle for natural portions ("that
+#    knowledge should come from the existing knowledge system, not from a
+#    hardcoded Analyzer list") -- the same reasoning applies here, but
+#    there is currently nothing in RuntimeKnowledge to draw on instead.
+#    `_route_measurement_quantity` below uses a small, explicit, clearly
+#    labeled hardcoded table as a stopgap. This is NOT a silent
+#    workaround: every quantity whose unit isn't in that table is left
+#    entirely unrouted (no column populated) and counted into the
+#    execution report's CRITICAL ISSUES section, rather than guessed.
+#    Recommend adding a real unit-family/-system lookup to
+#    `RuntimeKnowledge` and deleting this table once one exists.
+#
+# 2. NO UNIT CONVERSION IS PERFORMED, INCLUDING WHERE THE DOWNSTREAM
+#    SCHEMA MIGHT SEEM TO WANT IT. `grams`/`ml` are populated ONLY when
+#    the source already used a metric unit (with kg->g / L->mL SI-prefix
+#    scaling ONLY -- a decimal shift within the metric system, not a
+#    system conversion). "4 oz" is never converted into grams, and
+#    "2 cups" is never converted into ml, even though both are
+#    mathematically possible with a fixed conversion factor. This follows
+#    directly from RO-9's explicit, repeated rule that "the Analyzer is
+#    not the measurement normalization layer" and "do not convert
+#    measurements to grams merely because the downstream system likes
+#    grams." This work order's own SS4 text ("resolved metric quantities
+#    where conversion is possible") is ambiguous about whether it wants
+#    that boundary crossed; this implementation keeps the existing,
+#    explicit RO-9 boundary rather than silently reversing it, and flags
+#    the ambiguity for confirmation. The practical consequence: for any
+#    recipe written in cups/tbsp/tsp/oz/lb (the majority of
+#    English-language recipes), `grams`/`ml` will be NULL and the
+#    imperial_* columns will carry the value instead -- this is expected
+#    given the above, not a bug.
+#
+# 3. PREPARATION LIST GRANULARITY IS NOT VERIFIABLE FROM CURRENT INPUTS.
+#    The work order's own example wants
+#    `["peeled", "quartered lengthwise", "cut crosswise into
+#    0.25-inch-thick slices"]` -- three DISCRETE technique phrases.
+#    `_build_preparation_modifier` (upstream, unchanged) currently merges
+#    every `PreparationNode` leaf in one `PreparationExpression` into a
+#    SINGLE joined modifier term (per the parser's 7a fragmented-phrase
+#    merge rule, the same mechanism that merges "boneless, skinless
+#    chicken breasts" into one ingredient phrase). Whether "cut crosswise
+#    into 0.25-inch-thick slices" arrives as ONE lexical span (a
+#    multi-word vocabulary phrase match) or as several separate
+#    PreparationNode leaves that get merged word-by-word is a property of
+#    the seed vocabulary's phrase-matching granularity, which this module
+#    has no visibility into and cannot verify. Splitting on comma
+#    positions in the original source text is not implementable either --
+#    the Analyzer's input contract (a serialized `ParseResult`) never
+#    includes the original raw line text, only tokenized/lexed spans, so
+#    there is no string to scan for comma boundaries even if that were
+#    otherwise a safe heuristic (it is not, in general: "cut crosswise
+#    into 0.25-inch-thick slices" contains no comma at all). Given this,
+#    `preparation` below is a JSON list wrapper around whatever single
+#    joined term the Analyzer already produced -- currently always 0 or 1
+#    elements, never the 3-element list the work order's example shows.
+#    Do not assume multi-technique lists work until this is verified
+#    against real seed-vocabulary output.
+#
+# 4. `ingredient_phrase` AND `ingredient_name_original` CURRENTLY COMPUTE
+#    IDENTICALLY. The work order describes them with materially
+#    overlapping language ("source phrase/evidence used to resolve
+#    ingredient_id... may include size/descriptor/component/..." vs.
+#    "verbatim source-language representation... original casing,
+#    wording, hyphenation, spelling") but gives no computation that would
+#    make them differ given what a `reference` actually carries. Both are
+#    implemented here as the raw (unnormalized) source text of the
+#    reference's own `source_spans` -- the only "verbatim identity-bearing
+#    phrase" text this data model actually has. If these are meant to
+#    differ (e.g. `ingredient_phrase` should also fold in `component`
+#    text), that needs to be specified; nothing here invents a difference
+#    to make the two columns look distinct.
+#
+# 5. `package.size` HAS NO DOWNSTREAM COLUMN -- AND IS ALSO RARELY EVEN
+#    CONSTRUCTED IN THE FIRST PLACE. E.g. "2 cans (14-ounce) tomatoes" ->
+#    `package.count`/`package_term` project cleanly into
+#    `packaging_count`/`packaging`, but the "14-ounce" (the CONTENTS of
+#    one can) has no target column in the DDL above, and is deliberately
+#    NOT stuffed into `notes` (notes has a specific, narrower meaning
+#    already -- "meta-instructions/context for the cook", not precise
+#    quantity data). It is preserved only in `canonical_result_json`
+#    (fully queryable there, per RO-8) and counted in the execution
+#    report's CRITICAL ISSUES section so the gap is visible rather than
+#    silently dropped.
+#
+#    CONFIRMED BY TESTING, not just reasoned about: the most common
+#    real-world spelling of a can/package size -- a hyphenated
+#    parenthetical like "(14-ounce)" -- triggers mismatch #1 (range
+#    fragmentation) BEFORE `_build_package` ever gets a clean measurement
+#    to consume as `size`. "14-ounce" lexes as Quantity(14) + RangeMarker
+#    + Measurement(ounce), the exact dangling-range shape mismatch #1
+#    describes; `_build_scalar_quantity` therefore returns None for it,
+#    `_build_package`'s size-search leaves it unconsumed, and it falls
+#    through to `_resolve_dangling_ranges` as an ordinary
+#    `range_quantity_not_representable` unresolved entry instead of ever
+#    becoming `package.size` at all. So for this common phrasing,
+#    `package["size"]` is never even constructed upstream -- the
+#    `unmapped_package_size` counter below only catches the rarer case
+#    where `package.size` WAS constructed (e.g. a non-hyphenated "14
+#    ounce"). The execution report's count of this issue is therefore a
+#    floor, not the true frequency; the range-fragmentation unresolved
+#    count already captures most real occurrences under a different
+#    reason string.
+#
+# 6. "EXPLICITLY OPTIONAL" PHRASING IS NOT DETECTED. Item 8's first case
+#    ("olive oil, if desired", "butter (optional)") has NO structural
+#    signal anywhere in the parser/Analyzer data model -- a
+#    `NotesExpression` carries recognized annotation TEXT only, with no
+#    optionality sub-classification. Detecting it here would require a
+#    hardcoded keyword match against note text ("optional", "if
+#    desired", ...), which is exactly the kind of ad hoc,
+#    knowledge-system-should-own-this classification the work order
+#    itself warns against elsewhere. `optional` below is therefore set
+#    ONLY from item 8's second, structural case (non-first member of an
+#    "alternative" relation) -- never from note-text matching.
+#
+# 7. `alt_group_id` HAS NO ESTABLISHED PROJECT CONVENTION TO REPRODUCE.
+#    SS9 says "the exact identifier-generation mechanism should follow
+#    the project's existing conventions", but nothing inspected in this
+#    codebase establishes one (no prior alt-group/relation-id scheme
+#    exists anywhere in the schemas or code seen so far). This uses
+#    `f"{selected_interpretation_id}:{relation_index}"` -- unique within a
+#    line, deterministic/stable across re-runs of the same parse -- as a
+#    reasonable default, not a discovered convention. Replace it if an
+#    actual project convention turns out to exist.
+# ---------------------------------------------------------------------------
+
+_METRIC_WEIGHT_UNITS: Dict[str, float] = {
+    "gram": 1.0, "grams": 1.0, "g": 1.0,
+    "kilogram": 1000.0, "kilograms": 1000.0, "kg": 1000.0,
+    "milligram": 0.001, "milligrams": 0.001, "mg": 0.001,
+}
+_METRIC_VOLUME_UNITS: Dict[str, float] = {
+    "milliliter": 1.0, "milliliters": 1.0, "millilitre": 1.0, "millilitres": 1.0, "ml": 1.0,
+    "liter": 1000.0, "liters": 1000.0, "litre": 1000.0, "litres": 1000.0, "l": 1000.0,
+}
+_IMPERIAL_WEIGHT_UNITS = {"ounce", "ounces", "oz", "pound", "pounds", "lb", "lbs"}
+_IMPERIAL_VOLUME_UNITS = {
+    "cup", "cups", "tablespoon", "tablespoons", "tbsp", "tbs",
+    "teaspoon", "teaspoons", "tsp",
+    "fluid ounce", "fluid ounces", "fluid_ounce", "fl oz", "fl_oz",
+    "pint", "pints", "quart", "quarts", "gallon", "gallons",
+}
+
+
+def _route_measurement_quantity(quantity: dict) -> Dict[str, Any]:
+    """Routes a resolved `quantity` (unit_type == "measurement") into the
+    downstream table's grams/ml/imperial_weight_*/imperial_volume_*
+    columns. Returns a dict with only the keys that apply; the caller
+    merges it into the row. See FLAGGED GAPS #1/#2 above: no cross-system
+    (imperial<->metric) or cross-dimension (weight<->volume) conversion is
+    performed here, ever. An unclassified unit is left entirely unrouted
+    -- the caller records this as a critical issue rather than guessing.
     """
-    return any(len(interp.get("references", [])) > 1 for interp in result["interpretations"])
+    unit_term = (quantity.get("unit_term") or "").strip().lower()
+    value = quantity.get("value")
+    if value is None or not unit_term:
+        return {}
+    if unit_term in _METRIC_WEIGHT_UNITS:
+        return {"grams": value * _METRIC_WEIGHT_UNITS[unit_term]}
+    if unit_term in _METRIC_VOLUME_UNITS:
+        return {"ml": value * _METRIC_VOLUME_UNITS[unit_term]}
+    if unit_term in _IMPERIAL_WEIGHT_UNITS:
+        return {"imperial_weight_value": value, "imperial_weight_unit": unit_term}
+    if unit_term in _IMPERIAL_VOLUME_UNITS:
+        return {"imperial_volume_value": value, "imperial_volume_unit": unit_term}
+    return {}
 
 
-def _tally_unresolved_reasons(result: dict, reason_counts: Counter) -> None:
-    """Counts unresolved[].reason across every reference in every
-    interpretation of an unresolved-status result. Reasons outside
-    KNOWN_UNRESOLVED_REASONS fall into 'other' rather than being dropped
-    or silently mis-tallied.
+def _format_quantity_diagnostic(quantity: Optional[dict]) -> Optional[str]:
+    """Human-readable, diagnostic-only rendering of a quantity for
+    inclusion in the `notes` column (used for `per_item_quantity`, per the
+    work order's explicit "retain as notes" instruction for per-item
+    information). This is string formatting for display only -- it is
+    never parsed back out or fed into any typed numeric column, so it
+    does not cross the "no measurement normalization" boundary above."""
+    if not quantity:
+        return None
+    unit = quantity.get("unit_term", "") or ""
+    if quantity.get("form") == "range":
+        # Not currently constructible (mismatch #1), handled defensively
+        # rather than assumed unreachable.
+        return f"{quantity.get('lower')}-{quantity.get('upper')} {unit}".strip()
+    return f"{quantity.get('value')} {unit}".strip()
+
+
+def _project_reference_to_row(
+    reference: dict,
+    *,
+    optional: int,
+    alt_group_id: Optional[str],
+    alt_kind: Optional[str],
+    unmapped_units: List[str],
+    unmapped_package_size: List[str],
+) -> Dict[str, Any]:
+    """Projects one already-fully-resolved canonical `reference` into one
+    `recipe_ingredient_lines_parsed` row. Performs no new semantic
+    interpretation -- every value here was already decided by the
+    Analyzer's construction logic above; this only reshapes it into the
+    flat downstream column set. See the FLAGGED GAPS block above for every
+    place this projection cannot faithfully preserve something the
+    canonical result carries.
     """
+    ingredient = reference.get("ingredient")
+    ingredient_id = ingredient["id"] if ingredient else None
+
+    # ingredient_phrase / ingredient_name_original: see FLAGGED GAP #4 --
+    # both derived from the same underlying source-span text, since the
+    # Analyzer's data model has no separate "verbatim identity phrase"
+    # distinct from the reference's own source_spans (which already
+    # exclude preparation/notes/unresolved material, since those are
+    # separate fields -- see _reference_source_spans).
+    spans = reference.get("source_spans") or []
+    phrase_text = " ".join(spans) if spans else None
+
+    row: Dict[str, Any] = {
+        "ingredient_id": ingredient_id,
+        "ingredient_phrase": phrase_text,
+        "ingredient_name_original": phrase_text,
+        "grams": None,
+        "ml": None,
+        "imperial_weight_value": None,
+        "imperial_weight_unit": None,
+        "imperial_volume_value": None,
+        "imperial_volume_unit": None,
+        "natural_portion_value": None,
+        "natural_portion": None,
+        "packaging_count": None,
+        "packaging": None,
+        "preparation": None,
+        "notes": None,
+        "optional": optional,
+        "alt_group_id": alt_group_id,
+        "alt_kind": alt_kind,
+    }
+
+    quantity = reference.get("quantity")
+    if quantity:
+        if quantity.get("unit_type") == "natural_portion":
+            row["natural_portion_value"] = quantity.get("value")
+            row["natural_portion"] = quantity.get("unit_term")
+        elif quantity.get("unit_type") == "measurement":
+            routed = _route_measurement_quantity(quantity)
+            if not routed:
+                unmapped_units.append(quantity.get("unit_term") or "<empty>")
+            row.update(routed)
+
+    package = reference.get("package")
+    if package:
+        row["packaging_count"] = package.get("count")
+        row["packaging"] = package.get("package_term")
+        if package.get("size"):
+            # FLAGGED GAP #5 -- no downstream column for package.size.
+            size = package["size"]
+            unmapped_package_size.append(f"{size.get('value')} {size.get('unit_term')}")
+
+    preparation_terms = [
+        modifier["term"]
+        for modifier in reference.get("modifiers", [])
+        if modifier.get("modifier_class") == "preparation"
+    ]
+    if preparation_terms:
+        # FLAGGED GAP #3 -- currently always 0 or 1 entries; a list
+        # wrapper around whatever the Analyzer already produced, not a
+        # guess at discrete technique boundaries.
+        row["preparation"] = json.dumps(preparation_terms)
+
+    note_fragments = [note["text"] for note in reference.get("notes", [])]
+    per_item_text = _format_quantity_diagnostic(reference.get("per_item_quantity"))
+    if per_item_text:
+        # Per-item quantities are deliberately NOT a separate calculation
+        # dimension in this downstream schema (work order's explicit
+        # instruction) -- retained as diagnostic text only.
+        note_fragments.append(f"{per_item_text} each")
+    if note_fragments:
+        row["notes"] = "; ".join(note_fragments)
+
+    return row
+
+
+def _project_selected_references(
+    result: dict,
+) -> Tuple[List[Dict[str, Any]], List[str], List[str]]:
+    """Projects the SELECTED interpretation's references into downstream
+    rows. Returns (rows, unmapped_units, unmapped_package_size).
+
+    Item 12: a line whose top-level status is "ambiguous" -- either
+    multiple viable interpretations, or a single viable interpretation
+    whose own status is "ambiguous" per SS I.4's compound-scope case --
+    has `selected_interpretation is None` by construction (`_derive_result`
+    only ever populates it for resolved/unresolved). This relies on
+    exactly that signal rather than re-deriving ambiguity: no
+    `selected_interpretation` means no rows, full stop -- never a "best
+    guess" projection of one candidate's references. Status "invalid"
+    (zero viable interpretations) likewise never has a selected
+    interpretation, so it is handled by the same check.
+    """
+    selected_id = result.get("selected_interpretation")
+    if not selected_id:
+        return [], [], []
+
+    interpretation = next(
+        (i for i in result["interpretations"] if i["id"] == selected_id), None
+    )
+    if interpretation is None:
+        return [], [], []
+
+    references = interpretation.get("references", [])
+    relations = interpretation.get("relations", [])
+
+    # reference id -> (alt_group_id, alt_kind, is_first_member)
+    membership: Dict[str, Tuple[str, str, bool]] = {}
+    for relation_index, relation in enumerate(relations):
+        members = relation.get("members") or []
+        if not members:
+            continue
+        group_id = f"{selected_id}:{relation_index}"
+        kind = relation.get("relation_type")
+        for position, ref_id in enumerate(members):
+            if ref_id in membership:
+                # A reference can belong to more than one relation in a
+                # nested N-ary compound (SS I.7's flatten-to-leaves
+                # resolution puts every leaf in the outer relation's
+                # members too). First relation encountered wins for this
+                # flat row; the full nested structure remains available
+                # in canonical_result_json.
+                continue
+            membership[ref_id] = (group_id, kind, position == 0)
+
+    rows: List[Dict[str, Any]] = []
+    unmapped_units: List[str] = []
+    unmapped_package_size: List[str] = []
+    for reference in references:
+        alt_group_id: Optional[str] = None
+        alt_kind: Optional[str] = None
+        optional = 0
+        info = membership.get(reference["id"])
+        if info is not None:
+            alt_group_id, alt_kind, is_first = info
+            if alt_kind == "alternative" and not is_first:
+                optional = 1
+        # FLAGGED GAP #6 -- "explicitly optional" phrasing is not
+        # detected; optional is set ONLY from the structural alternative
+        # case above.
+        row = _project_reference_to_row(
+            reference,
+            optional=optional,
+            alt_group_id=alt_group_id,
+            alt_kind=alt_kind,
+            unmapped_units=unmapped_units,
+            unmapped_package_size=unmapped_package_size,
+        )
+        rows.append(row)
+
+    return rows, unmapped_units, unmapped_package_size
+
+
+# ---------------------------------------------------------------------------
+# Persistence -- both RO-10 outputs, one transaction per run
+# ---------------------------------------------------------------------------
+
+
+def _fetch_line_lineage(conn: sqlite3.Connection) -> Dict[int, Tuple[int, int, int]]:
+    """Bulk-fetches (ingredient_block_id, recipe_id, recipe_section_id) for
+    every `recipe_ingredient_lines_raw` row, keyed by its id -- one query
+    for the whole run rather than one per line. Reproduces the lineage
+    dimensions already denormalized directly onto that table (see the
+    target-DDL comment above), rather than inventing a new lineage model
+    (work order SS1)."""
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT id, ingredient_block_id, recipe_id, recipe_section_id
+        FROM recipe_ingredient_lines_raw
+        """
+    )
+    return {row[0]: (row[1], row[2], row[3]) for row in cursor.fetchall()}
+
+
+def _persist_analysis_record(
+    conn: sqlite3.Connection,
+    recipe_ingredient_line_id: int,
+    parse_tree_id: int,
+    result: dict,
+) -> int:
+    """Writes the diagnostic artifact (RO-8): one canonical semantic result
+    plus its evaluation/evidence projections. `result` is inserted into
+    `canonical_result_json` unmodified -- the complete, schema-conforming
+    return value of `analyze_parse_result()`, never narrowed. The rows
+    below are query projections derived from it, not a second source of
+    truth. Caller owns the transaction. Returns the new
+    `analysis_records.id`.
+
+    Assumes init_db.py's DDL for `analysis_candidate_evaluations` has:
+      - `interpretation_id TEXT NOT NULL` (NOT `candidate_id` -- there is
+        no candidate identity independent of `interpretation.id`).
+      - `evaluation_state`'s CHECK allowing exactly
+        {'resolved','ambiguous','unresolved','invalid'}, identical to
+        `interpretation.status` -- inserted verbatim below, no
+        translation.
+    Both confirmed in prior review; this will raise a sqlite3
+    IntegrityError/OperationalError if that DDL hasn't actually been
+    applied yet.
+    """
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        INSERT INTO analysis_records
+            (recipe_ingredient_line_id, parse_tree_id, status,
+             selected_interpretation_id, canonical_result_json)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (
+            recipe_ingredient_line_id,
+            parse_tree_id,
+            result["status"],
+            result.get("selected_interpretation"),
+            json.dumps(result),
+        ),
+    )
+    analysis_record_id = cursor.lastrowid
+    # cursor.lastrowid is typed Optional[int] (None only when the last
+    # statement wasn't an INSERT, or no row was inserted); immediately
+    # after the INSERT above on an AUTOINCREMENT table, it is always a
+    # real int.
+    assert analysis_record_id is not None
     for interpretation in result["interpretations"]:
-        for reference in interpretation.get("references", []):
-            for item in reference.get("unresolved", []):
-                reason = item.get("reason", "")
-                reason_counts[reason if reason in KNOWN_UNRESOLVED_REASONS else "other"] += 1
+        cursor.execute(
+            """
+            INSERT INTO analysis_candidate_evaluations
+                (analysis_record_id, interpretation_id, evaluation_state)
+            VALUES (?, ?, ?)
+            """,
+            (analysis_record_id, interpretation["id"], interpretation["status"]),
+        )
+        evaluation_id = cursor.lastrowid
+        for evidence in interpretation.get("evidence", []):
+            cursor.execute(
+                """
+                INSERT INTO analysis_evidence
+                    (analysis_candidate_evaluation_id, kind, record_id, effect)
+                VALUES (?, ?, ?, ?)
+                """,
+                (evaluation_id, evidence["kind"], evidence["record_id"], evidence["effect"]),
+            )
+    return analysis_record_id
 
 
-def _print_summary(
-    total: int,
-    multi_ref_lines: int,
-    status_counts: Counter,
-    reason_counts: Counter,
-) -> None:
-    def pct(n: int) -> float:
-        return (n / total * 100) if total else 0.0
+def _persist_parsed_rows(
+    conn: sqlite3.Connection,
+    recipe_ingredient_line_id: int,
+    ingredient_block_id: int,
+    recipe_id: int,
+    recipe_section_id: int,
+    rows: List[Dict[str, Any]],
+) -> int:
+    """Writes the primary downstream output (`recipe_ingredient_lines_parsed`)
+    for one line. Lineage FKs mirror `recipe_ingredient_lines_raw`'s own
+    convention exactly. Caller owns the transaction. Returns the number of
+    rows written."""
+    cursor = conn.cursor()
+    for row in rows:
+        cursor.execute(
+            """
+            INSERT INTO recipe_ingredient_lines_parsed (
+                recipe_ingredient_line_id, ingredient_block_id, recipe_id, recipe_section_id,
+                ingredient_id, ingredient_phrase, ingredient_name_original,
+                grams, ml,
+                imperial_weight_value, imperial_weight_unit,
+                imperial_volume_value, imperial_volume_unit,
+                natural_portion_value, natural_portion,
+                packaging_count, packaging,
+                preparation, notes,
+                optional, alt_group_id, alt_kind
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                recipe_ingredient_line_id, ingredient_block_id, recipe_id, recipe_section_id,
+                row["ingredient_id"], row["ingredient_phrase"], row["ingredient_name_original"],
+                row["grams"], row["ml"],
+                row["imperial_weight_value"], row["imperial_weight_unit"],
+                row["imperial_volume_value"], row["imperial_volume_unit"],
+                row["natural_portion_value"], row["natural_portion"],
+                row["packaging_count"], row["packaging"],
+                row["preparation"], row["notes"],
+                row["optional"], row["alt_group_id"], row["alt_kind"],
+            ),
+        )
+    return len(rows)
 
-    sep = "─" * 38
-    print("Analyzer Summary")
-    print(sep)
-    print(f"{'Lines analyzed:':<34}{total:>6,}")
-    print(f"{'Lines split into multiple refs:':<34}{multi_ref_lines:>6,}")
-    for label, key in (
-        ("Resolved:", "resolved"),
-        ("Ambiguous:", "ambiguous"),
-        ("Unresolved:", "unresolved"),
-        ("Invalid:", "invalid"),
-    ):
-        n = status_counts.get(key, 0)
-        print(f"{label:<34}{n:>6,} ({pct(n):>4.1f}%)")
-    print("Unresolved reasons:")
-    for reason in (*KNOWN_UNRESOLVED_REASONS, "other"):
-        print(f"  {reason:<32}{reason_counts.get(reason, 0):>5,}")
-    print(sep)
+
+def _classify_ambiguous_reason(result: dict) -> str:
+    """Distinguishes SS I.4's compound quantity/package-scope ambiguity (a
+    single viable interpretation whose own status is "ambiguous") from
+    genuine multi-candidate ambiguity (more than one viable
+    interpretation), using only `analyze_parse_result()`'s public output
+    -- the same viable-count logic `_derive_result` already uses, not a
+    new heuristic."""
+    viable = [i for i in result["interpretations"] if i["status"] != "invalid"]
+    if len(viable) == 1 and viable[0]["status"] == "ambiguous":
+        return "compound_quantity_or_package_scope"
+    return "other"
+
+
+class ReportStats:
+    """Aggregate counters for the execution report (item 17). Built
+    incrementally from `analyze_all_lines()`'s output -- no per-line state
+    is retained, so this never prints a line-by-line dump regardless of
+    database size."""
+
+    def __init__(self) -> None:
+        self.total_lines = 0
+        self.status_counts: "Counter[str]" = Counter()
+        self.ambiguous_reason_counts: "Counter[str]" = Counter()
+        self.unresolved_reason_counts: "Counter[str]" = Counter()
+        self.lines_zero_row = 0
+        self.lines_one_row = 0
+        self.lines_multi_row = 0
+        self.unmapped_units: "Counter[str]" = Counter()
+        self.unmapped_package_size_count = 0
+        self.missing_lineage_line_ids: List[int] = []
+
+    def record_result(self, result: dict) -> None:
+        self.total_lines += 1
+        self.status_counts[result["status"]] += 1
+        if result["status"] == "ambiguous":
+            self.ambiguous_reason_counts[_classify_ambiguous_reason(result)] += 1
+        # Tally every unresolved[].reason occurrence, across every
+        # reference, across every interpretation -- not one reason per
+        # line. A line can fail for more than one reason at once, and a
+        # line that decomposes into multiple references (SS I) can
+        # independently accumulate several unresolved reasons across
+        # those references. These counts are NOT expected to sum to
+        # status_counts["unresolved"].
+        for interpretation in result["interpretations"]:
+            for reference in interpretation.get("references", []):
+                for entry in reference.get("unresolved", []):
+                    self.unresolved_reason_counts[entry["reason"]] += 1
+
+    def record_projection(
+        self, rows: List[dict], unmapped_units: List[str], unmapped_package_size: List[str]
+    ) -> None:
+        if len(rows) == 0:
+            self.lines_zero_row += 1
+        elif len(rows) == 1:
+            self.lines_one_row += 1
+        else:
+            self.lines_multi_row += 1
+        for unit in unmapped_units:
+            self.unmapped_units[unit] += 1
+        self.unmapped_package_size_count += len(unmapped_package_size)
+
+    def record_missing_lineage(self, recipe_ingredient_line_id: int) -> None:
+        self.missing_lineage_line_ids.append(recipe_ingredient_line_id)
+
+
+def _print_report(stats: "ReportStats") -> None:
+    rule = "\u2500" * 64
+    total = stats.total_lines
+
+    print("Analyzer Execution Report")
+    print(rule)
+    print(f"{'Lines analyzed:':<40}{total:>10,}")
+    print(f"{'Lines producing zero downstream rows:':<40}{stats.lines_zero_row:>10,}")
+    print(f"{'Lines producing one downstream row:':<40}{stats.lines_one_row:>10,}")
+    print(f"{'Lines producing multiple downstream rows:':<40}{stats.lines_multi_row:>10,}")
+
+    print()
+    for status in _STATUS_ORDER:
+        count = stats.status_counts.get(status, 0)
+        pct = (count / total * 100) if total else 0.0
+        print(f"{status.capitalize() + ':':<40}{count:>10,} ({pct:5.1f}%)")
+
+    print()
+    print("Unresolved reasons (occurrences, not lines -- a line can carry")
+    print("more than one; see ReportStats.record_result):")
+    if stats.unresolved_reason_counts:
+        for reason, count in sorted(
+            stats.unresolved_reason_counts.items(), key=lambda kv: (-kv[1], kv[0])
+        ):
+            print(f"  {reason:<42}{count:>8,}")
+    else:
+        print("  none")
+
+    print()
+    print("Ambiguous reasons (one per ambiguous line):")
+    if stats.ambiguous_reason_counts:
+        for reason, count in sorted(
+            stats.ambiguous_reason_counts.items(), key=lambda kv: (-kv[1], kv[0])
+        ):
+            print(f"  {reason:<42}{count:>8,}")
+    else:
+        print("  none")
+
+    critical_issues: List[str] = []
+    if stats.unmapped_units:
+        total_unmapped = sum(stats.unmapped_units.values())
+        units_list = ", ".join(sorted(stats.unmapped_units))
+        critical_issues.append(
+            f"{total_unmapped} measurement-quantity occurrence(s) used a unit "
+            f"this projection cannot classify as metric/imperial weight/"
+            f"volume: {units_list}. No grams/ml/imperial_* value was "
+            f"populated for these -- see _route_measurement_quantity's "
+            f"docstring (FLAGGED GAP #1)."
+        )
+    if stats.unmapped_package_size_count:
+        critical_issues.append(
+            f"{stats.unmapped_package_size_count} package.size occurrence(s) "
+            f"have no column in the current downstream schema -- preserved "
+            f"only in canonical_result_json (FLAGGED GAP #5)."
+        )
+    if stats.missing_lineage_line_ids:
+        sample = stats.missing_lineage_line_ids[:10]
+        critical_issues.append(
+            f"{len(stats.missing_lineage_line_ids)} line(s) produced downstream "
+            f"rows but had no matching recipe_ingredient_lines_raw lineage row "
+            f"-- those rows were NOT written. Sample "
+            f"recipe_ingredient_line_id values: {sample}."
+        )
+
+    if critical_issues:
+        print()
+        print("CRITICAL ISSUES:")
+        for issue in critical_issues:
+            print(f"  - {issue}")
+
+    print(rule)
+
+
+def persist_all_lines(
+    db_path: Optional[Any] = None, line_ids: Optional[Iterable[int]] = None
+) -> ReportStats:
+    """Runs `analyze_all_lines()` and writes BOTH RO-10 outputs for every
+    line: the primary downstream rows (`recipe_ingredient_lines_parsed`)
+    and the diagnostic artifact (`analysis_records`/
+    `analysis_candidate_evaluations`/`analysis_evidence`).
+
+    `line_ids=None` (default) analyzes the whole database -- a debugging
+    convenience (item 15), not a permanent design assumption. Pass an
+    explicit iterable of `recipe_ingredient_line_id` values for a future
+    targeted-pipeline invocation; nothing else here needs to change.
+
+    Single transaction for the whole run (matching
+    `process_recipe_lines()`'s existing commit-once pattern); rolls back
+    entirely on any error so no line is left with diagnostic rows but no
+    primary rows, or vice versa. Returns a `ReportStats` (see `main()` for
+    the printed report built from it).
+    """
+    from gastrometric.config.paths import DB_PATH
+
+    path = str(db_path or DB_PATH)
+    write_conn = sqlite3.connect(path)
+    stats = ReportStats()
+    try:
+        lineage = _fetch_line_lineage(write_conn)
+        for recipe_ingredient_line_id, parse_tree_id, result in analyze_all_lines(path, line_ids):
+            stats.record_result(result)
+
+            _persist_analysis_record(write_conn, recipe_ingredient_line_id, parse_tree_id, result)
+
+            rows, unmapped_units, unmapped_package_size = _project_selected_references(result)
+            stats.record_projection(rows, unmapped_units, unmapped_package_size)
+
+            if rows:
+                line_lineage = lineage.get(recipe_ingredient_line_id)
+                if line_lineage is None:
+                    stats.record_missing_lineage(recipe_ingredient_line_id)
+                else:
+                    ingredient_block_id, recipe_id, recipe_section_id = line_lineage
+                    _persist_parsed_rows(
+                        write_conn,
+                        recipe_ingredient_line_id,
+                        ingredient_block_id,
+                        recipe_id,
+                        recipe_section_id,
+                        rows,
+                    )
+        write_conn.commit()
+    except Exception:
+        write_conn.rollback()
+        raise
+    finally:
+        write_conn.close()
+    return stats
 
 
 def main() -> None:
-    total = 0
-    multi_ref_lines = 0
-    status_counts: Counter = Counter()
-    reason_counts: Counter = Counter()
-
-    for _, _, result in analyze_all_lines():
-        total += 1
-        status_counts[result["status"]] += 1
-        if _has_multiple_references(result):
-            multi_ref_lines += 1
-        if result["status"] == "unresolved":
-            _tally_unresolved_reasons(result, reason_counts)
-
-    _print_summary(total, multi_ref_lines, status_counts, reason_counts)
+    stats = persist_all_lines()
+    _print_report(stats)
 
 
 if __name__ == "__main__":
