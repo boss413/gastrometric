@@ -1,5 +1,6 @@
 import sqlite3
 import json
+import itertools
 from dataclasses import dataclass, field, asdict
 from typing import List, Any, Type, Dict, Optional, cast
 
@@ -66,6 +67,13 @@ class ContainerNode(ASTNode):
 
 @dataclass
 class SpanNode(ASTNode):
+    """Wraps one lexical span. This node's concrete class (e.g.
+    NaturalPortionNode vs IngredientNode) is the role that particular
+    candidate classification plays -- when a lexical position has more
+    than one candidate `span_type`, that ambiguity is NOT recorded as
+    metadata here (see LEXICAL AMBIGUITY CONTRACT below): it produces a
+    separate candidate parse tree per role, each with an ordinary,
+    single-role SpanNode at this position."""
     span: LexicalToken
 
 @dataclass
@@ -216,14 +224,22 @@ class AlternativeExpression(ContainerNode):
     """An 'or' relationship between two syntactically-compatible operands
     (same constituent type on both sides). The type of the operands, not
     the operator, determines what the group means -- e.g. two
-    IngredientExpressions joined by 'or' is an ingredient alternative."""
-    pass
+    IngredientExpressions joined by 'or' is an ingredient alternative.
+
+    `connective` preserves the lexical span of the operator itself (the
+    `AlternativeMarker` for the "or"/"nor" that produced this group) --
+    `children` holds only the two operands, exactly as before this field
+    was added, so nothing that already reads `children[0]`/`children[1]`
+    is affected. `connective` is the actual provenance for this relation;
+    it must not be reconstructed from the operands' spans downstream."""
+    connective: Optional[ASTNode] = None
 
 @dataclass
 class ConjunctionExpression(ContainerNode):
     """An 'and' / 'plus' relationship between two syntactically-compatible
-    operands. Same classification rule as AlternativeExpression."""
-    pass
+    operands. Same classification rule and `connective` provenance
+    convention as AlternativeExpression."""
+    connective: Optional[ASTNode] = None
 
 @dataclass
 class ListExpression(ContainerNode):
@@ -249,7 +265,46 @@ class IngredientReference(ASTNode):
 
 @dataclass
 class IngredientLine(ContainerNode):
+    """One complete structural interpretation of an ingredient line's
+    lexical spans -- a list of `IngredientReference` children. This is a
+    single candidate; see `ParseResult` for how multiple candidates are
+    represented when the line's lexical spans are ambiguous."""
     pass
+
+@dataclass
+class Candidate(ASTNode):
+    """One parse branch: a complete structural interpretation (`tree`,
+    an `IngredientLine`) plus a flattened rollup (`unresolved`) of
+    everything within it the parser could not resolve into a recognized
+    constituent.
+
+    `unresolved` here is a convenience view across every
+    `IngredientReference` in `tree` -- each reference also keeps its own
+    `unresolved` list (which reference a fragment belongs to is still
+    meaningful when a line has more than one), but surfacing the flattened
+    set at the candidate level lets a consumer gauge how much of this
+    particular branch went unresolved without walking the tree.
+    """
+    tree: ASTNode
+    unresolved: List[ASTNode] = field(default_factory=list)
+
+@dataclass
+class ParseResult(ASTNode):
+    """The parser's output for one ingredient line: a set of complete,
+    independently-valid structural interpretations ("candidates"), one per
+    combination of lexical role choices across the line's ambiguous
+    positions (see LEXICAL AMBIGUITY CONTRACT below). Each candidate is a
+    `Candidate` wrapping a full `IngredientLine`.
+
+    Ambiguity lives BETWEEN candidates, not as metadata on a chosen node
+    inside one tree -- a NaturalPortion-vs-Ingredient reading of "cloves"
+    is two different candidates in `candidates`, not one tree with a note
+    attached to whichever role happened to be picked. The analyzer
+    selects/eliminates among candidates using knowledge the parser
+    deliberately does not have (ingredient/component relationships,
+    measurement semantics, surrounding structure, etc.).
+    """
+    candidates: List[ASTNode] = field(default_factory=list)
 
 # ---------------------------------------------------------------------------
 # PARSER OUTPUT CONTRACT  (see work order Section 23)
@@ -294,6 +349,21 @@ class IngredientLine(ContainerNode):
 #    post-nominal), whether they are a single PreparationExpression or an
 #    Alternative/ConjunctionExpression of PreparationExpressions.
 #
+# 7a. Fragmented phrases: `ingredient`, `component`, `preparation`, and
+#     `package` are singular fields, but the chunker can still produce more
+#     than one same-typed top-level expression for a single reference --
+#     typically a noun/adjective phrase interrupted by an intervening
+#     token, e.g. a comma between pre-nominal modifiers ("boneless,
+#     skinless chicken breasts") or a differently-classified word splitting
+#     what is really one phrase ("large boneless chicken breasts"). A
+#     second same-typed occurrence is merged into the existing value
+#     (`_attach_singular`) rather than discarded to `unresolved` -- it is
+#     virtually always a continuation of the same phrase, not a competing
+#     second value. This only merges expressions of the identical plain
+#     type; if the field already holds an Alternative/ConjunctionExpression
+#     (a genuine 'or'/'and' group), a further plain expression still falls
+#     back to `unresolved` rather than being guessed into the group.
+#
 # 8. Unknown spans become `UnknownSequence` nodes and are appended to
 #    `IngredientReference.unresolved`. Being unknown does not remove the
 #    span from the tree, and it does not get promoted into a recognized
@@ -309,6 +379,105 @@ class IngredientLine(ContainerNode):
 #     authoritative, package-to-quantity conversion, ingredient identity
 #     resolution, and any culinary-knowledge-based disambiguation (e.g.
 #     whether "2 carrots" means two natural-portion units of carrot).
+#
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# LEXICAL AMBIGUITY CONTRACT
+# ---------------------------------------------------------------------------
+#
+# This parser separates three distinct concerns that are easy to conflate:
+#
+#   1. LEXICAL CANDIDATES (the lexer's job, consumed as-is by the parser)
+#      For one source span, e.g. "ribs", the lexer may propose several
+#      candidate classifications with NO preference between them:
+#          Ingredient(ribs), Component(ribs), NaturalPortion(ribs)
+#      These arrive as multiple `lexical_spans` rows sharing the exact same
+#      (start_offset, end_offset, text). `_group_positions` groups them into
+#      one lexical position's candidate set; no row is ever dropped merely
+#      because another row exists for the same position.
+#
+#   2. PARSE BRANCHES (this parser's job)
+#      The parser combines lexical candidates into every STRUCTURALLY valid
+#      complete interpretation -- e.g. for "2 ribs celery":
+#          Candidate A: Quantity(2) + NaturalPortion(ribs) [one
+#                       MeasurementExpression] + Ingredient(celery)
+#          Candidate B: Quantity(2) + IngredientExpression(ribs, celery)
+#                       [one compound ingredient phrase]
+#          Candidate C: Quantity(2) + Component(ribs) + Ingredient(celery)
+#      The parser's job is to determine what structures are grammatically
+#      possible. It does NOT decide which one is true -- there is no
+#      "Ingredient wins" or "NaturalPortion wins" rule anywhere in this
+#      file, and no candidate is scored, ranked, or dropped for being
+#      semantically less likely.
+#
+#   3. ANALYZER SCORING (deliberately NOT this parser's job)
+#      Once `ParseResult.candidates` reaches the analyzer, it can ask the
+#      knowledge system questions the parser has no access to -- e.g.
+#      "ribs IS_A pork ribs", "ribs COMPONENT_OF celery?", "ribs
+#      NATURAL_PORTION_OF celery?" -- and use that evidence to prefer one
+#      candidate over another. That resolution step belongs entirely to the
+#      analyzer.
+#
+# The key invariant: the parser may eliminate structurally IMPOSSIBLE
+# interpretations (e.g. a candidate role that can't grammatically combine
+# with its neighbors at all), but it must never select among structurally
+# valid, semantically plausible interpretations. That selection is the
+# analyzer's job, not the parser's.
+#
+#     LexicalSpan  = source text + candidate lexical classifications
+#     Parser       = determines what structures the candidates can
+#                    participate in, as a SET of complete interpretations
+#     ParseResult  = every structurally valid interpretation, each a
+#                    Candidate(tree=<complete IngredientLine>, unresolved=...)
+#
+# Ambiguity therefore lives BETWEEN candidates, never as metadata on a
+# chosen node inside one tree. A NaturalPortion-vs-Ingredient reading of
+# "cloves" is two different candidates in `ParseResult.candidates`, not one
+# tree with a note attached to whichever role happened to be picked -- a
+# role chosen for one node, with the alternative recorded as metadata on
+# it, is already a preference, which is exactly the semantic judgment the
+# parser must not make. (An earlier iteration of this parser did exactly
+# that via an `alternate_roles` field; it was removed for this reason, not
+# renamed.)
+#
+# Concretely, how ambiguity becomes branches:
+#
+# 1. `_group_positions` groups same-extent `lexical_spans` rows into ONE
+#    lexical position with N candidate classifications (layer 1, above).
+#
+# 2. `_expand_candidate_sequences` takes the cross product of candidate
+#    choices across every ambiguous position in the line, producing one
+#    concrete (single-classification-per-position) token sequence per
+#    combination. A word with 2 candidate roles doubles the number of
+#    sequences; two independently-ambiguous words in one line multiply.
+#    This is a structural expansion, not a semantic one -- it does not ask
+#    which role is more likely, only which roles exist.
+#
+# 3. Each concrete sequence is parsed by the ORDINARY single-interpretation
+#    pipeline (`_group_parens` -> `_process_level` -> `_build_references`),
+#    completely unaware that it's one of several candidates. This is what
+#    keeps role interpretation from being decided ahead of structure: the
+#    same general grammar rules (e.g. "adjacent Ingredient-compatible spans
+#    form one IngredientExpression", "a bare NaturalPortion directly after
+#    a bare Quantity completes it") apply uniformly, and simply produce a
+#    different resulting tree depending on which candidate the sequence
+#    picked at each ambiguous position. This is layer 2 (parse branches).
+#
+# 4. The resulting `IngredientLine`s are deduplicated (candidates that
+#    happen to produce byte-identical trees collapse to one), each wrapped
+#    in a `Candidate` alongside a flattened `unresolved` rollup, and
+#    collected into `ParseResult.candidates`. Nothing here ranks or
+#    eliminates candidates on culinary grounds -- that's layer 3, entirely
+#    deferred to the analyzer.
+#
+# 5. This never depends on which specific word is involved. Expansion
+#    operates purely on however many candidate rows a position has, so no
+#    special-casing is needed for particular words (clove, ribs, skin,
+#    chili, ...) -- any ambiguously-classified word is handled by the same
+#    general mechanism, and an ordinary single-classification word (the
+#    common case) produces exactly one sequence, unchanged from before this
+#    mechanism existed.
 #
 # ---------------------------------------------------------------------------
 
@@ -359,35 +528,110 @@ class IngredientParser:
     literal, separate database-style passes, per Section 18's closing note.
     """
 
-    def parse(self, spans: List[LexicalToken]) -> IngredientLine:
-        deduped = self._deduplicate_spans(spans)
-        nested_tokens = self._group_parens(deduped)          # Pass 3 (structural)
-        exprs = self._process_level(nested_tokens)            # Passes 1,2,4,5
-        refs = self._build_references(exprs)                  # Passes 6-10
-        return IngredientLine(children=refs)
+    def parse(self, spans: List[LexicalToken]) -> ParseResult:
+        position_groups = self._group_positions(spans)
+        sequences = self._expand_candidate_sequences(position_groups)
+
+        candidates: List[ASTNode] = []
+        seen: set = set()
+        for seq in sequences:
+            nested = self._group_parens(seq)              # Pass 3 (structural)
+            exprs = self._process_level(nested)            # Passes 1,2,4,5
+            refs = self._build_references(exprs)            # Passes 6-10
+            line = IngredientLine(children=refs)
+
+            # Different candidate role choices usually produce visibly
+            # different trees, but a redundant lexer row (the same
+            # classification listed twice for one position) would produce
+            # two identical trees -- collapse those rather than showing
+            # the analyzer a duplicate hypothesis.
+            key = json.dumps(line.to_dict(), sort_keys=True)
+            if key not in seen:
+                seen.add(key)
+                flattened_unresolved: List[ASTNode] = []
+                for ref in line.children:
+                    if isinstance(ref, IngredientReference):
+                        flattened_unresolved.extend(ref.unresolved)
+                candidates.append(Candidate(tree=line, unresolved=flattened_unresolved))
+
+        return ParseResult(candidates=candidates)
 
     # -- Span hygiene -------------------------------------------------
 
-    def _deduplicate_spans(self, spans: List[LexicalToken]) -> List[LexicalToken]:
-        """Keep the outermost span when the lexer produced overlapping
-        candidates for the same source range."""
-        sorted_spans = sorted(spans, key=lambda s: (s.start_offset, -s.end_offset))
-        kept: List[LexicalToken] = []
-        max_end = -1
+    def _group_positions(self, spans: List[LexicalToken]) -> List[List[LexicalToken]]:
+        """Groups `lexical_spans` rows into lexical positions.
 
-        for span in sorted_spans:
-            if span.start_offset >= max_end:
-                kept.append(span)
-                max_end = span.end_offset
+        The lexer may emit more than one row for the exact same source
+        extent -- multiple candidate `span_type` classifications for one
+        word. Those rows are always kept together as a single position's
+        candidate set; they are NEVER reduced to one here. What happens
+        with multiple candidates is decided in `_expand_candidate_sequences`
+        (branch into separate candidate trees), not by discarding rows at
+        this stage.
+
+        Spans with genuinely different, overlapping extents (a distinct,
+        coarser kind of ambiguity -- alternative segmentations of the
+        text, not alternative classifications of the same word) fall back
+        to keeping the outermost extent, as before this change.
+        """
+        by_extent: Dict[Any, List[LexicalToken]] = {}
+        order: List[Any] = []
+        for s in spans:
+            key = (s.start_offset, s.end_offset)
+            if key not in by_extent:
+                by_extent[key] = []
+                order.append(key)
+            by_extent[key].append(s)
+
+        for key in by_extent:
+            by_extent[key].sort(key=lambda s: s.span_order)
+
+        extents = sorted(by_extent.keys(), key=lambda k: (k[0], -k[1]))
+
+        kept: List[List[LexicalToken]] = []
+        max_end = -1
+        for start, end in extents:
+            if start >= max_end:
+                kept.append(by_extent[(start, end)])
+                max_end = end
         return kept
+
+    # Defensive cap on how many candidate token sequences one line can
+    # expand into. This is a safety valve against pathological input (many
+    # independently-ambiguous positions multiplying together), not a
+    # designed limit -- ordinary ingredient lines have at most a handful of
+    # ambiguous words, so this should not be reached in practice.
+    MAX_CANDIDATE_SEQUENCES = 64
+
+    def _expand_candidate_sequences(
+        self, position_groups: List[List[LexicalToken]]
+    ) -> List[List[LexicalToken]]:
+        """Cross-multiplies candidate classifications across every lexical
+        position in the line into concrete (one-classification-per-position)
+        token sequences -- one per combination of role choices. A position
+        with a single candidate contributes only one choice, so an
+        ordinary, fully-unambiguous line always expands to exactly one
+        sequence, identical to running the pre-ambiguity single-candidate
+        pipeline directly.
+
+        This is a purely structural expansion (which roles EXIST), not a
+        semantic one (which role is more likely) -- see LEXICAL AMBIGUITY
+        CONTRACT.
+        """
+        sequences: List[List[LexicalToken]] = []
+        for i, combo in enumerate(itertools.product(*position_groups)):
+            if i >= self.MAX_CANDIDATE_SEQUENCES:
+                break
+            sequences.append(list(combo))
+        return sequences
 
     # -- Pass 3 (structural half): parenthesis grouping ---------------
 
     def _group_parens(self, spans: List[LexicalToken]) -> List[Any]:
-        """Turns the flat span sequence into a nested list-of-lists
-        wherever parentheses occur, so that everything inside `( ... )`
-        can be parsed as its own constituent sequence before being
-        resolved into a ParentheticalExpression."""
+        """Turns one concrete (already-disambiguated) span sequence into a
+        nested list-of-lists wherever parentheses occur, so that everything
+        inside `( ... )` can be parsed as its own constituent sequence
+        before being resolved into a ParentheticalExpression."""
         stack: List[List[Any]] = []
         current_level: List[Any] = []
 
@@ -412,6 +656,7 @@ class IngredientParser:
             current_level.append(finished_level)
 
         return current_level
+
 
     # -- Pass 1: grammar operator recognition --------------------------
 
@@ -449,7 +694,13 @@ class IngredientParser:
     def _process_level(self, tokens: List[Any]) -> List[ASTNode]:
         """Processes one bracketing level: forms atomic constituents, then
         (recursively, for nested levels) resolves parenthetical groups,
-        then classifies conjunction/alternative groups."""
+        then classifies conjunction/alternative groups.
+
+        `tokens` is a mix of concrete `LexicalToken`s (already
+        disambiguated by `_expand_candidate_sequences` -- by this point
+        each lexical position has exactly one classification) and nested
+        paren groups (`list`, produced by `_group_parens`).
+        """
         leaves: List[ASTNode] = []
         for t in tokens:
             if isinstance(t, list):
@@ -470,7 +721,14 @@ class IngredientParser:
         merging adjacent, grammatically-compatible leaves. This never
         merges across a marker (alternative/conjunction/comma/paren
         boundary), and it never merges two independent measurements into
-        one MeasurementExpression."""
+        one MeasurementExpression.
+
+        By the time this runs, ambiguity has already been resolved into
+        separate candidate sequences upstream (`_expand_candidate_sequences`
+        in `parse`) -- every node here has exactly one classification, so
+        this is the same single-interpretation grammar regardless of how
+        many candidates the line as a whole produces.
+        """
         exprs: List[ASTNode] = []
         current: Any = None
 
@@ -649,12 +907,14 @@ class IngredientParser:
             i = 1
             while i < len(nodes) - 1:
                 if isinstance(nodes[i], AlternativeMarker):
-                    left, right = nodes[i - 1], nodes[i + 1]
+                    marker, left, right = nodes[i], nodes[i - 1], nodes[i + 1]
                     if type(left) == type(right) and isinstance(
                         left, (IngredientExpression, PreparationExpression,
                                MeasurementExpression, ComponentExpression, DescriptorNode)
                     ):
-                        merged = AlternativeExpression(children=cast(List[ASTNode], [left, right]))
+                        merged: ASTNode = AlternativeExpression(
+                            children=cast(List[ASTNode], [left, right]), connective=marker
+                        )
                         nodes[i - 1:i + 2] = [merged]
                         i -= 1
                 i += 1
@@ -663,12 +923,14 @@ class IngredientParser:
             i = 1
             while i < len(nodes) - 1:
                 if isinstance(nodes[i], ConjunctionMarker):
-                    left, right = nodes[i - 1], nodes[i + 1]
+                    marker, left, right = nodes[i], nodes[i - 1], nodes[i + 1]
                     if type(left) == type(right) and isinstance(
                         left, (IngredientExpression, PreparationExpression,
                                MeasurementExpression, ComponentExpression, DescriptorNode)
                     ):
-                        merged = ConjunctionExpression(children=cast(List[ASTNode], [left, right]))
+                        merged = ConjunctionExpression(
+                            children=cast(List[ASTNode], [left, right]), connective=marker
+                        )
                         nodes[i - 1:i + 2] = [merged]
                         i -= 1
                 i += 1
@@ -707,6 +969,39 @@ class IngredientParser:
                 return field_name
         return None
 
+    def _attach_singular(
+        self, ref: IngredientReference, field_name: str, e: ContainerNode, expr_type: Type[ContainerNode]
+    ) -> None:
+        """Attaches `e` to a singular IngredientReference field (package,
+        ingredient, component, preparation).
+
+        `IngredientReference` has exactly ONE slot for each of these, but
+        the chunker can still produce more than one same-typed top-level
+        expression for a single reference -- most commonly a noun/adjective
+        phrase interrupted by an intervening token, e.g. a comma between
+        pre-nominal modifiers ("boneless, skinless chicken breasts") or a
+        differently-classified word splitting what is really one phrase
+        ("large boneless chicken breasts", where "boneless" briefly opens
+        its own PreparationExpression between two IngredientExpression
+        fragments). A second occurrence of the SAME expression type is
+        virtually always a continuation of that one phrase, not a second,
+        competing value -- so it is merged rather than discarded into
+        `unresolved`.
+
+        If the field is already occupied by something of a DIFFERENT shape
+        (e.g. an Alternative/ConjunctionExpression already assembled from a
+        genuine 'or'/'and'), merging into it would misrepresent the
+        grammar, so that case still falls back to `unresolved` rather than
+        guessing how to combine them.
+        """
+        current_value = getattr(ref, field_name)
+        if current_value is None:
+            setattr(ref, field_name, e)
+        elif isinstance(current_value, expr_type):
+            current_value.children.extend(e.children)
+        else:
+            ref.unresolved.append(e)
+
     def _attach(self, ref: IngredientReference, e: ASTNode) -> None:
         """Attaches one top-level expression to the reference being built,
         by dispatching on the expression's own grammatical type. This is
@@ -727,28 +1022,16 @@ class IngredientParser:
                 ref.unresolved.append(e)
 
         elif isinstance(e, PackageExpression):
-            if ref.package is None:
-                ref.package = e
-            else:
-                ref.unresolved.append(e)
+            self._attach_singular(ref, "package", e, PackageExpression)
 
         elif isinstance(e, IngredientExpression):
-            if ref.ingredient is None:
-                ref.ingredient = e
-            else:
-                ref.unresolved.append(e)
+            self._attach_singular(ref, "ingredient", e, IngredientExpression)
 
         elif isinstance(e, ComponentExpression):
-            if ref.component is None:
-                ref.component = e
-            else:
-                ref.unresolved.append(e)
+            self._attach_singular(ref, "component", e, ComponentExpression)
 
         elif isinstance(e, PreparationExpression):
-            if ref.preparation is None:
-                ref.preparation = e
-            else:
-                ref.unresolved.append(e)
+            self._attach_singular(ref, "preparation", e, PreparationExpression)
 
         elif isinstance(e, NotesExpression):
             ref.notes.extend(e.children)
@@ -774,6 +1057,7 @@ class IngredientParser:
             # produce a specific attachment rule for. Preserved, not
             # discarded, and NOT written into `notes`.
             ref.unresolved.append(e)
+
 
     def _reference_is_empty(self, ref: IngredientReference) -> bool:
         return not (
@@ -812,9 +1096,11 @@ class IngredientParser:
         i = 1
         while i < len(refs) - 1:
             if isinstance(refs[i], AlternativeMarker):
-                left, right = refs[i - 1], refs[i + 1]
+                marker, left, right = refs[i], refs[i - 1], refs[i + 1]
                 if isinstance(left, IngredientReference) and isinstance(right, IngredientReference):
-                    merged = AlternativeExpression(children=cast(List[ASTNode], [left, right]))
+                    merged: ASTNode = AlternativeExpression(
+                        children=cast(List[ASTNode], [left, right]), connective=marker
+                    )
                     refs[i - 1:i + 2] = [merged]
                     i -= 1
             i += 1
@@ -822,9 +1108,11 @@ class IngredientParser:
         i = 1
         while i < len(refs) - 1:
             if isinstance(refs[i], ConjunctionMarker):
-                left, right = refs[i - 1], refs[i + 1]
+                marker, left, right = refs[i], refs[i - 1], refs[i + 1]
                 if isinstance(left, IngredientReference) and isinstance(right, IngredientReference):
-                    merged = ConjunctionExpression(children=cast(List[ASTNode], [left, right]))
+                    merged = ConjunctionExpression(
+                        children=cast(List[ASTNode], [left, right]), connective=marker
+                    )
                     refs[i - 1:i + 2] = [merged]
                     i -= 1
             i += 1
@@ -851,6 +1139,14 @@ class IngredientParser:
 #       id INTEGER PRIMARY KEY, recipe_ingredient_line_id INTEGER,
 #       parse_tree_json TEXT
 #   )
+#
+# `parse_tree_json` holds a serialized `ParseResult` (node_type
+# "ParseResult", with a `candidates` list of one or more `Candidate`
+# objects, each `{tree: <complete IngredientLine>, unresolved: [...]}`)
+# -- not a single tree. An unambiguous line still produces exactly one
+# candidate, so existing consumers that only need "the" tree can read
+# `candidates[0].tree`, but the column now always carries the full
+# candidate set rather than a pre-chosen interpretation.
 #
 # `recipe_ingredient_line_id` on both `lexical_spans` and
 # `ingredient_parse_trees` is expected to reference
@@ -908,8 +1204,8 @@ def process_recipe_lines(db_path: Any = DB_PATH):
             )
             spans.append(token)
 
-        parse_tree = parser.parse(spans)
-        tree_json = json.dumps(parse_tree.to_dict())
+        parse_result = parser.parse(spans)
+        tree_json = json.dumps(parse_result.to_dict())
 
         cursor.execute('''
             INSERT INTO ingredient_parse_trees

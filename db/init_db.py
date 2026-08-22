@@ -96,61 +96,40 @@ def init_db():
             )  
         """)
         c.execute("""
-            CREATE TABLE IF NOT EXISTS culinary_vocabulary (
-                vocabulary_id       INTEGER PRIMARY KEY AUTOINCREMENT,
-                term                TEXT NOT NULL UNIQUE,
-                vocabulary_class    TEXT NOT NULL,
-                observation_id      INTEGER REFERENCES culinary_observations(observation_id),
-                description         TEXT,
-                created_at          TEXT NOT NULL DEFAULT (datetime('now'))
+            CREATE TABLE vocabulary_terms (
+                term_id       TEXT PRIMARY KEY,
+                term          TEXT NOT NULL UNIQUE,
+                created_at    TEXT NOT NULL DEFAULT (datetime('now'))
             )
         """)
-                  
+
         c.execute("""
-            CREATE INDEX IF NOT EXISTS idx_cv_class
-            ON culinary_vocabulary(vocabulary_class)      
+            CREATE TABLE vocabulary_classes (
+                class_id      TEXT PRIMARY KEY,
+                class_name    TEXT NOT NULL UNIQUE
+            )
         """)
+
         c.execute("""
-            CREATE TABLE IF NOT EXISTS culinary_aliases (
-                alias_id            INTEGER PRIMARY KEY AUTOINCREMENT,
-                vocabulary_id       INTEGER NOT NULL
-                                        REFERENCES culinary_vocabulary(vocabulary_id),
-                alias_text          TEXT NOT NULL UNIQUE,
-                source_id           INTEGER
-                                        REFERENCES culinary_sources(source_id),
-                created_at          TEXT NOT NULL DEFAULT (datetime('now')))
+            CREATE TABLE vocabulary_term_classes (
+                term_id       TEXT NOT NULL,
+                class_id      TEXT NOT NULL,
+                PRIMARY KEY (term_id, class_id),
+                FOREIGN KEY (term_id) REFERENCES vocabulary_terms(term_id),
+                FOREIGN KEY (class_id) REFERENCES vocabulary_classes(class_id)     
+            )
         """)
+
         c.execute("""
-            CREATE INDEX IF NOT EXISTS idx_ca_alias
-            ON culinary_aliases(alias_text)       
+            CREATE INDEX idx_vtc_class 
+            ON vocabulary_term_classes(class_id)      
         """)
+
         c.execute("""
-            CREATE TABLE IF NOT EXISTS culinary_observations (
-            observation_id          INTEGER PRIMARY KEY AUTOINCREMENT,
-            source_id               INTEGER NOT NULL
-                                        REFERENCES culinary_sources(source_id),
-            source_record_type      TEXT,
-            source_record_id        TEXT,
-            field_name              TEXT,
-            raw_text                TEXT NOT NULL,
-            normalized_text         TEXT,
-            created_at              TEXT DEFAULT (datetime('now')),
-            UNIQUE (source_id, normalized_text, field_name))
+            CREATE INDEX idx_vtc_term 
+            ON vocabulary_term_classes(term_id)
         """)
-        c.execute("""
-            CREATE INDEX IF NOT EXISTS idx_co_source
-            ON culinary_observations(source_id)
-        """)
-        c.execute("""      
-            CREATE INDEX IF NOT EXISTS idx_co_normalized
-            ON culinary_observations(normalized_text)
-        """)
-        c.execute("""      
-            CREATE INDEX IF NOT EXISTS idx_observations_field ON culinary_observations(field_name)
-        """)
-        c.execute("""      
-            CREATE INDEX IF NOT EXISTS idx_aliases_vocabulary ON culinary_aliases(vocabulary_id)
-        """)
+
         # ----------------------------------------------------------------
         # Ingredient parse pipeline
         # recipe_ingredient_blocks
@@ -280,34 +259,71 @@ def init_db():
                 ON observation_spans(span_id)
         """)
 
-        # Normalization log — name transformation only.
-        # Join to recipe_ingredient_lines_parsed on parsed_line_id for all
-        # other dimensions.
+        # relationships. this section used to be ingredient_normalizations
+        # When a future work order says this file needs to be cleaned up, move 
+        # this section so that it fits before those tables required for the analyzer
+
         c.execute("""
-            CREATE TABLE IF NOT EXISTS ingredient_normalizations (
-                id                  INTEGER PRIMARY KEY AUTOINCREMENT,
-                parsed_line_id      INTEGER NOT NULL UNIQUE
-                                        REFERENCES recipe_ingredient_lines_parsed(id),
-                recipe_id           INTEGER NOT NULL,
-                recipe_name         TEXT,
-                raw_text            TEXT,
-                ingredient_name_raw TEXT,   -- as arrived from parse stage
-                ingredient_name     TEXT,   -- core ingredient after both passes
-                status              TEXT NOT NULL,  -- 'ok' | 'empty' | 'reduced_to_nothing'
-                normalized_at       TEXT DEFAULT (datetime('now'))
+            CREATE TABLE IF NOT EXISTS relationships (
+                relationship_id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+                subject_type    TEXT NOT NULL,
+                subject_id      TEXT NOT NULL,
+
+                predicate       TEXT NOT NULL,
+
+                object_type     TEXT NOT NULL,
+                object_id       TEXT NOT NULL,
+
+                source          TEXT,
+
+                confidence      REAL
+                    CHECK (
+                        confidence IS NULL
+                        OR (confidence >= 0.0 AND confidence <= 1.0)
+                    ),
+
+                created_at      TEXT NOT NULL DEFAULT (datetime('now')),
+
+                UNIQUE (
+                    subject_type,
+                    subject_id,
+                    predicate,
+                    object_type,
+                    object_id
+                )
             )
         """)
+
         c.execute("""
-            CREATE INDEX IF NOT EXISTS idx_ingn_parsed_line_id
-                ON ingredient_normalizations (parsed_line_id)
+            CREATE INDEX IF NOT EXISTS idx_relationships_subject
+                ON relationships (
+                    subject_type,
+                    subject_id
+                    )
         """)
         c.execute("""
-            CREATE INDEX IF NOT EXISTS idx_ingn_recipe_id
-                ON ingredient_normalizations (recipe_id)
+            CREATE INDEX IF NOT EXISTS idx_relationships_object
+                ON relationships (
+                    object_type,
+                    object_id
+                    )
         """)
         c.execute("""
-            CREATE INDEX IF NOT EXISTS idx_ingn_ingredient_name
-                ON ingredient_normalizations (ingredient_name)
+            CREATE INDEX IF NOT EXISTS idx_relationships_subject_predicate
+                ON relationships (
+                    subject_type,
+                    subject_id,
+                    predicate
+                    )
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_relationships_object_predicate
+                ON relationships (
+                    object_type,
+                    object_id,
+                    predicate
+                    )
         """)
         # ----------------------------------------------------------------
         # Ingredient identity
@@ -356,83 +372,163 @@ def init_db():
             CREATE INDEX IF NOT EXISTS idx_ingredient_aliases_ingredient_id
                 ON ingredient_aliases (ingredient_id)
         """)
-        # ----------------------------------------------------------------
-        # Ingredient attributes
-        #
-        # An attribute is anything that varies about an identity WITHOUT
-        # changing what identity it is (raw/cooked, bone-in/boneless,
-        # salted/unsalted, brand). Whether an attribute is safe to ignore
-        # during fridge-matching ("decorative") or must match exactly
-        # ("required", e.g. brand for kosher salt — Diamond Crystal and
-        # Morton differ ~2x by volume) is asserted per (ingredient,
-        # attribute) pair in identity_attribute_rule, not globally per
-        # attribute — brand is decorative for canned tomatoes but
-        # required for kosher salt.
-        # ----------------------------------------------------------------
+
+        # Analysis Record: one row per Analyzer execution against one persisted
+        # parse tree. canonical_result_json is the complete, unmodified return
+        # value of analyze_parse_result() -- the authoritative persisted
+        # Canonical Semantic Result (R0-6). status/selected_interpretation_id
+        # are denormalized copies of fields already inside that JSON, kept only
+        # for filtering/listing without parsing JSON per row.
         c.execute("""
-            CREATE TABLE IF NOT EXISTS attribute_type (
-                id              INTEGER PRIMARY KEY,
-                name            TEXT UNIQUE NOT NULL,
-                value_kind      TEXT NOT NULL DEFAULT 'enum'
-                                    CHECK (value_kind IN ('enum', 'free_text')),
-                description     TEXT
-            )
+            CREATE TABLE IF NOT EXISTS analysis_records (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                recipe_ingredient_line_id INTEGER NOT NULL,
+                parse_tree_id INTEGER NOT NULL,
+                status TEXT NOT NULL
+                    CHECK (status IN ('resolved', 'ambiguous', 'unresolved', 'invalid')),
+                selected_interpretation_id TEXT,
+                canonical_result_json TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY(recipe_ingredient_line_id) REFERENCES recipe_ingredient_lines_raw(id),
+                FOREIGN KEY(parse_tree_id) REFERENCES ingredient_parse_trees(id))
         """)
         c.execute("""
-            CREATE TABLE IF NOT EXISTS attribute_value (
-                id                  INTEGER PRIMARY KEY,
-                attribute_type_id   INTEGER NOT NULL,
-                value               TEXT NOT NULL,
-                UNIQUE (attribute_type_id, value),
-                FOREIGN KEY(attribute_type_id) REFERENCES attribute_type(id)
-            )
+            CREATE INDEX IF NOT EXISTS idx_analysis_records_line
+            ON analysis_records(recipe_ingredient_line_id)
         """)
         c.execute("""
-            CREATE TABLE IF NOT EXISTS identity_attribute_rule (
-                id                      INTEGER PRIMARY KEY,
-                ingredient_id           INTEGER NOT NULL,
-                attribute_type_id       INTEGER NOT NULL,
-                required_for_match      INTEGER NOT NULL DEFAULT 0,
-                default_value_id        INTEGER,
-                UNIQUE (ingredient_id, attribute_type_id),
-                FOREIGN KEY(ingredient_id)      REFERENCES ingredients(id),
-                FOREIGN KEY(attribute_type_id)  REFERENCES attribute_type(id),
-                FOREIGN KEY(default_value_id)   REFERENCES attribute_value(id)
-            )
+            CREATE INDEX IF NOT EXISTS idx_analysis_records_parse_tree
+            ON analysis_records(parse_tree_id)
         """)
-        # Per-identity restriction of an enum attribute's otherwise-global
-        # value list (e.g. chicken breast's `state` is only ever
-        # raw/cooked, even though the global `state` vocabulary also
-        # includes partially_cooked/undercooked/overcooked for identities
-        # where those distinctions matter). No rows for a given rule
-        # means the full global value list is allowed.
+
+        # Candidate evaluation ledger: one row per interpretation the Analyzer
+        # produced for an analysis record. There is no independent candidate
+        # identity in the parser or analyzer -- interpretation_id is the sole
+        # identity for the 1:1 candidate/evaluation, so it is required and
+        # unique per analysis record. evaluation_state mirrors the analyzer
+        # interpretation status values (not a separate candidate-side vocabulary).
         c.execute("""
-            CREATE TABLE IF NOT EXISTS identity_attribute_allowed_value (
-                id                          INTEGER PRIMARY KEY,
-                identity_attribute_rule_id  INTEGER NOT NULL,
-                value_id                    INTEGER NOT NULL,
-                UNIQUE (identity_attribute_rule_id, value_id),
-                FOREIGN KEY(identity_attribute_rule_id) REFERENCES identity_attribute_rule(id),
-                FOREIGN KEY(value_id)                   REFERENCES attribute_value(id)
-            )
+            CREATE TABLE IF NOT EXISTS analysis_candidate_evaluations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                analysis_record_id INTEGER NOT NULL,
+                interpretation_id TEXT NOT NULL,
+                evaluation_state TEXT NOT NULL
+                    CHECK (evaluation_state IN ('resolved', 'ambiguous', 'unresolved', 'invalid')),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY(analysis_record_id) REFERENCES analysis_records(id))
         """)
-        # Attribute values actually observed on one resolved recipe
-        # ingredient mention (recipe_ingredients row below).
         c.execute("""
-            CREATE TABLE IF NOT EXISTS instance_attribute_value (
-                id                      INTEGER PRIMARY KEY,
-                recipe_ingredient_id    INTEGER NOT NULL,
-                attribute_type_id       INTEGER NOT NULL,
-                value_id                INTEGER,
-                value_text              TEXT,
-                source                  TEXT DEFAULT 'parsed'
-                                    CHECK (source IN ('parsed', 'defaulted', 'inferred_from_step')),
-                UNIQUE (recipe_ingredient_id, attribute_type_id),
-                FOREIGN KEY(recipe_ingredient_id) REFERENCES recipe_ingredients(id),
-                FOREIGN KEY(attribute_type_id)    REFERENCES attribute_type(id),
-                FOREIGN KEY(value_id)             REFERENCES attribute_value(id)
-            )
+            CREATE INDEX IF NOT EXISTS idx_analysis_candidate_evaluations_record
+            ON analysis_candidate_evaluations(analysis_record_id)
         """)
+        c.execute("""
+            CREATE UNIQUE INDEX IF NOT EXISTS uq_analysis_candidate_evaluations_record_interpretation
+            ON analysis_candidate_evaluations(analysis_record_id, interpretation_id)
+        """)
+
+        # Evidence projection: normalized copy of R0-6 evidence objects, scoped
+        # to the evaluation row for their interpretation. Query-only projection
+        # for knowledge-provenance lookups (e.g. "which analyses used
+        # relationship 17 as evidence") -- not a second source of truth; the
+        # authoritative evidence lives inside canonical_result_json.
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS analysis_evidence (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                analysis_candidate_evaluation_id INTEGER NOT NULL,
+                kind TEXT NOT NULL,
+                record_id TEXT NOT NULL,
+                effect TEXT NOT NULL
+                    CHECK (effect IN ('supporting', 'detracting')),
+                FOREIGN KEY(analysis_candidate_evaluation_id)
+                    REFERENCES analysis_candidate_evaluations(id))
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_analysis_evidence_evaluation
+            ON analysis_evidence(analysis_candidate_evaluation_id)
+        """)
+        c.execute("""
+            CREATE INDEX IF NOT EXISTS idx_analysis_evidence_kind_record
+            ON analysis_evidence(kind, record_id)
+        """)
+
+        # # ----------------------------------------------------------------
+        # # Ingredient attributes -- note for the next review, I believe this 
+        # # is no longer used and can be deleted. please verify and suggest.
+        # #
+        # # An attribute is anything that varies about an identity WITHOUT
+        # # changing what identity it is (raw/cooked, bone-in/boneless,
+        # # salted/unsalted, brand). Whether an attribute is safe to ignore
+        # # during fridge-matching ("decorative") or must match exactly
+        # # ("required", e.g. brand for kosher salt — Diamond Crystal and
+        # # Morton differ ~2x by volume) is asserted per (ingredient,
+        # # attribute) pair in identity_attribute_rule, not globally per
+        # # attribute — brand is decorative for canned tomatoes but
+        # # required for kosher salt.
+        # # ----------------------------------------------------------------
+        # c.execute("""
+        #     CREATE TABLE IF NOT EXISTS attribute_type (
+        #         id              INTEGER PRIMARY KEY,
+        #         name            TEXT UNIQUE NOT NULL,
+        #         value_kind      TEXT NOT NULL DEFAULT 'enum'
+        #                             CHECK (value_kind IN ('enum', 'free_text')),
+        #         description     TEXT
+        #     )
+        # """)
+        # c.execute("""
+        #     CREATE TABLE IF NOT EXISTS attribute_value (
+        #         id                  INTEGER PRIMARY KEY,
+        #         attribute_type_id   INTEGER NOT NULL,
+        #         value               TEXT NOT NULL,
+        #         UNIQUE (attribute_type_id, value),
+        #         FOREIGN KEY(attribute_type_id) REFERENCES attribute_type(id)
+        #     )
+        # """)
+        # c.execute("""
+        #     CREATE TABLE IF NOT EXISTS identity_attribute_rule (
+        #         id                      INTEGER PRIMARY KEY,
+        #         ingredient_id           INTEGER NOT NULL,
+        #         attribute_type_id       INTEGER NOT NULL,
+        #         required_for_match      INTEGER NOT NULL DEFAULT 0,
+        #         default_value_id        INTEGER,
+        #         UNIQUE (ingredient_id, attribute_type_id),
+        #         FOREIGN KEY(ingredient_id)      REFERENCES ingredients(id),
+        #         FOREIGN KEY(attribute_type_id)  REFERENCES attribute_type(id),
+        #         FOREIGN KEY(default_value_id)   REFERENCES attribute_value(id)
+        #     )
+        # """)
+        # # Per-identity restriction of an enum attribute's otherwise-global
+        # # value list (e.g. chicken breast's `state` is only ever
+        # # raw/cooked, even though the global `state` vocabulary also
+        # # includes partially_cooked/undercooked/overcooked for identities
+        # # where those distinctions matter). No rows for a given rule
+        # # means the full global value list is allowed.
+        # c.execute("""
+        #     CREATE TABLE IF NOT EXISTS identity_attribute_allowed_value (
+        #         id                          INTEGER PRIMARY KEY,
+        #         identity_attribute_rule_id  INTEGER NOT NULL,
+        #         value_id                    INTEGER NOT NULL,
+        #         UNIQUE (identity_attribute_rule_id, value_id),
+        #         FOREIGN KEY(identity_attribute_rule_id) REFERENCES identity_attribute_rule(id),
+        #         FOREIGN KEY(value_id)                   REFERENCES attribute_value(id)
+        #     )
+        # """)
+        # # Attribute values actually observed on one resolved recipe
+        # # ingredient mention (recipe_ingredients row below).
+        # c.execute("""
+        #     CREATE TABLE IF NOT EXISTS instance_attribute_value (
+        #         id                      INTEGER PRIMARY KEY,
+        #         recipe_ingredient_id    INTEGER NOT NULL,
+        #         attribute_type_id       INTEGER NOT NULL,
+        #         value_id                INTEGER,
+        #         value_text              TEXT,
+        #         source                  TEXT DEFAULT 'parsed'
+        #                             CHECK (source IN ('parsed', 'defaulted', 'inferred_from_step')),
+        #         UNIQUE (recipe_ingredient_id, attribute_type_id),
+        #         FOREIGN KEY(recipe_ingredient_id) REFERENCES recipe_ingredients(id),
+        #         FOREIGN KEY(attribute_type_id)    REFERENCES attribute_type(id),
+        #         FOREIGN KEY(value_id)             REFERENCES attribute_value(id)
+        #     )
+        # """)
         from gastrometric.pipeline.enrichment.usda.schema_usda import create_usda_tables
         create_usda_tables(conn)
         # usda_food_portions now exists (created by create_usda_tables above) —
@@ -464,10 +560,10 @@ def init_db():
             )
         """)
         # ----------------------------------------------------------------
-        # Flavor relationships
+        # Flavor bible relationships. the name of this table was too generic
         # ----------------------------------------------------------------
         c.execute("""
-            CREATE TABLE IF NOT EXISTS relationships (
+            CREATE TABLE IF NOT EXISTS flavor_bible_relationships (
                 id          INTEGER PRIMARY KEY,
                 source_id   INTEGER,
                 target_id   INTEGER,

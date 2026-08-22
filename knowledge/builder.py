@@ -30,10 +30,10 @@ def _all_builders() -> List[KnowledgeBuilder]:
     on top. Add new builders here as they're implemented -- this is the
     single place rebuild_db.py's entry point needs to know about.
     """
-    from .builders.seed_culinary_vocabulary_builder import SeedCulinaryVocabularyBuilder
+    from .builders.seed_vocabulary_builder import SeedVocabularyBuilder
 
     return [
-        SeedCulinaryVocabularyBuilder(),
+        SeedVocabularyBuilder(),
         # SeedIngredientsBuilder(),
         # SeedRelationshipsBuilder(),
         # UsdaObservationsBuilder(),

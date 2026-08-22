@@ -22,18 +22,6 @@
 #                                       fixes. Not culinary knowledge,
 #                                       never sourced from the database.
 #
-#   culinary_vocabulary_bootstrap.py   Temporary static fallback for
-#                                       PARSE-time culinary knowledge
-#                                       (protected ingredient-name
-#                                       phrases, preparation/state
-#                                       vocabulary, portion terms),
-#                                       consumed only through
-#                                       vocabulary_provider.py, which is
-#                                       what actually lets that data come
-#                                       from `ingredients`/
-#                                       `ingredient_aliases`/
-#                                       `attribute_type`/`attribute_value`
-#                                       instead once seeded.
 #
 # THIS file remains the source for the NORMALIZE stage
 # (normalize_ingredient_lines.py) and is unaffected by that refactor —
@@ -125,12 +113,6 @@ from gastrometric.config.parser_vocabulary import (  # noqa: F401  (re-exported 
     IMPERIAL_VOLUME_UNITS,
 
 )
-# from gastrometric.config.culinary_vocabulary_bootstrap import (  # noqa: F401
-#     PROTECTED_PHRASES,
-#     PREP_PATTERNS,
-#     TEMPERATURE_STATE_PATTERNS,
-#     PORTION_TERMS,
-# )
 
 # ============================================================
 # NORMALIZE-TIME VOCABULARY

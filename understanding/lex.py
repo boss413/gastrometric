@@ -95,16 +95,37 @@ class LexicalSpan:
     No span references another span. Spans carry no grammatical meaning --
     that is the job of later stages (observation_builder.py,
     observation_analyzer.py).
+
+    Multi-classification note (per work order "Refactor lex.py for
+    Multi-Class Vocabulary"): a vocabulary term may now legitimately
+    belong to more than one vocabulary class (e.g. "clove" is both an
+    ``ingredient`` and a ``natural_portion``). ``span_types`` therefore
+    carries ALL classifications the knowledge loader associated with this
+    span's text, not just one -- the lexer performs no disambiguation and
+    picks no "primary" classification; that is a downstream parser/
+    analyzer concern. A uniquely classified term is simply a one-element
+    tuple, e.g. ``("ingredient",)``.
+
+    Ordering within ``span_types`` (and the parallel ``source_vocabulary``
+    tuple) is first-seen order across the fixed stage sequence in
+    ``lex()`` -- ingredient, measurement, preparation, brand, grammar,
+    then any additional loader-exposed classes in sorted order -- with
+    duplicates removed. This is deterministic without imposing an
+    arbitrary/alphabetical resort on otherwise-unordered classifications;
+    see ``_merge_vocabulary_spans`` for exactly where this happens.
+
+    For non-vocabulary spans (Symbol, Quantity, Unknown) ``span_types``
+    is always a single-element tuple naming that stage's fixed type.
     """
 
-    span_type: str
+    span_types: Tuple[str, ...]
     text: str
     start_offset: int
     end_offset: int
     span_order: int
     normalized_value: Optional[Any] = None
     knowledge_id: Optional[Any] = None
-    source_vocabulary: Optional[str] = None
+    source_vocabulary: Optional[Tuple[str, ...]] = None
 
 
 __all__ = ["LexicalSpan", "lex", "reconstruct"]
@@ -228,7 +249,7 @@ def _lex_numeric(text: str, claimed: bytearray) -> List[LexicalSpan]:
         value = _numeric_value(m)
         spans.append(
             LexicalSpan(
-                span_type="Quantity",
+                span_types=("Quantity",),
                 text=text[start:end],
                 start_offset=start,
                 end_offset=end,
@@ -397,14 +418,14 @@ def _match_vocabulary(
                     knowledge_id, normalized_value, source_vocabulary = _phrase_match_metadata(match)
                     spans.append(
                         LexicalSpan(
-                            span_type=span_type,
+                            span_types=(span_type,),
                             text=phrase_text,
                             start_offset=phrase_start,
                             end_offset=phrase_end,
                             span_order=-1,
                             normalized_value=normalized_value,
                             knowledge_id=knowledge_id,
-                            source_vocabulary=source_vocabulary or span_type.lower(),
+                            source_vocabulary=(source_vocabulary or span_type.lower(),),
                         )
                     )
                 claim_ranges.append((phrase_start, phrase_end))
@@ -413,6 +434,87 @@ def _match_vocabulary(
         for k in range(start, end):
             claimed[k] = 1
     return spans
+
+
+def _merge_vocabulary_spans(spans: List[LexicalSpan]) -> List[LexicalSpan]:
+    """Collapse vocabulary-matched spans covering the EXACT same text
+    range (identical start/end offsets) into a single ``LexicalSpan``
+    carrying every classification found for that range.
+
+    Why this exists: ``lex()`` now matches each Stage 3-8 vocabulary
+    category (ingredient, measurement, preparation, brand, grammar, plus
+    any additional loader-exposed classes) against its own snapshot of
+    claimed positions, rather than letting the first category to claim a
+    word lock every later category out of it. That is what makes
+    multi-class terms possible at all (e.g. "clove" matching both
+    ``ingredient`` and ``natural_portion``) -- see the call site in
+    ``lex()``. Left unmerged, this would surface as multiple spans with
+    identical offsets and different ``span_types``, one per matching
+    category. Per the work order, that's exactly the outcome to avoid:
+    one textual occurrence must produce exactly one ``LexicalSpan``,
+    carrying the full set of classifications, with none discarded.
+
+    Grouping key is the exact ``(start_offset, end_offset)`` pair --
+    i.e. the identical textual match. Overlapping-but-different-length
+    matches (e.g. "grape" vs "grape tomatoes" at different offsets, or a
+    shorter/longer phrase within the same category) are a pre-existing,
+    intentional ambiguity this work order explicitly leaves alone, and
+    are NOT merged here; they remain separate spans exactly as before.
+
+    Ordering rule for the merged ``span_types`` / ``source_vocabulary``
+    tuples: first-seen order over ``spans`` as passed in (which reflects
+    the fixed, already-deterministic stage sequence in ``lex()``), with
+    duplicates removed. Classifications are never alphabetically
+    resorted -- the work order asks for that only if a stable order is
+    otherwise required, and stage sequence already provides one.
+
+    ``normalized_value`` / ``knowledge_id`` are not classification data;
+    when a range's contributing spans disagree, the first non-None value
+    (in that same stage order) is kept, matching how a single-classified
+    span already behaved.
+    """
+    groups: "Dict[Tuple[int, int], List[LexicalSpan]]" = {}
+    order: List[Tuple[int, int]] = []
+    for span in spans:
+        key = (span.start_offset, span.end_offset)
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append(span)
+
+    merged: List[LexicalSpan] = []
+    for key in order:
+        group = groups[key]
+        if len(group) == 1:
+            merged.append(group[0])
+            continue
+
+        span_types: List[str] = []
+        source_vocabularies: List[str] = []
+        normalized_value: Optional[Any] = None
+        knowledge_id: Optional[Any] = None
+        for span in group:
+            for classification in span.span_types:
+                if classification not in span_types:
+                    span_types.append(classification)
+            for source in span.source_vocabulary or ():
+                if source not in source_vocabularies:
+                    source_vocabularies.append(source)
+            if normalized_value is None and span.normalized_value is not None:
+                normalized_value = span.normalized_value
+            if knowledge_id is None and span.knowledge_id is not None:
+                knowledge_id = span.knowledge_id
+
+        merged.append(
+            dataclasses.replace(
+                group[0],
+                span_types=tuple(span_types),
+                source_vocabulary=tuple(source_vocabularies) or None,
+                normalized_value=normalized_value,
+                knowledge_id=knowledge_id,
+            )
+        )
+    return merged
 
 
 def _additional_vocab_span_type(vocab_name: str) -> str:
@@ -443,7 +545,7 @@ def _lex_unknown(text: str, claimed: bytearray) -> List[LexicalSpan]:
         end = i
         spans.append(
             LexicalSpan(
-                span_type="Unknown",
+                span_types=("Unknown",),
                 text=text[start:end],
                 start_offset=start,
                 end_offset=end,
@@ -536,7 +638,7 @@ def lex(text: str) -> List[LexicalSpan]:
                 continue
             spans.append(
                 LexicalSpan(
-                    span_type="Symbol",
+                    span_types=("Symbol",),
                     text=ch,
                     start_offset=i,
                     end_offset=i + 1,
@@ -548,28 +650,70 @@ def lex(text: str) -> List[LexicalSpan]:
     # Stage 2: Numeric expressions
     spans.extend(_lex_numeric(text, claimed))
 
-    # Stages 3-7: named runtime vocabularies
+    # Stages 3-8: named + additional runtime vocabularies.
+    #
+    # Each category is matched against its OWN copy of ``claimed``,
+    # snapshotted here right after Stage 1/2 -- not the shared, mutating
+    # ``claimed`` array. Previously every category claimed its matched
+    # ranges on that shared array before the next category ran, which
+    # meant the first category to match a word silently locked every
+    # later category out of it -- exactly the "arbitrarily selecting one
+    # class" behavior the work order requires the lexer to stop doing. A
+    # term such as "clove" can now match in both the ``ingredient`` and
+    # ``natural_portion`` categories independently; ``_merge_vocabulary_
+    # spans`` below then collapses same-range matches from different
+    # categories into one LexicalSpan carrying every classification,
+    # rather than emitting one span per category. Only after that merge
+    # are the combined ranges claimed on the real ``claimed`` array, so
+    # Stage 9 (Unknown) still sees the union of everything matched here,
+    # same as before.
+    pre_vocab_claimed = bytes(claimed)
+    vocab_spans: List[LexicalSpan] = []
+
     vocabularies = _load_all_vocabularies()
 
     ing_index, ing_max = vocabularies["ingredient"]
-    spans.extend(_match_vocabulary(text, claimed, words, ing_index, ing_max, "Ingredient"))
+    vocab_spans.extend(
+        _match_vocabulary(text, bytearray(pre_vocab_claimed), words, ing_index, ing_max, "Ingredient")
+    )
 
     meas_index, meas_max = vocabularies["measurement"]
-    spans.extend(_match_vocabulary(text, claimed, words, meas_index, meas_max, "Measurement"))
+    vocab_spans.extend(
+        _match_vocabulary(text, bytearray(pre_vocab_claimed), words, meas_index, meas_max, "Measurement")
+    )
 
     prep_index, prep_max = vocabularies["preparation"]
-    spans.extend(_match_vocabulary(text, claimed, words, prep_index, prep_max, "Preparation"))
+    vocab_spans.extend(
+        _match_vocabulary(text, bytearray(pre_vocab_claimed), words, prep_index, prep_max, "Preparation")
+    )
 
     brand_index, brand_max = vocabularies["brand"]
-    spans.extend(_match_vocabulary(text, claimed, words, brand_index, brand_max, "Brand"))
+    vocab_spans.extend(
+        _match_vocabulary(text, bytearray(pre_vocab_claimed), words, brand_index, brand_max, "Brand")
+    )
 
     grammar_index, grammar_max = vocabularies["grammar"]
-    spans.extend(_match_vocabulary(text, claimed, words, grammar_index, grammar_max, "Grammar"))
+    vocab_spans.extend(
+        _match_vocabulary(text, bytearray(pre_vocab_claimed), words, grammar_index, grammar_max, "Grammar")
+    )
 
-    # Stage 8: any remaining runtime vocabularies exposed by the loader
-    for vocab_name, (idx, mx) in _load_additional_vocabularies().items():
+    # Stage 8: any remaining runtime vocabularies exposed by the loader.
+    # Iterated in sorted-by-name order for determinism -- the loader
+    # exposes this set as a frozenset (no defined iteration order), and
+    # merge order now matters because it feeds the first-seen ordering
+    # of _merge_vocabulary_spans's span_types tuple. This affects only
+    # classification tie-breaking, not matching behavior.
+    additional_vocabularies = _load_additional_vocabularies()
+    for vocab_name in sorted(additional_vocabularies):
+        idx, mx = additional_vocabularies[vocab_name]
         span_type = _additional_vocab_span_type(vocab_name)
-        spans.extend(_match_vocabulary(text, claimed, words, idx, mx, span_type))
+        vocab_spans.extend(_match_vocabulary(text, bytearray(pre_vocab_claimed), words, idx, mx, span_type))
+
+    merged_vocab_spans = _merge_vocabulary_spans(vocab_spans)
+    spans.extend(merged_vocab_spans)
+    for span in merged_vocab_spans:
+        for k in range(span.start_offset, span.end_offset):
+            claimed[k] = 1
 
     # Stage 9: Unknown
     spans.extend(_lex_unknown(text, claimed))

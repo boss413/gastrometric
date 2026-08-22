@@ -1,36 +1,24 @@
 # Test Recipe
 Ingredients:
-1 clove garlic
-1 garlic clove
-
-2 cups flour
-2 flour
-1 head lettuce
-3 sprigs thyme
-
-2 14-ounce cans tomatoes
-2 (14-ounce) cans tomatoes
-2 14 oz cans tomatoes
-3 750-ml bottles wine
-4 (6 oz.) bottles hot sauce
-
-2 medium carrots, peeled and diced
-2 carrots, peeled and seeded
-bell pepper, seeds and ribs removed
-corn, husks and silk removed
-
-salt and pepper
-salt or pepper
-peeled and seeded
-minced or pressed
-small and firm
-
+2 carrots	
+1 clove garlic	
+2 cloves garlic
+1 clove
+2 ribs
+2 ribs celery
+2 ribs, celery
+1 cup grape tomatoes
+2 cups chili paste
+1 chicken breast, boneless, skinless
+2 skinless chicken thighs	
+2 large chicken breasts
+2 large boneless chicken breasts
+4 tablespoons butter (1/2 stick)	
+2 cans (14-ounce) diced tomatoes
 1 cup milk or cream
-2 cans tomatoes or 1 jar sauce
-
-xyz powder
+salt and pepper to taste
+1 medium garlic clove, minced or pressed
 2 tbsp xyz powder
-xyz, minced
 # Chicken Marsala
 Attribution: America’s Test Kitchen
 Source: The Best Recipe
@@ -353,6 +341,14 @@ Put radish sprouts on top and add 3 cups of stock.
 Cook over medium high heat. Korean style is to cook at the table with a portable burner. Friends and family will be sitting around the pot, talking and laughing, and maybe drinking. You can take a bit of cooked sausage or the meat with your chopsticks as you wait for the broth to boil and the noodles to soften. If you don’t have a tabletop burner, you can cook it on the stove away from the table.
 When it starts boiling about 10 minutes later, stir and turn the ingredients over with tongs to cook evenly.
 Serve right after the noodles and ramyeon have softened. Transfer some cooked stew to individual bowls and serve. Add more stock as the broth boils down.
+# Doctored Up Boxed Cake
+Note: A lot of grandmas I know don't want to accept the shame of using boxed cake mix and following the directions, so they'll say “it's a box cake, but I Doctored it up”. Honestly I've never had a purely from scratch cake that's better, so why fight it?
+Ingredients:
+1 package Betty Crocker boxed cake mix
+¾ c milk
+½ c vegetable oil
+½ stick butter
+4 eggs
 # Garlic Bread
 Notes: Every part of this is a work in progress.
 Ingredients:

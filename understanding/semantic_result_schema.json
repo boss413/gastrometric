@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canonical-semantic-result.schema.json",
+  "title": "Canonical Semantic Result",
+  "description": "Stable semantic interpretation of a recipe ingredient line.\n\nProvenance rule: source_spans identifies the lexical material that produced a semantic object. A child semantic object inherits no provenance implicitly from its parent. Objects that are merely identifiers or labels (e.g. ingredient.id, component.term, package.package_term) do not require their own source_spans when their provenance is already represented by the containing semantic object (reference, quantity, package, modifier, unresolved).\n\nEntity vs. vocabulary boundary: an ingredient is a canonical entity identified by an ingredients.id. A component, measurement unit, natural portion, package, preparation, size, state, descriptor, and other lexical concepts are vocabulary terms. They are not canonical entities merely because they participate in a semantic interpretation. Relationships in the knowledge graph may connect vocabulary terms to ingredient entities, but a relationship does not promote the vocabulary term into an entity. The analyzer may use such relationships as evidence when constructing an interpretation.\n\nSemantic interpretation rules: (1) Entity boundary -- only 'ingredient' references canonical ingredient entities; vocabulary terms do not become entities through relationships. (2) Provenance -- every semantic object produced from lexical material carries the source_spans that produced it. (3) Quantity -- a quantity is either scalar or range, never both. (4) Range syntax -- hyphen and 'to' produce the same range semantics; only source_spans differ. (5) Package -- package count and package size are independent quantities. (6) Per-item -- per_item_quantity establishes per-item scope; no additional flag is required. (7) Modifiers -- every modifier identifies both its vocabulary class (modifier_class) and semantic attachment target (applies_to). (8) Alternatives -- lexical alternatives create relations between separate references; they do not create a combined ingredient. (9) Vocabulary relationships -- knowledge-graph relationships provide evidence for interpretation but do not alter entity/vocabulary type. (10) Unresolved material -- material that cannot be semantically resolved remains explicitly represented rather than being discarded.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "interpretations"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["resolved", "ambiguous", "unresolved", "invalid"],
+      "description": "resolved: exactly one interpretation and every semantically required component is resolved. ambiguous: multiple viable interpretations remain. unresolved: interpretation exists, but required semantic material could not be resolved. invalid: no semantically valid interpretation can be produced."
+    },
+    "interpretations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/interpretation"
+      }
+    },
+    "selected_interpretation": {
+      "type": ["string", "null"],
+      "description": "ID of the selected interpretation. Null when ambiguity remains and no interpretation has been chosen; a single-interpretation result should still populate this once selection policy resolves it."
+    }
+  },
+  "$defs": {
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "score", "references"],
+      "properties": {
+        "id": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["resolved", "ambiguous", "unresolved", "invalid"]
+        },
+        "score": {
+          "type": "number",
+          "description": "Analyzer support score, not a calibrated probability.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "references": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/reference" }
+        },
+        "relations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/relation" }
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/evidence" }
+        }
+      }
+    },
+
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_spans"],
+      "properties": {
+        "id": { "type": "string" },
+        "ingredient": {
+          "type": ["object", "null"],
+          "properties": {
+            "id": { "type": "string", "description": "Canonical ingredient entity ID." }
+          },
+          "required": ["id"]
+        },
+        "component": {
+          "type": ["object", "null"],
+          "properties": {
+            "term": { "type": "string", "description": "Vocabulary term representing a part." }
+          },
+          "required": ["term"]
+        },
+        "quantity": { "$ref": "#/$defs/quantity" },
+        "per_item_quantity": { "$ref": "#/$defs/quantity" },
+        "package": { "$ref": "#/$defs/package" },
+        "modifiers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/modifier" }
+        },
+        "notes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/note" }
+        },
+        "unresolved": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/unresolved" }
+        },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "source_spans"],
+      "properties": {
+        "text": { "type": "string" },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "quantity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["form", "unit_type", "unit_term", "source_spans"],
+      "properties": {
+        "form": {
+          "type": "string",
+          "enum": ["scalar", "range"]
+        },
+        "value": { "type": "number" },
+        "lower": { "type": "number" },
+        "upper": { "type": "number" },
+        "unit_type": {
+          "type": "string",
+          "enum": ["measurement", "natural_portion"]
+        },
+        "unit_term": { "type": "string", "description": "Vocabulary term identifying the measurement or natural-portion unit (e.g. 'cup', 'clove'). Not a canonical entity ID." },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "form": { "const": "scalar" } } },
+          "then": {
+            "required": ["value"],
+            "not": { "anyOf": [ { "required": ["lower"] }, { "required": ["upper"] } ] }
+          }
+        },
+        {
+          "if": { "properties": { "form": { "const": "range" } } },
+          "then": {
+            "required": ["lower", "upper"],
+            "not": { "required": ["value"] }
+          }
+        }
+      ]
+    },
+
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "package_term", "source_spans"],
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "Number of packages (e.g. 2 in '2 cans'). This counts packages, not a measurement or natural-portion quantity, so it is a plain number rather than a Quantity."
+        },
+        "package_term": { "type": "string", "description": "Vocabulary term identifying the package/container (e.g. 'can'). Not a canonical entity ID." },
+        "size": {
+          "allOf": [{ "$ref": "#/$defs/quantity" }],
+          "description": "Quantity describing the contents of a single package (e.g. 14 ounce)."
+        },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "modifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["modifier_class", "term", "applies_to", "source_spans"],
+      "properties": {
+        "modifier_class": {
+          "type": "string",
+          "description": "Vocabulary dimension of the modifier (e.g. 'size', 'state', 'preparation'). Distinct from applies_to: modifier_class describes what kind of modifier this is, applies_to describes what semantic target it attaches to. E.g. modifier_class='preparation', applies_to='ingredient' means 'diced' is a preparation modifier applied to the ingredient; modifier_class='size', applies_to='preparation' means 'large' is a size modifier applied to the preparation (as in 'large dice')."
+        },
+        "term": { "type": "string" },
+        "applies_to": {
+          "type": "string",
+          "enum": ["ingredient", "component", "reference", "preparation"]
+        },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation_type", "source_spans"],
+      "properties": {
+        "relation_type": {
+          "type": "string",
+          "enum": ["conjunction", "alternative", "preference"]
+        },
+        "members": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string" }
+        },
+        "base": { "type": "string" },
+        "preferred": { "type": "string" },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Lexical provenance for the connective that produced this relation, e.g. the span(s) covering 'and'/'or'.",
+          "items": { "type": "string" }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "relation_type": { "enum": ["conjunction", "alternative"] } } },
+          "then": { "required": ["members"] }
+        },
+        {
+          "if": { "properties": { "relation_type": { "const": "preference" } } },
+          "then": { "required": ["base", "preferred"] }
+        }
+      ]
+    },
+
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "record_id", "effect"],
+      "properties": {
+        "kind": { "type": "string", "description": "Type of supporting knowledge, e.g. 'relationship_match', 'alias_match'." },
+        "record_id": { "type": "string", "description": "Identifies a persisted knowledge record appropriate to 'kind'. No universal foreign-key semantics are encoded here; interpretation of record_id is scoped by kind (e.g. kind='relationship_match' -> a relationship row ID; kind='alias_match' -> an ingredient alias record ID)." },
+        "effect": {
+          "type": "string",
+          "enum": ["supporting", "detracting"]
+        }
+      }
+    },
+
+    "unresolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "reason", "source_spans"],
+      "properties": {
+        "text": { "type": "string" },
+        "reason": { "type": "string" },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

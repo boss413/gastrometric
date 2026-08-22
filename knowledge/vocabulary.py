@@ -1,8 +1,10 @@
-"""Idempotent helpers for culinary_vocabulary / culinary_aliases.
+"""Idempotent helpers for vocabulary.
+
+As of 8/8/2026 I don't think this file is read by anything downstream.
 
 No culinary vocabulary is hardcoded in this module. Which terms are
 "obvious single concepts" and what class/plural aliases they have comes
-entirely from JSON seed data (see data/seed/culinary_vocabulary.json),
+entirely from JSON seed data (see data/seed/vocabulary.json),
 loaded via load_known_vocabulary(). This module only knows the *shape* of
 that data and the *rule* for what counts as a single-token candidate —
 never the culinary content itself.
@@ -69,7 +71,7 @@ def ensure_vocabulary_entry(
 
     cur = conn.execute(
         """
-        INSERT OR IGNORE INTO culinary_vocabulary (term, vocabulary_class, observation_id)
+        INSERT OR IGNORE INTO vocabulary (term, vocabulary_class, observation_id)
         VALUES (?, ?, ?)
         """,
         (term, vocabulary_class, observation_id),

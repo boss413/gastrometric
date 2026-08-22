@@ -47,6 +47,8 @@ class BuildResult:
     vocabulary_created: int = 0
     aliases_created: int = 0
     unknown_concepts: int = 0
+    relationships_created: int = 0
+    duplicates_skipped: int = 0
     extra_lines: list[str] = field(default_factory=list)
 
     def render(self) -> str:

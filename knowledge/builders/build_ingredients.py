@@ -44,12 +44,30 @@ class IngredientBuilder(KnowledgeBuilder):
 
             ingredient_count = 0
             alias_count = 0
+            skipped_count = 0
+            skipped_ingredient_count = 0
             seen_aliases: dict[str, str] = {}
+            seen_names: dict[str, str] = {}
 
             for identity in identities:
                 ingredient_id = identity["id"]
                 ingredient_name = identity["name"]
                 notes = identity.get("notes")
+
+                normalized_name = ingredient_name.strip().lower()
+
+                if normalized_name in seen_names:
+                    previous = seen_names[normalized_name]
+                    print(
+                        f"WARNING: Skipping duplicate ingredient_name "
+                        f"'{ingredient_name}' for '{ingredient_id}' "
+                        f"— already claimed by '{previous}'. "
+                        f"Its aliases are also skipped."
+                    )
+                    skipped_ingredient_count += 1
+                    continue
+
+                seen_names[normalized_name] = ingredient_id
 
                 cursor.execute(
                     """
@@ -80,10 +98,13 @@ class IngredientBuilder(KnowledgeBuilder):
 
                     if normalized in seen_aliases:
                         previous = seen_aliases[normalized]
-                        raise ValueError(
-                            f"Duplicate alias '{alias}' claimed by "
-                            f"'{previous}' and '{ingredient_id}'."
+                        print(
+                            f"WARNING: Skipping duplicate alias '{alias}' "
+                            f"(normalized: '{normalized}') for '{ingredient_id}' "
+                            f"— already claimed by '{previous}'."
                         )
+                        skipped_count += 1
+                        continue
 
                     seen_aliases[normalized] = ingredient_id
 
@@ -110,6 +131,13 @@ class IngredientBuilder(KnowledgeBuilder):
 
             print(f"{ingredient_count:,} ingredients added to ingredients")
             print(f"{alias_count:,} ingredient aliases added")
+            if skipped_count:
+                print(f"{skipped_count:,} duplicate aliases skipped")
+            if skipped_ingredient_count:
+                print(
+                    f"{skipped_ingredient_count:,} duplicate ingredient_name "
+                    f"entries skipped"
+                )
 
             return BuildResult(
                 builder_name=self.name,
