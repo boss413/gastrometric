@@ -53,7 +53,7 @@ import dataclasses
 import itertools
 import sqlite3
 from collections import Counter
-from typing import Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Iterable, List, Optional, Sequence, Tuple
 
 from gastrometric.config.paths import DB_PATH
 from gastrometric.understanding.lex import LexicalSpan, lex
@@ -96,21 +96,41 @@ def _insert_span(
 
     One row per classification in ``span.span_types`` (see module
     docstring "Persistence note" above) -- every row shares the same
-    ``span_order``/offsets/text/normalized_value/knowledge_id, and each
-    row's ``span_type`` is treated as an opaque string -- never inspected
-    or transformed -- so future lexer versions may emit new span types
-    with no code changes here. ``source_vocabulary`` is aligned
-    positionally with ``span_types`` when present (both tuples are built
-    in lock-step by lex()); for span types that carry no vocabulary
-    provenance (Symbol/Quantity/Unknown), ``source_vocabulary`` is None
-    on every row, same as before.
+    ``span_order``/offsets/text, and each row's ``span_type`` is treated
+    as an opaque string -- never inspected or transformed -- so future
+    lexer versions may emit new span types with no code changes here.
+
+    ``normalized_value``, ``knowledge_id`` and ``source_vocabulary`` are
+    each aligned positionally with ``span_types`` for vocabulary-matched
+    spans (both tuples are built in lock-step by lex()'s
+    ``_merge_vocabulary_spans``) -- row i gets classification i's OWN
+    normalized value, never another classification's. This is the fix
+    for ingredient-alias resolution bleeding into generic vocabulary
+    classes: e.g. for "ribs", the Ingredient row gets its own
+    ingredient-alias-resolved normalized_value ("pork ribs"), while the
+    Component and NaturalPortion rows each get their own generic-
+    vocabulary canonical ("rib"), not a value copied from the Ingredient
+    row. For span types that carry no vocabulary provenance (Symbol/
+    Quantity/Unknown -- identifiable by ``source_vocabulary`` being
+    None), ``normalized_value``/``knowledge_id`` are plain scalars and
+    ``source_vocabulary`` is None, same as before.
     """
     fields = dataclasses.asdict(span)
     span_types: Tuple[str, ...] = fields["span_types"]
     source_vocabulary: Optional[Tuple[str, ...]] = fields["source_vocabulary"]
-    sources: Iterable[Optional[str]] = source_vocabulary if source_vocabulary else itertools.repeat(None)
 
-    for span_type, source in zip(span_types, sources):
+    if source_vocabulary is not None:
+        sources: Iterable[Optional[str]] = source_vocabulary
+        normalized_values: Iterable[Optional[Any]] = fields["normalized_value"]
+        knowledge_ids: Iterable[Optional[Any]] = fields["knowledge_id"]
+    else:
+        sources = itertools.repeat(None)
+        normalized_values = itertools.repeat(fields["normalized_value"])
+        knowledge_ids = itertools.repeat(fields["knowledge_id"])
+
+    for span_type, source, normalized_value, knowledge_id in zip(
+        span_types, sources, normalized_values, knowledge_ids
+    ):
         conn.execute(
             """
             INSERT INTO lexical_spans (
@@ -131,9 +151,9 @@ def _insert_span(
                 fields["start_offset"],
                 fields["end_offset"],
                 fields["text"],
-                fields["normalized_value"],
+                normalized_value,
                 span_type,
-                fields["knowledge_id"],
+                knowledge_id,
                 source,
             ),
         )

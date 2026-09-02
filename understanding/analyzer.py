@@ -60,26 +60,31 @@ those belong to the parser/RO-9, not the Analyzer.
    (`applies_to="ingredient"`) for these four modifier classes; the override
    branches in SS G's table are dead code here, not silently reinterpreted.
 
-3. CONNECTIVE SPAN LOSS (affects the schema's
-   `relation.source_spans` -- "Lexical provenance for the connective ...
-   e.g. the span(s) covering 'and'/'or'"). Empirically,
-   `_classify_conjunction_groups` and the whole-reference merge step in
-   `_build_references` both build `AlternativeExpression`/
-   `ConjunctionExpression` as `children=[left, right]` -- the
-   `AlternativeMarker`/`ConjunctionMarker` leaf itself is discarded, never
-   added to `children`, and never routed to `unresolved` either. Its
-   source span is gone by the time the tree is serialized; there is no
-   place left in the persisted tree to recover it. Handling: the literal
-   connective text is unrecoverable and this Analyzer does NOT invent a
-   substitute for it -- in particular it does not reuse the members' own
-   source spans as stand-in provenance, since that would misattribute
-   lexical material that produced the *members* as if it were provenance
-   for the *connective* itself. `_relation_source_spans` instead returns a
-   fixed, unmistakable sentinel string so the gap is surfaced rather than
-   disguised. This is an open parser-level gap requiring a parser fix
-   (retain the marker's span somewhere in the tree) or an RO-9/schema
-   revision -- not something this Analyzer can correctly resolve on its
-   own.
+3. [RESOLVED, CONFIRMED AGAINST REAL OUTPUT] CONNECTIVE SPAN LOSS
+   (affected the schema's `relation.source_spans` -- "Lexical provenance
+   for the connective ... e.g. the span(s) covering 'and'/'or'"). This WAS
+   a real gap: `_classify_conjunction_groups` and the whole-reference
+   merge step in `_build_references` used to build `AlternativeExpression`/
+   `ConjunctionExpression` as `children=[left, right]` with the
+   `AlternativeMarker`/`ConjunctionMarker` leaf discarded outright -- never
+   added to `children`, never routed to `unresolved`, unrecoverable once
+   serialized. `_relation_source_spans` originally returned a fixed
+   sentinel rather than inventing a substitute (e.g. reusing the members'
+   own source spans, which would misattribute text that produced the
+   *members* as provenance for the *connective* itself).
+
+   The parser was subsequently changed to add a `connective` field --
+   a sibling of `children` on `Alternative`/`ConjunctionExpression`,
+   holding the marker's own real span
+   (e.g. `{"node_type": "AlternativeMarker", "span": {...,"text":"or"}}`).
+   Confirmed directly against real production `parse_tree_json` (not
+   assumed): both `"1 cup milk or cream"` and `"salt and pepper to
+   taste"` carry this field with correct real text. `_relation_source_spans`
+   now uses it when present, at every relation-construction call site
+   (`_compound_tree`'s `visit()`, and the top-level whole-reference merge
+   in `_evaluate_candidate`) -- the sentinel remains only as a defensive
+   fallback for a tree that, for whatever reason, doesn't carry one.
+
 
 Additionally, worth noting (not a blocking mismatch): the parser has no
 `PreferenceExpression`/comma-plus-"preferably" node type at all, so RO-9
@@ -123,7 +128,7 @@ import json
 import re
 import sqlite3
 from collections import Counter
-from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple, Union
 
 # ---------------------------------------------------------------------------
 # Evidence-kind -> effect mapping (RO-9 SS L: fixed, categorical, non-numeric)
@@ -141,15 +146,61 @@ def _evidence(kind: str, record_id: Any, effect: Optional[str] = None) -> Dict[s
 
 
 # ---------------------------------------------------------------------------
-# Confidence (RO-9 SS M: fixed three-... four-value placeholder table)
+# Confidence (RO-9 SS M, REVISED). The original fixed four-value table
+# (`resolved`->1.0, `ambiguous`/`unresolved`->0.5, `invalid`->0.0) was
+# never actually consulted by `_derive_result` -- selection compared only
+# the categorical `status` string, never `score`. That's what let two
+# genuinely different, independently complete candidates for the same
+# line (e.g. "2 ribs celery" modeled once via `component` and once via
+# an embedded `NaturalPortionNode`) both land on status "resolved" with
+# no way to prefer one: `_derive_result` saw ">1 strong candidate" and
+# emitted nothing, discarding a line that actually had a clear winner.
+#
+# This replaces the fixed table with a deterministic, rule-based score
+# computed from the KINDS of evidence an interpretation actually
+# accumulated (see `_EVIDENCE_WEIGHT_BY_KIND` / `_evidence_score` below).
+# This is still not "statistical inference or confidence calibration"
+# (explicitly out of scope, see module docstring) -- every input is a
+# categorical evidence-kind label already recorded above, and the
+# mapping from kind to weight is a fixed table just like this one was,
+# not anything learned or estimated. It is deliberately UNCAPPED: a
+# `relationship_match` (a specific curated knowledge-base fact backing
+# exactly this reading, e.g. "rib is a component_of celery") is
+# categorically stronger than any amount of generic vocabulary/
+# structural recognition, so its weight is set far above the sum any
+# realistic combination of the other weights could reach for one
+# reference (an ingredient line is a handful of words) -- this
+# guarantees, not just usually produces, a relationship-backed
+# interpretation outscoring an otherwise-identical one that lacks it.
 # ---------------------------------------------------------------------------
 
-_SCORE_BY_STATUS: Dict[str, float] = {
-    "resolved": 1.0,
-    "ambiguous": 0.5,
-    "unresolved": 0.5,
-    "invalid": 0.0,
+_EVIDENCE_WEIGHT_BY_KIND: Dict[str, float] = {
+    "relationship_match": 100.0,
+    "exact_ingredient_match": 1.0,
+    "alias_match": 1.0,
+    "structural_match": 0.5,
+    "vocabulary_match": 0.25,
+    "unresolved_material": 1.0,  # magnitude only; sign comes from `effect` below.
 }
+_DEFAULT_EVIDENCE_WEIGHT = 0.1
+
+
+def _evidence_score(evidence: List[Dict[str, str]]) -> float:
+    """Deterministic evidence-weighted score for one interpretation.
+    Sums `_EVIDENCE_WEIGHT_BY_KIND[kind]` for every evidence entry,
+    flipping the sign for entries marked `effect="detracting"`
+    (currently only `unresolved_material`, per `_EFFECT_BY_KIND` above).
+    An evidence kind not in the table (should not happen given the fixed
+    kind set this module emits, but defensive rather than a KeyError)
+    falls back to a small default weight rather than crashing."""
+    total = 0.0
+    for entry in evidence:
+        weight = _EVIDENCE_WEIGHT_BY_KIND.get(entry["kind"], _DEFAULT_EVIDENCE_WEIGHT)
+        if entry.get("effect") == "detracting":
+            total -= weight
+        else:
+            total += weight
+    return total
 
 
 # ---------------------------------------------------------------------------
@@ -221,6 +272,23 @@ def _node_type(node: Optional[dict]) -> Optional[str]:
 
 def _is_leaf(node: Optional[dict]) -> bool:
     return bool(node) and "span" in node
+
+
+def _as_node_list(value: Union[dict, List[dict], None]) -> List[dict]:
+    """Normalizes a reference field that is EITHER a single node dict (the
+    older parser shape some fields used, and any not-yet-migrated
+    `preparation` value from a pre-refactor `ingredient_parse_trees` row)
+    OR a list of node dicts (the current `preparation`/`measurements`
+    shape) into a plain list, without crashing on either. `None`/missing
+    becomes an empty list. Used wherever a field needs to support both
+    shapes during the transition -- see `_build_preparation_modifiers` and
+    `_reference_source_spans`.
+    """
+    if value is None:
+        return []
+    if isinstance(value, dict):
+        return [value]
+    return list(value)
 
 
 def _children(node: Optional[dict]) -> List[dict]:
@@ -316,6 +384,30 @@ def _resolve_ingredient(
     Returns (ingredient_id_or_None, modifiers).
     """
     if ingredient_expr is None:
+        # A reference the parser never attached ANY ingredient expression
+        # to (e.g. "ribs" fully absorbed into `component`, leaving
+        # `ingredient` entirely unset) has no canonical identity at all --
+        # per the schema's own entity/vocabulary boundary rule, a
+        # component is a vocabulary term, never a substitute for the
+        # ingredient entity. This must not be silently treated as
+        # "resolved" just because nothing else about it failed; a
+        # reference describing a quantity of literally nothing identified
+        # is itself the defect. Confirmed as a real bug via production
+        # data: a component-only candidate for "2 ribs" was being scored
+        # "resolved" (no unresolved entries) purely because component
+        # resolution doesn't touch `unresolved_out`, which meant it
+        # counted as a second "genuinely good" reading alongside the
+        # correct bare-ingredient candidate and forced the whole line into
+        # "ambiguous" (see _derive_result's updated docstring for the
+        # other half of this fix).
+        unresolved_out.append(
+            {
+                "text": "<no ingredient>",
+                "reason": "no_ingredient_identified",
+                "source_spans": ["<no ingredient>"],
+            }
+        )
+        evidence.append(_evidence("unresolved_material", "no_ingredient_identified"))
         return None, []
 
     core_leaves: List[dict] = []
@@ -379,49 +471,341 @@ def _resolve_ingredient(
 # ---------------------------------------------------------------------------
 
 
-def _build_preparation_modifier(
-    prep_node: Optional[dict],
+def _preparation_clause_text(
+    clause_node: dict,
     evidence: List[dict],
     unresolved_out: List[dict],
-) -> Optional[dict]:
-    if prep_node is None:
-        return None
-
-    prep_leaves: List[dict] = []
-    for child in _children(prep_node):
-        if _node_type(child) == "PreparationNode":
-            prep_leaves.append(child)
+) -> Tuple[str, List[str]]:
+    """Extracts (term_text, source_spans) for ONE plain
+    PreparationExpression-shaped clause node, walking its direct children:
+      - a leaf `PreparationNode` contributes its text to the term;
+      - a leaf `UnknownNode` also contributes its text (preserve, don't
+        discard) but is ALSO recorded as unresolved;
+      - a leaf `QuantityNode` contributes its literal written text (e.g.
+        "1/2"), not `normalized_value`'s decimal form ("0.5") -- a
+        preparation clause is read as natural-language instruction text
+        (by a person, or downstream nutrition search), and the decimal
+        form is only useful when the quantity is being computed with,
+        which it deliberately is not once it's embedded in prep text
+        rather than a `quantity` object (see
+        `_merge_trailing_preparation_measurement`);
+      - any other leaf contributes its normalized form as before;
+      - a non-leaf child is the parser's embedded-measurement nesting
+        (Pass 2c, e.g. "1/2-inch" inside a "cut ... cubes" clause) -- its
+        own leaves are folded in via `_iter_leaves`, type-agnostically,
+        without being flagged as unrecognized.
+    Shared by `_build_preparation_modifiers` for both a plain clause and
+    each side of an Alternative/ConjunctionExpression-wrapped clause pair
+    (see that function), and by `_merge_trailing_preparation_measurement`
+    for its reconstructed clause.
+    """
+    term_parts: List[str] = []
+    source_spans: List[str] = []
+    for child in _children(clause_node):
+        if _is_leaf(child):
+            text = _span_text(child)
+            term_parts.append(text if _node_type(child) == "QuantityNode" else _span_norm(child))
+            source_spans.append(text)
+            if _node_type(child) == "UnknownNode":
+                unresolved_out.append(
+                    {"text": text, "reason": "unrecognized_span", "source_spans": [text]}
+                )
+                evidence.append(_evidence("unresolved_material", text))
         else:
-            # UnknownNode can land inside a PreparationExpression (parser
-            # keeps unrecognized vocabulary in its preparation context
-            # rather than ejecting it) -- preserved, not discarded.
-            spans = [_span_text(child)] if _is_leaf(child) else _source_spans_of(child)
-            unresolved_out.append(
-                {
-                    "text": " ".join(spans),
-                    "reason": "unrecognized_span",
-                    "source_spans": _fallback_spans(spans, "<unrecognized preparation-position span>"),
-                }
-            )
-            evidence.append(_evidence("unresolved_material", " ".join(spans) or "unknown"))
+            nested_leaves = list(_iter_leaves(child))
+            if nested_leaves:
+                term_parts.append(" ".join(_span_norm(leaf) for leaf in nested_leaves))
+                source_spans.extend(_span_text(leaf) for leaf in nested_leaves)
+    return " ".join(part for part in term_parts if part).strip(), source_spans
 
-    if not prep_leaves:
-        return None
 
-    term = " ".join(_span_norm(leaf) for leaf in prep_leaves).strip()
-    spans = [_span_text(leaf) for leaf in prep_leaves]
-    evidence.append(_evidence("vocabulary_match", term))
-    return {
-        "modifier_class": "preparation",
-        "term": term,
-        "applies_to": "ingredient",
-        "source_spans": spans,
-    }
+def _leaf_offsets(node: Optional[dict]) -> Tuple[int, int]:
+    """(min start_offset, max end_offset) across every leaf under `node`.
+    (0, 0) for a node with no leaves at all (should not happen for any
+    real clause/measurement, but defensive rather than crashing)."""
+    leaves = list(_iter_leaves(node))
+    if not leaves:
+        return (0, 0)
+    return (
+        min(leaf["span"]["start_offset"] for leaf in leaves),
+        max(leaf["span"]["end_offset"] for leaf in leaves),
+    )
+
+
+def _merge_trailing_preparation_measurement(
+    prep_clauses: List[dict],
+    measurements: List[dict],
+    notes: List[dict],
+) -> Tuple[List[dict], List[dict], List[dict]]:
+    """Detects and reconstructs the "cut into 1/2-inch cubes" shape:
+    a preparation clause (e.g. "cut") whose true completion is a LATER,
+    structurally separate measurement -- one the parser currently emits
+    as an ordinary extra `measurements` entry (e.g. "1/2 cubes"), with
+    the connective word bridging them ("into", "to", "through", ...)
+    emitted separately as a `notes` GrammarNode leaf.
+
+    FLAGGED GAP #3 (further down in this file) originally assumed the
+    parser nests this kind of embedded measurement INSIDE the
+    preparation clause itself and explicitly flagged that assumption as
+    unverified against real output. It's confirmed wrong: real parser
+    output for "3 lb boneless chuck, cut into 1/2 cubes" gives
+    `preparation: [<boneless>, <cut>]` (two SEPARATE one-word clauses),
+    `notes: [<into>]`, and a second, unrelated-looking bare
+    `MeasurementExpression` for "1/2 cubes" sitting in `measurements`.
+    Left alone, `_assign_quantities` discards that second measurement as
+    `additional_measurement_unsupported`, "cut" is emitted as a
+    meaningless one-word preparation modifier, and "into" is emitted as
+    a stray note -- exactly the fragmentation this reassembles.
+
+    Detection is purely structural/positional, using only span offsets
+    and node types already in the tree -- no hardcoded vocabulary for
+    "cubes"/"into"/etc, so this also covers e.g. "sliced lengthwise to
+    ribbons":
+      - `prep_clauses` is non-empty;
+      - `measurements` has more than one entry, and the LAST one is a
+        bare `MeasurementExpression` (NOT inside a
+        `ParentheticalExpression` -- those are per-item quantities, an
+        unrelated, already-correct concept) whose own quantity/unit
+        shape has no dangling material and whose unit is a
+        `NaturalPortionNode` (a countable shape/portion word -- the same
+        node type "1 clove garlic" already uses; a `MeasurementNode`
+        like "ounce" is a real, independent measurement and is
+        deliberately NOT matched here, see id-16-shaped lines);
+      - that measurement's own start offset is AFTER the last
+        preparation clause's own end offset -- i.e. it is positioned in
+        the part of the line that follows the preparation word, not
+        overlapping the ingredient/quantity region earlier in the line.
+
+    Any `notes` leaf sitting strictly between the two (a bridging
+    connective) is folded into the merged clause instead of being
+    dropped or double-counted as a separate note. On a match, returns
+    (preparation list with the last clause replaced by the merged one,
+    measurements list with the last entry removed, notes list with any
+    consumed bridging note(s) removed). Returns the three inputs
+    unchanged when the shape doesn't match -- never invents a merge
+    that isn't structurally justified by real offsets already in the
+    tree.
+    """
+    if not prep_clauses or len(measurements) < 2:
+        return prep_clauses, measurements, notes
+
+    last_prep_clause = prep_clauses[-1]
+    if _node_type(last_prep_clause) != "PreparationExpression":
+        return prep_clauses, measurements, notes
+
+    last_measurement = measurements[-1]
+    if _node_type(last_measurement) != "MeasurementExpression":
+        return prep_clauses, measurements, notes
+
+    _, unit_leaf, dangling = _measurement_expr_shape(last_measurement)
+    if dangling or unit_leaf is None or _node_type(unit_leaf) != "NaturalPortionNode":
+        return prep_clauses, measurements, notes
+
+    _, prep_end = _leaf_offsets(last_prep_clause)
+    meas_start, _ = _leaf_offsets(last_measurement)
+    if meas_start < prep_end:
+        return prep_clauses, measurements, notes
+
+    bridging_notes = [
+        note
+        for note in notes
+        if _is_leaf(note) and prep_end <= note["span"]["start_offset"] < meas_start
+    ]
+    bridging_ids = {id(note) for note in bridging_notes}
+    remaining_notes = [note for note in notes if id(note) not in bridging_ids]
+
+    ordered_pieces = sorted(
+        [last_prep_clause] + bridging_notes + [last_measurement],
+        key=lambda piece: _leaf_offsets(piece)[0],
+    )
+    merged_children: List[dict] = []
+    for piece in ordered_pieces:
+        merged_children.extend([piece] if _is_leaf(piece) else _children(piece))
+
+    merged_clause = {"node_type": "PreparationExpression", "children": merged_children}
+    remaining_prep = prep_clauses[:-1] + [merged_clause]
+    remaining_measurements = measurements[:-1]
+    return remaining_prep, remaining_measurements, remaining_notes
+
+
+def _build_preparation_modifiers(
+    prep_clauses: Union[dict, List[dict], None],
+    evidence: List[dict],
+    unresolved_out: List[dict],
+) -> List[dict]:
+    """SS G ('preparation' row: applies_to=ingredient), updated for the
+    parser change reported [date of this fix]: `reference.preparation` is
+    now `List[ASTNode]` -- one PreparationExpression-shaped node per
+    clause, in source order, mirroring the pre-existing
+    `measurements: List[ASTNode]` pattern. Clause boundaries (pre- vs.
+    post-nominal) are determined entirely by the parser
+    (`_attach_preparation_clause`) and are NOT re-derived here -- this
+    function trusts the list's grouping and order as given.
+
+    Returns one modifier object per clause (was: at most one modifier
+    total). This finally resolves the FLAGGED GAP #3 note further down in
+    this file (preparation lists were previously always 0-1 elements,
+    never the multi-clause shape RO-10 originally asked for) -- see that
+    comment block for the history.
+
+    Per-clause term text is built by `_preparation_clause_text`. A clause
+    entry that is itself an `AlternativeExpression`/`ConjunctionExpression`
+    wrapping two PreparationExpression operands (e.g. "minced or
+    pressed") is now normally intercepted BEFORE this function ever runs
+    -- `_process_parser_reference` detects it
+    (`_find_compound_preparation_clause`) and dispatches to
+    `_build_preparation_alternative_references`, which decomposes the
+    whole reference into one row per alternative (explicit confirmation:
+    "minced or pressed" -> two rows, same ingredient, first optional=0,
+    second optional=1 -- the same convention as an ingredient alternative
+    like "butter or olive oil"). SS I.6 had explicitly left compound
+    preparation decomposition open; that's now resolved at the
+    reference-decomposition level, not by combining text here.
+
+    The combining behavior below (build one text like "minced or
+    pressed" instead of decomposing) is kept ONLY as a fallback for an
+    edge case the decomposition dispatch doesn't reach: a reference whose
+    `ingredient` is ALSO compound (SS I's own decomposition triggers
+    first in `_process_parser_reference`'s dispatch order), so this
+    function still receives the original, undecomposed preparation
+    clause list. That combination (compound ingredient AND compound
+    preparation on the same reference) is not itself decomposed for
+    preparation -- reconstructing "minced or pressed" as literal,
+    faithful text here is a safe fallback (not an invented culinary
+    interpretation -- no choice is being made, just transcribed), but a
+    curator wanting BOTH dimensions decomposed together would need that
+    built separately if it comes up in practice.
+
+    ROBUSTNESS NOTE: any `ingredient_parse_trees` row persisted by the
+    PRE-refactor parser (not yet re-parsed) still holds the OLD shape --
+    `preparation` as a single `PreparationExpression`-shaped dict, not a
+    list. `persist_all_lines`/`analyze_all_lines` read every persisted row
+    regardless of which parser version produced it, so this WILL occur on
+    any database that hasn't been fully re-parsed after the upgrade, not
+    just in stale test fixtures. Detected here (a dict where a list was
+    expected, via `_as_node_list`) and handled by treating it as a single
+    one-clause list -- the exact same result this function's predecessor
+    produced for that shape -- rather than crashing or silently misreading
+    it.
+    """
+    prep_clauses = _as_node_list(prep_clauses)
+    if not prep_clauses:
+        return []
+
+    modifiers: List[dict] = []
+    for clause_node in prep_clauses:
+        clause_type = _node_type(clause_node)
+
+        if clause_type in ("AlternativeExpression", "ConjunctionExpression"):
+            children = _children(clause_node)
+            if len(children) == 2:
+                left_term, left_spans = _preparation_clause_text(children[0], evidence, unresolved_out)
+                right_term, right_spans = _preparation_clause_text(children[1], evidence, unresolved_out)
+                connective = clause_node.get("connective")
+                if connective is not None:
+                    connective_text = _span_norm(connective)
+                    connective_spans = [_span_text(connective)]
+                else:
+                    # Defensive fallback only -- the node TYPE itself is
+                    # unambiguous about which connective it represents,
+                    # this is not a guess about uncertain content.
+                    connective_text = "or" if clause_type == "AlternativeExpression" else "and"
+                    connective_spans = []
+                term = f"{left_term} {connective_text} {right_term}".strip()
+                spans = left_spans + connective_spans + right_spans
+                if term:
+                    evidence.append(_evidence("vocabulary_match", term))
+                    modifiers.append(
+                        {
+                            "modifier_class": "preparation",
+                            "term": term,
+                            "applies_to": "ingredient",
+                            "source_spans": _fallback_spans(spans, term),
+                        }
+                    )
+                continue
+            # Not the expected 2-operand shape -- fall through to the
+            # generic single-clause handling below rather than guessing
+            # further (children walked directly; won't crash, may just
+            # produce an odd/partial term for this genuinely unanticipated
+            # shape).
+
+        term, source_spans = _preparation_clause_text(clause_node, evidence, unresolved_out)
+        if not term:
+            continue
+        evidence.append(_evidence("vocabulary_match", term))
+        modifiers.append(
+            {
+                "modifier_class": "preparation",
+                "term": term,
+                "applies_to": "ingredient",
+                "source_spans": _fallback_spans(source_spans, term),
+            }
+        )
+    return modifiers
 
 
 # ---------------------------------------------------------------------------
 # Component / natural-portion -- RO-9 SS B, SS C
 # ---------------------------------------------------------------------------
+
+
+def _relationship_lookup_terms(term: str) -> List[str]:
+    """Candidate `subject_id` strings to try, in preference order, against
+    `RuntimeKnowledge.find_relationships`.
+
+    CONFIRMED (not assumed): `find_relationships` currently does plain
+    exact-string matching on `subject_id` -- there is no pluralizer or
+    other normalization inside `knowledge/` yet (that is an explicitly
+    separate, future ticket). Meanwhile a vocabulary-class span's own
+    `span.normalized_value` (as set by the PARSER, which this module
+    does not control) is not itself singularized -- e.g. a
+    `ComponentNode`/`NaturalPortionNode` for "ribs" carries
+    `normalized_value: "ribs"`, while a curated relationship for the
+    same vocabulary word is authored as `subject_id: "rib"` (confirmed
+    via `loader_diagnostic` output). An exact-match lookup on the
+    unmodified term therefore silently misses a real, curated
+    relationship for the single most common case: a plain trailing "s".
+    Both `_resolve_component` and `_add_natural_portion_evidence` route
+    through this helper so the fix applies uniformly to both predicates.
+
+    This is deliberately NOT a pluralizer: it tries the term exactly as
+    given first, and only as a fallback strips a single trailing "s".
+    No other inflection is attempted, nothing is guessed beyond that one
+    narrow, extremely common English shape, and this whole function goes
+    away once `knowledge/` grows a real pluralizer and callers can go
+    back to a single `find_relationships` call.
+    """
+    candidates = [term]
+    if term.endswith("s") and len(term) > 1:
+        singular = term[:-1]
+        if singular != term:
+            candidates.append(singular)
+    return candidates
+
+
+def _find_relationships_any(
+    knowledge: Any,
+    subject_id: str,
+    predicate: str,
+    object_type: str,
+    object_id: str,
+) -> tuple:
+    """`knowledge.find_relationships`, tried across
+    `_relationship_lookup_terms(subject_id)` in order, returning the
+    first non-empty result (or `()` if none match). See that function's
+    docstring for why more than one term is tried at all."""
+    for candidate_term in _relationship_lookup_terms(subject_id):
+        relationships = knowledge.find_relationships(
+            subject_type="vocabulary",
+            subject_id=candidate_term,
+            predicate=predicate,
+            object_type=object_type,
+            object_id=object_id,
+        )
+        if relationships:
+            return relationships
+    return ()
 
 
 def _resolve_component(
@@ -459,12 +843,8 @@ def _resolve_component(
 
     relationships = ()
     if ingredient_id:
-        relationships = knowledge.find_relationships(
-            subject_type="vocabulary",
-            subject_id=term,
-            predicate="component_of",
-            object_type="ingredient",
-            object_id=ingredient_id,
+        relationships = _find_relationships_any(
+            knowledge, term, "component_of", "ingredient", ingredient_id
         )
     if relationships:
         # SS B.6: one evidence entry per matching row, not deduplicated.
@@ -486,12 +866,8 @@ def _add_natural_portion_evidence(
     embedded directly in a MeasurementExpression (component left unset)."""
     if not ingredient_id or not unit_term or unit_term == ingredient_id:
         return
-    relationships = knowledge.find_relationships(
-        subject_type="vocabulary",
-        subject_id=unit_term,
-        predicate="natural_portion_of",
-        object_type="ingredient",
-        object_id=ingredient_id,
+    relationships = _find_relationships_any(
+        knowledge, unit_term, "natural_portion_of", "ingredient", ingredient_id
     )
     if relationships:
         for rel in relationships:
@@ -589,12 +965,114 @@ def _build_scalar_quantity(
     )
 
 
+def _range_expr_shape(node: dict) -> Tuple[Optional[dict], Optional[dict], Optional[dict]]:
+    """Classifies a RangeExpression's direct children into
+    (lower_leaf, upper_leaf, unit_leaf). Confirmed against real parser
+    output: a bare range like "3-5" is `[QuantityNode, RangeMarker,
+    QuantityNode]` -- the first QuantityNode is the lower bound, the
+    second is the upper bound, and RangeMarker (or UnitConnectorMarker,
+    should one ever appear here) is a pure connective carrying no data.
+    An optional trailing MeasurementNode/NaturalPortionNode is the unit
+    shared by both bounds (a ranged measurement, e.g. "3-5 ounces"),
+    mirroring `_measurement_expr_shape`'s scalar handling -- not yet
+    confirmed against real output for that specific sub-case, but this is
+    the same structural pattern, not a new guess.
+    """
+    lower_leaf = None
+    upper_leaf = None
+    unit_leaf = None
+    for child in _children(node):
+        child_type = _node_type(child)
+        if child_type == "QuantityNode":
+            if lower_leaf is None:
+                lower_leaf = child
+            elif upper_leaf is None:
+                upper_leaf = child
+        elif child_type in ("MeasurementNode", "NaturalPortionNode"):
+            unit_leaf = child
+        # RangeMarker / UnitConnectorMarker: pure connectives, no data.
+    return lower_leaf, upper_leaf, unit_leaf
+
+
+def _build_range_quantity(
+    node: dict,
+    knowledge: Any,
+    component_term: Optional[str] = None,
+    ingredient_resolved: Optional[str] = None,
+    ingredient_raw: Optional[str] = None,
+    allow_bare_ingredient_fallback: bool = False,
+) -> Tuple[Optional[dict], Optional[str]]:
+    """Builds one schema `quantity` object with form="range" from a clean
+    RangeExpression node. Mirrors `_build_scalar_quantity`'s SS H
+    unit-resolution table exactly, just for two bounds instead of one --
+    see that function's docstring for the branch-by-branch rationale,
+    unchanged here.
+    """
+    lower_leaf, upper_leaf, unit_leaf = _range_expr_shape(node)
+    if lower_leaf is None or upper_leaf is None:
+        return None, "incomplete_range"
+    lower = _parse_number(_span_norm(lower_leaf), knowledge)
+    upper = _parse_number(_span_norm(upper_leaf), knowledge)
+    if lower is None or upper is None:
+        return None, "unparseable_quantity_value"
+
+    source_spans = _fallback_spans(_source_spans_of(node), _span_text(lower_leaf))
+
+    if unit_leaf is not None:
+        unit_term = _span_norm(unit_leaf)
+        unit_type = "measurement" if _node_type(unit_leaf) == "MeasurementNode" else "natural_portion"
+    elif component_term:
+        unit_type, unit_term = "natural_portion", component_term
+    elif allow_bare_ingredient_fallback and (ingredient_resolved or ingredient_raw):
+        unit_type, unit_term = "natural_portion", (ingredient_resolved or ingredient_raw)
+    else:
+        return None, "missing_unit"
+
+    return (
+        {
+            "form": "range",
+            "lower": lower,
+            "upper": upper,
+            "unit_type": unit_type,
+            "unit_term": unit_term,
+            "source_spans": source_spans,
+        },
+        None,
+    )
+
+
+def _build_quantity_from_slot(
+    slot: dict,
+    knowledge: Any,
+    component_term: Optional[str] = None,
+    ingredient_resolved: Optional[str] = None,
+    ingredient_raw: Optional[str] = None,
+    allow_bare_ingredient_fallback: bool = False,
+) -> Tuple[Optional[dict], Optional[str]]:
+    """Dispatches to scalar or range quantity construction based on the
+    slot's tagged `kind` (see `_flatten_measurement_slots`). Used by both
+    `_assign_quantities` and `_build_package`'s size-search so a package
+    size can also be range-shaped (e.g. "2 (14-16 oz) cans"), not just a
+    reference's primary/per-item quantity."""
+    if slot.get("kind") == "range":
+        return _build_range_quantity(
+            slot["expr"], knowledge, component_term, ingredient_resolved, ingredient_raw,
+            allow_bare_ingredient_fallback,
+        )
+    return _build_scalar_quantity(
+        slot["expr"], knowledge, component_term, ingredient_resolved, ingredient_raw,
+        allow_bare_ingredient_fallback,
+    )
+
+
 def _flatten_measurement_slots(measurements: List[dict]) -> List[dict]:
     """Normalizes `reference.measurements` (a mix of MeasurementExpression /
-    ParentheticalExpression / Alternative-or-ConjunctionExpression-of-
-    measurements, in source order) into a flat, ordered list of slot dicts:
+    RangeExpression / ParentheticalExpression / Alternative-or-
+    ConjunctionExpression-of-measurements, in source order) into a flat,
+    ordered list of slot dicts:
         {"container": <ParentheticalExpression dict or None>,
-         "expr": <MeasurementExpression dict or None>,
+         "expr": <MeasurementExpression or RangeExpression dict or None>,
+         "kind": "scalar" | "range" (only meaningful when "expr" is set),
          "dangling": bool,
          "unrecognized": bool (optional),
          "raw": <original node, for unrecognized slots>}
@@ -604,15 +1082,32 @@ def _flatten_measurement_slots(measurements: List[dict]) -> List[dict]:
         node_type = _node_type(node)
         if node_type == "MeasurementExpression":
             _, _, dangling = _measurement_expr_shape(node)
-            slots.append({"container": None, "expr": node, "dangling": dangling})
+            slots.append({"container": None, "expr": node, "dangling": dangling, "kind": "scalar"})
+        elif node_type == "RangeExpression":
+            # Confirmed via real parser output: a clean range like "3-5"
+            # is now its own dedicated node type (mismatch #1's fix), not
+            # a fragmented pair of MeasurementExpressions to reassemble.
+            slots.append({"container": None, "expr": node, "dangling": False, "kind": "range"})
         elif node_type == "ParentheticalExpression":
-            inner = [c for c in _children(node) if _node_type(c) == "MeasurementExpression"]
+            inner = [
+                c for c in _children(node)
+                if _node_type(c) in ("MeasurementExpression", "RangeExpression")
+            ]
             if len(inner) == 1:
-                _, _, dangling = _measurement_expr_shape(inner[0])
-                slots.append({"container": node, "expr": inner[0], "dangling": dangling})
+                inner_node = inner[0]
+                if _node_type(inner_node) == "RangeExpression":
+                    slots.append({"container": node, "expr": inner_node, "dangling": False, "kind": "range"})
+                else:
+                    _, _, dangling = _measurement_expr_shape(inner_node)
+                    slots.append({"container": node, "expr": inner_node, "dangling": dangling, "kind": "scalar"})
             elif len(inner) >= 2:
                 # Fragmented range inside a parenthetical (mismatch #1) --
                 # e.g. "(5-6 ounces each)". Not modeled by SS D at all.
+                # NOTE: now that RangeExpression exists as its own node
+                # type, this branch (>=2 MeasurementExpression siblings
+                # inside one Parenthetical) may be dead in practice --
+                # left in place defensively rather than removed, since it
+                # hasn't been proven unreachable against real output.
                 slots.append({"container": node, "expr": None, "dangling": True, "multi": inner})
             else:
                 slots.append({"container": node, "expr": None, "dangling": False, "unrecognized": True, "raw": node})
@@ -703,8 +1198,8 @@ def _assign_quantities(
         # against is a structural contradiction, not merely unresolved.
         return None, None, "per_item_quantity_without_primary"
 
-    quantity, reason = _build_scalar_quantity(
-        primary_slot["expr"],
+    quantity, reason = _build_quantity_from_slot(
+        primary_slot,
         knowledge,
         component_term=component_term,
         ingredient_resolved=ingredient_resolved,
@@ -728,7 +1223,7 @@ def _assign_quantities(
     if len(clean_slots) >= 2:
         second_slot = clean_slots[1]
         if second_slot.get("container") is not None:
-            per_item_quantity, reason2 = _build_scalar_quantity(second_slot["expr"], knowledge)
+            per_item_quantity, reason2 = _build_quantity_from_slot(second_slot, knowledge)
             if per_item_quantity is not None:
                 evidence.append(_evidence("structural_match", "per_item_quantity"))
             else:
@@ -769,6 +1264,23 @@ def _assign_quantities(
 # ---------------------------------------------------------------------------
 # Package -- RO-9 SS E
 # ---------------------------------------------------------------------------
+
+
+def _slot_has_unit(slot: dict) -> bool:
+    """True iff a measurement slot (scalar or range, see
+    `_flatten_measurement_slots`) carries an explicit unit
+    (Measurement/NaturalPortion), as opposed to being bare. Used by
+    `_build_package`'s size-search, which needs to recognize a unit
+    regardless of whether the underlying expression is a
+    MeasurementExpression or a RangeExpression."""
+    expr = slot.get("expr")
+    if expr is None:
+        return False
+    if slot.get("kind") == "range":
+        _, _, unit_leaf = _range_expr_shape(expr)
+    else:
+        _, unit_leaf, _ = _measurement_expr_shape(expr)
+    return unit_leaf is not None
 
 
 def _build_package(
@@ -815,6 +1327,7 @@ def _build_package(
             and slot.get("expr") is not None
             and not slot.get("dangling")
             and not slot.get("unrecognized")
+            and slot.get("kind") != "range"
             and _is_bare_quantity_only(slot["expr"])
         ):
             quantity_leaf, _, _ = _measurement_expr_shape(slot["expr"])
@@ -829,9 +1342,9 @@ def _build_package(
     size_obj = None
     for index, slot in enumerate(remaining):
         if slot.get("expr") is not None and not slot.get("dangling") and not slot.get("unrecognized"):
-            _, unit_leaf, _ = _measurement_expr_shape(slot["expr"])
-            if unit_leaf is not None:
-                built, _reason = _build_scalar_quantity(slot["expr"], knowledge)
+            has_unit = _slot_has_unit(slot)
+            if has_unit:
+                built, _reason = _build_quantity_from_slot(slot, knowledge)
                 if built is not None:
                     size_obj = built
                     del remaining[index]
@@ -932,7 +1445,8 @@ def _reference_source_spans(parser_ref: dict) -> List[str]:
     add_from(parser_ref.get("package"))
     add_from(parser_ref.get("ingredient"))
     add_from(parser_ref.get("component"))
-    add_from(parser_ref.get("preparation"))
+    for prep_clause in _as_node_list(parser_ref.get("preparation")):
+        add_from(prep_clause)
     for note in parser_ref.get("notes", []) or []:
         add_from(note)
     for unresolved in parser_ref.get("unresolved", []) or []:
@@ -966,15 +1480,26 @@ def _build_single_reference(
     )
     modifiers: List[dict] = list(own_modifiers)
 
-    prep_modifier = _build_preparation_modifier(parser_ref.get("preparation"), evidence, unresolved)
-    if prep_modifier:
-        modifiers.append(prep_modifier)
+    # RO-9 SS G / FLAGGED GAP #3 revision: fold a trailing "cut into 1/2
+    # cubes"-shaped preparation clause + measurement + connective note
+    # back into one clause before building modifiers/quantities/notes
+    # from them individually -- see `_merge_trailing_preparation_measurement`.
+    # No-op (returns its inputs unchanged) for every line that doesn't
+    # structurally match that shape.
+    prep_clauses, raw_measurements, raw_notes = _merge_trailing_preparation_measurement(
+        _as_node_list(parser_ref.get("preparation")),
+        parser_ref.get("measurements", []) or [],
+        parser_ref.get("notes", []) or [],
+    )
+
+    prep_modifiers = _build_preparation_modifiers(prep_clauses, evidence, unresolved)
+    modifiers.extend(prep_modifiers)
 
     component_term = _resolve_component(
         parser_ref.get("component"), ingredient_id, knowledge, evidence, unresolved
     )
 
-    measurement_slots = _flatten_measurement_slots(parser_ref.get("measurements", []) or [])
+    measurement_slots = _flatten_measurement_slots(raw_measurements)
 
     package_obj = None
     if parser_ref.get("package") is not None:
@@ -995,7 +1520,7 @@ def _build_single_reference(
     ):
         _add_natural_portion_evidence(quantity["unit_term"], ingredient_id, knowledge, evidence)
 
-    notes = _build_notes(parser_ref.get("notes", []) or [], evidence)
+    notes = _build_notes(raw_notes, evidence)
     _carry_through_unresolved(parser_ref.get("unresolved", []) or [], unresolved, evidence)
 
     reference: Dict[str, Any] = {
@@ -1029,12 +1554,17 @@ def _build_single_reference(
 def _compound_tree(node: dict) -> tuple:
     """Recursively describes an Alternative/ConjunctionExpression over
     IngredientExpression operands as a nested tuple tree:
-    ("leaf", IngredientExpression) or (node_type, left_subtree, right_subtree).
+    ("leaf", IngredientExpression) or
+    (node_type, left_subtree, right_subtree, connective_node_or_None).
+    `connective_node` is the parser's own AlternativeMarker/
+    ConjunctionMarker (see `_relation_source_spans`), read from the node's
+    `connective` field -- a sibling of `children`, NOT one of the two
+    operands.
     """
     if _node_type(node) == "IngredientExpression":
         return ("leaf", node)
     children = _children(node)
-    return (_node_type(node), _compound_tree(children[0]), _compound_tree(children[1]))
+    return (_node_type(node), _compound_tree(children[0]), _compound_tree(children[1]), node.get("connective"))
 
 
 def _is_compound_ingredient_tree(node: Optional[dict]) -> bool:
@@ -1058,6 +1588,108 @@ def _relation_type_for(node_type: str) -> str:
     return "conjunction" if node_type == "ConjunctionExpression" else "alternative"
 
 
+def _is_compound_preparation_clause(clause_node: dict) -> bool:
+    """True iff a single entry in `reference.preparation`'s clause list is
+    itself an Alternative/ConjunctionExpression wrapping exactly two
+    PreparationExpression operands -- e.g. "minced or pressed" -- rather
+    than a plain single clause. Mirrors `_is_compound_ingredient_tree`'s
+    shape check, for preparation instead of ingredient."""
+    if _node_type(clause_node) not in ("AlternativeExpression", "ConjunctionExpression"):
+        return False
+    children = _children(clause_node)
+    return len(children) == 2 and all(_node_type(child) == "PreparationExpression" for child in children)
+
+
+def _find_compound_preparation_clause(prep_clauses: List[dict]) -> Optional[Tuple[int, dict]]:
+    """Returns (index, clause_node) for the first compound preparation
+    clause in the list, or None. Only the first is decomposed -- a
+    reference with more than one independent preparation alternative
+    (e.g. two separate "X or Y" clauses) is an unanticipated shape, not
+    modeled; the first one found drives decomposition and any additional
+    ones are simply inherited unchanged as shared clauses on every
+    resulting reference, same as an ordinary plain clause would be."""
+    for index, clause in enumerate(prep_clauses):
+        if _is_compound_preparation_clause(clause):
+            return index, clause
+    return None
+
+
+def _build_preparation_alternative_references(
+    parser_ref: dict,
+    prep_clauses: List[dict],
+    compound_prep: Tuple[int, dict],
+    next_ref_id: Callable[[], str],
+    knowledge: Any,
+    evidence: List[dict],
+    invalid_reasons: List[str],
+) -> Tuple[List[dict], List[dict]]:
+    """Decomposes a reference whose preparation includes a compound
+    (Alternative/ConjunctionExpression) clause -- e.g. "1 medium garlic
+    clove, minced or pressed" -- into one reference PER preparation
+    alternative, sharing everything else (ingredient, quantity, package,
+    component, notes, and any OTHER preparation clauses on this same
+    reference) unmodified, connected by a relation carrying the real
+    connective span (see `_relation_source_spans`).
+
+    SS I.6 explicitly left compound preparation/component decomposition
+    open ("Whether compound preparation/component... should decompose the
+    same way is explicitly left open"). This is that open item's
+    resolution, per explicit confirmation: "minced or pressed" -> two
+    downstream rows, same ingredient and quantity, differing only in
+    preparation -- the first (leftmost, "minced") optional=0, the second
+    ("pressed") optional=1 -- the SAME optionality convention already used
+    for a structurally-optional INGREDIENT alternative (e.g. "butter or
+    olive oil"), just triggered by a preparation-level choice instead of
+    an ingredient-level one. `optional`/`alt_group_id`/`alt_kind` are
+    still derived entirely at the projection layer from the relation this
+    function returns (`_project_selected_references`'s existing
+    membership logic), not computed here -- this function's only job is
+    to produce the right SET of canonical references plus the relation
+    connecting them; it does not decide optionality itself.
+
+    Implementation: reuses `_build_single_reference` once per operand,
+    substituting ONLY that operand's clause into a shallow-copied
+    `parser_ref["preparation"]` in place of the compound wrapper (every
+    other field -- ingredient, measurements, package, component, notes,
+    any other preparation clauses -- passed through unchanged). This is
+    simpler and lower-risk than threading shared-field copying through a
+    second bespoke construction path, at the cost of re-running
+    ingredient/quantity resolution once per operand -- deterministic, so
+    this never produces a different result across operands for those
+    shared fields, just repeats the same work.
+    """
+    index, clause_node = compound_prep
+    operands = _children(clause_node)
+    connective = clause_node.get("connective")
+    clause_node_type = _node_type(clause_node)
+    # _find_compound_preparation_clause only returns a clause that already
+    # passed _is_compound_preparation_clause, which requires node_type to
+    # be "AlternativeExpression" or "ConjunctionExpression" -- never None
+    # at this point.
+    assert clause_node_type is not None
+    relation_type = _relation_type_for(clause_node_type)
+
+    references: List[dict] = []
+    for operand in operands:
+        ref_id = next_ref_id()
+        variant_prep_clauses = prep_clauses[:index] + [operand] + prep_clauses[index + 1 :]
+        variant_parser_ref = dict(parser_ref)
+        variant_parser_ref["preparation"] = variant_prep_clauses
+        reference, invalid_reason = _build_single_reference(ref_id, variant_parser_ref, knowledge, evidence)
+        if invalid_reason:
+            invalid_reasons.append(invalid_reason)
+        references.append(reference)
+
+    member_ids = [reference["id"] for reference in references]
+    relation = {
+        "relation_type": relation_type,
+        "members": member_ids,
+        "source_spans": _relation_source_spans(connective),
+    }
+    evidence.append(_evidence("structural_match", "relation"))
+    return references, [relation]
+
+
 _CONNECTIVE_SPAN_UNAVAILABLE = (
     "<connective span not preserved by parser -- see analyzer.py module "
     "docstring, mismatch #3: AlternativeMarker/ConjunctionMarker leaves are "
@@ -1067,19 +1699,25 @@ _CONNECTIVE_SPAN_UNAVAILABLE = (
 )
 
 
-def _relation_source_spans() -> List[str]:
-    """See mismatch #3 in the module docstring: the parser discards the
-    'and'/'or' token itself when building an Alternative/ConjunctionExpression,
-    so the literal connective span is unrecoverable from the persisted tree.
+def _relation_source_spans(connective: Optional[dict] = None) -> List[str]:
+    """See mismatch #3 in the module docstring: the parser USED TO discard
+    the 'and'/'or' token when building an Alternative/ConjunctionExpression.
 
-    This deliberately does NOT substitute the members' own source spans as
-    stand-in provenance -- doing so would misattribute lexical material
-    that produced the *members* as if it were provenance for the
-    *connective*, which is exactly the invented transformation the work
-    order prohibits. Instead the gap is surfaced explicitly via a fixed,
-    unmistakable sentinel; this needs a parser fix (retain the marker span
-    somewhere in the tree) or an RO-9 schema revision, not an Analyzer-side
-    guess."""
+    CONFIRMED FIXED by a subsequent parser update, verified against real
+    production output: `Alternative`/`ConjunctionExpression` now carries a
+    `connective` field (a sibling of `children`, e.g.
+    `{"node_type": "AlternativeMarker", "span": {...,"text":"or"...}}`)
+    holding the marker's own real span. When available, that real text is
+    used here directly -- no more fabrication needed for this case. The
+    sentinel below remains ONLY as a defensive fallback for a tree that,
+    for whatever reason (an older cached parse predating this fix, or some
+    future connective-less shape), doesn't carry one -- so this never
+    crashes and never fabricates provenance either way.
+    """
+    if connective is not None:
+        spans = _source_spans_of(connective)
+        if spans:
+            return spans
     return [_CONNECTIVE_SPAN_UNAVAILABLE]
 
 
@@ -1116,7 +1754,7 @@ def _build_decomposed_references(
     tree = _compound_tree(compound_node)
 
     prep_unresolved: List[dict] = []
-    shared_prep_modifier = _build_preparation_modifier(parser_ref.get("preparation"), evidence, prep_unresolved)
+    shared_prep_modifiers = _build_preparation_modifiers(parser_ref.get("preparation"), evidence, prep_unresolved)
     shared_notes = _build_notes(parser_ref.get("notes", []) or [], evidence)
 
     has_quantity_material = bool(parser_ref.get("measurements"))
@@ -1155,8 +1793,8 @@ def _build_decomposed_references(
             ingredient_id, own_modifiers = _resolve_ingredient(ingredient_expr, knowledge, evidence, own_unresolved)
 
             modifiers = list(own_modifiers)
-            if shared_prep_modifier:
-                modifiers.append(dict(shared_prep_modifier))
+            for shared_modifier in shared_prep_modifiers:
+                modifiers.append(dict(shared_modifier))
 
             reference: Dict[str, Any] = {
                 "id": ref_id,
@@ -1188,7 +1826,7 @@ def _build_decomposed_references(
             references.append(reference)
             return [ref_id]
 
-        node_type, left, right = subtree
+        node_type, left, right, connective = subtree
         left_ids = visit(left)
         right_ids = visit(right)
         member_ids = left_ids + right_ids
@@ -1196,7 +1834,7 @@ def _build_decomposed_references(
             {
                 "relation_type": _relation_type_for(node_type),
                 "members": member_ids,
-                "source_spans": _relation_source_spans(),
+                "source_spans": _relation_source_spans(connective),
             }
         )
         evidence.append(_evidence("structural_match", "relation"))
@@ -1224,6 +1862,14 @@ def _process_parser_reference(
         return _build_decomposed_references(
             parser_ref, ingredient_field, next_ref_id, knowledge, evidence, ambiguous_flag
         )
+
+    prep_clauses = _as_node_list(parser_ref.get("preparation"))
+    compound_prep = _find_compound_preparation_clause(prep_clauses)
+    if compound_prep is not None:
+        return _build_preparation_alternative_references(
+            parser_ref, prep_clauses, compound_prep, next_ref_id, knowledge, evidence, invalid_reasons
+        )
+
     ref_id = next_ref_id()
     reference, invalid_reason = _build_single_reference(ref_id, parser_ref, knowledge, evidence)
     if invalid_reason:
@@ -1279,11 +1925,17 @@ def _evaluate_candidate(candidate: dict, index: int, knowledge: Any) -> dict:
                 references.extend(right_refs)
                 relations.extend(right_rels)
                 member_ids = [r["id"] for r in left_refs] + [r["id"] for r in right_refs]
+                # child_type was already confirmed to be
+                # "AlternativeExpression"/"ConjunctionExpression" by the
+                # `elif child_type in (...)` above -- never None here,
+                # though an `in` check over a tuple isn't narrowing a
+                # type checker relies on.
+                assert child_type is not None
                 relations.append(
                     {
                         "relation_type": _relation_type_for(child_type),
                         "members": member_ids,
-                        "source_spans": _relation_source_spans(),
+                        "source_spans": _relation_source_spans(child.get("connective")),
                     }
                 )
                 evidence.append(_evidence("structural_match", "relation"))
@@ -1334,7 +1986,7 @@ def _evaluate_candidate(candidate: dict, index: int, knowledge: Any) -> dict:
     interpretation: Dict[str, Any] = {
         "id": interpretation_id,
         "status": status,
-        "score": _SCORE_BY_STATUS[status],
+        "score": _evidence_score(evidence),
         "references": references,
     }
     if relations:
@@ -1357,21 +2009,96 @@ def _derive_result(interpretations: List[dict]) -> Tuple[str, Optional[str]]:
     anticipate; this treats it as viable-but-unselectable, consistent with
     RO-9's own note (SS M) that this exact interaction is a flagged, not
     silently assumed, extension.
+
+    POLICY FIX, confirmed against real production data: the original rule
+    here was "more than one non-invalid interpretation -> ambiguous",
+    full stop, with no regard for what STATUS those interpretations
+    individually held. This was too coarse. Concretely: for "2 ribs
+    celery", the parser (correctly, per SS A.5/SS C's between-candidate
+    lexical ambiguity model) emits two candidates -- one reading "ribs
+    celery" as one nonsensical compound bare-ingredient phrase (which
+    fails ingredient resolution -> status "unresolved"), and one reading
+    it as component="rib" + ingredient="celery" (which resolves cleanly
+    -> status "resolved"). Under the old rule, BOTH counted as "viable"
+    purely because neither was "invalid", forcing the line to
+    "ambiguous" and producing NO downstream row -- even though only ONE
+    of the two candidates was actually a complete, valid reading. This
+    pattern recurred across "2 cloves garlic", "2 ribs", "2 ribs
+    celery", and "2 ribs, celery" in the same test batch, silently
+    dropping all of them from the primary output.
+
+    "unresolved" is not a competing GOOD reading in the same sense
+    "resolved" or "ambiguous" (SS I.4) are -- by RO-6's own status
+    definitions, it specifically means required semantic material could
+    NOT be resolved. A structurally-incomplete candidate existing
+    alongside a complete one is not genuine interpretive uncertainty
+    about what the line means; it's noise. This is a deterministic,
+    structural distinction (whether resolution succeeded or not), not a
+    confidence/likelihood judgment -- it does not violate "do not
+    automatically populate a winning interpretation merely because one
+    candidate has the highest confidence", since no score/confidence
+    value is consulted anywhere below; only the fixed status category is.
+
+    Revised rule: only "resolved" and "ambiguous" candidates count as
+    "strong" (complete, non-deficient) for the purposes of this decision.
+      - >1 strong candidates -> compare `score` (see `_evidence_score`).
+        A genuine curated-relationship match (RO-9 SS M REVISION, see
+        that section) always outweighs generic vocabulary/structural
+        recognition, so this is NOT "pick whichever has the highest
+        confidence" in the sense the original SS13 language warns
+        against -- it is a deterministic tiebreak over evidence KINDS
+        this module already recorded, the same evidence a human curator
+        reading the interpretation's own `evidence` list would use.
+          - a single top scorer -> it wins outright, exactly like the
+            len(strong)==1 case below.
+          - still tied even after evidence weighting (no evidence
+            distinguishes them) -> genuine, unresolvable ambiguity.
+            UNLIKE the old rule, this does NOT mean "no output": one
+            candidate (first among the tied, for determinism) is still
+            selected so a downstream row is produced, but the top-level
+            `status` stays "ambiguous" so curation can triage it. This
+            is the one case where an "ambiguous" result carries a
+            non-None `selected_interpretation` -- see the updated note
+            in `_project_selected_references`.
+      - exactly 1 strong candidate -> it wins outright, REGARDLESS of how
+        many "unresolved" siblings exist alongside it (those are
+        discarded as noise, not "selected among").
+      - 0 strong candidates, exactly 1 "unresolved" -> that one wins
+        (unchanged from before: a lone imperfect reading still selects).
+      - 0 strong candidates, >1 "unresolved" -> none of them are
+        trustworthy enough to prefer over the others -> "ambiguous"
+        (matches the old rule's outcome for this specific sub-case; none
+        of them have any evidence-based claim to preference either, so
+        no tiebreak is attempted here -- this bucket predates and is
+        orthogonal to the score-based tiebreak above).
     """
-    viable = [interp for interp in interpretations if interp["status"] != "invalid"]
-    viable_count = len(viable)
+    non_invalid = [interp for interp in interpretations if interp["status"] != "invalid"]
+    if not non_invalid:
+        return "invalid", None
 
-    if viable_count == 0:
-        status = "invalid"
-    elif viable_count == 1:
-        status = viable[0]["status"]
-    else:
-        status = "ambiguous"
+    strong = [interp for interp in non_invalid if interp["status"] in ("resolved", "ambiguous")]
 
-    selected = None
-    if viable_count == 1 and status in ("resolved", "unresolved"):
-        selected = viable[0]["id"]
-    return status, selected
+    if len(strong) > 1:
+        best_score = max(interp["score"] for interp in strong)
+        top = [interp for interp in strong if interp["score"] == best_score]
+        winner = top[0]
+        if len(top) == 1:
+            selected = winner["id"] if winner["status"] == "resolved" else None
+            return winner["status"], selected
+        # Genuinely tied even after evidence weighting -- still flagged
+        # "ambiguous" for curation, but a candidate is selected so the
+        # line still produces a downstream row rather than none at all.
+        return "ambiguous", winner["id"]
+    if len(strong) == 1:
+        winner = strong[0]
+        selected = winner["id"] if winner["status"] == "resolved" else None
+        return winner["status"], selected
+
+    # No resolved/ambiguous candidate at all -- everything left is
+    # "unresolved".
+    if len(non_invalid) == 1:
+        return "unresolved", non_invalid[0]["id"]
+    return "ambiguous", None
 
 
 # ---------------------------------------------------------------------------
@@ -1559,10 +2286,10 @@ _STATUS_ORDER = ["resolved", "ambiguous", "unresolved", "invalid"]
 #   CREATE TABLE IF NOT EXISTS recipe_ingredient_lines_parsed (
 #       id INTEGER PRIMARY KEY AUTOINCREMENT,
 #
-#       recipe_ingredient_line_id INTEGER NOT NULL,
-#       ingredient_block_id       INTEGER NOT NULL,
 #       recipe_id                 INTEGER NOT NULL,
 #       recipe_section_id         INTEGER NOT NULL,
+#       ingredient_block_id       INTEGER NOT NULL,
+#       recipe_ingredient_line_id INTEGER NOT NULL,
 #
 #       ingredient_id TEXT,
 #       ingredient_phrase TEXT,
@@ -1578,12 +2305,19 @@ _STATUS_ORDER = ["resolved", "ambiguous", "unresolved", "invalid"]
 #       imperial_volume_unit TEXT,
 #
 #       natural_portion_value REAL,
+#       natural_portion_min REAL,
+#       natural_portion_max REAL,
 #       natural_portion TEXT,
 #
 #       packaging_count REAL,
+#       packaging_size_value REAL,
+#       packaging_size_unit TEXT,
 #       packaging TEXT,
 #
-#       preparation TEXT,   -- JSON array (see FLAGGED GAP #3 below)
+#       preparation TEXT,   -- JSON array, genuinely multi-element (clause
+#                            -- boundaries are now parser-provided -- see
+#                            -- FLAGGED GAP #3's "resolved, pending
+#                            -- verification" note below)
 #       notes TEXT,
 #
 #       optional INTEGER NOT NULL DEFAULT 0,
@@ -1597,6 +2331,18 @@ _STATUS_ORDER = ["resolved", "ambiguous", "unresolved", "invalid"]
 #       FOREIGN KEY(recipe_id)                 REFERENCES recipes(id),
 #       FOREIGN KEY(recipe_section_id)         REFERENCES recipe_sections(id)
 #   );
+#
+# `natural_portion_min`/`natural_portion_max`/`packaging_size_value`/
+# `packaging_size_unit` are now populated by `_project_reference_to_row`,
+# verified against real `RangeExpression` parser output (e.g. "3-5 medium
+# peppers"), not assumed. REMAINING GAP: a RANGED measurement quantity
+# (e.g. a hypothetical "3-5 ounces", unit_type="measurement" rather than
+# "natural_portion") and a RANGED package size (e.g. "2 (14-16 oz) cans")
+# still have nowhere to go -- this schema only added min/max columns for
+# `natural_portion`, not for `imperial_weight`/`imperial_volume`/`grams`/
+# `ml`/`packaging_size`. These are counted into the execution report's
+# CRITICAL ISSUES (via `unmapped_units`/`unmapped_package_size`) rather
+# than silently dropped or collapsed into a single fabricated value.
 #
 # No column here links back to `analysis_records` -- one isn't needed.
 # Both this table and `analysis_records` already share
@@ -1648,31 +2394,40 @@ _STATUS_ORDER = ["resolved", "ambiguous", "unresolved", "invalid"]
 #    imperial_* columns will carry the value instead -- this is expected
 #    given the above, not a bug.
 #
-# 3. PREPARATION LIST GRANULARITY IS NOT VERIFIABLE FROM CURRENT INPUTS.
-#    The work order's own example wants
-#    `["peeled", "quartered lengthwise", "cut crosswise into
-#    0.25-inch-thick slices"]` -- three DISCRETE technique phrases.
-#    `_build_preparation_modifier` (upstream, unchanged) currently merges
-#    every `PreparationNode` leaf in one `PreparationExpression` into a
-#    SINGLE joined modifier term (per the parser's 7a fragmented-phrase
-#    merge rule, the same mechanism that merges "boneless, skinless
-#    chicken breasts" into one ingredient phrase). Whether "cut crosswise
-#    into 0.25-inch-thick slices" arrives as ONE lexical span (a
-#    multi-word vocabulary phrase match) or as several separate
-#    PreparationNode leaves that get merged word-by-word is a property of
-#    the seed vocabulary's phrase-matching granularity, which this module
-#    has no visibility into and cannot verify. Splitting on comma
-#    positions in the original source text is not implementable either --
-#    the Analyzer's input contract (a serialized `ParseResult`) never
-#    includes the original raw line text, only tokenized/lexed spans, so
-#    there is no string to scan for comma boundaries even if that were
-#    otherwise a safe heuristic (it is not, in general: "cut crosswise
-#    into 0.25-inch-thick slices" contains no comma at all). Given this,
-#    `preparation` below is a JSON list wrapper around whatever single
-#    joined term the Analyzer already produced -- currently always 0 or 1
-#    elements, never the 3-element list the work order's example shows.
-#    Do not assume multi-technique lists work until this is verified
-#    against real seed-vocabulary output.
+# 3. [RESOLVED, PENDING EMPIRICAL VERIFICATION] PREPARATION LIST
+#    GRANULARITY. This WAS a hard blocker: the parser used to hand the
+#    Analyzer one flat, unsegmented `PreparationExpression` per reference,
+#    with no clause-boundary signal and no raw source text available to
+#    reconstruct one (confirmed empirically at the time, not guessed --
+#    see the conversation history around this exact example). The parser
+#    was subsequently changed specifically to fix this:
+#    `reference.preparation` is now `List[ASTNode]`, one
+#    `PreparationExpression`-shaped node per clause, with clause
+#    boundaries determined positionally (pre- vs. post-nominal, relative
+#    to when `ref.ingredient` was recognized) and embedded measurements
+#    (e.g. "1/2-inch" inside "cut ... cubes") nested as a child of the
+#    clause they belong to, rather than ejected to the reference-level
+#    `measurements` list.
+#
+#    `_build_preparation_modifiers` (below) was updated to consume this
+#    new shape: one modifier per clause, in source order, walking each
+#    clause's own direct children and recursing into any nested non-leaf
+#    child (the embedded measurement) via the existing type-agnostic
+#    `_iter_leaves` helper rather than assuming any new node's specific
+#    field names.
+#
+#    IMPORTANT CAVEAT: this fix was written against a written report of
+#    the parser change, NOT against the actual updated
+#    `ingredient_parser.py` output -- unlike every other fix in this file,
+#    which was verified by running real parser output through this code
+#    (see this module's git/conversation history for the range-
+#    fragmentation and connective-span fixes, both confirmed empirically
+#    before being trusted). The two specific worked examples given
+#    (`"3 lb boneless chuck, cut into 1/2-inch cubes"` and
+#    `"peeled, quartered lengthwise, cut crosswise into 1/4-inch slices"`)
+#    have NOT yet been run through this code against the real parser.
+#    Treat this as implemented-but-unverified until that happens; do not
+#    assume it is correct merely because the reasoning above is sound.
 #
 # 4. `ingredient_phrase` AND `ingredient_name_original` CURRENTLY COMPUTE
 #    IDENTICALLY. The work order describes them with materially
@@ -1801,6 +2556,67 @@ def _format_quantity_diagnostic(quantity: Optional[dict]) -> Optional[str]:
     return f"{quantity.get('value')} {unit}".strip()
 
 
+def _derive_ingredient_phrase(reference: dict) -> Optional[str]:
+    """`ingredient_phrase` is NOT `ingredient_id` and is NOT an
+    id-derived display string -- per explicit correction: it is "the
+    analyzer's ingredient input set of spans that led to the ingredient
+    it selected, like the alias, prep words, and substance words that
+    were in the attached parse sub-section." Concretely: the reference's
+    own verbatim source text (aliases as actually written, preparation
+    words, substance/unresolved words -- everything that was available as
+    input), NOT a narrowed "identity-only" phrase, and NOT the canonical
+    resolved id.
+
+    A prior version of this function used only size/descriptor/state/
+    temperature modifiers plus the canonical id turned into display text
+    -- that was wrong on two counts, confirmed by concrete failing
+    examples: (1) for a reference with no ingredient noun at all (e.g.
+    "1 clove", where the parser attaches nothing to `ingredient`), it
+    returned None instead of the expected "1 clove" -- the quantity/unit
+    material IS legitimate input even when it never yields an ingredient
+    id; (2) it dropped unresolved/substance material (e.g. "xyz powder")
+    that should be preserved as input evidence even though resolution
+    failed on it.
+
+    Implementation: `reference["source_spans"]` (the reference's full
+    aggregate provenance -- measurements + package + ingredient +
+    component + preparation + notes + unresolved, per
+    `_reference_source_spans`) MINUS whatever spans came specifically
+    from `reference["notes"]`. Notes are the one category explicitly
+    excluded ("everything that isn't clearly a note", per the same
+    clarification) -- e.g. "to taste" must not appear here. Subtraction
+    is done by matching each note's own `source_spans` text against the
+    aggregate list and removing at most that many occurrences (order-
+    preserving), using only data already present in the canonical
+    schema -- no parser_ref access needed, and no risk of over-removing
+    a coincidentally-identical word that appears elsewhere for an
+    unrelated reason, beyond the same count actually attributed to notes.
+
+    `ingredient_name_original`'s eventual correct definition ("the
+    original line of everything that isn't clearly a note") is
+    functionally the same computation for now -- both downstream columns
+    use this same value below, by explicit agreement, until a curation
+    system distinguishes them further.
+    """
+    all_spans = reference.get("source_spans") or []
+    if not all_spans:
+        return None
+
+    note_span_counts: "Counter[str]" = Counter()
+    for note in reference.get("notes", []) or []:
+        for span in note.get("source_spans", []) or []:
+            note_span_counts[span] += 1
+
+    kept: List[str] = []
+    for span in all_spans:
+        if note_span_counts.get(span, 0) > 0:
+            note_span_counts[span] -= 1
+            continue
+        kept.append(span)
+
+    return " ".join(kept).strip() or None
+
+
 def _project_reference_to_row(
     reference: dict,
     *,
@@ -1821,14 +2637,7 @@ def _project_reference_to_row(
     ingredient = reference.get("ingredient")
     ingredient_id = ingredient["id"] if ingredient else None
 
-    # ingredient_phrase / ingredient_name_original: see FLAGGED GAP #4 --
-    # both derived from the same underlying source-span text, since the
-    # Analyzer's data model has no separate "verbatim identity phrase"
-    # distinct from the reference's own source_spans (which already
-    # exclude preparation/notes/unresolved material, since those are
-    # separate fields -- see _reference_source_spans).
-    spans = reference.get("source_spans") or []
-    phrase_text = " ".join(spans) if spans else None
+    phrase_text = _derive_ingredient_phrase(reference)
 
     row: Dict[str, Any] = {
         "ingredient_id": ingredient_id,
@@ -1841,8 +2650,12 @@ def _project_reference_to_row(
         "imperial_volume_value": None,
         "imperial_volume_unit": None,
         "natural_portion_value": None,
+        "natural_portion_min": None,
+        "natural_portion_max": None,
         "natural_portion": None,
         "packaging_count": None,
+        "packaging_size_value": None,
+        "packaging_size_unit": None,
         "packaging": None,
         "preparation": None,
         "notes": None,
@@ -1853,7 +2666,22 @@ def _project_reference_to_row(
 
     quantity = reference.get("quantity")
     if quantity:
-        if quantity.get("unit_type") == "natural_portion":
+        if quantity.get("form") == "range":
+            if quantity.get("unit_type") == "natural_portion":
+                row["natural_portion_min"] = quantity.get("lower")
+                row["natural_portion_max"] = quantity.get("upper")
+                row["natural_portion"] = quantity.get("unit_term")
+            elif quantity.get("unit_type") == "measurement":
+                # No imperial_weight_min/max, grams_min/max, etc. exist in
+                # the current schema for a RANGED measurement -- only
+                # natural_portion has min/max columns. Flagged, not
+                # silently dropped or collapsed into a single fabricated
+                # value.
+                unmapped_units.append(
+                    f"{quantity.get('lower')}-{quantity.get('upper')} "
+                    f"{quantity.get('unit_term')} (range measurement, no downstream column)"
+                )
+        elif quantity.get("unit_type") == "natural_portion":
             row["natural_portion_value"] = quantity.get("value")
             row["natural_portion"] = quantity.get("unit_term")
         elif quantity.get("unit_type") == "measurement":
@@ -1866,10 +2694,19 @@ def _project_reference_to_row(
     if package:
         row["packaging_count"] = package.get("count")
         row["packaging"] = package.get("package_term")
-        if package.get("size"):
-            # FLAGGED GAP #5 -- no downstream column for package.size.
-            size = package["size"]
-            unmapped_package_size.append(f"{size.get('value')} {size.get('unit_term')}")
+        size = package.get("size")
+        if size:
+            if size.get("form") == "scalar":
+                row["packaging_size_value"] = size.get("value")
+                row["packaging_size_unit"] = size.get("unit_term")
+            else:
+                # Ranged package size (e.g. "2 (14-16 oz) cans") -- no
+                # packaging_size_min/max columns exist in the current
+                # schema either.
+                unmapped_package_size.append(
+                    f"{size.get('lower')}-{size.get('upper')} "
+                    f"{size.get('unit_term')} (range package size, no downstream column)"
+                )
 
     preparation_terms = [
         modifier["term"]
@@ -1877,18 +2714,46 @@ def _project_reference_to_row(
         if modifier.get("modifier_class") == "preparation"
     ]
     if preparation_terms:
-        # FLAGGED GAP #3 -- currently always 0 or 1 entries; a list
-        # wrapper around whatever the Analyzer already produced, not a
-        # guess at discrete technique boundaries.
+        # One entry per clause, in source order -- see the (formerly
+        # FLAGGED GAP #3, now resolved-pending-verification) note above
+        # _build_preparation_modifiers. This list-collection logic itself
+        # needed no change: it was already written to handle N clauses,
+        # it simply never received more than one before the parser fix.
         row["preparation"] = json.dumps(preparation_terms)
 
     note_fragments = [note["text"] for note in reference.get("notes", [])]
-    per_item_text = _format_quantity_diagnostic(reference.get("per_item_quantity"))
-    if per_item_text:
-        # Per-item quantities are deliberately NOT a separate calculation
-        # dimension in this downstream schema (work order's explicit
-        # instruction) -- retained as diagnostic text only.
-        note_fragments.append(f"{per_item_text} each")
+    per_item = reference.get("per_item_quantity")
+    if (
+        per_item
+        and quantity
+        and quantity.get("unit_type") == "measurement"
+        and per_item.get("unit_type") == "natural_portion"
+    ):
+        # CONFIRMED FIX from a real test case: "4 tablespoons butter
+        # (1/2 stick)". The primary reading here has no discrete countable
+        # item (a plain measurement, "tablespoons") -- so the parenthetical
+        # isn't scoping "each of N items" the way "6 chicken breasts
+        # (5-6 oz each)" does; it's an ALTERNATE unit expression of the
+        # SAME total amount ("4 tbsp" and "1/2 stick" both describe the
+        # same quantity of butter). Route it into natural_portion_* rather
+        # than `notes`. Genuine per-item scoping -- primary quantity IS
+        # itself a natural-portion count, e.g. "6 chicken breasts" -- is
+        # deliberately left as diagnostic-only `notes` text, UNCHANGED,
+        # per the original explicit "do not build a separate per-item
+        # calculation dimension" instruction; only this different,
+        # narrower shape (primary=measurement, per-item=natural_portion)
+        # is rerouted.
+        if per_item.get("form") == "range":
+            row["natural_portion_min"] = per_item.get("lower")
+            row["natural_portion_max"] = per_item.get("upper")
+        else:
+            row["natural_portion_value"] = per_item.get("value")
+        row["natural_portion"] = per_item.get("unit_term")
+    elif per_item:
+        per_item_text = _format_quantity_diagnostic(per_item)
+        if per_item_text:
+            note_fragments.append(f"{per_item_text} each")
+
     if note_fragments:
         row["notes"] = "; ".join(note_fragments)
 
@@ -1901,14 +2766,26 @@ def _project_selected_references(
     """Projects the SELECTED interpretation's references into downstream
     rows. Returns (rows, unmapped_units, unmapped_package_size).
 
-    Item 12: a line whose top-level status is "ambiguous" -- either
-    multiple viable interpretations, or a single viable interpretation
-    whose own status is "ambiguous" per SS I.4's compound-scope case --
-    has `selected_interpretation is None` by construction (`_derive_result`
-    only ever populates it for resolved/unresolved). This relies on
-    exactly that signal rather than re-deriving ambiguity: no
-    `selected_interpretation` means no rows, full stop -- never a "best
-    guess" projection of one candidate's references. Status "invalid"
+    Item 12, REVISED (RO-9 SS M revision): a line whose top-level status
+    is "ambiguous" no longer *always* has `selected_interpretation is
+    None`. There are now three distinct "ambiguous" cases:
+      1. A single viable interpretation whose own status is "ambiguous"
+         per SS I.4's compound-scope case -> `selected_interpretation`
+         is still None (unchanged).
+      2. Multiple viable interpretations where none is genuinely tied on
+         evidence-weighted `score` -> `_derive_result` now resolves this
+         outright to a clear winner, so top-level status is "resolved"
+         or "unresolved", not "ambiguous" at all (this used to always be
+         "ambiguous"; see `_derive_result`'s docstring).
+      3. Multiple viable interpretations that remain genuinely tied even
+         after evidence weighting -> top-level status stays "ambiguous",
+         but `selected_interpretation` IS populated (one of the tied
+         candidates, chosen for determinism) so this line still produces
+         a downstream row -- flagged ambiguous for curation triage
+         rather than silently dropped.
+    This function's own logic doesn't need to distinguish these cases --
+    it still just checks whether `selected_interpretation` is truthy,
+    which is exactly the right gate for all three. Status "invalid"
     (zero viable interpretations) likewise never has a selected
     interpretation, so it is handled by the same check.
     """
@@ -2085,11 +2962,11 @@ def _persist_parsed_rows(
                 grams, ml,
                 imperial_weight_value, imperial_weight_unit,
                 imperial_volume_value, imperial_volume_unit,
-                natural_portion_value, natural_portion,
-                packaging_count, packaging,
+                natural_portion_value, natural_portion_min, natural_portion_max, natural_portion,
+                packaging_count, packaging_size_value, packaging_size_unit, packaging,
                 preparation, notes,
                 optional, alt_group_id, alt_kind
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 recipe_ingredient_line_id, ingredient_block_id, recipe_id, recipe_section_id,
@@ -2097,8 +2974,8 @@ def _persist_parsed_rows(
                 row["grams"], row["ml"],
                 row["imperial_weight_value"], row["imperial_weight_unit"],
                 row["imperial_volume_value"], row["imperial_volume_unit"],
-                row["natural_portion_value"], row["natural_portion"],
-                row["packaging_count"], row["packaging"],
+                row["natural_portion_value"], row["natural_portion_min"], row["natural_portion_max"], row["natural_portion"],
+                row["packaging_count"], row["packaging_size_value"], row["packaging_size_unit"], row["packaging"],
                 row["preparation"], row["notes"],
                 row["optional"], row["alt_group_id"], row["alt_kind"],
             ),
@@ -2112,10 +2989,21 @@ def _classify_ambiguous_reason(result: dict) -> str:
     genuine multi-candidate ambiguity (more than one viable
     interpretation), using only `analyze_parse_result()`'s public output
     -- the same viable-count logic `_derive_result` already uses, not a
-    new heuristic."""
+    new heuristic.
+
+    RO-9 SS M revision: multi-candidate ambiguity now splits further.
+    When `_derive_result` still populated a `selected_interpretation`
+    despite the top-level status being "ambiguous", that means evidence
+    weighting found a genuine, unresolvable tie (case 3 in
+    `_project_selected_references`'s docstring) rather than the old
+    catch-all -- worth its own bucket so a curator scanning the report
+    can tell "these still have a row, just need a tiebreak" apart from
+    "these produced nothing at all"."""
     viable = [i for i in result["interpretations"] if i["status"] != "invalid"]
     if len(viable) == 1 and viable[0]["status"] == "ambiguous":
         return "compound_quantity_or_package_scope"
+    if len(viable) > 1 and result.get("selected_interpretation"):
+        return "tied_evidence_score"
     return "other"
 
 

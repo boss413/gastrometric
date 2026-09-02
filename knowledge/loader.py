@@ -49,9 +49,9 @@ Expected schema (owned by the DB, not assumed by this loader):
         PRIMARY KEY (term_id, class_id)
     )
 
-    ingredients (
-        id              STR PRIMARY KEY,
-        ingredient_name TEXT UNIQUE NOT NULL,
+    ingredients(
+        id                INTEGER PRIMARY KEY,
+        ingredient_name   TEXT NOT NULL,
         ...              -- notes/created_at, not our concern
     )
 
@@ -297,14 +297,6 @@ class RuntimeKnowledge:
         self._members_by_class: DefaultDict[str, set[str]] = defaultdict(set)
         self._declared_classes: set[str] = {self._INGREDIENT_VOCABULARY_CLASS}
 
-        # surface form -> canonical identity. For vocabulary terms and
-        # canonical ingredient names this is a self-mapping; for ingredient
-        # aliases it points at the real ingredient name. This is internal
-        # plumbing for `PhraseMatch.canonical` and `resolve_ingredient_alias`
-        # -- it is NOT publicly exposed as a generic "aliases" concept,
-        # because generic vocabulary terms don't have aliases.
-        self._canonical_by_surface: dict[str, str] = {}
-
         # alias -> canonical ingredient name, TRUE aliases only (surface !=
         # canonical). This is the ingredient-specific concept the public
         # `knowledge.ingredient_aliases` exposes.
@@ -387,17 +379,14 @@ class RuntimeKnowledge:
     def _load_vocabulary_terms(self, conn: sqlite3.Connection) -> None:
         """Register every generic vocabulary term.
 
-        This seeds `_classes_by_term` with an empty set for the term (so it
-        shows up as "known" even before any class is attached) and seeds
-        `_canonical_by_surface` with a self-mapping, matching how ingredient
-        names behave.
+        This seeds `_classes_by_term` with an empty set for the term so it
+        shows up as "known" even before any class is attached.
         """
         rows = conn.execute(f"SELECT term FROM {self._TERM_TABLE}").fetchall()
 
         for row in rows:
             term = self._normalize(row["term"])
             self._classes_by_term[term]  # noqa: B018 -- touch to register via defaultdict
-            self._canonical_by_surface.setdefault(term, term)
 
     def _load_vocabulary_term_classes(self, conn: sqlite3.Connection) -> None:
         """Populate the many-to-many term <-> class relationship.
@@ -435,11 +424,11 @@ class RuntimeKnowledge:
         table.
 
         Ingredients get folded into the exact same shared indexes
-        (`_classes_by_term`, `_members_by_class`, `_canonical_by_surface`)
-        as everything loaded from the generic vocabulary tables, always
-        tagged with class "ingredient" -- there's no separate downstream
-        code path (phrase indexes, public views, `phrase_index_for`, etc.)
-        that needs to know ingredients came from a different table.
+        (`_classes_by_term`, `_members_by_class`) as everything loaded from
+        the generic vocabulary tables, always tagged with class
+        "ingredient" -- there's no separate downstream code path (phrase
+        indexes, public views, `phrase_index_for`, etc.) that needs to know
+        ingredients came from a different table.
 
         Because `_classes_by_term` is many-to-many, an ingredient name that
         also happens to be tagged as, say, "brand" via
@@ -455,7 +444,6 @@ class RuntimeKnowledge:
 
             self._classes_by_term[term].add(self._INGREDIENT_VOCABULARY_CLASS)
             self._members_by_class[self._INGREDIENT_VOCABULARY_CLASS].add(term)
-            self._canonical_by_surface.setdefault(term, term)
 
     def _load_ingredient_aliases(self, conn: sqlite3.Connection) -> None:
         """Populate both lookup directions for each ingredient alias.
@@ -469,6 +457,14 @@ class RuntimeKnowledge:
         `confidence`/`source` on `ingredient_aliases` are provenance
         columns -- not this loader's concern -- so every alias row is
         loaded regardless of confidence.
+
+        Deliberately does NOT touch any shared surface->canonical map: an
+        alias surface (e.g. "ribs") can simultaneously be a generic
+        vocabulary term tagged with unrelated classes (e.g. "component",
+        "natural_portion"). Ingredient aliasing must only affect the
+        "ingredient" class's view of that surface, never the others --
+        see `_build_phrase_indexes`, which resolves canonical per (surface,
+        class) rather than per surface alone for exactly this reason.
         """
         rows = conn.execute(
             f"""
@@ -502,7 +498,6 @@ class RuntimeKnowledge:
                 )
 
             self._ingredient_alias_to_canonical[alias] = canonical
-            self._canonical_by_surface[alias] = canonical
 
             self._classes_by_term[alias].add(self._INGREDIENT_VOCABULARY_CLASS)
             self._members_by_class[self._INGREDIENT_VOCABULARY_CLASS].add(alias)
@@ -565,6 +560,19 @@ class RuntimeKnowledge:
         sharing the same tokens. This is what backs `find_phrases_starting_with`
         and `phrases_longest_first`. The lexer should never need to split or
         sort vocabulary on its own.
+
+        Canonical resolution is done PER (surface, class), not per surface
+        alone. Ingredient aliasing is the only place a surface's canonical
+        identity differs from the surface itself, and it must only apply to
+        the "ingredient" class -- the same surface text can simultaneously
+        be a generic vocabulary term tagged with unrelated classes (e.g.
+        "ribs" is an alias for ingredient "pork ribs", AND separately a
+        vocabulary term tagged "component"/"natural_portion", where it
+        should resolve to itself, not to "pork ribs"). Resolving canonical
+        once per surface and reusing it across every class was the bug here
+        previously; a shared surface->canonical map can't represent "this
+        surface means something different depending on which class is
+        asking."
         """
         matches: list[PhraseMatch] = []
         seen: set[tuple[tuple[str, ...], str]] = set()
@@ -577,13 +585,17 @@ class RuntimeKnowledge:
             if not tokens:
                 continue
 
-            canonical = self._canonical_by_surface.get(surface, surface)
-
             for vocabulary_class in classes:
                 key = (tokens, vocabulary_class)
                 if key in seen:
                     continue
                 seen.add(key)
+
+                if vocabulary_class == self._INGREDIENT_VOCABULARY_CLASS:
+                    canonical = self._ingredient_alias_to_canonical.get(surface, surface)
+                else:
+                    canonical = surface
+
                 matches.append(
                     PhraseMatch(tokens=tokens, canonical=canonical, vocabulary_class=vocabulary_class)
                 )

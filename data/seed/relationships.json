@@ -16,6 +16,19 @@
     {
       "subject": {
         "type": "vocabulary",
+        "term": "ribs"
+      },
+      "predicate": "component_of",
+      "object": {
+        "type": "ingredient",
+        "id": "celery"
+      },
+      "source": "curated",
+      "confidence": 1.0
+    },
+    {
+      "subject": {
+        "type": "vocabulary",
         "term": "clove"
       },
       "predicate": "natural_portion_of",

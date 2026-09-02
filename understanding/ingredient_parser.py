@@ -149,8 +149,27 @@ class ConjunctionMarker(SpanNode):
     pass
 
 @dataclass
+class UnitConnectorMarker(SpanNode):
+    """Functions as the connector between a bare quantity and its own
+    unit -- e.g. the hyphen in "14-ounce", "28-oz", "750-ml". This is NOT
+    a range operator, and is never represented as one: a hyphen/'to' span
+    is recognized as this role by default (see `_to_leaf`), and is only
+    reclassified to `RangeMarker` if grammar later confirms it's actually
+    closing a numeric range (a second bare quantity follows it -- see
+    `_chunk_primitives`). If neither a unit nor a second quantity ever
+    follows (malformed/truncated input), it simply stays a
+    UnitConnectorMarker rather than being mislabeled either way."""
+    pass
+
+@dataclass
 class RangeMarker(SpanNode):
-    """Functions as a range operator ('to', '-') between quantities."""
+    """Functions as a confirmed range operator between two quantities
+    (e.g. "3-5", "2 to 4"). This class is ONLY ever constructed once a
+    second bare quantity has confirmed the operator is closing a genuine
+    numeric range -- never assigned by default, and never used for a
+    hyphen/'to' that merely connects a quantity to its own unit (see
+    UnitConnectorMarker). A RangeMarker therefore only ever appears as the
+    middle child of a RangeExpression."""
     pass
 
 @dataclass
@@ -171,7 +190,37 @@ class MeasurementExpression(ContainerNode):
     """A single discrete quantity/measurement constituent (Quantity,
     Measurement, and/or NaturalPortion spans). Distinct measurements are
     never merged into one MeasurementExpression -- see Section 6/14 of the
-    parser contract below."""
+    parser contract below. Never contains a QuantityNode-RangeMarker-
+    QuantityNode sequence -- a genuine range is a RangeExpression instead,
+    so `node_type` alone tells a consumer whether a measurement is
+    form=scalar (MeasurementExpression) or form=range (RangeExpression)
+    without needing to inspect children. May contain a UnitConnectorMarker
+    (e.g. "14-ounce" is Quantity+UnitConnectorMarker+Measurement) -- that
+    marker type is structurally distinct from RangeMarker specifically so
+    this case can never be confused with a range at the leaf level either,
+    not just at the container level."""
+    pass
+
+@dataclass
+class RangeExpression(ContainerNode):
+    """A numeric range measurement: Quantity RangeMarker Quantity, with an
+    optional trailing MeasurementUnit shared by both bounds (e.g. "3-5
+    ounces" is one RangeExpression covering both "3" and "5"). Children
+    are in source order: [lower QuantityNode, RangeMarker, upper
+    QuantityNode, (optional MeasurementNode/NaturalPortionNode)].
+
+    This is a distinct node TYPE from MeasurementExpression -- not a
+    MeasurementExpression that happens to contain a RangeMarker -- so a
+    consumer can distinguish form=scalar from form=range purely from
+    `node_type`. The connector between the two quantities is ALWAYS a
+    RangeMarker here, never a UnitConnectorMarker (see that class), so
+    there is no ambiguity at the leaf level either -- a consumer never
+    needs to inspect token text or count QuantityNodes to tell a range
+    apart from a hyphenated quantity+unit. The parser does not invent
+    lower/upper bound values or otherwise interpret the range -- it only
+    recognizes that the grammar `Quantity RangeMarker Quantity` occurred,
+    and lets the analyzer read the two QuantityNodes' own
+    spans/normalized_values."""
     pass
 
 @dataclass
@@ -254,12 +303,21 @@ class IngredientReference(ASTNode):
     A syntactic ingredient-reference production, assembled only after its
     constituent expressions have already been formed (Pass 7). See the
     "PARSER OUTPUT CONTRACT" below for the meaning of every field.
+
+    `preparation` is a LIST, not a singular field like `package`/
+    `ingredient`/`component` -- a reference can genuinely have multiple,
+    structurally distinct preparation CLAUSES (e.g. "boneless" and "cut
+    into 1/2-inch cubes" in "3 lb boneless chuck, cut into 1/2-inch
+    cubes" are two separate clauses, not one flattened list), unlike
+    ingredient/component fragments, which always describe one entity even
+    when interrupted. See `_attach_preparation_clause` for how clause
+    boundaries are determined.
     """
     measurements: List[ASTNode] = field(default_factory=list)
     package: Optional[ASTNode] = None
     ingredient: Optional[ASTNode] = None
     component: Optional[ASTNode] = None
-    preparation: Optional[ASTNode] = None
+    preparation: List[ASTNode] = field(default_factory=list)
     notes: List[ASTNode] = field(default_factory=list)
     unresolved: List[ASTNode] = field(default_factory=list)
 
@@ -312,19 +370,42 @@ class ParseResult(ASTNode):
 #
 # 1. MeasurementExpression: a single Quantity/Measurement/NaturalPortion
 #    constituent, e.g. "4 tablespoons", "1/2 stick", "14 ounces", "2".
+#    NEVER contains a Quantity-RangeMarker-Quantity sequence -- see
+#    RangeExpression (1a) for that shape. A UnitConnectorMarker CAN appear
+#    inside an ordinary MeasurementExpression (e.g. "14-ounce" is
+#    Quantity+UnitConnectorMarker+Measurement), but only when it glues a
+#    single bare quantity to its own unit, never a second quantity --
+#    RangeMarker itself never appears here, only in a confirmed
+#    RangeExpression, so the connector's own node type already tells a
+#    consumer which case it is without needing to count QuantityNodes.
+#
+# 1a. RangeExpression: a distinct node TYPE (not a MeasurementExpression
+#    variant) for a genuine numeric range -- Quantity RangeMarker Quantity,
+#    with an optional trailing shared unit ("3-5", "3-5 ounces", "2 to 4
+#    cups"). This is what lets a consumer distinguish form=scalar
+#    (MeasurementExpression) from form=range (RangeExpression) purely from
+#    `node_type`, with no risk of confusing a genuine range with a hyphen
+#    that merely connects a quantity to its unit. The parser does not
+#    compute or invent lower/upper bound values -- it only recognizes that
+#    this grammar occurred; the two QuantityNodes' own spans carry the
+#    bound values for the analyzer to read.
 #
 # 2. Multiple measurements: `IngredientReference.measurements` is a LIST.
 #    There is no "primary quantity" vs. "secondary measurement" split --
-#    every MeasurementExpression (or ParentheticalExpression wrapping one)
-#    found for a reference is appended to this list in source order. The
-#    analyzer decides which, if any, is nutritionally authoritative.
+#    every MeasurementExpression/RangeExpression (or ParentheticalExpression
+#    wrapping one) found for a reference is appended to this list in source
+#    order. The analyzer decides which, if any, is nutritionally
+#    authoritative.
 #
 # 3. Parenthetical expressions: content inside `( ... )` is resolved before
 #    ordinary attachment (Pass 3) into a ParentheticalExpression, which
 #    preserves the fact that its children were grouped by parentheses. If
-#    that content is itself a measurement, the ParentheticalExpression (not
-#    an unwrapped MeasurementExpression) is what gets appended to
-#    `measurements` -- so the analyzer can still see it was parenthetical.
+#    that content is itself a measurement or range, the ParentheticalExpression
+#    (not an unwrapped MeasurementExpression/RangeExpression) is what gets
+#    appended to `measurements` -- so the analyzer can still see it was
+#    parenthetical. This is what makes package-size phrasing like
+#    "2 cans (14-ounce) tomatoes" produce a usable, non-fragmented
+#    `measurements` entry for the size, separate from `package`.
 #
 # 4. Conjunctions: an AlternativeExpression ('or') or ConjunctionExpression
 #    ('and'/'plus') wraps exactly two syntactically-compatible operands
@@ -334,9 +415,9 @@ class ParseResult(ASTNode):
 #    where the group attaches on IngredientReference -- two
 #    IngredientExpressions -> `ingredient`; two PreparationExpressions ->
 #    `preparation`; two ComponentExpressions -> `component`; two
-#    MeasurementExpressions (or parenthetical measurements) -> appended to
-#    `measurements`. This is a lookup on constituent type, not a table of
-#    per-example special cases.
+#    MeasurementExpressions or two RangeExpressions (or parenthetical
+#    measurements/ranges) -> appended to `measurements`. This is a lookup
+#    on constituent type, not a table of per-example special cases.
 #
 # 6. Package relationships: `PackageExpression` (e.g. "cans") and any
 #    associated MeasurementExpression / ParentheticalExpression remain
@@ -344,25 +425,45 @@ class ParseResult(ASTNode):
 #    parser does not merge them into a single node or decide that one is
 #    the "package size" -- it only preserves adjacency and grouping.
 #
-# 7. Preparation expressions attach to `IngredientReference.preparation`
-#    after the core ingredient has been recognized (preparation is
-#    post-nominal), whether they are a single PreparationExpression or an
-#    Alternative/ConjunctionExpression of PreparationExpressions.
+# 7. `IngredientReference.preparation` is a LIST of preparation CLAUSES,
+#    not a singular field like `ingredient`/`component`/`package` -- see
+#    7b for why. Each entry is either a single PreparationExpression or an
+#    Alternative/ConjunctionExpression of PreparationExpressions (e.g.
+#    "minced or pressed" is one clause, an AlternativeExpression). A
+#    measurement grammatically embedded inside a clause (e.g. "1/2-inch"
+#    in "cut into 1/2-inch cubes") is nested INSIDE that clause's own
+#    children (Pass 2d, `_embed_measurements_in_preparation`), not ejected
+#    to `measurements` -- so a consumer never has to reassemble a clause's
+#    text by cross-referencing two different fields by offset.
 #
-# 7a. Fragmented phrases: `ingredient`, `component`, `preparation`, and
-#     `package` are singular fields, but the chunker can still produce more
-#     than one same-typed top-level expression for a single reference --
-#     typically a noun/adjective phrase interrupted by an intervening
-#     token, e.g. a comma between pre-nominal modifiers ("boneless,
-#     skinless chicken breasts") or a differently-classified word splitting
-#     what is really one phrase ("large boneless chicken breasts"). A
-#     second same-typed occurrence is merged into the existing value
-#     (`_attach_singular`) rather than discarded to `unresolved` -- it is
-#     virtually always a continuation of the same phrase, not a competing
-#     second value. This only merges expressions of the identical plain
-#     type; if the field already holds an Alternative/ConjunctionExpression
-#     (a genuine 'or'/'and' group), a further plain expression still falls
-#     back to `unresolved` rather than being guessed into the group.
+# 7a. Fragmented phrases: `ingredient`, `component`, and `package` are
+#     singular fields, but the chunker can still produce more than one
+#     same-typed top-level expression for a single reference -- typically
+#     a noun/adjective phrase interrupted by an intervening token, e.g. a
+#     comma between pre-nominal modifiers ("boneless, skinless chicken
+#     breasts") or a differently-classified word splitting what is really
+#     one phrase ("large boneless chicken breasts"). A second same-typed
+#     occurrence is merged into the existing value (`_attach_singular`)
+#     rather than discarded to `unresolved` -- it is virtually always a
+#     continuation of the same phrase, not a competing second value. This
+#     only merges expressions of the identical plain type; if the field
+#     already holds an Alternative/ConjunctionExpression (a genuine
+#     'or'/'and' group), a further plain expression still falls back to
+#     `unresolved` rather than being guessed into the group.
+#
+# 7b. Preparation clause boundaries: unlike ingredient/component fragments
+#     (which always describe ONE entity even when interrupted, so
+#     same-typed fragments always merge), preparation fragments do NOT
+#     always belong to one phrase just because they're the same expression
+#     type -- see `_attach_preparation_clause`. PRE-nominal fragments
+#     (before `ref.ingredient` is recognized) are a descriptive modifier
+#     list and merge into one clause ("boneless, skinless chicken
+#     breasts" -> one clause). POST-nominal fragments (after the
+#     ingredient is recognized) are typically a SEQUENCE of distinct
+#     actions and each becomes its OWN clause ("chicken breast, peeled,
+#     quartered lengthwise, cut crosswise into 1/4-inch slices" -> three
+#     separate clauses). This is a purely positional/structural signal
+#     (has the ingredient been recognized yet), not word-specific.
 #
 # 8. Unknown spans become `UnknownSequence` nodes and are appended to
 #    `IngredientReference.unresolved`. Being unknown does not remove the
@@ -663,7 +764,16 @@ class IngredientParser:
     def _to_leaf(self, span: LexicalToken) -> ASTNode:
         """Maps one lexical span to a leaf AST node, distinguishing the
         syntactic ROLE of Grammar/punctuation spans (operator) from their
-        lexical CLASS (which the lexer already gave us)."""
+        lexical CLASS (which the lexer already gave us).
+
+        A recognized "-"/"to" operator defaults to UnitConnectorMarker
+        (its far more common role, connecting a bare quantity to its own
+        unit, e.g. "14-ounce") rather than RangeMarker. `_chunk_primitives`
+        retroactively promotes it to RangeMarker only once grammar confirms
+        it's actually closing a numeric range -- see UnitConnectorMarker
+        and RangeMarker for why the default direction matters: it means
+        RangeMarker is never assigned speculatively.
+        """
         stype = span.span_type.upper()
         text = span.text.lower()
 
@@ -673,7 +783,7 @@ class IngredientParser:
             if text in ("and", "+", "plus"):
                 return ConjunctionMarker(span=span)
             if text in ("to", "-"):
-                return RangeMarker(span=span)
+                return UnitConnectorMarker(span=span)
             # A recognized Grammar span that isn't an operator (e.g.
             # "to taste") is a genuine grammar/note constituent, not an
             # unknown one.
@@ -683,7 +793,7 @@ class IngredientParser:
             if text == ",":
                 return CommaMarker(span=span)
             if text == "-":
-                return RangeMarker(span=span)
+                return UnitConnectorMarker(span=span)
             return UnknownNode(span=span)
 
         node_class = SPAN_TYPE_MAP.get(stype, UnknownNode)
@@ -711,7 +821,9 @@ class IngredientParser:
 
         exprs = self._chunk_primitives(leaves)                        # Pass 2
         exprs = self._merge_discontinuous_quantity_unit(exprs)       # Pass 2b
+        exprs = self._merge_unknown_connector_in_measurement(exprs)  # Pass 2c
         exprs = self._resolve_parenthetical_groups(exprs)            # Pass 3
+        exprs = self._embed_measurements_in_preparation(exprs)       # Pass 2d
         exprs = self._classify_conjunction_groups(exprs)             # Passes 4-5
         exprs = [e for e in exprs if not isinstance(e, CommaMarker)]
         return exprs
@@ -745,12 +857,37 @@ class IngredientParser:
                 continue
 
             if isinstance(node, QuantityNode):
+                if (
+                    isinstance(current, MeasurementExpression)
+                    and current.children
+                    and isinstance(current.children[-1], UnitConnectorMarker)
+                ):
+                    # This quantity closes an open range ("3-5" / "3 to
+                    # 5..."): `current` is exactly Quantity+connector with
+                    # nothing after it yet, so this is the range's upper
+                    # bound, not a new, unrelated measurement. The pending
+                    # connector was tentatively a UnitConnectorMarker (the
+                    # default -- see `_to_leaf`); grammar has now confirmed
+                    # it's actually a range operator, so it is reclassified
+                    # to RangeMarker here rather than promoted as-is --
+                    # RangeMarker must never be assigned speculatively, only
+                    # once a genuine range is confirmed like this. Promote
+                    # the whole thing to a RangeExpression rather than
+                    # flushing -- see RangeExpression for why this needs
+                    # its own node type instead of just appending to a
+                    # MeasurementExpression.
+                    pending_connector = current.children[-1]
+                    confirmed_marker = RangeMarker(span=pending_connector.span)
+                    current = RangeExpression(
+                        children=cast(List[ASTNode], list(current.children[:-1]) + [confirmed_marker, node])
+                    )
+                    continue
                 # A new Quantity starting while we're already mid-way
                 # through a measurement that has its own quantity means
                 # this is a *second* measurement, e.g. "2 lbs 3 oz" --
                 # don't let it merge into the first one.
                 if isinstance(current, MeasurementExpression) and any(
-                    isinstance(c, (QuantityNode, RangeMarker)) for c in current.children
+                    isinstance(c, (QuantityNode, UnitConnectorMarker)) for c in current.children
                 ):
                     flush()
                 if not isinstance(current, MeasurementExpression):
@@ -758,7 +895,7 @@ class IngredientParser:
                     current = MeasurementExpression()
                 current.children.append(node)
 
-            elif isinstance(node, RangeMarker):
+            elif isinstance(node, UnitConnectorMarker):
                 # Rule B: a hyphen (or "to") gluing a bare quantity to its
                 # unit -- "14-ounce", "28-oz", "750-ml" -- is part of one
                 # atomic quantity+unit constituent, not a boundary between
@@ -766,17 +903,28 @@ class IngredientParser:
                 # a real range like "2 cups - 3 cups") once the current
                 # measurement already has a completed unit attached. This
                 # is a general grammar rule, not specific to any one unit.
+                # (This node is tentatively a UnitConnectorMarker -- see
+                # `_to_leaf` -- and stays one unless the QuantityNode branch
+                # above later confirms and reclassifies it to RangeMarker
+                # because a second bare quantity closes a genuine range,
+                # e.g. "3-5". This branch only ever sees the FIRST
+                # connector of a potential range, immediately after a bare
+                # quantity, and correctly keeps it pending in `current`.)
                 if isinstance(current, MeasurementExpression) and any(
                     isinstance(c, (MeasurementNode, NaturalPortionNode)) for c in current.children
                 ):
                     flush()
-                if not isinstance(current, MeasurementExpression):
+                if not isinstance(current, (MeasurementExpression, RangeExpression)):
                     flush()
                     current = MeasurementExpression()
                 current.children.append(node)
 
             elif isinstance(node, (MeasurementNode, NaturalPortionNode)):
-                if not isinstance(current, MeasurementExpression):
+                # A completed unit can complete either a bare
+                # MeasurementExpression ("14 ounces") or a just-closed
+                # RangeExpression ("3-5 ounces" -- the unit applies to
+                # both bounds).
+                if not isinstance(current, (MeasurementExpression, RangeExpression)):
                     flush()
                     current = MeasurementExpression()
                 current.children.append(node)
@@ -822,6 +970,25 @@ class IngredientParser:
         flush()
         return exprs
 
+    def _is_bare_quantity_expr(self, e: ASTNode) -> bool:
+        """True if `e` is a MeasurementExpression containing only
+        Quantity/UnitConnectorMarker children -- a quantity still waiting
+        for its unit to complete it."""
+        return (
+            isinstance(e, MeasurementExpression) and bool(e.children)
+            and all(isinstance(c, (QuantityNode, UnitConnectorMarker)) for c in e.children)
+        )
+
+    def _is_bare_unit_expr(self, e: ASTNode) -> bool:
+        """True if `e` is a MeasurementExpression containing only
+        Measurement/NaturalPortion children -- a unit with no quantity of
+        its own, i.e. one still waiting to be paired with a preceding
+        quantity."""
+        return (
+            isinstance(e, MeasurementExpression) and bool(e.children)
+            and all(isinstance(c, (MeasurementNode, NaturalPortionNode)) for c in e.children)
+        )
+
     def _merge_discontinuous_quantity_unit(self, exprs: List[ASTNode]) -> List[ASTNode]:
         """Pass 2b (grammar rule):
 
@@ -844,28 +1011,15 @@ class IngredientParser:
         expressions), so it only fires on this specific, general shape
         rather than guessing across arbitrary distances.
         """
-
-        def is_bare_quantity(e: ASTNode) -> bool:
-            return (
-                isinstance(e, MeasurementExpression) and bool(e.children)
-                and all(isinstance(c, (QuantityNode, RangeMarker)) for c in e.children)
-            )
-
-        def is_bare_unit(e: ASTNode) -> bool:
-            return (
-                isinstance(e, MeasurementExpression) and bool(e.children)
-                and all(isinstance(c, (MeasurementNode, NaturalPortionNode)) for c in e.children)
-            )
-
         result: List[ASTNode] = []
         i = 0
         n = len(exprs)
         while i < n:
             if (
                 i + 2 < n
-                and is_bare_quantity(exprs[i])
+                and self._is_bare_quantity_expr(exprs[i])
                 and isinstance(exprs[i + 1], IngredientExpression)
-                and is_bare_unit(exprs[i + 2])
+                and self._is_bare_unit_expr(exprs[i + 2])
             ):
                 quantity_expr = cast(MeasurementExpression, exprs[i])
                 unit_expr = cast(MeasurementExpression, exprs[i + 2])
@@ -874,6 +1028,66 @@ class IngredientParser:
                 )
                 result.append(merged)
                 result.append(exprs[i + 1])
+                i += 3
+            else:
+                result.append(exprs[i])
+                i += 1
+        return result
+
+    def _merge_unknown_connector_in_measurement(self, exprs: List[ASTNode]) -> List[ASTNode]:
+        """Pass 2c: a single unrecognized symbol sitting directly between a
+        bare quantity and its unit -- e.g. the "\u201d" in "1/2\u201d cubes",
+        where the lexer has no vocabulary entry mapping "\u201d" to a unit --
+        must not fragment the quantity away from its unit into three
+        disconnected top-level pieces (a bare quantity, a one-element
+        UnknownSequence, and a bare unit). This is the same "unknown
+        vocabulary must not destroy syntactic context" principle already
+        applied inside PreparationExpression, generalized to the
+        quantity+unit grammar specifically.
+
+        This is deliberately narrow, matching ONLY:
+
+            MeasurementExpression(bare quantity), UnknownSequence(exactly
+            one leaf), MeasurementExpression(bare unit)
+
+        The unknown symbol is preserved verbatim as a child of the merged
+        MeasurementExpression, in its original source position -- the
+        parser does not decide what it means (e.g. that "\u201d" means
+        inches); it only keeps it attached to the quantity/unit it sits
+        between. Assigning it a meaning is squarely the lexer's vocabulary
+        to do, not this parser's to invent.
+
+        Requiring EXACTLY one leaf in the UnknownSequence (not two or
+        more) is what keeps this from absorbing a longer, genuinely
+        unrelated unresolved run into the measurement -- "2 tbsp xyz
+        powder" must still leave "xyz powder" unresolved rather than being
+        swallowed into "2 tbsp", and it still does, because there is no
+        bare-unit MeasurementExpression following "xyz powder" for this
+        pattern to close against (a two-word run also fails the
+        exactly-one-leaf check on its own).
+        """
+        result: List[ASTNode] = []
+        i = 0
+        n = len(exprs)
+        while i < n:
+            middle = exprs[i + 1] if i + 1 < n else None
+            if (
+                i + 2 < n
+                and self._is_bare_quantity_expr(exprs[i])
+                and isinstance(middle, UnknownSequence)
+                and len(middle.children) == 1
+                and self._is_bare_unit_expr(exprs[i + 2])
+            ):
+                quantity_expr = cast(MeasurementExpression, exprs[i])
+                unknown_seq = middle
+                unit_expr = cast(MeasurementExpression, exprs[i + 2])
+                merged = MeasurementExpression(
+                    children=cast(
+                        List[ASTNode],
+                        list(quantity_expr.children) + list(unknown_seq.children) + list(unit_expr.children),
+                    )
+                )
+                result.append(merged)
                 i += 3
             else:
                 result.append(exprs[i])
@@ -895,6 +1109,64 @@ class IngredientParser:
                 resolved.append(e)
         return resolved
 
+    def _embed_measurements_in_preparation(self, exprs: List[ASTNode]) -> List[ASTNode]:
+        """Pass 2c: a measurement that is grammatically embedded INSIDE a
+        preparation clause -- e.g. "cut into 1/2-inch cubes", where
+        "1/2-inch" completes "cut into ... cubes" rather than standing as
+        an unrelated top-level quantity -- must stay nested in that clause.
+        Otherwise it is ejected to `IngredientReference.measurements` as a
+        disconnected sibling with no link back to the clause it came from,
+        and a consumer trying to reassemble "cut into 1/2-inch cubes" would
+        have to guess which measurement belongs to which clause by
+        adjacency/offset -- exactly the invented heuristic this parser
+        does not produce.
+
+        This only fires on the exact SANDWICHED shape:
+
+            PreparationExpression, <measurement-like>, PreparationExpression
+
+        i.e. a measurement with PreparationExpression content on BOTH
+        sides and nothing else between it and either neighbor. This is
+        deliberately narrow: a measurement that precedes ALL preparation
+        content (e.g. the reference's own leading quantity, "3 lb" in
+        "3 lb boneless chuck, cut into 1/2-inch cubes") never matches,
+        because there is no PreparationExpression before it -- so a
+        top-level quantity is never misattributed to a nearby clause just
+        because it happens to be spatially adjacent. A trailing
+        measurement with nothing preparation-typed after it is left alone
+        for the same reason: without a PreparationExpression closing the
+        sandwich, there's no structural confirmation it belongs to the
+        clause rather than to something else entirely.
+        """
+
+        def is_measurement_like(e: ASTNode) -> bool:
+            return isinstance(e, (MeasurementExpression, RangeExpression)) or (
+                isinstance(e, ParentheticalExpression) and self._contains_measurement(e)
+            )
+
+        result: List[ASTNode] = []
+        i = 0
+        n = len(exprs)
+        while i < n:
+            if (
+                i + 2 < n
+                and isinstance(exprs[i], PreparationExpression)
+                and is_measurement_like(exprs[i + 1])
+                and isinstance(exprs[i + 2], PreparationExpression)
+            ):
+                left = cast(PreparationExpression, exprs[i])
+                measurement = exprs[i + 1]
+                right = cast(PreparationExpression, exprs[i + 2])
+                merged = PreparationExpression(
+                    children=cast(List[ASTNode], list(left.children) + [measurement] + list(right.children))
+                )
+                result.append(merged)
+                i += 3
+            else:
+                result.append(exprs[i])
+                i += 1
+        return result
+
     def _classify_conjunction_groups(self, exprs: List[ASTNode]) -> List[ASTNode]:
         """Passes 4-5: find AlternativeMarker/ConjunctionMarker operators
         and, if the constituents on both sides are of the same syntactic
@@ -910,7 +1182,7 @@ class IngredientParser:
                     marker, left, right = nodes[i], nodes[i - 1], nodes[i + 1]
                     if type(left) == type(right) and isinstance(
                         left, (IngredientExpression, PreparationExpression,
-                               MeasurementExpression, ComponentExpression, DescriptorNode)
+                               MeasurementExpression, RangeExpression, ComponentExpression, DescriptorNode)
                     ):
                         merged: ASTNode = AlternativeExpression(
                             children=cast(List[ASTNode], [left, right]), connective=marker
@@ -926,7 +1198,7 @@ class IngredientParser:
                     marker, left, right = nodes[i], nodes[i - 1], nodes[i + 1]
                     if type(left) == type(right) and isinstance(
                         left, (IngredientExpression, PreparationExpression,
-                               MeasurementExpression, ComponentExpression, DescriptorNode)
+                               MeasurementExpression, RangeExpression, ComponentExpression, DescriptorNode)
                     ):
                         merged = ConjunctionExpression(
                             children=cast(List[ASTNode], [left, right]), connective=marker
@@ -947,10 +1219,11 @@ class IngredientParser:
     # -- Passes 6-10: reference assembly -------------------------------
 
     def _contains_measurement(self, node: ASTNode) -> bool:
-        """True if `node` is, or wraps, a MeasurementExpression -- used to
-        decide whether a ParentheticalExpression belongs in `measurements`
-        without unwrapping (and thus losing) the parenthetical context."""
-        if isinstance(node, MeasurementExpression):
+        """True if `node` is, or wraps, a MeasurementExpression or
+        RangeExpression -- used to decide whether a ParentheticalExpression
+        belongs in `measurements` without unwrapping (and thus losing) the
+        parenthetical context."""
+        if isinstance(node, (MeasurementExpression, RangeExpression)):
             return True
         if isinstance(node, (AlternativeExpression, ConjunctionExpression, ParentheticalExpression)):
             return any(self._contains_measurement(c) for c in node.children)
@@ -973,7 +1246,8 @@ class IngredientParser:
         self, ref: IngredientReference, field_name: str, e: ContainerNode, expr_type: Type[ContainerNode]
     ) -> None:
         """Attaches `e` to a singular IngredientReference field (package,
-        ingredient, component, preparation).
+        ingredient, or component -- NOT preparation, which is a list; see
+        `_attach_preparation_clause`).
 
         `IngredientReference` has exactly ONE slot for each of these, but
         the chunker can still produce more than one same-typed top-level
@@ -986,7 +1260,9 @@ class IngredientParser:
         fragments). A second occurrence of the SAME expression type is
         virtually always a continuation of that one phrase, not a second,
         competing value -- so it is merged rather than discarded into
-        `unresolved`.
+        `unresolved`. (This "same type means same phrase" assumption is
+        specifically what does NOT hold for preparation -- see
+        `_attach_preparation_clause` for why.)
 
         If the field is already occupied by something of a DIFFERENT shape
         (e.g. an Alternative/ConjunctionExpression already assembled from a
@@ -1002,6 +1278,57 @@ class IngredientParser:
         else:
             ref.unresolved.append(e)
 
+    def _attach_preparation_clause(self, ref: IngredientReference, e: ContainerNode) -> None:
+        """Appends one preparation clause to `ref.preparation` (a LIST of
+        clauses -- see the contract note on `IngredientReference`).
+
+        Unlike ingredient/component fragments (which always describe one
+        entity even when comma/token-interrupted, so same-typed fragments
+        merge via `_attach_singular`), preparation fragments do NOT all
+        belong to one phrase just because they're the same expression
+        type. Two distinct things happen to look identical at the
+        expression-type level:
+
+        - PRE-nominal preparation, before the core ingredient has been
+          recognized (`ref.ingredient is None`), is a descriptive modifier
+          list -- e.g. "boneless, skinless chicken breasts" -- the same
+          role Size/Descriptor/State play inside IngredientExpression.
+          These fragments are continuations of ONE clause and are merged
+          into the most recent clause.
+
+        - POST-nominal preparation, after the ingredient has already been
+          recognized, is typically a SEQUENCE of distinct actions -- e.g.
+          "peeled, quartered lengthwise, cut crosswise into 1/4-inch
+          slices" is three separate steps, not one adjective list. Each
+          post-nominal fragment becomes its OWN clause (a new list entry)
+          rather than being flattened together with the others, so a
+          consumer can tell the steps apart.
+
+        Whether the ingredient has been recognized YET is a purely
+        structural, position-based signal (not word-specific), and it is
+        exactly the signal Section 15 of this parser's contract already
+        established: preparation is generally post-nominal, resolved
+        after the core ingredient structure. This method is what makes
+        that distinction observable in the output instead of only
+        informing chunking order.
+
+        An Alternative/ConjunctionExpression clause (already a single
+        cohesive unit from a genuine 'or'/'and', e.g. "minced or
+        pressed") is always appended as its own clause -- it never merges
+        into a preceding plain-fragment clause, pre- or post-nominal,
+        since there's no established rule for combining a grouped
+        alternative with a flat list.
+        """
+        if (
+            ref.ingredient is None
+            and ref.preparation
+            and isinstance(ref.preparation[-1], PreparationExpression)
+            and isinstance(e, PreparationExpression)
+        ):
+            ref.preparation[-1].children.extend(e.children)
+        else:
+            ref.preparation.append(e)
+
     def _attach(self, ref: IngredientReference, e: ASTNode) -> None:
         """Attaches one top-level expression to the reference being built,
         by dispatching on the expression's own grammatical type. This is
@@ -1009,7 +1336,7 @@ class IngredientParser:
         inspects raw tokens and never uses a 'first slot wins, everything
         else is a note' fallback chain."""
 
-        if isinstance(e, MeasurementExpression):
+        if isinstance(e, (MeasurementExpression, RangeExpression)):
             ref.measurements.append(e)
 
         elif isinstance(e, ParentheticalExpression):
@@ -1031,7 +1358,7 @@ class IngredientParser:
             self._attach_singular(ref, "component", e, ComponentExpression)
 
         elif isinstance(e, PreparationExpression):
-            self._attach_singular(ref, "preparation", e, PreparationExpression)
+            self._attach_preparation_clause(ref, e)
 
         elif isinstance(e, NotesExpression):
             ref.notes.extend(e.children)
@@ -1046,6 +1373,9 @@ class IngredientParser:
             field_name = self._group_operand_field(e)
             if field_name is None:
                 ref.unresolved.append(e)
+                return
+            if field_name == "preparation":
+                self._attach_preparation_clause(ref, e)
                 return
             if getattr(ref, field_name) is None:
                 setattr(ref, field_name, e)

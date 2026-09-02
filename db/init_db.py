@@ -161,9 +161,13 @@ def init_db():
             imperial_volume_unit TEXT,
 
             natural_portion_value REAL,
+            natural_portion_min REAL,
+            natural_portion_max REAL,
             natural_portion TEXT,
 
             packaging_count REAL,
+            packaging_size_value REAL,
+            packaging_size_unit TEXT,
             packaging TEXT,
 
             preparation TEXT,  

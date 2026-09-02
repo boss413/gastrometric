@@ -241,14 +241,19 @@
       "aliases": ["onion powder"]
     },
     {
-      "id": "ground-cumin",
-      "name": "ground cumin",
-      "aliases": ["ground cumin", "cumin powder", "cumin"]
+      "id": "cumin",
+      "name": "cumin",
+      "aliases": ["ground cumin", "cumin powder", "cumin", "cumin seed", "cumin seeds"]
+    },
+    {
+      "id": "fennel-seed",
+      "name": "fennel seed",
+      "aliases": ["ground fennel", "fennel powder", "fennel seed", "fennel seeds"]
     },
     {
       "id": "chili-powder",
       "name": "chili powder",
-      "aliases": ["chili powder", "chile powder"]
+      "aliases": ["chili powder", "chile powder", "chilli powder"]
     },
     {
       "id": "smoked-paprika",
@@ -273,7 +278,12 @@
     {
       "id": "chicken-broth",
       "name": "chicken broth",
-      "aliases": ["chicken broth", "chicken stock"]
+      "aliases": ["chicken broth"]
+    },
+    {
+      "id": "chicken-stock",
+      "name": "chicken stock",
+      "aliases": ["chicken stock"]
     },
     {
       "id": "tomato-paste",
@@ -308,12 +318,7 @@
     {
       "id": "thyme",
       "name": "thyme",
-      "aliases": ["thyme"]
-    },
-    {
-      "id": "fresh-thyme",
-      "name": "fresh thyme",
-      "aliases": ["fresh thyme", "thyme sprigs"]
+      "aliases": ["thyme", "fresh thyme", "thyme sprigs", "thyme leaves", "dried thyme"]
     },
     {
       "id": "potato",
@@ -378,12 +383,7 @@
     {
       "id": "ginger",
       "name": "ginger",
-      "aliases": ["ginger"]
-    },
-    {
-      "id": "fresh-ginger",
-      "name": "fresh ginger",
-      "aliases": ["fresh ginger", "ginger root"]
+      "aliases": ["ginger", "fresh ginger", "ginger root"]
     },
     {
       "id": "red-pepper-flakes",
@@ -396,23 +396,13 @@
       "aliases": ["cayenne pepper", "ground cayenne"]
     },
     {
-      "id": "dried-thyme",
-      "name": "dried thyme",
-      "aliases": ["dried thyme"]
-    },
-    {
-      "id": "dried-basil",
-      "name": "dried basil",
-      "aliases": ["dried basil"]
-    },
-    {
-      "id": "bay-leaves",
-      "name": "bay leaves",
+      "id": "bay-leaf",
+      "name": "bay leaf",
       "aliases": ["bay leaves", "dried bay leaf", "bay leaf"]
     },
     {
-      "id": "ground-cinnamon",
-      "name": "ground cinnamon",
+      "id": "cinnamon",
+      "name": "cinnamon",
       "aliases": ["ground cinnamon", "cinnamon"]
     },
     {
@@ -466,13 +456,13 @@
       "aliases": ["vegetable broth", "vegetable stock"]
     },
     {
-      "id": "canned-crushed-tomato",
-      "name": "canned crushed tomato",
+      "id": "crushed-tomato",
+      "name": "crushed tomato",
       "aliases": ["canned crushed tomatoes", "crushed tomatoes"]
     },
     {
-      "id": "canned-whole-peeled-tomato",
-      "name": "canned whole peeled tomato",
+      "id": "whole-peeled-tomato",
+      "name": "whole peeled tomato",
       "aliases": ["canned whole peeled tomatoes", "whole peeled tomatoes", "san marzano tomatoes"]
     },
     {
@@ -498,12 +488,7 @@
     {
       "id": "rosemary",
       "name": "rosemary",
-      "aliases": ["rosemary"]
-    },
-    {
-      "id": "fresh-rosemary",
-      "name": "fresh rosemary",
-      "aliases": ["fresh rosemary", "rosemary sprigs"]
+      "aliases": ["rosemary", "fresh rosemary", "rosemary sprigs"]
     },
     {
       "id": "sweet-onion",
@@ -666,11 +651,6 @@
       "aliases": ["salmon", "fresh salmon"]
     },
     {
-      "id": "salmon-fillets",
-      "name": "salmon fillets",
-      "aliases": ["salmon fillets"]
-    },
-    {
       "id": "shrimp",
       "name": "shrimp",
       "aliases": ["shrimp", "raw shrimp", "prawns"]
@@ -716,9 +696,9 @@
       "aliases": ["angel hair", "angel hair pasta", "angel hair noodles"]
     },
     {
-      "id": "penne-pasta",
-      "name": "penne pasta",
-      "aliases": ["penne pasta", "penne", "penne rigate"]
+      "id": "penne",
+      "name": "penne",
+      "aliases": ["penne pasta", "penne", "penne rigate", "penne noodles"]
     },
     {
       "id": "elbow-macaroni",
@@ -733,7 +713,7 @@
     {
       "id": "ricotta-cheese",
       "name": "ricotta cheese",
-      "aliases": ["ricotta cheese", "ricotta"]
+      "aliases": ["ricotta cheese", "ricotta", "part-skim ricotta"]
     },
     {
       "id": "feta-cheese",
@@ -763,7 +743,7 @@
     {
       "id": "molasses",
       "name": "molasses",
-      "aliases": ["molasses", "blackstrap molasses"]
+      "aliases": ["molasses", "light molasses", "unsulphured molasses"]
     },
     {
       "id": "active-dry-yeast",
@@ -943,7 +923,7 @@
     {
       "id": "yogurt",
       "name": "yogurt",
-      "aliases": ["yogurt", "plain yogurt"]
+      "aliases": ["yogurt", "yoghurt", "plain yogurt"]
     },
     {
       "id": "greek-yogurt",
@@ -953,7 +933,7 @@
     {
       "id": "buttermilk",
       "name": "buttermilk",
-      "aliases": ["buttermilk"]
+      "aliases": ["buttermilk", "reduced fat buttermilk"]
     },
     {
       "id": "evaporated-milk",
@@ -971,49 +951,29 @@
       "aliases": ["dill"]
     },
     {
-      "id": "fresh-dill",
-      "name": "fresh dill",
-      "aliases": ["fresh dill", "dill weed"]
-    },
-    {
       "id": "chives",
       "name": "chives",
-      "aliases": ["chives"]
-    },
-    {
-      "id": "fresh-chives",
-      "name": "fresh chives",
-      "aliases": ["fresh chives"]
+      "aliases": ["chives", "fresh chives"]
     },
     {
       "id": "mint",
       "name": "mint",
-      "aliases": ["mint"]
-    },
-    {
-      "id": "fresh-mint",
-      "name": "fresh mint",
-      "aliases": ["fresh mint", "mint leaves"]
+      "aliases": ["mint", "mint leaves", "fresh mint"]
     },
     {
       "id": "sage",
       "name": "sage",
-      "aliases": ["sage"]
+      "aliases": ["sage", "dry rubbed sage", "rubbed sage", "fresh sage", "sage leaves"]
     },
     {
-      "id": "fresh-sage",
-      "name": "fresh sage",
-      "aliases": ["fresh sage", "sage leaves"]
-    },
-    {
-      "id": "ground-nutmeg",
-      "name": "ground nutmeg",
+      "id": "nutmeg",
+      "name": "nutmeg",
       "aliases": ["ground nutmeg", "nutmeg"]
     },
     {
       "id": "ground-ginger",
       "name": "ground ginger",
-      "aliases": ["ground ginger", "ginger powder"]
+      "aliases": ["ground ginger", "ginger powder", "dried ginger"]
     },
     {
       "id": "cloves",
@@ -1023,7 +983,7 @@
     {
       "id": "allspice",
       "name": "allspice",
-      "aliases": ["ground allspice", "allspice"]
+      "aliases": ["ground allspice", "allspice", "allspice berries"]
     },
     {
       "id": "cardamom",

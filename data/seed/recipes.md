@@ -11,14 +11,65 @@ Ingredients:
 2 cups chili paste
 1 chicken breast, boneless, skinless
 2 skinless chicken thighs	
-2 large chicken breasts
 2 large boneless chicken breasts
+3 lb boneless chuck, cut into 1/2” cubes
 4 tablespoons butter (1/2 stick)	
 2 cans (14-ounce) diced tomatoes
+1 12-ounce package spinach
+3-5 medium peppers
 1 cup milk or cream
 salt and pepper to taste
 1 medium garlic clove, minced or pressed
 2 tbsp xyz powder
+# Rogan Josh (Kashmiri Curry with Lamb)
+url: https://www.recipetineats.com/rogan-josh/
+Author: Nagi Maehashi
+## Curry
+Ingredients:
+3 1/2 tbsp ghee or butter
+1 cinnamon stick
+6 green cardamom pods , lightly bruised
+4 cloves
+1 large onion , finely chopped
+3 cloves garlic , finely minced
+1 tbsp ginger , finely grated
+5 tbsp tomato puree
+1 tsp cooking salt / kosher salt (halve for table salt, double for flakes)
+750g/1.5lb boneless lamb shoulder , cut into 3cm/1.2" cubes (Note 6)
+1 ½  cups chicken stock , salt reduced (broth)
+Instructions: 
+Toast whole spices – Melt ghee over medium heat in large heavy based pot. Add cinnamon, cardamom and cloves and cook for one minute.
+Sauté – Add onion and cook for 7 minutes, stirring frequently, until pieces are golden and starting the brown on the edges. Add the garlic and ginger, cook for another minute.
+## SPICES
+Ingredients:
+2 tbsp paprika , normal or sweet
+¾  tsp chilli powder
+4 tsp ground coriander
+4 tsp ground cumin
+2 tsp turmeric powder
+¼  tsp nutmeg powder
+1 tsp garam marsala (Note 3)
+½  tsp fennel powder (Note 4)
+Instructions:
+Toast spices – Stir in the Spices, cook for 30 seconds.
+Sauce and lamb – Mix in the tomato puree and salt, then add stock and mix. Add lamb, stir, bring to simmer.
+Simmer 1 h 45 min – Place lid on and adjust heat to low or medium low so it's simmering gently. Cook 1 hour 45 minutes, giving it an occasional stir, until lamb is quite tender – use 2 forks to check, it should pry apart pretty easily.
+Reduce – Remove lid, and continue cooking for another 15 minutes (to reduce sauce slightly) – lamb should be very tender by this stage.
+## FINISHES
+Ingredients:
+1/2 cup plain yoghurt (Greek yogurt fine)
+1/2 tsp extra garam masala (Note 3)
+1/2 tsp extra fennel powder
+Instructions:
+Finish – Stir in the Yogurt, the Extra garam marsala and fennel. Cook for another few minutes.
+## SERVING/GARNISH
+Ingredients:
+Chopped coriander leaves
+finely shredded ginger
+yogurt
+Basmati rice, cooked
+Instructions:
+Serve with basmati rice, sprinkled with fresh coriander leaves and other garnishes if desired. More sides (pictured): Cucumber salad (Note 7) and Easy naan – No Yeast Flatbread
 # Chicken Marsala
 Attribution: America’s Test Kitchen
 Source: The Best Recipe
@@ -95,7 +146,7 @@ Ingredients:
 • 3 T paprika
 • 1½ t caraway seeds
 • 1/3 c flour
-• ¼ c red-wine vinegar
+• ¼ c red wine vinegar
 • ¼ c tomato paste
 • 5 c beef broth
 • 1 to 5 cups water or beer (use the former to make a stew, the latter to make a soup)
@@ -5238,6 +5289,7 @@ Add green beans to water and boil until tender but still bright green, about 5 m
 Reheat the mushroom sauce and stir together with the beans, then top with a generous amount of fried onions. Add to the warming (225°F) oven for up to an hour.
 # Marcella Hazan’s Tomato Sauce
 Attribution: New York Times
+Author: Marcella Hazan
 Ingredients
 2cups tomatoes, in addition to their juices (for example, a 28-ounce can of San Marzano whole peeled tomatoes)
 5tablespoons butter
@@ -5266,3 +5318,376 @@ Dough is ready when its surface is dotted with bubbles. Lightly flour a work sur
 Using just enough flour to keep dough from sticking to work surface or to your fingers, gently and quickly shape dough into a ball. Generously coat a cotton towel (not terry cloth) with flour, wheat bran or cornmeal; put dough seam side down on towel and dust with more flour, bran or cornmeal. Cover with another cotton towel and let rise for about 2 hours. When it is ready, dough will be more than double in size and will not readily spring back when poked with a finger.
 
 At least a half-hour before dough is ready, heat oven to 450 degrees. Put a 6- to 8-quart heavy covered pot (cast iron, enamel, Pyrex or ceramic) in oven as it heats. When dough is ready, carefully remove pot from oven. Slide your hand under towel and turn dough over into pot, seam side up; it may look like a mess, but that is OK. Shake pan once or twice if dough is unevenly distributed; it will straighten out as it bakes. Cover with lid and bake 30 minutes, then remove lid and bake another 15 to 30 minutes, until loaf is beautifully browned. Cool on a rack.
+Instant Ramen Hacks (video: https://www.youtube.com/watch?v=8Nr2xxHM9kk&t=326s)
+Rabokki 3:53
+Ram-Don (jjapaguri) 5:13
+Korean army stew 6:57
+Thai inspired 8:47
+Mac n' ramen 10:01
+Carbonara 11:09
+Mozzarella moses 12:40
+Ramyun fried rice 14:42
+Cacio e pepe 18:28
+Rose ramen 20:23
+Curry ramen 21:38
+Assassin's ramen 22:59 
+Scallion ramen 24:25
+Leftovers (ramlette) 26:07
+Leftovers (okonomiyaki) 28:30
+Korean egg soufflé 30:14
+Leftovers (croquettes) 31:12
+Ramen gnocchi 34:27
+Chinese stir-fry noodles 35:50 
+# Cold Chewy Scallion & Cucumber Noodle
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: Slicing the cucumber at an angle (the Chinese way) gives fun textures and is very forgiving. Heating toasted sesame oil to the smoking point loses a bit of toastiness but perfectly fries the raw garlic and scallions in the bowl.
+Ingredients:
+ramen noodles (cooked chewy, rinsed in cold water)
+1 scallion, sliced
+2 garlic cloves, roughly chopped
+1 Tbsp sugar
+2 tsp soy sauce
+Chinese black vinegar (or rice vinegar)
+ramen seasoning
+ramen dried vegetables (cooked with noodles)
+1 english cucumber, shredded thinly at an angle
+1 Tbsp toasted sesame oil
+Instructions:
+In a bowl, combine sugar, soy sauce, Chinese black vinegar, ramen seasoning, a little extra sugar, the sliced scallions, and chopped garlic.
+Pour toasted sesame oil into a large spoon and heat directly over a stove flame until smoking. Carefully pour the smoking oil directly onto the scallions and garlic in the bowl to fry them, then mix with the hot spoon.
+Add the cold, drained noodles and shredded cucumbers to the sauce. Mix well and let sit for at least 5 minutes so the cucumbers release some water before eating.
+
+# Rabokki (Ramen & Tteokbokki)
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: A comforting, "throw anything in" dish. It's a great way to use leftover rice cakes and combine textures.
+Ingredients:
+½ head cabbage, cut into large chunks
+scallions, chopped
+1 package rice cakes (tteokbokki), slightly rinsed
+water
+ramen seasoning
+tteokbokki sauce/seasoning
+1 packet shin ramen noodles
+2 soft or hard-boiled eggs, cut up
+6 frozen potstickers, quickly boiled
+Instructions:
+In a pot, combine a good amount of water, cabbage chunks, rice cakes, ramen seasoning, and tteokbokki sauce. Boil for about 2 minutes.
+Drop the ramen noodles into the pot and cook until they reach the desired texture.
+Top with the chopped boiled eggs, boiled frozen dumplings, and chopped scallions to serve.
+
+# Ramdon / Chapaguri
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: Inspired by the movie Parasite. Using beef fat trimmings to fry the onions adds deep savory flavor. Do not overcook the steak during the initial sear since it will mix with hot noodles later.
+Ingredients:
+12 oz sirloin steak, cut into little chunks
+beef fat trimmings
+½ onion, chopped
+1 tsp toasted sesame oil
+Chapagetti noodles and dried veggies
+Shin Ramen noodles and dried veggies
+ramen seasonings (from both packets)
+1 Tbsp sugar
+1 scallion
+Instructions:
+Render the beef fat trimmings in a pan, add toasted sesame oil, and fry the onions. Push the onions to one side, add the steak chunks, sear quickly, and remove from heat.
+Boil the Chapagetti and Shin Ramen noodles with their dried veggies (no seasoning yet). Once cooked, drain the pot but leave about 3/4 of the water to create a sauce base.
+Mix the ramen seasonings and a bit of sugar into the wet noodles. Stir in the steak and onions.
+Plate and top with scallions and an extra dusting of dry ramen seasoning.
+
+# Instant Korean Army Stew (Budae Jjigae)
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: Assemble everything in a cold pan first, then bring to a boil. American cheese is essential for adding creaminess and saltiness that balances the spicy gochujang and kimchi.
+Ingredients:
+1 lb tofu, sliced into large squares
+½ can Spam, cut into large chunks
+scallions, cut into sections
+1 Tbsp gochujang
+water
+1 Tbsp sugar
+ramen dried vegetables
+½ c kimchi
+ramen noodles
+2 slices American cheese
+Instructions:
+In a large pot or pan, combine gochujang, water, sugar, and ramen dry vegetables. Do not heat yet.
+Add the kimchi. Fan the tofu slices on one side of the pan and the Spam chunks on the opposite side. Place the dry ramen noodles directly in the middle.
+Place the slices of American cheese over the borders of the tofu and Spam, and add a heavy handful of scallions to the back.
+Turn the heat on and bring the stew to a boil for 5 to 6 minutes until the noodles are cooked and the broth reduces and intensifies.
+
+# Pad Thai Inspired Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: A shockingly close flavor profile to real Pad Thai. Mixing the sauce directly into the noodles first keeps the egg flavors distinct.
+Ingredients:
+ramen noodles and dried vegetables
+2 eggs
+2 Tbsp sriracha
+1 Tbsp peanut butter
+ramen seasoning
+juice from ¼ lime
+2 tsp sugar
+1 Tbsp crushed peanuts
+2 scallions, sliced
+Instructions:
+Cook the ramen noodles and dried vegetables off to the side and drain them.
+Scramble and fry the eggs in a pan. Turn off the heat and add the cooked noodles to the pan alongside the eggs.
+In a small bowl, mix sriracha, peanut butter, ramen seasoning, and lime juice to create the sauce.
+Pour the sauce over the noodles and mix them first to coat, then combine with the scrambled egg. Top with crushed peanuts, scallions, and extra lime juice.
+
+# Mac and Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: A fun textural clash of short and long noodles. The American cheese flavor from the Kraft packet pairs perfectly with the spicy Shin Ramen seasoning.
+Ingredients:
+1 box Kraft Mac and Cheese
+ramen noodles and dried vegetables
+1/4 cup milk
+butter
+ramen seasoning
+1 slice American cheese
+Instructions:
+Boil the Kraft macaroni according to package instructions. Halfway through the cooking time, drop in the ramen noodles and the dried vegetables.
+Once all noodles are al dente, completely drain the water.
+Add the milk, butter, ramen seasoning, the Kraft cheese packet, and one slice of American cheese. Stir vigorously until creamy and fully incorporated.
+
+# Carbonara Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: Using Kewpie mayo enhances the egg yolk to create a creamy sauce without using heavy cream or butter. The fat comes strictly from the rendered bacon.
+Ingredients:
+3 oz. thick cut bacon, cut up
+1 egg yolk
+1 Tbsp Kewpie mayo
+1 oz. pecorino cheese, freshly grated
+black pepper
+ramen cooking liquid
+ramen noodles, cooked and drained
+1 scallion
+ramen seasoning
+Instructions:
+Fry the bacon until mostly crispy but still slightly chewy. Drain the bacon, saving the fat.
+In a mixing bowl, combine the egg yolk, a heavy squirt of Kewpie mayo, pecorino cheese, black pepper, left-over bacon fat, and a splash of hot ramen water to thicken the sauce.
+Toss the hot, drained noodles directly into the sauce. Add extra pecorino and the cooked bacon, mixing well.
+Plate in a mound and top with scallions and a dusting of ramen seasoning to cut through the richness.
+
+# Cheesy Fire Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: A communal, party-style dish. Eat it straight out of the pan by grabbing noodles and chicken with chopsticks and twisting the melted cheese around it.
+Ingredients:
+1 chicken thigh, cubed
+1 c mozzarella cheese, heavily grated
+toasted sesame oil
+water
+ramen noodles
+1 Tbsp gochujang
+1 Tbsp sugar
+ramen seasoning
+1 scallion
+Instructions:
+Fry the cubed chicken in sesame oil until just lightly browned on the surface, then remove them from the pan.
+Add water to the remaining pan juices and cook the ramen noodles until the liquid reduces and the pan is mostly dry.
+Stir in gochujang, sugar, ramen seasoning, and the cooked chicken. Mix well.
+Part the noodles down the center of the pan to create an empty alley. Fill the alley with a massive mountain of mozzarella cheese. Cover with a lid on medium heat until melted, then sprinkle with scallions.
+
+# Ramen Fried Rice
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: Use leftover, dried-out rice to ensure every grain fries separately. You need maximum wok heat to get the proper charred egg flavor (wok hei).
+Ingredients:
+1 pack dry ramen noodles, entirely crushed
+ramen seasoning
+4 scallions, separated into whites and greens
+½ can Spam, cut into tiny cubes
+2 Tbsp toasted sesame oil
+4 eggs
+2 c leftover cooked rice
+Instructions:
+Crush the dry ramen block inside its bag into small bits. Pour the seasoning directly into the bag and shake to coat the dry noodles.
+Heat a wok on maximum heat with toasted sesame oil until smoking. Crack the eggs in, let them form a slight shell, and then aggressively scramble to create charred egg shards.
+Add the Spam to absorb some heat and crisp up. Once the Spam releases its fat, throw in the seasoned dry ramen bits to absorb moisture and toast, followed by the scallion whites.
+Dump in the leftover rice. Use the back of a ladle to press and separate every single grain so they fry. Turn off the heat, toss in the scallion greens, and serve.
+
+# Ramen Cacio e Pepe
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: Inspired by David Chang. The aggressive agitation of the ruffled ramen noodles releases starch that perfectly emulsifies the notorious cheese sauce so it won't break.
+Ingredients:
+1.5 oz. parmesan cheese, freshly grated
+1 cup water
+1 Tbsp butter
+2 tsp olive oil
+dry ramen noodles
+black pepper to taste
+ramen seasoning
+Instructions:
+In a pan over medium heat, combine the water, a pat of butter, olive oil, and parmesan cheese to create a watery cheese mixture.
+Drop in the dry ramen block. Stir vigorously and constantly as the noodles cook and release starch into the water, emulsifying the cheese sauce.
+Once the noodles are cooked and coated in the thick sauce, plate immediately. Dust heavily with extra parmesan, black pepper, and ramen seasoning on top instead of mixing it in.
+
+# Rose (Rosé) Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: An easy cream sauce made entirely in one pot. The starch from the noodles thickens the milk naturally as it cooks.
+Ingredients:
+1-½ c milk
+1 tbsp gochujang
+¼ c onions, sliced
+ramen seasoning
+10-12 cocktail sausages
+ramen noodles
+sugar
+1 scallion
+Instructions:
+In a pot, bring a good amount of milk to a simmer. Stir in the gochujang, chopped onions, ramen seasoning, and cocktail sausages.
+Drop the ramen noodles straight into the milk to cook. Do not drain; the starches will thicken the sauce.
+Finish with a touch of sugar and an extra splash of milk if it looks too thick. Top with scallions.
+
+# Japanese Curry Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: Combines two amazing pantry staples. The thick, savory profile of Japanese curry perfectly balances the intense flavor burst of ramen seasoning.
+Ingredients:
+¼ c carrots, cut up
+⅓ c onions, cut up
+1 Tbsp butter
+water
+ramen seasoning
+1 block Japanese Golden curry
+ramen noodles
+1 egg
+1 scallion
+Instructions:
+Sauté the carrots and onions in butter in a pot. Add water, ramen seasoning, and the Japanese curry block. Simmer until the block dissolves and the broth thickens.
+Add the ramen noodles and cook directly in the curry liquid without draining.
+Crack an egg directly on top of the noodles, cover the pot with a lid to let the steam lightly cook the egg, and top with scallions. Serve directly out of the pot.
+
+# Assassin's Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: A play on Spaghetti all'Assassina. Cooking in a non-stick pan is recommended to carefully build caramelization without completely burning it to the pan.
+Ingredients:
+2 cloves garlic, thinly sliced
+2 tsp olive oil
+dry ramen noodles
+1 c jarred marinara tomato sauce
+water
+splash of cream or cheese (optional)
+Instructions:
+Sauté the sliced garlic in olive oil until browned. Add the dry ramen noodle block straight into the pan to toast in the oil.
+Ladle a bit of tomato sauce and water over the noodles. Cook until the liquid absorbs, gets sticky, and edges on burning.
+Repeat the process of adding sauce and cooking down until the noodles are deeply caramelized, crispy on the edges, and cooked all the way through. Add cream or cheese to balance the acidity if desired.
+
+# Scallion Oil Ramen
+url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
+Attribution: Anything with Alvin
+Notes: One of the most incredibly fragrant recipes on the list. You must cook the scallions until they are dark brown and completely drained of water to properly flavor the oil.
+Ingredients:
+soy sauce
+Chinese black vinegar
+honey
+ramen seasoning
+ramen dried vegetables
+scallions, roughly chopped into long sections
+toasted sesame oil (heavy amount)
+ramen noodles, cooked and drained
+Instructions:
+In a small bowl, mix soy sauce, black vinegar, honey, ramen seasoning, and dry vegetables to make a base sauce.
+In a pan over medium heat, fry the large scallion pieces in toasted sesame oil until all water cooks out and the scallions are dark brown and fragrant.
+Pour the base sauce directly into the scallion oil and let it reduce and bubble together.
+Toss the cooked, drained ramen noodles into the intensely flavored oil until fully coated.
+
+# Tan Tan Style Ramen Noodles
+Note: I grew up in Singapore where we had Tan tan mian at a place called Crystal Jade, and the flavor ends up being kiiiinda reminiscent of that!
+Ingredients
+Buldak Noodles
+buldak noodles spicy sauce packet
+Then add Peanut butter
+Honey
+a bit of soy sauce
+rice vinegar
+sesame oil
+Instructions:
+in the bowl only put 3/4 of the spicy sauce. Mix up the sauce before tossing the noodles in it. Add some sesame oil if you have it.
+# Creamy Egg Style:
+Ingredients:
+Buldak Noodles
+egg
+mayonaise
+salt or soy sauce to taste
+Instructions:
+Start with Buldak Noodles. Add a raw egg in the bowl and mix. 
+Once the noodles are ready, put it in the bowl and mix with the egg vigorously (Let the heat of the noodles cook the egg). Then put in the sauce packet, mayonnaise, salt/soy sauce to taste
+# Baked Feta Pasta (from TikTok)
+url: https://grilledcheesesocial.com/2019/06/27/baked-feta-pasta-with-tomatoes/#recipe
+Attribution: TikTok
+Notes: It works best if you use a small baking dish so the tomatoes are touching. If the tomatoes are out of season and are too sour or tart, try adding in some balsamic glaze to sweeten it up.
+If it's dry after cooking, add ½ cup pasta water and stir.
+Ingredients:
+1 lb Pasta (I recommend bowtie or orzo)
+½ cup Olive Oil
+2 pints Cherry Tomatoes (around 20-25 oz)
+1 8 oz block Feta Cheese
+4 cloves Garlic finely chopped
+2 pinches Red Pepper Flakes
+1 handful Fresh Basil Leaves
+Kosher Salt and Fresh Cracked Pepper
+Balsamic Glaze (if the tomatoes are too sour)
+Instructions:
+Preheat oven to 400. Add tomatoes, olive oil, and salt to a baking dish and toss.
+Place the block of feta in the middle and top with a splash more of olive oil plus a few pinches red pepper flakes. Bake for 30 minutes.
+Meanwhile, prepare bowtie pasta al dente according to directions then strain -- being sure to save some pasta water for later on.
+After the 30 minutes has past, crank the heat up to 450 and bake for another 5-10 minutes or until the feta and tomatoes have browned.
+Remove the baking dish from the oven and IMMEDIATELY add the garlic and basil and stir. The residual heat from the tomatoes and olive oil will take the raw edge off the garlic.
+Now stir in the strained al dente pasta and toss. Season with salt and pepper to taste!
+(And if the sauce is dry, you can add ¼ cup pasta water and stir to loosen the sauce!)
+# Cucumber Salad
+url: https://imhungryforthat.com/viral-cucumber-salad/
+Attribution: TikTok
+Ingredients:
+1 English cucumber
+1 spring onion, chopped
+1 clove of garlic, minced
+1 tablespoon soy sauce
+1 teaspoon fish sauce
+½ teaspoon sesame oil
+½ teaspoon sugar
+A pinch of MSG
+A sprinkle of sesame seeds
+Instructions
+Thinly slice the cucumber using a mandolin and transfer to a jar.
+Add the chopped spring onion, minced garlic, soy sauce, fish sauce, sesame oil, sugar, MSG, and sesame seeds. 
+Place the lid on the jar and shake until well incorporated. Garnish with chili flakes
+# Dubai chewy cookie
+## Filling
+Ingredients:
+100g (approx. 1 ¼ cups) Kataifi pastry, finely chopped
+15g (1 tbsp) Unsalted butter (to toast the kataifi)
+100g (approx. ½ cup) Pistachio cream or paste
+15g (1 tbsp) Tahini paste
+50g (approx. ¼ cup) White chocolate, melted
+1 pinch Fine sea salt (balances the sweetness)
+Instructions:
+Chop and toast the kataifi pastry in a pan with a little butter until golden and crispy.
+Mix the warm kataifi with pistachio cream, tahini, and melted white chocolate.
+Scoop the mixture into portions and place them in the freezer or fridge to set for 15 to 30 minutes.
+## Shell
+Ingredients:
+200g (approx. 4 cups packed) White mini marshmallows
+30g (approx. 2 tbsp) Unsalted butter
+15g (approx. 2 tbsp) Unsweetened cocoa powder
+10g (approx. 1 tbsp) Dry milk powder (creates a rich, fudgy bite)
+4g (¾ tsp) each Corn syrup (or glucose) and water (optional, adds extra stretch)
+Instructions:
+Melt the butter and a splash of water or corn syrup on low heat.
+Add the marshmallows and stir until mostly melted.
+Turn off the heat. Stir in the cocoa powder and milk powder to form a soft, pliable chocolate dough.
+## To Finish
+Ingredients:
+2 to 3 tbsp Unsweetened cocoa powder (for dusting/dredging)
+Instructions:
+Flatten portions of the warm chocolate marshmallow dough.Wrap the dough securely around a chilled pistachio filling ball.Roll and dredge each finished cookie thoroughly in extra cocoa powder.

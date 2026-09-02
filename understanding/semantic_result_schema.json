@@ -103,20 +103,6 @@
       }
     },
 
-    "note": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["text", "source_spans"],
-      "properties": {
-        "text": { "type": "string" },
-        "source_spans": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "type": "string" }
-        }
-      }
-    },
-
     "quantity": {
       "type": "object",
       "additionalProperties": false,
@@ -258,6 +244,21 @@
       "properties": {
         "text": { "type": "string" },
         "reason": { "type": "string" },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "source_spans"],
+      "description": "Recognized-but-not-semantically-interpreted content attached to a reference (e.g. 'to taste'). The Analyzer preserves it verbatim; it never becomes a modifier, unresolved material, or evidence.",
+      "properties": {
+        "text": { "type": "string" },
         "source_spans": {
           "type": "array",
           "minItems": 1,

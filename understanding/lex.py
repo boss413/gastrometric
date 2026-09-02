@@ -116,6 +116,26 @@ class LexicalSpan:
 
     For non-vocabulary spans (Symbol, Quantity, Unknown) ``span_types``
     is always a single-element tuple naming that stage's fixed type.
+
+    ``normalized_value`` / ``knowledge_id`` shape note: for those same
+    non-vocabulary spans they remain plain scalars exactly as before
+    (e.g. Quantity's ``normalized_value`` is a float like ``1.5``). For
+    vocabulary-matched spans (Stages 3-8, identifiable by
+    ``source_vocabulary is not None``), they are instead tuples
+    positionally aligned with ``span_types`` -- index i of
+    ``normalized_value``, ``knowledge_id`` and ``source_vocabulary`` all
+    describe ``span_types[i]`` and nothing else. This is what keeps
+    classifications' normalization independent of one another: for
+    "ribs" with ``span_types=("Ingredient", "Component",
+    "NaturalPortion")``, ``normalized_value`` might be
+    ``("pork ribs", "rib", "rib")`` -- Ingredient keeps its own
+    ingredient-alias-resolved canonical, while Component/NaturalPortion
+    each keep their own generic-vocabulary canonical term, never
+    borrowing Ingredient's (or each other's). A single-classified
+    vocabulary span is still a 1-tuple, e.g. ``("carrot",)`` -- no
+    implicit "unwrap when there's only one" special case. See
+    ``_merge_vocabulary_spans`` for where this alignment is built and
+    preserved.
     """
 
     span_types: Tuple[str, ...]
@@ -423,8 +443,17 @@ def _match_vocabulary(
                             start_offset=phrase_start,
                             end_offset=phrase_end,
                             span_order=-1,
-                            normalized_value=normalized_value,
-                            knowledge_id=knowledge_id,
+                            # Wrapped as 1-tuples, positionally aligned
+                            # with span_types, even though there's only
+                            # one classification here -- this is what
+                            # _merge_vocabulary_spans relies on to keep
+                            # each classification's own normalized value
+                            # from bleeding into a different
+                            # classification's when spans covering the
+                            # same text range get merged (see that
+                            # function's docstring, and LexicalSpan's).
+                            normalized_value=(normalized_value,),
+                            knowledge_id=(knowledge_id,),
                             source_vocabulary=(source_vocabulary or span_type.lower(),),
                         )
                     )
@@ -461,17 +490,32 @@ def _merge_vocabulary_spans(spans: List[LexicalSpan]) -> List[LexicalSpan]:
     intentional ambiguity this work order explicitly leaves alone, and
     are NOT merged here; they remain separate spans exactly as before.
 
-    Ordering rule for the merged ``span_types`` / ``source_vocabulary``
-    tuples: first-seen order over ``spans`` as passed in (which reflects
-    the fixed, already-deterministic stage sequence in ``lex()``), with
-    duplicates removed. Classifications are never alphabetically
-    resorted -- the work order asks for that only if a stable order is
-    otherwise required, and stage sequence already provides one.
+    Ordering rule for the merged ``span_types`` tuple: first-seen order
+    over ``spans`` as passed in (which reflects the fixed,
+    already-deterministic stage sequence in ``lex()``), with duplicates
+    removed. Classifications are never alphabetically resorted -- the
+    work order asks for that only if a stable order is otherwise
+    required, and stage sequence already provides one.
 
-    ``normalized_value`` / ``knowledge_id`` are not classification data;
-    when a range's contributing spans disagree, the first non-None value
-    (in that same stage order) is kept, matching how a single-classified
-    span already behaved.
+    Per-classification normalization (the ingredient-alias boundary fix):
+    each contributing span already carries its own ``normalized_value``/
+    ``knowledge_id``/``source_vocabulary`` as 1-tuples describing ONLY
+    its own single classification (see ``_match_vocabulary``). Merging
+    must keep that alignment -- classification i's normalized value here
+    must come from classification i's own PhraseMatch, never from a
+    different classification's. Concretely: if "ribs" resolves as an
+    Ingredient alias to "pork ribs" AND separately as a generic
+    Component/NaturalPortion vocabulary term canonicalized as "rib",
+    picking a single shared normalized_value for the merged span (e.g.
+    "first non-None wins") would incorrectly stamp the ingredient
+    alias's resolution onto the generic vocabulary classifications too.
+    Instead we build one (classification -> its own normalized_value /
+    knowledge_id / source_vocabulary) mapping, first-seen per
+    classification, and only then flatten it back into tuples aligned
+    with the deduplicated ``span_types`` order. A classification that
+    appears more than once in the group (e.g. duplicate canonicals
+    within one category) keeps its first-seen values, matching how a
+    single-classified span already behaved.
     """
     groups: "Dict[Tuple[int, int], List[LexicalSpan]]" = {}
     order: List[Tuple[int, int]] = []
@@ -489,29 +533,34 @@ def _merge_vocabulary_spans(spans: List[LexicalSpan]) -> List[LexicalSpan]:
             merged.append(group[0])
             continue
 
-        span_types: List[str] = []
-        source_vocabularies: List[str] = []
-        normalized_value: Optional[Any] = None
-        knowledge_id: Optional[Any] = None
+        types_in_order: List[str] = []
+        normalized_by_type: Dict[str, Optional[Any]] = {}
+        knowledge_by_type: Dict[str, Optional[Any]] = {}
+        source_by_type: Dict[str, Optional[str]] = {}
+
         for span in group:
-            for classification in span.span_types:
-                if classification not in span_types:
-                    span_types.append(classification)
-            for source in span.source_vocabulary or ():
-                if source not in source_vocabularies:
-                    source_vocabularies.append(source)
-            if normalized_value is None and span.normalized_value is not None:
-                normalized_value = span.normalized_value
-            if knowledge_id is None and span.knowledge_id is not None:
-                knowledge_id = span.knowledge_id
+            span_normalized = span.normalized_value if isinstance(span.normalized_value, tuple) else ()
+            span_knowledge = span.knowledge_id if isinstance(span.knowledge_id, tuple) else ()
+            span_sources = span.source_vocabulary or ()
+            for i, classification in enumerate(span.span_types):
+                if classification in normalized_by_type:
+                    continue  # already recorded from an earlier (first-seen) span
+                types_in_order.append(classification)
+                normalized_by_type[classification] = (
+                    span_normalized[i] if i < len(span_normalized) else None
+                )
+                knowledge_by_type[classification] = (
+                    span_knowledge[i] if i < len(span_knowledge) else None
+                )
+                source_by_type[classification] = span_sources[i] if i < len(span_sources) else None
 
         merged.append(
             dataclasses.replace(
                 group[0],
-                span_types=tuple(span_types),
-                source_vocabulary=tuple(source_vocabularies) or None,
-                normalized_value=normalized_value,
-                knowledge_id=knowledge_id,
+                span_types=tuple(types_in_order),
+                normalized_value=tuple(normalized_by_type[t] for t in types_in_order),
+                knowledge_id=tuple(knowledge_by_type[t] for t in types_in_order),
+                source_vocabulary=tuple(source_by_type[t] for t in types_in_order),
             )
         )
     return merged
