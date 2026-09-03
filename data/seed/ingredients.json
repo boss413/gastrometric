@@ -3941,11 +3941,6 @@
       "aliases": ["frog legs"]
     },
     {
-      "id": "alligator-meat",
-      "name": "alligator meat",
-      "aliases": ["gator tail", "alligator meat"]
-    },
-    {
       "id": "crawfish-tails",
       "name": "crawfish tails",
       "aliases": ["crawfish meat", "crayfish tails", "crawdad meat"]

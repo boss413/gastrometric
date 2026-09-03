@@ -1,0 +1,786 @@
+[
+  {
+    "input": "cabbage",
+    "location": "fridge"
+  },
+  {
+    "input": "scallions",
+    "location": "fridge"
+  },
+  {
+    "input": "mushrooms",
+    "location": "fridge"
+  },
+  {
+    "input": "broccoli",
+    "location": "fridge"
+  },
+  {
+    "input": "criminis",
+    "location": "fridge"
+  },
+  {
+    "input": "parsley",
+    "location": "fridge"
+  },
+  {
+    "input": "zucchini",
+    "location": "fridge"
+  },
+  {
+    "input": "yellow squash",
+    "location": "fridge"
+  },
+  {
+    "input": "all purpose flour",
+    "location": "pantry"
+  },
+  {
+    "input": "bread flour",
+    "location": "pantry"
+  },
+  {
+    "input": "quinoa",
+    "location": "pantry"
+  },
+  {
+    "input": "millet",
+    "location": "pantry"
+  },
+  {
+    "input": "brown basmati rice",
+    "location": "pantry"
+  },
+  {
+    "input": "brown rice",
+    "location": "pantry"
+  },
+  {
+    "input": "potato starch",
+    "location": "pantry"
+  },
+  {
+    "input": "corn starch",
+    "location": "pantry"
+  },
+  {
+    "input": "corn flour",
+    "location": "pantry"
+  },
+  {
+    "input": "corn meal",
+    "location": "pantry"
+  },
+  {
+    "input": "gelatin",
+    "location": "pantry"
+  },
+  {
+    "input": "long grain rice",
+    "location": "pantry"
+  },
+  {
+    "input": "basmati rice",
+    "location": "pantry"
+  },
+  {
+    "input": "sushi rice",
+    "location": "pantry"
+  },
+  {
+    "input": "short grain rice",
+    "location": "pantry"
+  },
+  {
+    "input": "dry short grain white rice",
+    "location": "pantry"
+  },
+  {
+    "input": "black beans",
+    "location": "pantry"
+  },
+  {
+    "input": "pinto beans",
+    "location": "pantry"
+  },
+  {
+    "input": "garbanzo beans",
+    "location": "pantry"
+  },
+  {
+    "input": "chickpeas",
+    "location": "pantry"
+  },
+  {
+    "input": "bread crumbs",
+    "location": "pantry"
+  },
+  {
+    "input": "instant potato flakes",
+    "location": "pantry"
+  },
+  {
+    "input": "sliced wheat bread",
+    "location": "pantry"
+  },
+  {
+    "input": "flour tortillas",
+    "location": "pantry"
+  },
+  {
+    "input": "macaroni",
+    "location": "pantry"
+  },
+  {
+    "input": "rigatoni",
+    "location": "pantry"
+  },
+  {
+    "input": "spaghetti",
+    "location": "pantry"
+  },
+  {
+    "input": "fettuccini",
+    "location": "pantry"
+  },
+  {
+    "input": "ramen noodles",
+    "location": "pantry"
+  },
+  {
+    "input": "rice noodles",
+    "location": "pantry"
+  },
+  {
+    "input": "bean threads",
+    "location": "pantry"
+  },
+  {
+    "input": "rice sticks",
+    "location": "pantry"
+  },
+  {
+    "input": "orzo",
+    "location": "pantry"
+  },
+  {
+    "input": "honey",
+    "location": "pantry"
+  },
+  {
+    "input": "molasses",
+    "location": "pantry"
+  },
+  {
+    "input": "sugar",
+    "location": "pantry"
+  },
+  {
+    "input": "granulated sugar",
+    "location": "pantry"
+  },
+  {
+    "input": "brown sugar",
+    "location": "pantry"
+  },
+  {
+    "input": "white sugar",
+    "location": "pantry"
+  },
+  {
+    "input": "marshmallows",
+    "location": "pantry"
+  },
+  {
+    "input": "cocoa",
+    "location": "pantry"
+  },
+  {
+    "input": "salt",
+    "location": "pantry"
+  },
+  {
+    "input": "baking powder",
+    "location": "pantry"
+  },
+  {
+    "input": "baking soda",
+    "location": "pantry"
+  },
+  {
+    "input": "yeast",
+    "location": "pantry"
+  },
+  {
+    "input": "vanilla extract",
+    "location": "pantry"
+  },
+  {
+    "input": "msg",
+    "location": "pantry"
+  },
+  {
+    "input": "corn syrup",
+    "location": "pantry"
+  },
+  {
+    "input": "maple syrup",
+    "location": "pantry"
+  },
+  {
+    "input": "agave nectar",
+    "location": "pantry"
+  },
+  {
+    "input": "fried onions",
+    "location": "pantry"
+  },
+  {
+    "input": "semi-sweet chocolate",
+    "location": "pantry"
+  },
+  {
+    "input": "powdered sugar",
+    "location": "pantry"
+  },
+  {
+    "input": "oil",
+    "location": "pantry"
+  },
+  {
+    "input": "neutral oil",
+    "location": "pantry"
+  },
+  {
+    "input": "white vinegar",
+    "location": "pantry"
+  },
+  {
+    "input": "balsamic vinegar",
+    "location": "pantry"
+  },
+  {
+    "input": "sherry vinegar",
+    "location": "pantry"
+  },
+  {
+    "input": "citric acid",
+    "location": "pantry"
+  },
+  {
+    "input": "lemon juice",
+    "location": "pantry"
+  },
+  {
+    "input": "lime juice",
+    "location": "pantry"
+  },
+  {
+    "input": "shaoxing wine",
+    "location": "pantry"
+  },
+  {
+    "input": "water",
+    "location": "pantry"
+  },
+  {
+    "input": "stock",
+    "location": "pantry"
+  },
+  {
+    "input": "broth",
+    "location": "pantry"
+  },
+  {
+    "input": "chicken broth",
+    "location": "pantry"
+  },
+  {
+    "input": "beef broth",
+    "location": "pantry"
+  },
+  {
+    "input": "vegetable broth",
+    "location": "pantry"
+  },
+  {
+    "input": "hot sauce",
+    "location": "pantry"
+  },
+  {
+    "input": "rice vinegar",
+    "location": "pantry"
+  },
+  {
+    "input": "tamarind paste",
+    "location": "pantry"
+  },
+  {
+    "input": "sriracha",
+    "location": "pantry"
+  },
+  {
+    "input": "red wine vinegar",
+    "location": "pantry"
+  },
+  {
+    "input": "soy sauce",
+    "location": "pantry"
+  },
+  {
+    "input": "dark soy sauce",
+    "location": "pantry"
+  },
+  {
+    "input": "oyster sauce",
+    "location": "pantry"
+  },
+  {
+    "input": "fish sauce",
+    "location": "pantry"
+  },
+  {
+    "input": "Worcestershire sauce",
+    "location": "pantry"
+  },
+  {
+    "input": "chicken base",
+    "location": "pantry"
+  },
+  {
+    "input": "chicken bouillon",
+    "location": "pantry"
+  },
+  {
+    "input": "beef base",
+    "location": "pantry"
+  },
+  {
+    "input": "beef bouillon",
+    "location": "pantry"
+  },
+  {
+    "input": "liquid aminos",
+    "location": "pantry"
+  },
+  {
+    "input": "diamond crystal kosher salt",
+    "location": "pantry"
+  },
+  {
+    "input": "crushed tomatoes",
+    "location": "pantry"
+  },
+  {
+    "input": "diced tomatoes",
+    "location": "pantry"
+  },
+  {
+    "input": "spam",
+    "location": "pantry"
+  },
+  {
+    "input": "whole peeled tomatoes",
+    "location": "pantry"
+  },
+  {
+    "input": "evaporated milk",
+    "location": "pantry"
+  },
+  {
+    "input": "bamboo shoots",
+    "location": "pantry"
+  },
+  {
+    "input": "water chestnuts",
+    "location": "pantry"
+  },
+  {
+    "input": "diced chilis",
+    "location": "pantry"
+  },
+  {
+    "input": "coconut milk",
+    "location": "pantry"
+  },
+  {
+    "input": "tomato paste",
+    "location": "pantry"
+  },
+  {
+    "input": "crab meat",
+    "location": "pantry"
+  },
+  {
+    "input": "onions",
+    "location": "pantry"
+  },
+  {
+    "input": "carrots",
+    "location": "pantry"
+  },
+  {
+    "input": "celery",
+    "location": "pantry"
+  },
+  {
+    "input": "garlic",
+    "location": "pantry"
+  },
+  {
+    "input": "ginger",
+    "location": "pantry"
+  },
+  {
+    "input": "yellow onions",
+    "location": "pantry"
+  },
+  {
+    "input": "oregano",
+    "location": "pantry"
+  },
+  {
+    "input": "thyme",
+    "location": "pantry"
+  },
+  {
+    "input": "cumin",
+    "location": "pantry"
+  },
+  {
+    "input": "paprika",
+    "location": "pantry"
+  },
+  {
+    "input": "coriander",
+    "location": "pantry"
+  },
+  {
+    "input": "rosemary",
+    "location": "pantry"
+  },
+  {
+    "input": "mustard seed",
+    "location": "pantry"
+  },
+  {
+    "input": "chili powder",
+    "location": "pantry"
+  },
+  {
+    "input": "sage",
+    "location": "pantry"
+  },
+  {
+    "input": "fennel seed",
+    "location": "pantry"
+  },
+  {
+    "input": "mustard",
+    "location": "pantry"
+  },
+  {
+    "input": "ketchup",
+    "location": "pantry"
+  },
+  {
+    "input": "dijon mustard",
+    "location": "pantry"
+  },
+  {
+    "input": "chili flakes",
+    "location": "pantry"
+  },
+  {
+    "input": "cardamom",
+    "location": "pantry"
+  },
+  {
+    "input": "cinnamon",
+    "location": "pantry"
+  },
+  {
+    "input": "tumeric",
+    "location": "pantry"
+  },
+  {
+    "input": "curry powder",
+    "location": "pantry"
+  },
+  {
+    "input": "cayenne",
+    "location": "pantry"
+  },
+  {
+    "input": "black pepper",
+    "location": "pantry"
+  },
+  {
+    "input": "kosher salt",
+    "location": "pantry"
+  },
+  {
+    "input": "savory salt",
+    "location": "pantry"
+  },
+  {
+    "input": "garam masala",
+    "location": "pantry"
+  },
+  {
+    "input": "vanilla",
+    "location": "pantry"
+  },
+  {
+    "input": "chocolate chips",
+    "location": "pantry"
+  },
+  {
+    "input": "allspice",
+    "location": "pantry"
+  },
+  {
+    "input": "bay leaf",
+    "location": "pantry"
+  },
+  {
+    "input": "ground ginger",
+    "location": "pantry"
+  },
+  {
+    "input": "gochujang",
+    "location": "pantry"
+  },
+  {
+    "input": "saffron",
+    "location": "pantry"
+  },
+  {
+    "input": "cloves",
+    "location": "pantry"
+  },
+  {
+    "input": "dried oregano",
+    "location": "pantry"
+  },
+  {
+    "input": "star anise",
+    "location": "pantry"
+  },
+  {
+    "input": "coconut extract",
+    "location": "pantry"
+  },
+  {
+    "input": "green cardamom",
+    "location": "pantry"
+  },
+  {
+    "input": "cinnamon sticks",
+    "location": "pantry"
+  },
+  {
+    "input": "tumeric",
+    "location": "pantry"
+  },
+  {
+    "input": "parmesan cheese",
+    "location": "pantry"
+  },
+  {
+    "input": "mozzarella cheese",
+    "location": "pantry"
+  },
+  {
+    "input": "mexican cheese blend",
+    "location": "pantry"
+  },
+  {
+    "input": "string cheese",
+    "location": "pantry"
+  },
+  {
+    "input": "whole milk",
+    "location": "pantry"
+  },
+  {
+    "input": "eggs",
+    "location": "pantry"
+  },
+  {
+    "input": "whole eggs",
+    "location": "pantry"
+  },
+  {
+    "input": "large eggs",
+    "location": "pantry"
+  },
+  {
+    "input": "medium eggs",
+    "location": "pantry"
+  },
+  {
+    "input": "milk",
+    "location": "pantry"
+  },
+  {
+    "input": "egg yolks",
+    "location": "pantry"
+  },
+  {
+    "input": "egg whites",
+    "location": "pantry"
+  },
+  {
+    "input": "beer",
+    "location": "pantry"
+  },
+  {
+    "input": "red wine",
+    "location": "pantry"
+  },
+  {
+    "input": "white wine",
+    "location": "pantry"
+  },
+  {
+    "input": "ale",
+    "location": "pantry"
+  },
+  {
+    "input": "lager",
+    "location": "pantry"
+  },
+  {
+    "input": "butter",
+    "location": "pantry"
+  },
+  {
+    "input": "mayonnaise",
+    "location": "pantry"
+  },
+  {
+    "input": "sour cream",
+    "location": "pantry"
+  },
+  {
+    "input": "yogurt",
+    "location": "pantry"
+  },
+  {
+    "input": "cream cheese",
+    "location": "pantry"
+  },
+  {
+    "input": "vegetable oil",
+    "location": "pantry"
+  },
+  {
+    "input": "olive oil",
+    "location": "pantry"
+  },
+  {
+    "input": "canola oil",
+    "location": "pantry"
+  },
+  {
+    "input": "sesame oil",
+    "location": "pantry"
+  },
+  {
+    "input": "coconut oil",
+    "location": "pantry"
+  },
+  {
+    "input": "lard",
+    "location": "pantry"
+  },
+  {
+    "input": "peanut butter",
+    "location": "pantry"
+  },
+  {
+    "input": "peanuts",
+    "location": "pantry"
+  },
+  {
+    "input": "cashews",
+    "location": "pantry"
+  },
+  {
+    "input": "sesame seeds",
+    "location": "pantry"
+  },
+  {
+    "input": "frozen peas",
+    "location": "pantry"
+  },
+  {
+    "input": "frozen corn",
+    "location": "pantry"
+  },
+  {
+    "input": "frozen spinach",
+    "location": "pantry"
+  },
+  {
+    "input": "green beans",
+    "location": "pantry"
+  },
+  {
+    "input": "spinach",
+    "location": "pantry"
+  },
+  {
+    "input": "chicken legs",
+    "location": "pantry"
+  },
+  {
+    "input": "chicken thighs",
+    "location": "pantry"
+  },
+  {
+    "input": "chicken",
+    "location": "pantry"
+  },
+  {
+    "input": "pork chop",
+    "location": "pantry"
+  },
+  {
+    "input": "ground beef",
+    "location": "pantry"
+  },
+  {
+    "input": "ribeye steak",
+    "location": "pantry"
+  },
+  {
+    "input": "chicken stock",
+    "location": "pantry"
+  },
+  {
+    "input": "shrimp",
+    "location": "pantry"
+  },
+  {
+    "input": "frozen mixed berries",
+    "location": "pantry"
+  },
+  {
+    "input": "basil",
+    "location": "pantry"
+  },
+  {
+    "input": "tofu",
+    "location": "pantry"
+  },
+  {
+    "input": "bacon",
+    "location": "pantry"
+  },
+  {
+    "input": "tater tots",
+    "location": "pantry"
+  }
+]

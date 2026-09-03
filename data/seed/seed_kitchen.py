@@ -1,180 +1,102 @@
-import sqlite3
+"""
+Development kitchen seed operation (BE-01).
 
-from gastrometric.config.paths import DB_PATH
+Responsibility: read data/seed/kitchen.json and submit each entry to
+the generic inventory application (gastrometric.application.inventory_editor).
+
+This module must NOT:
+  * contain inventory persistence logic (no SQL against inventory_items),
+  * contain the semantic-understanding implementation,
+  * become the future web API's inventory entry point,
+  * write to fridge_items / pantry_items.
+
+It is invoked by rebuild_db.py for development database rebuilds only.
+"""
+
+import json
+from typing import Any, Dict, List, Optional
+
+from gastrometric.config.paths import SEED_DIR
+from gastrometric.application.inventory_editor import (
+    InventoryValidationError,
+    create_inventory_item,
+)
+
+KITCHEN_SEED_FILE = SEED_DIR / "kitchen.json"
+
+_MAX_FAILURE_EXAMPLES = 8
 
 
-def resolve_ingredient(cursor, name):
+class SeedEntryError(Exception):
+    """Raised for a malformed seed entry; identifies which entry failed."""
+
+    def __init__(self, index: int, entry: Any, reason: str):
+        self.index = index
+        self.entry = entry
+        self.reason = reason
+        super().__init__(f"seed entry #{index} ({entry!r}): {reason}")
+
+
+def _load_seed_entries(seed_file) -> List[Dict[str, Any]]:
+    with open(seed_file, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, list):
+        raise SeedEntryError(-1, data, "seed file must contain a JSON array of entries")
+    return data
+
+
+def _validate_entry(index: int, entry: Any) -> None:
+    if not isinstance(entry, dict):
+        raise SeedEntryError(index, entry, "entry must be a JSON object")
+
+    original_input = entry.get("input")
+    if not isinstance(original_input, str) or not original_input.strip():
+        raise SeedEntryError(index, entry, "'input' is required and must be a non-empty string")
+
+    location = entry.get("location")
+    if location not in ("fridge", "pantry"):
+        raise SeedEntryError(index, entry, "'location' is required and must be 'fridge' or 'pantry'")
+
+
+def seed_kitchen(seed_file=None, db_path: Optional[str] = None) -> Dict[str, Any]:
     """
-    Resolve an ingredient name to an ingredient ID.
+    Load data/seed/kitchen.json and create one inventory item per entry
+    via the generic inventory application.
 
-    Matching order:
-    1. Exact match against ingredients.ingredient_name
-    2. Exact match against ingredient_aliases.alias
-
-    Returns:
-        tuple[int, str] | None:
-            (ingredient_id, match_type), or None if no match is found.
+    Returns a summary dict: {"successes": int, "failures": [str, ...]}.
     """
-    cursor.execute(
-        """
-        SELECT id
-        FROM ingredients
-        WHERE LOWER(TRIM(ingredient_name)) = LOWER(TRIM(?))
-        """,
-        (name,),
-    )
-    row = cursor.fetchone()
+    seed_file = seed_file or KITCHEN_SEED_FILE
+    entries = _load_seed_entries(seed_file)
 
-    if row:
-        return row[0], "ingredient_name"
+    successes = 0
+    failures: List[str] = []
 
-    cursor.execute(
-        """
-        SELECT ingredient_id
-        FROM ingredient_aliases
-        WHERE LOWER(TRIM(alias)) = LOWER(TRIM(?))
-        ORDER BY confidence DESC, id ASC
-        LIMIT 1
-        """,
-        (name,),
-    )
-    row = cursor.fetchone()
+    for index, entry in enumerate(entries):
+        try:
+            _validate_entry(index, entry)
+        except SeedEntryError as exc:
+            failures.append(str(exc))
+            continue
 
-    if row:
-        return row[0], "alias"
-
-    return None
-
-
-def seed_kitchen():
-    fridge = [
-        "cabbage",
-        "scallions",
-        "mushrooms",
-        "broccoli",
-        "criminis",
-        "parsley",
-        "zucchini",
-        "yellow squash",
-    ]
-
-    pantry = [
-
-#Dry Goods
-        "all purpose flour", "bread flour", "quinoa", "millet", "brown basmati rice",
-        "brown rice", "potato starch", "corn starch", "corn flour", "corn meal", "gelatin",
-        "long grain rice", "basmati rice", "sushi rice", "short grain rice", "dry short grain white rice",
-        "black beans", "pinto beans", "garbanzo beans", "chickpeas",
-        "bread crumbs", "instant potato flakes", "sliced wheat bread", "flour tortillas",
-        "macaroni", "rigatoni", "spaghetti", "fettuccini", "ramen noodles",
-        "rice noodles", "bean threads", "rice sticks", "orzo",
-        "honey", "molasses", "sugar", "granulated sugar", "brown sugar", "white sugar",
-        "marshmallows", "cocoa", "salt", "baking powder", "baking soda", "yeast",
-        "vanilla extract", "msg", "corn syrup", "maple syrup", "agave nectar", "fried onions",
-        "semi-sweet chocolate", "powdered sugar", "oil", "neutral oil",
-#Acid
-        "white vinegar", "balsamic vinegar", "sherry vinegar", "citric acid",
-        "lemon juice", "lime juice", "shaoxing wine", "water", "stock", "broth",
-        "chicken broth", "beef broth", "vegetable broth", "hot sauce", "rice vinegar", "tamarind paste",
-        "sriracha", "red wine vinegar",
-#Salt
-        "soy sauce", "dark soy sauce", "oyster sauce", "fish sauce", "Worcestershire sauce",
-        "chicken base", "chicken bouillon", "beef base", "beef bouillon", "liquid aminos", 
-        "diamond crystal kosher salt",
-#Canned
-        "crushed tomatoes", "diced tomatoes", "spam", "whole peeled tomatoes", "evaporated milk", 
-        "bamboo shoots", "water chestnuts", "diced chilis", "coconut milk", "tomato paste", "crab meat",
-#Aromatics
-        "onions", "carrots", "celery", "garlic", "ginger", "yellow onions",
-        "oregano", "thyme", "cumin", "paprika", "coriander", "rosemary", "mustard seed",
-        "chili powder", "sage", "fennel seed", "mustard", "ketchup", "dijon mustard",
-        "chili flakes", "cardamom", "cinnamon", "tumeric", "curry powder", "cayenne",
-        "black pepper", "kosher salt", "savory salt", "garam masala", "vanilla", "chocolate chips",
-        "allspice", "bay leaf", "ground ginger", "gochujang", "saffron", "cloves", "dried oregano", 
-        "star anise", "coconut extract", "green cardamom", "cinnamon sticks", "tumeric"
-#Fridge
-        "parmesan cheese", "mozzarella cheese", "mexican cheese blend", "string cheese",
-        "whole milk", "eggs", "whole eggs", "large eggs", "medium eggs", "milk",
-        "egg yolks", "egg whites", "beer", "red wine", "white wine", "ale", "lager"
-        "butter", "mayonnaise", "sour cream", "yogurt", "cream cheese",
-        "vegetable oil", "olive oil", "canola oil", "sesame oil", "coconut oil",
-        "lard", "peanut butter", "peanuts", "cashews", "sesame seeds",
-#Freezer
-        "frozen peas", "frozen corn", "frozen spinach", "green beans", "spinach", 
-        "chicken legs", "chicken thighs", "chicken", "pork chop",
-        "ground beef", "ribeye steak", "chicken stock", "shrimp",
-        "frozen mixed berries", "basil", "tofu", "bacon", "tater tots"
-    ]
-
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-
-    fridge_successes = 0
-    pantry_successes = 0
-    failures = []
-
-    try:
-        for item in fridge:
-            resolved = resolve_ingredient(cursor, item)
-
-            if resolved is None:
-                failures.append(("fridge", item))
-                continue
-
-            ingredient_id, _ = resolved
-
-            cursor.execute(
-                """
-                INSERT INTO fridge_items (ingredient_id, ingredient_name)
-                VALUES (?, ?)
-                """,
-                (ingredient_id, item),
+        try:
+            create_inventory_item(
+                entry["input"],
+                entry["location"],
+                quantity=entry.get("quantity"),
+                unit=entry.get("unit"),
+                db_path=db_path,
             )
+            successes += 1
+        except InventoryValidationError as exc:
+            failures.append(f"seed entry #{index} ({entry!r}) rejected by inventory application: {exc}")
 
-            fridge_successes += 1
-
-        for item in pantry:
-            resolved = resolve_ingredient(cursor, item)
-
-            if resolved is None:
-                failures.append(("pantry", item))
-                continue
-
-            ingredient_id, _ = resolved
-
-            cursor.execute(
-                """
-                INSERT INTO pantry_items (ingredient_id, ingredient_name)
-                VALUES (?, ?)
-                """,
-                (ingredient_id, item),
-            )
-
-            pantry_successes += 1
-
-        conn.commit()
-
-    except Exception:
-        conn.rollback()
-        raise
-
-    finally:
-        conn.close()
-
-    total_successes = fridge_successes + pantry_successes
-
-    print(
-        f"Kitchen seeded: {total_successes} successful matches "
-        f"({fridge_successes} fridge, {pantry_successes} pantry)"
-    )
-
-    print(f"Failed ingredient matches: {len(failures)}")
-
+    print(f"Kitchen seeded: {successes} inventory items created from {len(entries)} seed entries")
+    print(f"Failed seed entries: {len(failures)}")
     if failures:
         print("Failure examples:")
+        for message in failures[:_MAX_FAILURE_EXAMPLES]:
+            print(f"  - {message}")
+        if len(failures) > _MAX_FAILURE_EXAMPLES:
+            print(f"  ... and {len(failures) - _MAX_FAILURE_EXAMPLES} more")
 
-        for location, item in failures[:8]:
-            print(f"  - {location}: {item}")
-
-        if len(failures) > 8:
-            print(f"  ... and {len(failures) - 8} more")
+    return {"successes": successes, "failures": failures}

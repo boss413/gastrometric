@@ -659,6 +659,29 @@ def init_db():
             )
         """)
         conn.commit()
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS inventory_items (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+                original_input TEXT NOT NULL,
+
+                ingredient_id TEXT,
+
+                location TEXT NOT NULL,
+
+                quantity TEXT,
+                unit TEXT,
+
+                resolution_status TEXT NOT NULL,
+
+                analysis_result_json TEXT NOT NULL,
+
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+                CHECK (location IN ('fridge', 'pantry'))
+            )
+        """)
         # ----------------------------------------------------------------
         # Nutrition Calculation
         # ----------------------------------------------------------------
