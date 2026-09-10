@@ -1,11 +1,12 @@
 # Test Recipe
+Note: This is where the ingredient ingestion pipeline test cases are kept.
 Ingredients:
 2 carrots	
 1 clove garlic	
 2 cloves garlic
 1 clove
 2 ribs
-2 ribs celery
+1 rib celery
 2 ribs, celery
 1 cup grape tomatoes
 2 cups chili paste
@@ -43,12 +44,12 @@ Sauté – Add onion and cook for 7 minutes, stirring frequently, until pieces a
 ## SPICES
 Ingredients:
 2 tbsp paprika , normal or sweet
-¾  tsp chilli powder
+¾  tsp chilli powder (or to taste, Note 2)
 4 tsp ground coriander
 4 tsp ground cumin
 2 tsp turmeric powder
 ¼  tsp nutmeg powder
-1 tsp garam marsala (Note 3)
+1 tsp garam masala (Note 3)
 ½  tsp fennel powder (Note 4)
 Instructions:
 Toast spices – Stir in the Spices, cook for 30 seconds.
@@ -69,7 +70,79 @@ finely shredded ginger
 yogurt
 Basmati rice, cooked
 Instructions:
-Serve with basmati rice, sprinkled with fresh coriander leaves and other garnishes if desired. More sides (pictured): Cucumber salad (Note 7) and Easy naan – No Yeast Flatbread
+Serve with basmati rice, sprinkled with fresh coriander leaves and other garnishes if desired. More sides: Cucumber salad (Note 7) and Easy naan – No Yeast Flatbread
+# Chicken Scarpariello (Braised Chicken With Sausage and Peppers)
+Attribution: Serious Eats
+url: https://www.seriouseats.com/chicken-scarpariello-sweet-and-sour-chicken-italian-recipe
+Author: J. Kenji López-Alt
+Ingredients:
+2 1/2 pounds (1.15 kg) bone-in, skin-on chicken thighs (6 to 8 thighs)
+Kosher salt and freshly ground black pepper
+1 tablespoon (15 ml) vegetable oil
+3 to 4 links sweet or hot Italian sausage (about 1 1/2 pounds; 700 g)
+1 medium onion, thinly sliced (about 6 ounces; 170 g)
+1 large red bell pepper, thinly sliced (about 6 ounces; 170 g)
+2 tablespoons finely minced fresh sage leaves (about 1/4 ounce; 8 g)
+6 cloves garlic, thinly sliced
+8 hot or sweet pickled cherry peppers, thinly sliced, along with 1/4 cup (60 ml) pickling liquid from the jar
+1 cup (240 ml) dry white wine
+1 cup (240 ml) homemade or store-bought low-sodium chicken stock
+2 tablespoons (28 g) sugar
+Instructions: 
+Adjust oven rack to center position and preheat oven to 350°F (175°C). Season chicken generously with salt and pepper. Heat oil in a 4- to 5-quart straight-sided sauté pan or Dutch oven over medium-high heat until shimmering. Add chicken, skin side down, and cook, without moving, until well browned and crisp, about 8 minutes total, lowering heat if pan starts to smoke excessively. Flip chicken and brown lightly on second side, about 3 minutes. Transfer chicken to a large plate and set aside.
+Return skillet to heat without draining it and add sausage. Cook until well browned on first side, about 1 1/2 minutes, reducing heat if it starts smoking. Flip sausage and cook on second side until browned, about 1 1/2 minutes longer. Remove pan from heat, transfer sausage to a cutting board, and cut each link into 3 to 4 slices.
+Return pan to heat, add onion and bell pepper, and cook, stirring and scraping up browned bits with a wooden spoon, until softened and starting to brown, about 4 minutes. Add sage and garlic, stir to combine, and cook until fragrant, about 1 minute.
+Add pickled cherry peppers and their liquid, stirring and scraping up browned bits from bottom of pan with a wooden spoon. Add wine and cook until liquid is reduced by half, about 2 minutes. Add chicken stock and sugar, and stir to combine. Return sausage to pan, toss to combine, then return chicken pieces to pan skin side up, nestling them down among sauce, vegetables, and sausage.
+A four-image collage. The top left image shows pickled cherry peppers and their liquid added to a stainless steel pan, with any browned bits from bottom of pan scraped up. The top right image shows wine now added to the pan. The bottom left image shows the wine reduced by half inside of the pan. The bottom right image shows the browned chicken and cut up sausages added to the vegetables and reduced wine inside of the pan.
+Transfer to oven and cook until chicken is crisp and tender, about 30 minutes. Serve immediately, spooning sauce, vegetables, and sausage around chicken pieces.
+# Halal Cart-Style Chicken and Rice With White Sauce
+Attribution: Serious Eats
+url: https://www.seriouseats.com/serious-eats-halal-cart-style-chicken-and-rice-white-sauce-recipe
+Author: Caroline Russock and J. Kenji López-Alt
+Note: Do not marinate the chicken longer than 4 hours or it’ll get a mushy texture. If you must delay cooking the chicken for any reason, remove it from the marinade, pat it dry with paper towels, and refrigerate until ready to cook.
+## For the chicken:
+Ingredients:
+2 tablespoons fresh lemon juice
+1 tablespoon chopped fresh oregano
+1/2 teaspoon ground coriander seed
+3 garlic cloves, roughly chopped (about 1 1/2 tablespoons)
+1/4 cup light olive oil
+Kosher salt and freshly ground black pepper
+2 pounds boneless, skinless chicken thighs, trimmed of excess fat (6 to 8 thighs)
+1 tablespoon vegetable or canola oil
+Instructions: 
+For the chicken: Combine the lemon juice, oregano, coriander, garlic, and olive oil in a blender. Blend until smooth. Season the marinade to taste with kosher salt and black pepper. Place the chicken in a 1-gallon zipper-lock bag and add half of the marinade (reserve the remaining marinade in the refrigerator). Turn the chicken to coat, seal the bag, and marinate the chicken in the refrigerator for at least 1 hour and up to 4 hours, turning occasionally to redistribute the marinade (see Note).
+Remove the chicken from the bag and pat it dry with paper towels. Season with kosher salt and pepper, going heavy on the pepper. Heat the oil in a 12-inch heavy-bottomed cast iron or stainless-steel skillet over medium-high heat until it is lightly smoking. Add the chicken pieces and cook without disturbing until they are lightly browned on the first side, about 4 minutes. Using tongs, flip the chicken. Reduce the heat to medium and cook until the chicken is cooked through and the center of each thigh registers 165°F. on an instant-read thermometer, about 6 minutes longer. Transfer the chicken to a cutting board and allow to cool for 5 minutes.
+Using a chef’s knife, roughly chop the chicken into 1/2- to 1/4-inch chunks. Transfer to a medium bowl, add the remaining marinade, cover loosely with plastic, and refrigerate while you cook the rice and prepare the sauce.
+## For the rice:
+Ingredients:
+2 tablespoons unsalted butter
+1/2 teaspoon turmeric
+1/4 teaspoon ground cumin
+1 1/2 cups long-grain or Basmati rice
+2 1/2 cups chicken broth
+Kosher salt and freshly ground black pepper
+Instructions:
+Melt the butter over medium heat in a large Dutch oven. Add the turmeric and cumin and cook until fragrant but not browned, about 1 minute. Add the rice and stir to coat. Cook, stirring frequently, until the rice is lightly toasted, about 4 minutes. Add the chicken broth. Season to taste with salt and pepper. Raise the heat to high and bring to a boil. Cover, reduce to a simmer, and cook for 15 minutes without disturbing. Remove from the heat and allow to rest until the water is completely absorbed and the rice is tender, about 15 minutes.
+## For the sauce:
+Ingredients:
+1/2 cup mayonnaise
+1/2 cup Greek yogurt
+1 tablespoon sugar
+2 tablespoons white vinegar
+1 teaspoon lemon juice
+1/4 cup chopped fresh parsley
+Kosher salt and freshly ground black pepper
+Instructions:
+In a small bowl, combine the mayonnaise, yogurt, sugar, vinegar, lemon juice, parsley, and 2 teaspoons black pepper. Whisk to combine. Season to taste with salt.
+## To serve:
+Ingredients:
+1 head iceberg lettuce, shredded
+1 large tomato, cut into wedges
+Fluffy pocketless pita bread, brushed in butter, lightly toasted, and cut into 1 × 3-inch strips
+Harissa-style hot sauce, for serving
+Instructions:
+Return the entire contents of the chicken bowl (chicken, marinade, and all juices) to the skillet. Cook over medium-high heat, stirring occasionally, until heated through. To serve, divide the rice, lettuce, tomato, and toasted pita bread evenly among four to six plates. Pile the chicken on top of the rice. Top with the white sauce and hot sauce. Serve immediately, passing extra sauce at the table.
 # Chicken Marsala
 Attribution: America’s Test Kitchen
 Source: The Best Recipe
@@ -271,15 +344,108 @@ Ingredients:
 ¾ cup mayonnaise, add more if needed
 2 Tbsp sugar
 1 teaspoon white vinegar
-# Jiffy Cornbread 
+# Jiffy Corn Muffins 
 Ingredients:
-Boxed Jiffy Cornbread mix
-Ingredients in the instructions 
+1 Box Jiffy Corn muffin mix
+1 egg
+⅓ c milk
 ½ c sour cream
 Honey to taste 
 Instructions:
-Follow the instructions on the box. 
+preheat oven to 400 F. Grease muffin pan or use paper baking cups.
+blend ingredients. batter will be slightly lumpy. (for maximum crown on muffins let batter rest for 3 or 4 minutes, stir lightly before filling cups.)
+fill muffin cups ⅔ full.
+bake 15-20 minutes or until golden brown.
 After baking, while still warm, drizzle honey on the cornbread.
+## Johnny Cake / Jiffy Cornbread
+Instructions:
+Prepare as directed for Corn Muffins, except pour batter into greased 8” square pan. bake 20-25 minutes.
+# Jamaican Black Pepper Shrimp
+Attribution: Crazy Man in the Kitchen
+Source: Cheesecake Factory
+url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
+## Prep the Shrimp
+Ingredients:
+1 lb of uncooked large shrimp (41-50 count)
+1/4 of a cup of white rice flour
+1/3 teaspoon of cayenne pepper
+1/2 teaspoon of black pepper
+pinch of salt
+1/2 teaspoon of thyme
+Instructions:
+Take 1/4 of a cup of white rice flour and mix it with 1/3 teaspoon of cayenne pepper, 1/2 teaspoon of black pepper, a pinch of salt, and 1/2 teaspoon of thyme. Stir mixture and pour over shrimp to coat. You do not need to use the entire mixture - just enough to coat the shrimp to your liking.
+## Make the Sauce
+IngredientsL
+1 cup of chicken broth
+1/3 of a cup of minced garlic
+1 cup of Budweiser or Bud Light
+4 tablespoons of Worcestershire Sauce
+1/2 cup of Black Molasses
+1 & 1/2 teaspoons of McCormick Perfect Pinch Caribbean Jerk Seasoning
+Instructions:
+Mix the ingredients listed above into a bowl then transfer into a large sauce pan. Stir for approximately 5 minutes on high heat with no lid then add the following into the pan while over the heat:
+## Cook the Shrimp
+Ingredients:
+1/4 of cup of brown sugar
+1/4 of KC Masterpiece Marinade Caribbean Jerk
+2 tablespoons of butter
+Instructions:
+Stir on high for another 5 minutes with no lid then add the shrimp. Continue to monitor on high for another 5 minutes then set to medium heat and cook for another 5 minutes while the sauce thickens.
+## To Serve
+Ingredients:
+0.5 recipe Mango Salsa
+1 recipe Seasoned White rice
+0.15 recipe Instant Pot Beans (1 cup, use black beans)
+0.25 recipe Grilled / Fried Plantains
+# Grilled / Fried Plantains
+Attribution: Crazy Man in the Kitchen
+Source: Cheesecake Factory
+url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
+Ingredients:
+2 ripe plantains
+3 tablespoons olive oil
+Instructions:
+Peel and slice the plantains into thirds horizontally then cut them into fourths vertically to form finger sized slices. Saute in a pan with a little bit of olive oil on medium to high heat watching them closely so they don't burn. Turn heat down and put the lid on to let them finish off.
+# Seasoned White RIce
+Attribution: Crazy Man in the Kitchen
+Source: Cheesecake Factory
+url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
+Ingredients:
+1 cup of rice
+2 cups of water
+1 tablespoon of butter
+1/2 teaspoon of basil
+Instructions:
+Put 1 cup of rice and two cups of water into a rice cooker if you have one and set them to cook. Once done transfer the rice to a large bowl and add 1 tablespoon of butter. Mix thoroughly. Finally, add a half teaspoon of basil for taste.
+# Mango Salsa
+Attribution: Crazy Man in the Kitchen
+Source: Cheesecake Factory
+url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
+Ingredients: 
+6-8 mango spears
+1-2 tomatoes
+1 peach
+3-4 sprigs of fresh parsley
+Instructions:
+Dice the mango, tomatoes, and the peach into tiny pieces. Transfer them to a bowl then use a pair of scissors to add some freshly cut parsley to the mixture.
+# Instant Pot Beans
+Yield: 56 fl oz. cooked beans plus 2 cups bean cooking liquid
+Note: The calculus for salt here is about 1% salt for the total mass of beans plus vegetables plus water, or about 2200g with 0.75% salt and 0.5% MSG. If using only salt you should increase it to 22g salt.
+Ingredients:
+450g (1 lb) pinto beans or black beans
+1.5 L water
+½ yellow peeled onion, root discarded
+2 cloves peeled garlic
+2 bay leaves
+½ tsp oregano
+½ tsp cumin
+1 sprig epazote (optional)
+15g salt
+10g MSG
+Instructions: 
+Add all ingredients to an instant pot and press the “Chili / Beans” button OR pressure cook on high for 30 minutes. Let cook and cool completely (the vent pin must retract), about 1-½ hours.
+Discard the bay leaves. 
+Optional: If converting the recipe to Refried Style, reserve the cooked garlic and onion for blending
 # Paella
 url: https://www.bonappetit.com/recipe/paella-de-pollo-con-verduras
 Author: Jose Andres
@@ -392,8 +558,8 @@ Put radish sprouts on top and add 3 cups of stock.
 Cook over medium high heat. Korean style is to cook at the table with a portable burner. Friends and family will be sitting around the pot, talking and laughing, and maybe drinking. You can take a bit of cooked sausage or the meat with your chopsticks as you wait for the broth to boil and the noodles to soften. If you don’t have a tabletop burner, you can cook it on the stove away from the table.
 When it starts boiling about 10 minutes later, stir and turn the ingredients over with tongs to cook evenly.
 Serve right after the noodles and ramyeon have softened. Transfer some cooked stew to individual bowls and serve. Add more stock as the broth boils down.
-# Doctored Up Boxed Cake
-Note: A lot of grandmas I know don't want to accept the shame of using boxed cake mix and following the directions, so they'll say “it's a box cake, but I Doctored it up”. Honestly I've never had a purely from scratch cake that's better, so why fight it?
+# Doctored-Up Boxed Cake
+Note: A lot of grandmas I know don't want to accept the shame of using boxed cake mix and following the directions, so they'll say “it's a box cake, but I Doctored it up”. Honestly I don’t understand that shame, and boxed cake mixes get the benefit of industrial ingredients that help texture tremendously, so why fight it?
 Ingredients:
 1 package Betty Crocker boxed cake mix
 ¾ c milk
@@ -505,8 +671,26 @@ Instructions:
 While cioppino simmers, mix 4 Tbsp. unsalted butter, room temperature, 1 Tbsp. chopped parsley, ½ tsp. finely grated lemon zest, and a pinch of kosher salt in a small bowl. Taste gremolata butter and season with more salt if needed.
 Heat broiler. Arrange 1 baguette, sliced, on a rimmed baking sheet and toast bread, turning halfway through, until light golden, about 4 minutes. Rub cut sides of 1 garlic clove, halved, over toasts.
 Spread gremolata butter over toasts. Ladle cioppino into shallow bowls and serve with toasts.
+# Simple Tomato Angel Hair
+Note: Adapted from Anna Stockwell’s 15-Minute Cherry Tomato Angel Hair on Epicurious. When making this with cherry tomatoes the skins separate and litter the finished dish in an unpleasant way.
+Author: Matt Boss
+Yield: 4–6 servings
+Ingredients:
+1 lb. angel hair
+1 tsp. Diamond Crystal Kosher salt plus more for pasta pot
+½ cup olive oil
+2 large garlic cloves, finely chopped
+1 28-oz. can crushed tomatoes
+½ tsp. freshly ground black pepper
+1 cup coarsely chopped fresh basil
+Freshly grated Parmesan (for serving)
+Instructions:
+Cook 1 lb. pasta in a large pot of boiling salted water, stirring occasionally, until al dente; drain pasta, reserving pasta water, and transfer to a large bowl.
+Meanwhile, warm ½ cup extra-virgin olive oil in a large skillet (12" diameter) or wide heavy saucepan over medium-high heat. Add 2 large garlic cloves, finely chopped, then 3 pints cherry tomatoes, ½ tsp. freshly ground black pepper, a pinch of sugar, and 1 tsp. Diamond Crystal or ½ tsp. plus ⅛ tsp. Morton kosher salt. Cook pasta sauce, stirring occasionally, until tomatoes burst and release their juices, 6–8 minutes.
+Toss cooked pasta with cherry tomato sauce; if needed, thin sauce with a little reserved pasta water. Toss in 1 cup coarsely chopped fresh basil and top with freshly grated Parmesan.
 # 15-Minute Cherry Tomato Angel Hair (burst tomato pasta)
 Attribution: Epicurious
+Author: Anna Stockwell
 Yield: 4–6 servings
 note: when making this with cherry tomatoes the skins separate and litter the finished dish.
 url: https://www.epicurious.com/recipes/food/views/pasta-with-15-minute-burst-cherry-tomato-sauce-56390060
@@ -515,7 +699,7 @@ Ingredients:
 1 tsp. Diamond Crystal Kosher salt plus more for pasta pot
 ½ cup olive oil
 2 large garlic cloves, finely chopped
-3 pints cherry tomatoes or 1 28-oz. can crushed tomatoes
+3 pints cherry tomatoes
 ½ tsp. freshly ground black pepper
 1 cup coarsely chopped fresh basil
 Freshly grated Parmesan (for serving)
@@ -3407,11 +3591,29 @@ Heat the oven to 450 degrees. Arrange the bacon in a single layer on 2 aluminum 
 Bake until the bacon is browned and starts to ripple, or to desired doneness, 10 to 20 minutes. (Because the cook time depends on the thickness of the bacon and how you like it cooked, start checking doneness at the 10-minute mark.)
 
 Transfer the bacon to a paper towel-lined plate to drain.							
-# Italian [American] Meatballs
+# Air Fryer Meatballs
+Author: Matt Boss
+Note: Adapted from Anne Burrell’s Excellent Meatballs to use my savory salt, forget about using fresh parsley, lamb and pork, and using an airfryer as a massive quality of life improvement.
+Ingredients:
+1 large onion, finely minced
+kosher salt
+½ tsp savory Salt
+2 cloves garlic, smashed and chopped
+½ tsp crushed red pepper flakes
+1-1/2 pound ground beef
+2 large eggs
+1 cup grated parmesan cheese
+½ tsp dry oregano
+½ tsp dry thyme
+¾ cup breadcrumbs or 1 cup panko breadcrumbs
+Instructions:
+In a nonstick pan cook the onions over medium or medium-low heat. Season the onions with salt and sweat for about 5 minutes. The onions should be very soft and aromatic but have no color. Add the garlic and the crushed red pepper and saute for another 1 to 2 minutes. Turn off heat and allow to cool.
+In a large bowl combine the meats, eggs, cheese, herbs, cooled aromatics, savory salt, and bread crumbs. Season generously with salt and mix it together with a potato masher or your hands. Shape the meat mixture into 1-1/2 Tbsp balls (#40 disher),
+In three batches, air fry the shaped meatballs at 370 F for 9 minutes. Either discard the rendered fat or use it as the base for marinara sauce.			
+# Excellent Meatballs
 Attribution: Food Network
 Author: Anne Burrell 		
 URL: https://www.foodnetwork.com/recipes/anne-burrell/excellent-meatballs-recipe-1943292 			
-Note: Air Fryer is a massive quality of life improvement as a cooking method for these
 Ingredients:
 1 large onion, minced
 
@@ -4312,7 +4514,7 @@ Bring to a boil, turn heat down to low or medium-low a simmer. Cook for 10 minut
 # Cassoulet Toulousian
 Attribution: America’s Test Kitchen
 Yield: SERVES 6
-Note: If flageolet beans aren't available, use great Northern beans or other small white beans. You may have to modify the cooking times slightly to account for dif-ferences in the size of the beans. Avoid using canned beans their flavor and texture will pale in compar-ison to properly cooked dried beans. Leave the salt pork skin in the cassoulet when serving. Although it is not eaten, it imparts flavor to the dish and should be left in the pot.
+Note: If flageolet beans aren't available, use great Northern beans or other small white beans. You may have to modify the cooking times slightly to account for differences in the size of the beans. Avoid using canned beans their flavor and texture will pale in comparison to properly cooked dried beans. Leave the salt pork skin in the cassoulet when serving. Although it is not eaten, it imparts flavor to the dish and should be left in the pot.
 Ingredients:
 1 pound dried flageolet beans, washed, picked over, covered with 10 cups water, and soaked overnight (6 hours or longer)
 8 sprigs fresh parsley
@@ -4729,12 +4931,17 @@ Combine lemon juice and cornstarch in a small bowl. Heat remaining 1 tablespoon 
 
 Return skillet to medium heat, add lemon juice–cornstarch mixture, and cook until slightly thickened, 1 minute. Remove from heat and whisk in butter and parsley until combined. Return shrimp and any accumulated juices to skillet and toss to combine. Serve, passing lemon wedges separately.
 # Carbonara
+Attribution: Serious Eats
+url: https://www.seriouseats.com/pasta-carbonara-sauce-recipe
+Author: Daniel Gritzer
+Notes: Remember not to oversalt your pasta water; you'll add some of it to your sauce, which will already have salty ingredients. Feel free to substitute another dried pasta, such as penne, if desired. Guanciale, cured pork jowl, is generally considered the most authentic choice here; it's fattier than pancetta or bacon and often more heavily spiced, creating a pasta with pronounced spice notes and an extra-unctuous texture. Pancetta delivers the cleanest porky flavor, while American bacon, though less traditional, adds a hit of pleasant smoke. Use whichever you prefer.
+# Cook the noodles
 Ingredients:
 1/2 pound (220g) dried spaghetti
 Instructions:
 Bring a pot of salted water to a boil. Add pasta and cook until al dente.
-
 When the pasta is cooked, reserve 1/4 cup pasta water
+# Make the carbonara sauce
 Ingredients:
 1 large strip of bacon, sliced into thin rashers (about 1 1/2 ounces; 45g)
 

@@ -258,7 +258,7 @@
     {
       "id": "smoked-paprika",
       "name": "smoked paprika",
-      "aliases": ["smoked paprika", "spanish paprika"]
+      "aliases": ["smoked paprika"]
     },
     {
       "id": "paprika",
@@ -306,14 +306,14 @@
       "aliases": ["honey", "raw honey"]
     },
     {
-      "id": "basil",
-      "name": "basil",
-      "aliases": ["basil"]
+      "id": "dried-basil",
+      "name": "dried basil",
+      "aliases": ["dried basil", "dry basil"]
     },
     {
       "id": "fresh-basil",
       "name": "fresh basil",
-      "aliases": ["fresh basil", "sweet basil", "basil leaves"]
+      "aliases": ["fresh basil", "basil leaves"]
     },
     {
       "id": "thyme",
@@ -793,7 +793,7 @@
     {
       "id": "long-grain-rice",
       "name": "long grain rice",
-      "aliases": ["long grain white rice", "white rice", "long grain grain rice", "long grain rice"]
+      "aliases": ["long grain white rice", "long-grain white rice", "white rice", "long-grain rice", "long grain rice"]
     },
     {
       "id": "short-grain-rice",
@@ -801,9 +801,9 @@
       "aliases": ["short grain rice", "medium grain rice", "short grain white rice", "medium grain white rice"]
     },
     {
-      "id": "basmati-rice",
-      "name": "basmati rice",
-      "aliases": ["basmati rice"]
+      "id": "basmati",
+      "name": "basmati",
+      "aliases": ["basmati rice", "basmati"]
     },
     {
       "id": "jasmine-rice",
@@ -818,7 +818,7 @@
     {
       "id": "quinoa",
       "name": "quinoa",
-      "aliases": ["quinoa", "white quinoa"]
+      "aliases": ["quinoa", "white quinoa", "red quinoa"]
     },
     {
       "id": "couscous",
@@ -826,14 +826,9 @@
       "aliases": ["couscous"]
     },
     {
-      "id": "sriracha-sauce",
-      "name": "sriracha sauce",
-      "aliases": ["sriracha sauce", "sriracha", "rooster sauce"]
-    },
-    {
       "id": "hot-sauce",
       "name": "hot sauce",
-      "aliases": ["hot sauce", "tabasco", "franks red hot"]
+      "aliases": ["hot sauce", "pepper sauce", "hot pepper sauce"]
     },
     {
       "id": "hoisin-sauce",
@@ -961,9 +956,14 @@
       "aliases": ["mint", "mint leaves", "fresh mint"]
     },
     {
-      "id": "sage",
-      "name": "sage",
-      "aliases": ["sage", "dry rubbed sage", "rubbed sage", "fresh sage", "sage leaves"]
+      "id": "dried-sage",
+      "name": "dried sage",
+      "aliases": ["dry rubbed sage", "rubbed sage"]
+    },
+    {
+      "id": "fresh-sage",
+      "name": "fresh-sage",
+      "aliases": ["sage", "fresh sage", "sage leaves"]
     },
     {
       "id": "nutmeg",
@@ -3894,6 +3894,11 @@
       "id": "lamb-leg",
       "name": "lamb leg",
       "aliases": ["leg of lamb", "boneless leg of lamb"]
+    },
+    {
+      "id": "lamb-shoulder",
+      "name": "lamb shoulder",
+      "aliases": ["boneless lamb shoulder"]
     },
     {
       "id": "beef-tripe",

@@ -1,10 +1,13 @@
 beautifulsoup4
 datasette
+fastapi
 ijson
+inflect
 lxml
 pandas
 playwright
 pyarrow
+pydantic
 python-dotenv
+pytest
 requests
-sqlite3

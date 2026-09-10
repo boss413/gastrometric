@@ -54,20 +54,14 @@ def main():
     from gastrometric.pipeline.parse.parse_ingredient_blocks import parse_ingredient_blocks
     parse_ingredient_blocks()
 
-    from gastrometric.understanding.build_lexical_spans import build_lexical_spans
+    from gastrometric.orchestration.recipe_ingredient_understanding import build_lexical_spans
     build_lexical_spans()
 
-    from gastrometric.understanding.ingredient_parser import process_recipe_lines
+    from gastrometric.orchestration.recipe_ingredient_understanding import process_recipe_lines
     process_recipe_lines()
 
-    from gastrometric.understanding.analyzer import persist_all_lines
+    from gastrometric.orchestration.recipe_ingredient_understanding import persist_all_lines
     persist_all_lines()
-
-
-#    from gastrometric.pipeline.observations.build_ingredient_observations import build_all_observations
-#    build_all_observations()
-#    from gastrometric.pipeline.normalize.normalize_ingredient_lines import normalize_ingredient_lines
-#    normalize_ingredient_lines()
 
 # I had to rename a table called relationships to flavor_bible_relationships, check for that if it's broken
 

@@ -1,27 +1,26 @@
 """
-Generic inventory application (BE-01).
+Generic inventory application.
 
-This is the application-level boundary for inventory management. It
-is the only thing callers (seed_kitchen.py today, the future web API
-later) should talk to for inventory operations. Callers do not need
-to know:
-  * SQLite table names or SQL,
-  * how analyzer/understanding results are serialized,
-  * where the database lives,
-  * how semantic understanding is orchestrated.
-
-Persistence lives in gastrometric.db.inventory_repository.
-The understanding seam lives in gastrometric.application.inventory_understanding
-and is a BE-01 placeholder pending BE-02A/BE-02C.
+Application-facing boundary for inventory operations. Owns input
+validation and the record<->item shape translation
+(`analysis_result_json` <-> `analysis_result`). Delegates anything that
+requires running text through understanding -- creating a new item, or
+updating one whose `original_input` changed -- to
+`gastrometric.orchestration.inventory_ingredient_orchestrator`, which is
+the sole place that calls `understand_inventory_ingredient()` and derives
+`ingredient_id`/`resolution_status` from its result. This module contains
+no understanding logic of its own; it calls `inventory_repository`
+directly only for operations that don't require re-understanding
+(read/list/delete, and quantity/unit/location-only updates).
 """
 
 import json
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from gastrometric.db import inventory_repository as repo
-from gastrometric.application.inventory_understanding import (
-    UnderstandingResult,
-    understand_inventory_input,
+from gastrometric.orchestration.inventory_ingredient_orchestrator import (
+    add_inventory_observation,
+    derive_inventory_fields,
 )
 
 VALID_LOCATIONS = ("fridge", "pantry")
@@ -53,10 +52,6 @@ def _record_to_item(record: Dict[str, Any]) -> Dict[str, Any]:
     representation returned to callers: analysis_result_json is
     parsed back into a dict (analysis_result) so callers never see
     raw JSON text.
-
-    Callers are responsible for handling the None case themselves
-    (record-not-found) so this helper's type stays precise instead of
-    forcing every return type in this module to be Optional.
     """
     item = dict(record)
     item["analysis_result"] = json.loads(item.pop("analysis_result_json"))
@@ -69,34 +64,26 @@ def create_inventory_item(
     quantity: Optional[str] = None,
     unit: Optional[str] = None,
     *,
-    understand: Callable[[str], UnderstandingResult] = understand_inventory_input,
     db_path: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Create one inventory item from raw human input.
 
-    original_input is passed through `understand` (the BE-02C seam).
-    If the result is not "resolved", ingredient_id is persisted as
-    NULL — the application never invents a canonical ingredient.
+    Validation happens here. Understanding, deriving `ingredient_id` /
+    `resolution_status`, and persisting all happen in
+    `inventory_ingredient_orchestrator.add_inventory_observation` -- this
+    function does not touch the analyzer result itself.
     """
     _validate_original_input(original_input)
     _validate_location(location)
 
-    result = understand(original_input)
-    ingredient_id = result.ingredient_id if result.status == "resolved" else None
-
-    record = repo.create_inventory_record(
-        original_input=original_input,
-        ingredient_id=ingredient_id,
-        location=location,
+    record = add_inventory_observation(
+        original_input,
+        location,
         quantity=quantity,
         unit=unit,
-        resolution_status=result.status,
-        analysis_result_json=json.dumps(result.raw_result),
         db_path=db_path,
     )
-    # repo.create_inventory_record always returns a record (never None)
-    # on success, so this is safe without an explicit None-check.
     return _record_to_item(record)
 
 
@@ -120,19 +107,20 @@ def update_inventory_item(
     location: Any = _UNSET,
     quantity: Any = _UNSET,
     unit: Any = _UNSET,
-    understand: Callable[[str], UnderstandingResult] = understand_inventory_input,
     db_path: Optional[str] = None,
 ) -> Optional[Dict[str, Any]]:
     """
     Update an existing inventory item. Only fields explicitly passed
     are changed; omitted keyword arguments retain their current value.
 
-    Changing location/quantity/unit alone retains the existing
-    semantic result (no re-understanding call).
+    Changing location/quantity/unit alone retains the existing semantic
+    result (no re-understanding call).
 
-    Changing original_input re-runs it through `understand` and the
-    resulting ingredient_id/resolution_status/analysis_result_json
-    replace the previous values.
+    Changing original_input re-derives ingredient_id/resolution_status/
+    analysis_result_json via
+    `inventory_ingredient_orchestrator.derive_inventory_fields` -- the
+    same derivation logic the create path uses, not a separate copy of
+    it here.
 
     Returns None if item_id does not exist.
     """
@@ -153,10 +141,10 @@ def update_inventory_item(
     input_changed = original_input is not _UNSET and new_original_input != existing["original_input"]
 
     if input_changed:
-        result = understand(new_original_input)
-        new_ingredient_id = result.ingredient_id if result.status == "resolved" else None
-        new_resolution_status = result.status
-        new_analysis_result_json = json.dumps(result.raw_result)
+        fields = derive_inventory_fields(new_original_input)
+        new_ingredient_id = fields["ingredient_id"]
+        new_resolution_status = fields["resolution_status"]
+        new_analysis_result_json = json.dumps(fields["analysis_result"])
     else:
         new_ingredient_id = existing["ingredient_id"]
         new_resolution_status = existing["resolution_status"]

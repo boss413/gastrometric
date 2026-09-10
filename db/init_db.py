@@ -160,6 +160,8 @@ def init_db():
             imperial_volume_value REAL,
             imperial_volume_unit TEXT,
 
+            size TEXT,
+
             natural_portion_value REAL,
             natural_portion_min REAL,
             natural_portion_max REAL,
@@ -393,7 +395,7 @@ def init_db():
         c.execute("""
             CREATE TABLE IF NOT EXISTS ingredient_aliases (
                 id              INTEGER PRIMARY KEY,
-                ingredient_id   INTEGER NOT NULL,
+                ingredient_id   TEXT NOT NULL,
                 alias           TEXT UNIQUE NOT NULL,
                 confidence      REAL,
                 source          TEXT,   -- e.g. 'ingredients.json', 'manual'
@@ -638,26 +640,8 @@ def init_db():
             )
         """)
         # ----------------------------------------------------------------
-        # Pantry / fridge
+        # Inventory Items = Pantry + fridge
         # ----------------------------------------------------------------
-        c.execute("""
-            CREATE TABLE IF NOT EXISTS pantry_items (
-                id              INTEGER PRIMARY KEY AUTOINCREMENT,
-                ingredient_id   INTEGER,
-                ingredient_name TEXT,
-                quantity        TEXT,
-                unit            TEXT,
-                FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
-            )
-        """)
-        c.execute("""
-            CREATE TABLE IF NOT EXISTS fridge_items (
-                id              INTEGER PRIMARY KEY,
-                ingredient_id   INTEGER,
-                ingredient_name TEXT,
-                FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
-            )
-        """)
         conn.commit()
         c.execute("""
             CREATE TABLE IF NOT EXISTS inventory_items (

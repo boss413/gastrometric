@@ -17,6 +17,7 @@ from typing import Dict, List, Tuple
 
 from ..builder import KnowledgeBuilder
 from ..models import BuildResult
+from ..pluralizer import both_forms
 
 # Valid vocabulary classes, mirrored from the runtime loader's classification
 # helpers (knowledge.loader.CulinaryVocabulary). Keep this in sync with that
@@ -79,18 +80,6 @@ def _normalize(term: str, *, vocabulary_class: str) -> str:
     return normalized
 
 
-def _pluralize(term: str) -> str:
-    """Applies basic pluralization rules to singular nouns."""
-    if term.endswith("s"):
-        return term + "es"
-    elif term.endswith("fe"):
-        return term[:-2] + "ves"
-    elif term.endswith("f"):
-        return term[:-1] + "ves"
-    else:
-        return term + "s"
-
-
 def _validate_and_normalize(raw: object) -> Tuple[Dict[str, List[str]], List[str]]:
     """Validate the raw seed JSON and return normalized, deduplicated,
     per-class term lists alongside any duplicate warnings.
@@ -138,16 +127,20 @@ def _validate_and_normalize(raw: object) -> Tuple[Dict[str, List[str]], List[str
             else:
                 seen_in_class[normalized] = None
                 
-            # Apply auto-pluralization for target noun classes
+            # Apply auto singular/plural expansion for target noun classes:
+            # whichever form (singular or plural) the seed entry was NOT
+            # written in, add that counterpart form too.
             if vocabulary_class in PLURAL_TARGET_CLASSES:
-                plural = _pluralize(normalized)
-                if plural in seen_in_class:
-                    duplicate_warnings.append(
-                        f'Duplicate auto-plural detected and deleted: "{plural}" '
-                        f'in class "{vocabulary_class}"'
-                    )
-                else:
-                    seen_in_class[plural] = None
+                singular, plural = both_forms(normalized)
+                other_form = singular if normalized == plural else plural
+                if other_form != normalized:
+                    if other_form in seen_in_class:
+                        duplicate_warnings.append(
+                            f'Duplicate auto-generated form detected and deleted: "{other_form}" '
+                            f'in class "{vocabulary_class}"'
+                        )
+                    else:
+                        seen_in_class[other_form] = None
 
         normalized_by_class[vocabulary_class] = list(seen_in_class.keys())
 

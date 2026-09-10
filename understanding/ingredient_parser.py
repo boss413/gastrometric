@@ -1,10 +1,7 @@
-import sqlite3
 import json
 import itertools
 from dataclasses import dataclass, field, asdict
 from typing import List, Any, Type, Dict, Optional, cast
-
-from gastrometric.config.paths import DB_PATH
 
 # ---------------------------------------------------------------------------
 # AST NODE DEFINITIONS
@@ -1448,104 +1445,3 @@ class IngredientParser:
             i += 1
 
         return [r for r in refs if not isinstance(r, (AlternativeMarker, ConjunctionMarker))]
-
-
-# ---------------------------------------------------------------------------
-# DATABASE ORCHESTRATOR
-# ---------------------------------------------------------------------------
-#
-# Required schema (created by init_db.py -- NOT by this module):
-#
-#   recipe_ingredient_lines_raw(
-#       id, ingredient_block_id, recipe_id, recipe_section_id,
-#       recipe_name, section_name, line_index, raw_text
-#   )
-#   lexical_spans(
-#       span_id, recipe_ingredient_line_id, span_order, start_offset,
-#       end_offset, text, normalized_value, span_type, knowledge_id,
-#       source_vocabulary
-#   )
-#   ingredient_parse_trees(
-#       id INTEGER PRIMARY KEY, recipe_ingredient_line_id INTEGER,
-#       parse_tree_json TEXT
-#   )
-#
-# `parse_tree_json` holds a serialized `ParseResult` (node_type
-# "ParseResult", with a `candidates` list of one or more `Candidate`
-# objects, each `{tree: <complete IngredientLine>, unresolved: [...]}`)
-# -- not a single tree. An unambiguous line still produces exactly one
-# candidate, so existing consumers that only need "the" tree can read
-# `candidates[0].tree`, but the column now always carries the full
-# candidate set rather than a pre-chosen interpretation.
-#
-# `recipe_ingredient_line_id` on both `lexical_spans` and
-# `ingredient_parse_trees` is expected to reference
-# `recipe_ingredient_lines_raw.id`. This module only reads `lexical_spans`
-# and writes `ingredient_parse_trees`; it does not create, alter, or assume
-# write access to any table.
-
-def process_recipe_lines(db_path: Any = DB_PATH):
-    db_path_str = str(db_path)
-    conn = sqlite3.connect(db_path_str)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    existing_tables = {row['name'] for row in cursor.fetchall()}
-    required_tables = {'lexical_spans', 'recipe_ingredient_lines_raw', 'ingredient_parse_trees'}
-
-    missing_tables = required_tables - existing_tables
-    if missing_tables:
-        conn.close()
-        raise RuntimeError(
-            f"Expected tables {missing_tables} are missing in the database at {db_path_str}. "
-            "Please run init_db.py first to create the necessary tables."
-        )
-
-    cursor.execute('''
-        SELECT DISTINCT recipe_ingredient_line_id
-        FROM lexical_spans
-        ORDER BY recipe_ingredient_line_id
-    ''')
-    line_ids = [row['recipe_ingredient_line_id'] for row in cursor.fetchall()]
-
-    parser = IngredientParser()
-
-    for line_id in line_ids:
-        cursor.execute('''
-            SELECT * FROM lexical_spans
-            WHERE recipe_ingredient_line_id = ?
-            ORDER BY span_order ASC
-        ''', (line_id,))
-
-        spans = []
-        for row in cursor.fetchall():
-            row_keys = row.keys()
-            token = LexicalToken(
-                span_id=row['span_id'],
-                span_order=row['span_order'],
-                start_offset=row['start_offset'],
-                end_offset=row['end_offset'],
-                text=row['text'],
-                normalized_value=row['normalized_value'],
-                span_type=row['span_type'],
-                knowledge_id=row['knowledge_id'] if 'knowledge_id' in row_keys else None,
-                source_vocabulary=row['source_vocabulary'] if 'source_vocabulary' in row_keys else None,
-            )
-            spans.append(token)
-
-        parse_result = parser.parse(spans)
-        tree_json = json.dumps(parse_result.to_dict())
-
-        cursor.execute('''
-            INSERT INTO ingredient_parse_trees
-            (recipe_ingredient_line_id, parse_tree_json)
-            VALUES (?, ?)
-        ''', (line_id, tree_json))
-
-    conn.commit()
-    conn.close()
-    print(f"Successfully built ASTs for {len(line_ids)} ingredient lines.")
-
-if __name__ == "__main__":
-    process_recipe_lines(DB_PATH)
