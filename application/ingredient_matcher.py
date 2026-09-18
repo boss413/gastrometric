@@ -35,7 +35,7 @@ this module to silently paper over.
 """
 
 from dataclasses import dataclass
-from typing import Any, Dict, FrozenSet, Mapping, Protocol, Tuple
+from typing import Any, Dict, FrozenSet, Mapping, Optional, Protocol, Tuple
 
 
 class RuntimeKnowledgeLike(Protocol):
@@ -157,3 +157,113 @@ def find_ingredient_matches(
         )
 
     return ()
+
+
+def ingredients_match(
+    ingredient_a: str,
+    ingredient_b: str,
+    knowledge: RuntimeKnowledgeLike,
+) -> Optional[IngredientMatch]:
+    """
+    Pairwise comparison between two already-persisted ingredient
+    identities (e.g. an inventory item's resolved `ingredient_id` and a
+    recipe ingredient's persisted `ingredient_id`) -- for BE-07's
+    inventory-to-recipe matching, which needs to ask "do these two
+    already-resolved identities refer to the same ingredient?" rather
+    than "what does this raw text resolve to?" (`find_ingredient_matches`'s
+    actual purpose).
+
+    Added here, in MATCH-01's own module, rather than in the caller (see
+    the BE-07 work order: "extend the matcher with a small pairwise
+    operation if that is cleaner" / "do not create a second semantic
+    matching implementation" elsewhere) -- this reuses
+    `find_ingredient_matches` for the non-trivial case rather than
+    touching `knowledge.ingredients`/`knowledge.ingredient_aliases`
+    directly a second time.
+
+    Returns an `IngredientMatch` if both identities resolve to the same
+    canonical ingredient name, or `None` if they don't -- either because
+    one side is blank, neither resolves at all, or they resolve to
+    different canonical names.
+
+    match_type/reason on the returned match: "exact" (`{"type":
+    "identity"}`) when the two identities are literally the same
+    normalized string -- the expected common case, since both sides are
+    already independently-resolved canonical-ish identities, not raw
+    user text. "alias" (`{"type": "alias"}`) when they differ as
+    strings but both resolve (via `find_ingredient_matches`) to the same
+    canonical name -- e.g. one side stored as an alias form of the
+    other's canonical form. `matched_term` is set to `ingredient_a` (the
+    first argument), documented so callers know which side's original
+    text it reflects.
+
+    --------------------------------------------------------------
+    IDENTITY-CONTRACT FINDING (investigated, not assumed)
+    --------------------------------------------------------------
+    A real question worth being explicit about: are persisted
+    `ingredient_id` values (in both `inventory_items` and
+    `recipe_ingredient_lines_parsed`) guaranteed to be in the same
+    string space as `knowledge.ingredients`/`knowledge.ingredient_aliases`
+    (canonical, space-separated names), or could they use a different
+    convention (e.g. hyphenated slugs like "chicken-breast")?
+
+    Evidence actually available to me: two confirmed real persisted
+    `recipe_ingredient_lines_parsed.ingredient_id` values -- "chuck
+    roast" and "chicken breast" -- are space-separated, not hyphenated,
+    consistent with the documented runtime knowledge contract (a
+    frozenset used for phrase-based lexer matching against natural
+    recipe text, which requires space-separated multi-word forms to
+    match at all). I have not seen the actual `ingredients` table
+    schema, `build_ingredients.py`, or `knowledge/loader.py` source, so
+    this is evidence, not proof.
+
+    The EXACT-MATCH path above (the `normalized_a == normalized_b`
+    check) does not depend on resolving this question either way: it
+    only compares the two persisted values to EACH OTHER, never to
+    `knowledge`. That's sound as long as both `inventory_items` and
+    `recipe_ingredient_lines_parsed` populate `ingredient_id` via the
+    same underlying analyzer output (`reference.ingredient.id`) -- an
+    architectural fact established across BE-02C/BE-02D/BE-04's
+    construction, not an accident of the two strings happening to
+    resemble each other.
+
+    The ALIAS path below DOES depend on it: if persisted `ingredient_id`
+    values ever used a convention that never appears in
+    `knowledge.ingredients`/`knowledge.ingredient_aliases` at all, two
+    genuinely-related but differently-spelled stored values could not be
+    bridged this way -- `find_ingredient_matches` would return empty for
+    both, and this function would correctly report "no match" rather
+    than silently produce a wrong one. That's a safe failure mode (see
+    `test_alias_resolution_requires_matching_vocabulary_convention` in
+    `test_recipe_matcher.py`), but a real functional limitation if the
+    premise turns out to be false -- worth confirming against the actual
+    `ingredients` table/loader source, which I cannot do from here.
+    """
+    normalized_a = _normalize(ingredient_a)
+    normalized_b = _normalize(ingredient_b)
+
+    if not normalized_a or not normalized_b:
+        return None
+
+    if normalized_a == normalized_b:
+        return IngredientMatch(
+            ingredient_name=normalized_b,
+            match_type="exact",
+            reason={"type": "identity"},
+            matched_term=ingredient_a,
+        )
+
+    matches_a = find_ingredient_matches(ingredient_a, knowledge)
+    matches_b = find_ingredient_matches(ingredient_b, knowledge)
+    if not matches_a or not matches_b:
+        return None
+
+    if matches_a[0].ingredient_name != matches_b[0].ingredient_name:
+        return None
+
+    return IngredientMatch(
+        ingredient_name=matches_b[0].ingredient_name,
+        match_type="alias",
+        reason={"type": "alias"},
+        matched_term=ingredient_a,
+    )

@@ -15,6 +15,7 @@ def init_db():
             CREATE TABLE IF NOT EXISTS recipes (
                 id                      INTEGER PRIMARY KEY,
                 recipe_name             TEXT NOT NULL,
+                recipe_alt_title        TEXT,
                 recipe_author           TEXT,
                 recipe_attribution      TEXT,
                 recipe_source           TEXT,
@@ -22,6 +23,9 @@ def init_db():
                 recipe_video            TEXT,
                 recipe_notes            TEXT,
                 recipe_yield            TEXT,
+                recipe_servings         TEXT,
+                recipe_restaurant       TEXT,
+                recipe_favorites        TEXT,
                 recipe_state            TEXT,       -- 'raw' | 'parsed' | 'enriched'
                 recipe_ingestion_method TEXT        -- 'manual'
             )

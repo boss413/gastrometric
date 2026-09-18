@@ -43,6 +43,7 @@ def ingest_markdown():
                 """
                 INSERT INTO recipes (
                     recipe_name,
+                    recipe_alt_title,
                     recipe_author,
                     recipe_attribution,
                     recipe_source,
@@ -50,20 +51,27 @@ def ingest_markdown():
                     recipe_video,
                     recipe_notes,
                     recipe_yield,
+                    recipe_servings,
+                    recipe_restaurant,
+                    recipe_favorites,
                     recipe_state,
                     recipe_ingestion_method
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'raw', 'manual')
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'raw', 'manual')
                 """,
                 (
                     recipe_name,
+                    recipe["metadata"].get("alt_title"),
                     recipe["metadata"].get("author"),
                     recipe["metadata"].get("attribution"),
                     recipe["metadata"].get("source"),
                     recipe["metadata"].get("url"),
                     recipe["metadata"].get("video"),
                     recipe["metadata"].get("notes") or recipe["metadata"].get("note"),
-                    recipe["metadata"].get("yield"),
+                    recipe["metadata"].get("yield") or recipe["metadata"].get("yields"),
+                    recipe["metadata"].get("servings"),
+                    recipe["metadata"].get("restaurant"),
+                    recipe["metadata"].get("favorite") or recipe["metadata"].get("favorites"),
                 ),
             )
             recipe_id = c.lastrowid

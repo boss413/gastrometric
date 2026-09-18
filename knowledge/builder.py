@@ -1,6 +1,6 @@
 """Shared builder interface.
 
-Every ingestion/builders/*.py module implements this so rebuild_db.py can
+Every knowledge/builders/*.py module implements this so rebuild_db.py can
 orchestrate them uniformly without knowing their internals.
 """
 from __future__ import annotations

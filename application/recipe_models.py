@@ -128,6 +128,24 @@ class Recipe:
     Only `id` and `recipe_name` are guaranteed. Every other field is
     optional and must remain `None` rather than being fabricated when
     the underlying `recipes` row doesn't have it populated (section 17).
+
+    `alt_title`, `servings`, `restaurant`, `favorite`: added per a later
+    schema addition to `recipes` (not part of BE-04's original column
+    list). ASSUMPTION FLAGGED: I'm taking the column names `alt_title`,
+    `servings`, `restaurant`, `favorites` at face value from how they
+    were described to me, not from a confirmed `CREATE TABLE`
+    statement -- unlike the original nine `recipe_*` columns, these
+    don't follow the `recipe_` prefix convention, which is plausible for
+    a later addition but worth a quick confirmation. `servings` is typed
+    `Optional[str]` rather than `Optional[int]` defensively, since I
+    don't know its real column type and `recipe_yield` (an existing,
+    similar-sounding field, e.g. "6 servings") is already free text --
+    if `servings` is actually numeric, this should become `Optional[int]`.
+    `favorite: bool` is a converted/derived field, not a raw passthrough:
+    the underlying column is described as storing `1` or `NULL` (no
+    `0` state), so `recipe_reader.py` converts `NULL -> False`,
+    `1 -> True` rather than exposing the raw nullable-int convention to
+    the application layer.
     """
 
     id: int
@@ -141,6 +159,10 @@ class Recipe:
     recipe_yield: Optional[str] = None
     recipe_state: Optional[str] = None
     recipe_ingestion_method: Optional[str] = None
+    alt_title: Optional[str] = None
+    servings: Optional[str] = None
+    restaurant: Optional[str] = None
+    favorite: bool = False
     sections: List[RecipeSection] = field(default_factory=list)
 
 

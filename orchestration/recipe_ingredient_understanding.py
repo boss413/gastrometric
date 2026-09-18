@@ -579,6 +579,84 @@ def _classify_ambiguous_reason(result: dict) -> str:
     return "other"
 
 
+# Coarse, four-bucket outcome summary requested for a quick top-of-report
+# read -- display order matches how it was asked for, not alphabetical.
+# See `_classify_outcome_summary`'s docstring for exactly what each
+# bucket means and, importantly, what it PAPERS OVER -- this is a
+# compression of the richer status/reason breakdown printed below it,
+# not a replacement for it.
+_OUTCOME_SUMMARY_ORDER = [
+    ("confident_success", "Confident successes (resolved, ingredient identified)"),
+    ("likely_success", "Likely successes (ingredient identified, minor gaps)"),
+    ("failed_ambiguous", "Failed - ambiguous (needs curator tiebreak)"),
+    ("failed_no_ingredient_match", "Failed - no ingredient match"),
+]
+
+
+def _classify_outcome_summary(result: dict, rows: List[dict]) -> str:
+    """One of the four buckets in `_OUTCOME_SUMMARY_ORDER`, in priority
+    order (each line gets exactly one, even though the underlying
+    status/reason data is richer and not always this clean-cut -- see
+    the caveats below and the reply this shipped with for the full
+    assessment of whether these four are the right buckets at all):
+
+    - "failed_ambiguous": top-level status "ambiguous". Covers BOTH
+      SS I.4's compound-scope case (produces no row at all) and a
+      genuine tied-evidence case that still produced a row (see
+      `_classify_ambiguous_reason`'s "tied_evidence_score") -- both need
+      a curator's judgment call, so both count here regardless of
+      whether a row happened to come out the other end. If you want to
+      tell those two apart at this top level (their operational urgency
+      really does differ -- one has nothing downstream yet, the other
+      already does and just wants a second look), split on
+      `result.get("selected_interpretation")` here the same way
+      `_classify_ambiguous_reason` already does.
+    - "failed_no_ingredient_match": status "invalid" (no viable candidate
+      survived AT ALL -- nothing was extracted, not just the ingredient),
+      OR zero rows were produced for any other reason, OR at least one
+      produced row has `ingredient_id is None` (e.g. a component-only
+      reference that still got selected). Folding "invalid" in here is a
+      judgment call, not a fact the data forces -- it could just as
+      reasonably be its own fifth bucket ("totally unparseable") since it
+      means less was extracted than a line that at least identified
+      SOMETHING and only failed on the ingredient specifically. Kept
+      separately countable below (see `status_counts["invalid"]` in the
+      existing detailed section) so you can see how much this matters
+      for your corpus before deciding.
+    - "likely_success": a candidate WAS selected (status "resolved" or
+      "unresolved", not ambiguous), every produced row has an
+      ingredient_id, but the interpretation still carries at least one
+      `unresolved[]` entry somewhere -- a stray unmapped symbol, an
+      unsupported additional measurement, unrecognized text, etc. This
+      bucket is NOT a uniform quality tier: a line short one punctuation
+      mark and a line missing a whole measurement both land here. Cross-
+      reference `unresolved_reason_counts` below to see which specific
+      reasons are actually driving this bucket's size.
+    - "confident_success": status "resolved" -- by construction (see
+      `_resolve_ingredient`/`_derive_result`), this means zero
+      `unresolved[]` entries anywhere in the winning interpretation AND
+      every reference in it has a resolved ingredient_id.
+
+    Classified per ANALYZED LINE, not per downstream row -- a compound
+    reference (e.g. "salt and pepper", "milk or cream") can still produce
+    several rows from one line. Rule for that case: if ANY produced row
+    is missing an ingredient_id, the whole line counts as
+    "failed_no_ingredient_match" (conservative -- flags the line for
+    review rather than half-crediting it).
+    """
+    if result["status"] == "ambiguous":
+        return "failed_ambiguous"
+    if (
+        result["status"] == "invalid"
+        or not rows
+        or any(row.get("ingredient_id") is None for row in rows)
+    ):
+        return "failed_no_ingredient_match"
+    if result["status"] == "resolved":
+        return "confident_success"
+    return "likely_success"  # status == "unresolved": selected, not ambiguous, ingredient present
+
+
 class ReportStats:
     """Aggregate counters for the execution report (item 17). Built
     incrementally from `analyze_all_lines()`'s output -- no per-line state
@@ -590,6 +668,7 @@ class ReportStats:
         self.status_counts: "Counter[str]" = Counter()
         self.ambiguous_reason_counts: "Counter[str]" = Counter()
         self.unresolved_reason_counts: "Counter[str]" = Counter()
+        self.outcome_summary_counts: "Counter[str]" = Counter()
         self.lines_zero_row = 0
         self.lines_one_row = 0
         self.lines_multi_row = 0
@@ -615,7 +694,11 @@ class ReportStats:
                     self.unresolved_reason_counts[entry["reason"]] += 1
 
     def record_projection(
-        self, rows: List[dict], unmapped_units: List[str], unmapped_package_size: List[str]
+        self,
+        result: dict,
+        rows: List[dict],
+        unmapped_units: List[str],
+        unmapped_package_size: List[str],
     ) -> None:
         if len(rows) == 0:
             self.lines_zero_row += 1
@@ -626,6 +709,7 @@ class ReportStats:
         for unit in unmapped_units:
             self.unmapped_units[unit] += 1
         self.unmapped_package_size_count += len(unmapped_package_size)
+        self.outcome_summary_counts[_classify_outcome_summary(result, rows)] += 1
 
     def record_missing_lineage(self, recipe_ingredient_line_id: int) -> None:
         self.missing_lineage_line_ids.append(recipe_ingredient_line_id)
@@ -636,6 +720,19 @@ def _print_report(stats: "ReportStats") -> None:
     total = stats.total_lines
 
     print("Analyzer Execution Report")
+    print(rule)
+
+    print("Outcome summary")
+    for key, label in _OUTCOME_SUMMARY_ORDER:
+        count = stats.outcome_summary_counts.get(key, 0)
+        pct = (count / total * 100) if total else 0.0
+        print(f"  {label:<52}{count:>8,} ({pct:5.1f}%)")
+    print(
+        "  (a compression of the detailed status/reason breakdown below --\n"
+        "   see _classify_outcome_summary's docstring for what each bucket\n"
+        "   does and doesn't tell you)"
+    )
+
     print(rule)
     print(f"{'Lines analyzed:':<40}{total:>10,}")
     print(f"{'Lines producing zero downstream rows:':<40}{stats.lines_zero_row:>10,}")
@@ -705,7 +802,9 @@ def _print_report(stats: "ReportStats") -> None:
 
 
 def persist_all_lines(
-    db_path: Optional[Any] = None, line_ids: Optional[Iterable[int]] = None
+    db_path: Optional[Any] = None,
+    line_ids: Optional[Iterable[int]] = None,
+    print_report: bool = True,
 ) -> ReportStats:
     """Runs `analyze_all_lines()` and writes BOTH RO-10 outputs for every
     line: the primary downstream rows (`recipe_ingredient_lines_parsed`)
@@ -720,8 +819,20 @@ def persist_all_lines(
     Single transaction for the whole run (matching
     `process_recipe_lines()`'s existing commit-once pattern); rolls back
     entirely on any error so no line is left with diagnostic rows but no
-    primary rows, or vice versa. Returns a `ReportStats` (see `main()` for
-    the printed report built from it).
+    primary rows, or vice versa.
+
+    `print_report=True` (default) prints the execution report before
+    returning -- matching `build_lexical_spans()`/`process_recipe_lines()`,
+    which already print their own summary unprompted (their "Span types"
+    breakdown and "Successfully built ASTs..." line respectively). This
+    stage used to be the one exception, printing nothing itself and
+    relying on `main()` to call `_print_report` afterward -- which meant
+    calling `persist_all_lines()` the same way you call the other two
+    stages (bare call, return value ignored, as `rebuild_db.py` does)
+    silently produced no report at all. Pass `print_report=False` if
+    you're building your own reporting around the returned `ReportStats`
+    instead -- e.g. aggregating stats across several targeted `line_ids`
+    calls before printing once at the end.
     """
     from gastrometric.config.paths import DB_PATH
 
@@ -736,7 +847,7 @@ def persist_all_lines(
             _persist_analysis_record(write_conn, recipe_ingredient_line_id, parse_tree_id, result)
 
             rows, unmapped_units, unmapped_package_size = _project_selected_references(result)
-            stats.record_projection(rows, unmapped_units, unmapped_package_size)
+            stats.record_projection(result, rows, unmapped_units, unmapped_package_size)
 
             if rows:
                 line_lineage = lineage.get(recipe_ingredient_line_id)
@@ -758,12 +869,13 @@ def persist_all_lines(
         raise
     finally:
         write_conn.close()
+    if print_report:
+        _print_report(stats)
     return stats
 
 
 def main() -> None:
-    stats = persist_all_lines()
-    _print_report(stats)
+    persist_all_lines()
 
 
 if __name__ == "__main__":

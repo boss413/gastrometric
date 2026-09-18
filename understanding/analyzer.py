@@ -439,7 +439,7 @@ def _resolve_ingredient(
         child_type = _node_type(child)
         if child_type == "IngredientNode":
             core_leaves.append(child)
-        elif child_type in _INGREDIENT_MODIFIER_CLASS_BY_NODE_TYPE:
+        elif child_type is not None and child_type in _INGREDIENT_MODIFIER_CLASS_BY_NODE_TYPE:
             term = _span_norm(child)
             modifiers.append(
                 {
@@ -553,6 +553,100 @@ def _leaf_offsets(node: Optional[dict]) -> Tuple[int, int]:
         min(leaf["span"]["start_offset"] for leaf in leaves),
         max(leaf["span"]["end_offset"] for leaf in leaves),
     )
+
+
+# A size candidate is considered "immediately adjacent" to a following
+# preparation clause when at most this many characters separate them --
+# enough for ", " or " " but not an unrelated intervening word. See
+# `_merge_trailing_size_adverbs_into_preparation`.
+_TRAILING_SIZE_ADJACENCY_TOLERANCE = 3
+
+
+def _merge_trailing_size_adverbs_into_preparation(
+    ingredient_expr: Optional[dict],
+    prep_clauses: List[dict],
+) -> Tuple[Optional[dict], List[dict]]:
+    """Reassigns a specific vocabulary/parser mismatch: manner adverbs
+    like "thinly"/"coarsely"/"finely" were added to the SAME "size"
+    vocabulary class as genuine size adjectives ("large"/"medium"/
+    "small") -- a vocabulary-authoring choice made outside this module,
+    not a parser bug -- so both surface identically as `SizeNode`
+    children of the `IngredientExpression`, with nothing structurally
+    distinguishing "medium" in "medium onion" from "thinly" in "onion,
+    thinly sliced".
+
+    A genuine size adjective in English always PRECEDES the noun it
+    modifies. Confirmed via real output that a manner adverb classified
+    the same way instead FOLLOWS the noun and sits immediately before a
+    `PreparationExpression` clause it's actually modifying -- "thinly"
+    describes "sliced", not "onion". Detection is structural, not a word
+    list, using exactly that: a `SizeNode` (or any node type
+    `_INGREDIENT_MODIFIER_CLASS_BY_NODE_TYPE` maps to "size") that
+    appears in `ingredient_expr`'s children AFTER at least one
+    `IngredientNode` has already appeared, AND whose own end_offset is
+    immediately followed (within
+    `_TRAILING_SIZE_ADJACENCY_TOLERANCE` characters -- covering ", "/" "
+    but not an unrelated intervening word) by a preparation clause's own
+    start_offset, is folded into that clause's term text (prepended,
+    since "thinly" precedes "sliced" in the source) instead of being kept
+    as an ingredient-level size modifier.
+
+    A post-noun SizeNode with no adjacent preparation clause to attach to
+    is left completely unchanged -- this only reassigns the one confirmed
+    shape (adverb immediately before a preparation clause), not every
+    post-noun size occurrence; nothing here assumes "size after the noun"
+    alone is enough to prove it's an adverb.
+
+    Returns (possibly-pruned ingredient_expr, possibly-modified
+    prep_clauses). Returns the inputs unchanged whenever nothing matches.
+    """
+    if ingredient_expr is None or not prep_clauses:
+        return ingredient_expr, prep_clauses
+
+    children = _children(ingredient_expr)
+    seen_core = False
+    trailing_candidates: List[dict] = []
+    for child in children:
+        child_type = _node_type(child)
+        if child_type == "IngredientNode":
+            seen_core = True
+        elif (
+            seen_core
+            and child_type is not None
+            and _INGREDIENT_MODIFIER_CLASS_BY_NODE_TYPE.get(child_type) == "size"
+        ):
+            trailing_candidates.append(child)
+
+    if not trailing_candidates:
+        return ingredient_expr, prep_clauses
+
+    new_prep_clauses = list(prep_clauses)
+    consumed_ids = set()
+    for candidate in trailing_candidates:
+        cand_end = candidate["span"]["end_offset"]
+        match_index = None
+        for index, clause in enumerate(new_prep_clauses):
+            clause_start, _ = _leaf_offsets(clause)
+            if cand_end <= clause_start <= cand_end + _TRAILING_SIZE_ADJACENCY_TOLERANCE:
+                match_index = index
+                break
+        if match_index is None:
+            # No adjacent clause -- leave this candidate exactly as it
+            # was (still a "size" modifier) rather than guessing.
+            continue
+        clause = new_prep_clauses[match_index]
+        new_prep_clauses[match_index] = {
+            "node_type": "PreparationExpression",
+            "children": [candidate] + _children(clause),
+        }
+        consumed_ids.add(id(candidate))
+
+    if not consumed_ids:
+        return ingredient_expr, prep_clauses
+
+    new_children = [child for child in children if id(child) not in consumed_ids]
+    new_ingredient_expr = {"node_type": _node_type(ingredient_expr), "children": new_children}
+    return new_ingredient_expr, new_prep_clauses
 
 
 def _merge_trailing_preparation_measurement(
@@ -1088,6 +1182,19 @@ def _build_quantity_from_slot(
     )
 
 
+# The closed, deliberately narrow set of words that actually signal
+# per-item scoping ("(5 to 6 ounces EACH)") as opposed to some other
+# grammar-class word sharing the same node type/vocabulary
+# (`NotesExpression`/`GrammarNode`, `source_vocabulary: "grammar"`) that
+# means something else entirely -- e.g. "about" is a hedge/approximation
+# qualifier, not a per-item marker. Node type alone can't distinguish
+# these (confirmed: both appear as the same shape in real output), so
+# this checks the leaf's own normalized text against this specific,
+# small set rather than treating every non-measurement sibling as a
+# per-item signal.
+_PER_ITEM_MARKER_TERMS = {"each", "apiece"}
+
+
 def _flatten_measurement_slots(measurements: List[dict]) -> List[dict]:
     """Normalizes `reference.measurements` (a mix of MeasurementExpression /
     RangeExpression / ParentheticalExpression / Alternative-or-
@@ -1095,16 +1202,22 @@ def _flatten_measurement_slots(measurements: List[dict]) -> List[dict]:
     ordered list of slot dicts:
         {"container": <ParentheticalExpression dict or None>,
          "expr": <MeasurementExpression or RangeExpression dict or None>,
-         "kind": "scalar" | "range" (only meaningful when "expr" is set),
+         "kind": "scalar" | "range" | "alternate_units"
+                 (only meaningful when "expr"/"alternates" is set),
+         "alternates": <list of MeasurementExpression dicts, only for
+                        kind="alternate_units">,
          "dangling": bool,
          "unrecognized": bool (optional),
          "raw": <original node, for unrecognized slots>,
          "per_item_marker": <list[str] of verbatim source text, or None>}
     `per_item_marker` is set only for a container (parenthetical) slot
-    that has a genuine "each"-type sibling (e.g. "(5 to 6 ounces each)"),
+    that has a genuine per-item-signaling sibling (one whose normalized
+    text is in `_PER_ITEM_MARKER_TERMS`, e.g. "(5 to 6 ounces each)"),
     distinguishing it from a parenthetical that's purely an alternate-unit
-    expression of the SAME total quantity (e.g. "(1.15 kg)") -- see
-    `_project_reference_to_row`'s per_item_quantity handling.
+    expression of the SAME total quantity (e.g. "(1.15 kg)", or
+    "(about 6 ounces; 170 g)" -- "about" is a hedge, not a per-item
+    marker) -- see `_project_reference_to_row`'s per_item_quantity and
+    alternate_quantities handling.
     """
     slots: List[dict] = []
     for node in measurements:
@@ -1124,21 +1237,30 @@ def _flatten_measurement_slots(measurements: List[dict]) -> List[dict]:
             ]
             # A sibling inside the parenthetical that ISN'T the
             # measurement/range itself -- e.g. the `NotesExpression`
-            # wrapping "each" in "(5 to 6 ounces each)" -- is a genuine
-            # per-item marker, not incidental material to discard (it was
-            # previously dropped silently here: filtered out of `inner`
-            # and never touched again). Preserved on the slot (SS J:
-            # preserve, don't discard) so `_project_reference_to_row` can
-            # tell "(1.15 kg)" (an alternate-unit expression of the SAME
-            # total quantity) apart from "(5 to 6 ounces each)" (a
-            # genuinely PER-ITEM value) -- confirmed via real parser
-            # output that both shapes parse identically as "container +
-            # scalar/range measurement" except for exactly this sibling.
+            # wrapping "each" in "(5 to 6 ounces each)" -- is preserved
+            # (SS J: preserve, don't discard) rather than silently
+            # dropped, as it was before. But NOT every such sibling means
+            # the same thing: "each" is a genuine per-item marker, while
+            # e.g. "about" in "(about 6 ounces; 170 g)" is a hedge/
+            # approximation qualifier with no bearing on per-item scoping
+            # -- both are `NotesExpression`/`GrammarNode` wrapping a
+            # `source_vocabulary: "grammar"` leaf, so node type alone
+            # can't tell them apart. Only a leaf whose own normalized text
+            # is in `_PER_ITEM_MARKER_TERMS` counts as a per-item marker;
+            # anything else found here is a hedge/qualifier that's simply
+            # not carried forward as structured per-item data (it's
+            # already preserved faithfully in the reference's aggregate
+            # `ingredient_phrase` text regardless, via
+            # `_reference_source_spans`, which reads every leaf in the
+            # original tree independent of this classification).
             inner_ids = {id(c) for c in inner}
             marker_spans: List[str] = []
             for sibling in _children(node):
-                if id(sibling) not in inner_ids:
-                    marker_spans.extend(_source_spans_of(sibling))
+                if id(sibling) in inner_ids:
+                    continue
+                sibling_leaves = list(_iter_leaves(sibling))
+                if any(_span_norm(leaf) in _PER_ITEM_MARKER_TERMS for leaf in sibling_leaves):
+                    marker_spans.extend(_span_text(leaf) for leaf in sibling_leaves)
             per_item_marker = marker_spans or None
 
             if len(inner) == 1:
@@ -1155,14 +1277,52 @@ def _flatten_measurement_slots(measurements: List[dict]) -> List[dict]:
                         "kind": "scalar", "per_item_marker": per_item_marker,
                     })
             elif len(inner) >= 2:
-                # Fragmented range inside a parenthetical (mismatch #1) --
-                # e.g. "(5-6 ounces each)". Not modeled by SS D at all.
-                # NOTE: now that RangeExpression exists as its own node
-                # type, this branch (>=2 MeasurementExpression siblings
-                # inside one Parenthetical) may be dead in practice --
-                # left in place defensively rather than removed, since it
-                # hasn't been proven unreachable against real output.
-                slots.append({"container": node, "expr": None, "dangling": True, "multi": inner})
+                # 2+ bare MeasurementExpression siblings, no RangeMarker
+                # tying them together. Two genuinely different shapes
+                # look identical at this level, distinguished by whether
+                # their units actually differ:
+                #   - a fragmented range the parser failed to join into
+                #     one RangeExpression (mismatch #1's original target,
+                #     e.g. a hypothetical "(5 ounces - 6 ounces)") -- both
+                #     sides share the SAME unit;
+                #   - CONFIRMED via real output: "(about 6 ounces;
+                #     170 g)" -- each sibling is a DIFFERENT unit system's
+                #     expression of the SAME total quantity, exactly the
+                #     same relationship as the already-handled
+                #     primary+per_item case just above, just with both
+                #     alternates sitting inside one parenthetical instead
+                #     of one being the reference's own primary quantity.
+                # Same/missing units -> can't safely guess a range
+                # boundary, preserve the original dangling/unresolved
+                # behavior. Distinct units on every sibling -> each is
+                # independently routable, so build one quantity per
+                # sibling ("alternate_units") rather than discarding the
+                # whole group -- this is the fix for a metric value being
+                # lost just because it shares a parenthetical with a
+                # second, non-metric alternate rather than being alone.
+                sibling_units: List[str] = []
+                all_plain_measurements = True
+                for sibling in inner:
+                    if _node_type(sibling) != "MeasurementExpression":
+                        all_plain_measurements = False
+                        break
+                    _, unit_leaf, sib_dangling = _measurement_expr_shape(sibling)
+                    if sib_dangling or unit_leaf is None:
+                        all_plain_measurements = False
+                        break
+                    sibling_units.append(_span_norm(unit_leaf))
+                if (
+                    all_plain_measurements
+                    and len(sibling_units) == len(set(sibling_units))
+                    and len(sibling_units) > 1
+                ):
+                    slots.append({
+                        "container": node, "expr": None, "dangling": False,
+                        "kind": "alternate_units", "alternates": inner,
+                        "per_item_marker": per_item_marker,
+                    })
+                else:
+                    slots.append({"container": node, "expr": None, "dangling": True, "multi": inner})
             else:
                 slots.append({"container": node, "expr": None, "dangling": False, "unrecognized": True, "raw": node})
         else:
@@ -1235,22 +1395,26 @@ def _assign_quantities(
     knowledge: Any,
     evidence: List[dict],
     unresolved_out: List[dict],
-) -> Tuple[Optional[dict], Optional[dict], Optional[str]]:
+) -> Tuple[Optional[dict], Optional[dict], List[dict], Optional[str]]:
     """Implements SS D/SS H's primary-quantity and per-item-quantity
     construction, plus SS K.3 (a per-item-shaped parenthetical with no
     primary quantity is a structural contradiction -> invalid).
 
-    Returns (quantity, per_item_quantity, invalid_reason_or_None).
+    Returns (quantity, per_item_quantity, alternate_quantities,
+    invalid_reason_or_None). `alternate_quantities` (see
+    `_flatten_measurement_slots`'s "alternate_units" slot kind) is always
+    a list, empty when nothing of that shape was found -- e.g.
+    "(about 6 ounces; 170 g)" produces two entries, one per unit.
     """
     clean_slots = _resolve_dangling_ranges(slots, unresolved_out)
     if not clean_slots:
-        return None, None, None
+        return None, None, [], None
 
     primary_slot = clean_slots[0]
     if primary_slot.get("container") is not None:
         # SS K.3: a per-item-shaped parenthetical with nothing to scope
         # against is a structural contradiction, not merely unresolved.
-        return None, None, "per_item_quantity_without_primary"
+        return None, None, [], "per_item_quantity_without_primary"
 
     quantity, reason = _build_quantity_from_slot(
         primary_slot,
@@ -1274,9 +1438,36 @@ def _assign_quantities(
         evidence.append(_evidence("structural_match", "quantity"))
 
     per_item_quantity = None
+    alternate_quantities: List[dict] = []
     if len(clean_slots) >= 2:
         second_slot = clean_slots[1]
-        if second_slot.get("container") is not None:
+        if second_slot.get("kind") == "alternate_units":
+            # CONFIRMED via real output ("about 6 ounces; 170 g"): 2+
+            # MeasurementExpression siblings in one parenthetical with
+            # genuinely DIFFERENT units are each an independent
+            # alternate-unit expression of the SAME total quantity, not
+            # a fragmented range (see `_flatten_measurement_slots`).
+            # Build a scalar quantity for each and let
+            # `_project_reference_to_row` route every one of them -- this
+            # is what makes a metric alternate get extracted even when
+            # it shares a parenthetical with a non-metric sibling rather
+            # than standing alone.
+            for sibling in second_slot.get("alternates", []):
+                alt_quantity, alt_reason = _build_scalar_quantity(sibling, knowledge)
+                if alt_quantity is not None:
+                    alt_quantity["per_item_marker"] = second_slot.get("per_item_marker")
+                    alternate_quantities.append(alt_quantity)
+                    evidence.append(_evidence("structural_match", "alternate_quantity"))
+                else:
+                    spans = _source_spans_of(sibling)
+                    unresolved_out.append(
+                        {
+                            "text": " ".join(spans),
+                            "reason": alt_reason or "unparseable_quantity",
+                            "source_spans": _fallback_spans(spans, "<alternate quantity>"),
+                        }
+                    )
+        elif second_slot.get("container") is not None:
             per_item_quantity, reason2 = _build_quantity_from_slot(second_slot, knowledge)
             if per_item_quantity is not None:
                 # See `_flatten_measurement_slots`'s docstring: carried
@@ -1319,7 +1510,7 @@ def _assign_quantities(
                 }
             )
 
-    return quantity, per_item_quantity, None
+    return quantity, per_item_quantity, alternate_quantities, None
 
 
 # ---------------------------------------------------------------------------
@@ -1568,8 +1759,19 @@ def _build_single_reference(
     """
     unresolved: List[dict] = []
 
+    # Reassign manner adverbs that share the "size" vocabulary class with
+    # genuine size adjectives ("thinly sliced" vs "medium onion") to the
+    # preparation clause they actually modify, before either the
+    # ingredient or the preparation clauses are built from these fields.
+    # No-op (returns its inputs unchanged) for every line that doesn't
+    # structurally match that shape -- see
+    # `_merge_trailing_size_adverbs_into_preparation`.
+    ingredient_expr, raw_prep_clauses = _merge_trailing_size_adverbs_into_preparation(
+        parser_ref.get("ingredient"), _as_node_list(parser_ref.get("preparation"))
+    )
+
     ingredient_id, own_modifiers, ingredient_original_text = _resolve_ingredient(
-        parser_ref.get("ingredient"), knowledge, evidence, unresolved
+        ingredient_expr, knowledge, evidence, unresolved
     )
     modifiers: List[dict] = list(own_modifiers)
 
@@ -1578,9 +1780,13 @@ def _build_single_reference(
     # back into one clause before building modifiers/quantities/notes
     # from them individually -- see `_merge_trailing_preparation_measurement`.
     # No-op (returns its inputs unchanged) for every line that doesn't
-    # structurally match that shape.
+    # structurally match that shape. Chained after the size-adverb merge
+    # above -- the two are independent shapes and compose fine in
+    # sequence (this one only ever inspects/replaces the LAST clause,
+    # which the size-adverb merge only ever modifies by prepending to,
+    # never removing).
     prep_clauses, raw_measurements, raw_notes = _merge_trailing_preparation_measurement(
-        _as_node_list(parser_ref.get("preparation")),
+        raw_prep_clauses,
         parser_ref.get("measurements", []) or [],
         parser_ref.get("notes", []) or [],
     )
@@ -1600,8 +1806,8 @@ def _build_single_reference(
             parser_ref["package"], measurement_slots, knowledge, evidence, unresolved
         )
 
-    ingredient_raw = _normalized_phrase(parser_ref.get("ingredient")) or None
-    quantity, per_item_quantity, invalid_reason = _assign_quantities(
+    ingredient_raw = _normalized_phrase(ingredient_expr) or None
+    quantity, per_item_quantity, alternate_quantities, invalid_reason = _assign_quantities(
         measurement_slots, component_term, ingredient_id, ingredient_raw, knowledge, evidence, unresolved
     )
 
@@ -1631,6 +1837,8 @@ def _build_single_reference(
         reference["quantity"] = quantity
     if per_item_quantity is not None:
         reference["per_item_quantity"] = per_item_quantity
+    if alternate_quantities:
+        reference["alternate_quantities"] = alternate_quantities
     if package_obj is not None:
         reference["package"] = package_obj
     if modifiers:
@@ -1860,6 +2068,7 @@ def _build_decomposed_references(
 
     shared_quantity = None
     shared_per_item = None
+    shared_alternates: List[dict] = []
     shared_package = None
     shared_component = None
     shared_scope_unresolved: List[dict] = []
@@ -1875,7 +2084,7 @@ def _build_decomposed_references(
             shared_component = _resolve_component(
                 parser_ref.get("component"), None, knowledge, evidence, shared_scope_unresolved
             )
-        shared_quantity, shared_per_item, _reason = _assign_quantities(
+        shared_quantity, shared_per_item, shared_alternates, _reason = _assign_quantities(
             measurement_slots, shared_component, None, None, knowledge, evidence, shared_scope_unresolved
         )
 
@@ -1914,6 +2123,8 @@ def _build_decomposed_references(
                 reference["quantity"] = dict(shared_quantity)
             if shared_per_item is not None:
                 reference["per_item_quantity"] = dict(shared_per_item)
+            if shared_alternates:
+                reference["alternate_quantities"] = [dict(alt) for alt in shared_alternates]
             if shared_package is not None:
                 reference["package"] = dict(shared_package)
 
@@ -2829,6 +3040,27 @@ def _project_reference_to_row(
         if per_item_text:
             marker_text = " ".join(per_item_marker) if per_item_marker else "each"
             note_fragments.append(f"{per_item_text} {marker_text}")
+
+    # CONFIRMED via real output: "1 medium onion, thinly sliced (about
+    # 6 ounces; 170 g)" -- 2+ measurements sharing one parenthetical with
+    # genuinely different units (see `_flatten_measurement_slots`'s
+    # "alternate_units" slot kind). Same reasoning as the per_item cases
+    # above: no per-item marker means each is an alternate-unit
+    # expression of the SAME total, so route every one of them exactly
+    # like a primary quantity would be -- this is what keeps a metric
+    # value from being lost just because it shares a parenthetical with a
+    # non-metric sibling instead of standing alone.
+    for alt in reference.get("alternate_quantities", []):
+        alt_marker = alt.get("per_item_marker")
+        if alt_marker:
+            alt_text = _format_quantity_diagnostic(alt)
+            if alt_text:
+                note_fragments.append(f"{alt_text} {' '.join(alt_marker)}")
+        else:
+            routed = _route_measurement_quantity(alt)
+            if not routed:
+                unmapped_units.append(alt.get("unit_term") or "<empty>")
+            row.update(routed)
 
     if note_fragments:
         row["notes"] = "; ".join(note_fragments)

@@ -3,7 +3,7 @@ import re
 
 def is_metadata_line(line):
     return bool(re.match(
-        r"^(author|source|url|yield|note|notes|attribution|video):",
+        r"^(alt_title|author|source|url|yield|note|notes|attribution|video|favorite|servings|restaurant|favorites):",
         line,
         re.IGNORECASE
     ))

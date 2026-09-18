@@ -180,30 +180,77 @@ def _render_imperial(value: Optional[Number], unit: Optional[str]) -> Optional[s
     return f"{formatted} {unit}" if not _is_blank(unit) else formatted
 
 
+def _render_metric(row: Mapping[str, Any]) -> Optional[str]:
+    """
+    Renders the metric dimension in parentheses -- "(150g)", "(500ml)",
+    or "(150g, 500ml)" if both are populated -- appearing LAST in the
+    quantity string, after natural portion/package and imperial (product
+    decision: "carrots, diced" -> "2 large, 1 cup (150g)").
+
+    Only renders a value the backend has actually persisted in `grams`/
+    `ml` -- this function never calculates or converts to metric units
+    itself (work order section 10's "do not calculate grams" applies
+    equally to `ml`; this is presentation of an already-persisted value,
+    not a computation).
+    """
+    grams = row.get("grams")
+    ml = row.get("ml")
+
+    parts: List[str] = []
+    if not _is_blank(grams):
+        parts.append(f"{_format_number(grams)}g")
+    if not _is_blank(ml):
+        parts.append(f"{_format_number(ml)}ml")
+
+    if not parts:
+        return None
+    return f"({', '.join(parts)})"
+
+
 def render_quantity(row: Mapping[str, Any]) -> Optional[str]:
     """
     Builds the author-facing quantity string for one parsed ingredient
-    row by concatenating whichever of natural-portion / packaging /
-    imperial-weight / imperial-volume dimensions are actually populated.
-    Returns None only if none of them are populated at all (work order
-    section 17: "ingredients with no quantity" is a valid, expected
-    case).
+    row: natural portion or package (mutually exclusive in the
+    persisted data -- an ingredient line is described one way or the
+    other, never both -- so no special either/or logic is needed here
+    beyond including whichever is actually populated), then imperial
+    weight/volume, joined with ", " -- then metric (grams/ml) in
+    parentheses, joined with a plain space, if the backend has supplied
+    it. Example: "carrots, diced" -> "2 large, 1 cup (150g)".
 
-    This never converts to grams (work order section 7) and never
-    silently drops a populated dimension (section 9) -- if multiple
-    dimensions are populated simultaneously in a way this function
-    doesn't have a clean rule for (the "difficult cases" -- e.g. two
-    independent quantity expressions on one line), they are still all
-    concatenated in a fixed, deterministic order rather than one being
-    chosen and the rest discarded. Producing a maximally natural-reading
-    string for every such case is explicitly out of scope here; that
-    refinement is expected to happen upstream in the analyzer.
+    The comma only separates the "primary" dimensions (natural
+    portion/package/imperial) from each other; the metric parenthetical
+    is appended with a space, not a comma, matching the product's
+    specified format exactly.
+
+    Returns None only if none of these dimensions are populated at all
+    (work order section 17: "ingredients with no quantity" is a valid,
+    expected case).
+
+    This never calculates grams/ml itself (work order section 7/10) and
+    never silently drops a populated dimension (section 9) -- if
+    multiple primary dimensions are populated simultaneously in a way
+    this function doesn't have a clean rule for (the "difficult cases"
+    -- e.g. two independent quantity expressions on one line), they are
+    still all concatenated in a fixed, deterministic order rather than
+    one being chosen and the rest discarded. Producing a maximally
+    natural-reading string for every such case is explicitly out of
+    scope here; that refinement is expected to happen upstream in the
+    analyzer.
     """
-    raw_pieces = [
+    raw_primary_pieces = [
         _render_natural_portion(row),
         _render_packaging(row),
         _render_imperial(row.get("imperial_weight_value"), row.get("imperial_weight_unit")),
         _render_imperial(row.get("imperial_volume_value"), row.get("imperial_volume_unit")),
     ]
-    pieces: List[str] = [piece for piece in raw_pieces if piece]
-    return " ".join(pieces) if pieces else None
+    primary_pieces: List[str] = [piece for piece in raw_primary_pieces if piece]
+    metric_piece = _render_metric(row)
+
+    if not primary_pieces and not metric_piece:
+        return None
+
+    primary = ", ".join(primary_pieces)
+    if metric_piece:
+        return f"{primary} {metric_piece}".strip()
+    return primary

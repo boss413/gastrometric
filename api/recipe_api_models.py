@@ -76,6 +76,10 @@ class RecipeResponse(BaseModel):
     recipe_yield: Optional[str] = None
     recipe_state: Optional[str] = None
     recipe_ingestion_method: Optional[str] = None
+    alt_title: Optional[str] = None
+    servings: Optional[str] = None
+    restaurant: Optional[str] = None
+    favorite: bool = False
     sections: List[RecipeSectionResponse]
 
 
@@ -89,12 +93,28 @@ class RecipeSearchResultItem(BaseModel):
     `GET /api/recipes/{recipe_id}`'s job (BE-05), backed by
     `recipe_reader.get_recipe()`.
 
+    `alt_title`/`servings`/`restaurant`/`favorite` are included here too
+    (not just on the full `RecipeResponse`) since browsing/search
+    results are where a `favorite` flag actually needs to be usable --
+    filtering a list doesn't require opening each recipe individually.
+
+    `source`/`attribution` (BE-06-CO1) are the same common recipe
+    browse-card fields shared with favorites and inventory matches --
+    read straight through from `RecipeSearchResult`, not derived from
+    the search term or match info.
+
     `matched_ingredient` through `matched_term` are populated only for
     ingredient-search results; always `None` for name-search results.
     """
 
     recipe_id: int
     recipe_name: str
+    alt_title: Optional[str] = None
+    servings: Optional[str] = None
+    restaurant: Optional[str] = None
+    source: Optional[str] = None
+    attribution: Optional[str] = None
+    favorite: bool = False
     matched_ingredient: Optional[str] = None
     match_type: Optional[str] = None
     match_reason: Optional[Dict[str, Any]] = None
@@ -103,3 +123,102 @@ class RecipeSearchResultItem(BaseModel):
 
 class RecipeSearchResponse(BaseModel):
     results: List[RecipeSearchResultItem]
+
+
+class FavoriteRecipeItem(BaseModel):
+    """
+    One favorited recipe -- BE-06-CO1's new `/api/recipes/favorites`
+    read path. Deliberately its own model rather than reusing
+    `RecipeSearchResultItem`: favorites involves no search and no
+    matcher, so it carries none of `matched_ingredient`/`match_type`/
+    `match_reason`/`matched_term` -- not even as always-null fields --
+    to keep this contract free of fields that only ever mean something
+    for a search result.
+    """
+
+    recipe_id: int
+    recipe_name: str
+    alt_title: Optional[str] = None
+    restaurant: Optional[str] = None
+    source: Optional[str] = None
+    attribution: Optional[str] = None
+    favorite: bool = True
+
+
+class FavoriteRecipesResponse(BaseModel):
+    results: List[FavoriteRecipeItem]
+
+
+class MatchedIngredientResponse(BaseModel):
+    """
+    Mirrors `application.recipe_matcher.MatchedIngredient` field-for-field.
+    `reason` is passed through exactly as MATCH-01 produced it -- never
+    reinterpreted at this layer.
+
+    `recipe_ingredient_id` and `ingredient_name_original` are
+    deliberately separate, differently-named fields, not one field doing
+    double duty: `recipe_ingredient_id` is an identity (never assume it's
+    display-safe or that it can be concatenated/pluralized into
+    something else); `ingredient_name_original` is the recipe's own raw
+    wording, exactly as persisted -- no preparation phrases appended, no
+    relation to `inventory_item_id`'s own identity string. A consumer
+    must not assume `recipe_ingredient_id` and `ingredient_name_original`
+    are interchangeable just because they can look similar (e.g.
+    "tomato" vs "tomatoes").
+
+    `location` (BE-06-CO1) is the actual fridge/pantry location of the
+    specific inventory item referenced by `inventory_item_id` -- never
+    inferred by the frontend from `fridge_match_count`/
+    `pantry_match_count`, a second inventory request, or assumptions
+    about inventory IDs. Always `"fridge"` or `"pantry"`.
+    """
+
+    recipe_ingredient_id: str
+    ingredient_name_original: str
+    inventory_item_id: int
+    location: str
+    match_type: str
+    reason: Dict[str, Any]
+
+
+class MissingIngredientResponse(BaseModel):
+    """
+    Mirrors `application.recipe_matcher.MissingIngredient` field-for-field.
+    Same identity-vs-presentation distinction as `MatchedIngredientResponse`:
+    `ingredient_id` is the canonical identity, `ingredient_name_original`
+    is the recipe's raw wording -- never derived from `ingredient_phrase`,
+    never preparation-augmented.
+    """
+
+    ingredient_id: str
+    ingredient_name_original: str
+
+
+class RecipeMatchResponse(BaseModel):
+    """
+    One recipe's inventory-match classification (BE-07). Mirrors
+    `application.recipe_matcher.RecipeMatch` field-for-field.
+    Deliberately does NOT include `sections`/recipe content -- same
+    "candidates, not recipes" discipline as `RecipeSearchResultItem`;
+    `GET /api/recipes/{recipe_id}` remains the way to retrieve a
+    selected match's full representation.
+
+    `alt_title`/`restaurant`/`source`/`attribution` (BE-06-CO1) are the
+    same common recipe browse-card fields as favorites/search results.
+    """
+
+    recipe_id: int
+    recipe_name: str
+    alt_title: Optional[str] = None
+    restaurant: Optional[str] = None
+    source: Optional[str] = None
+    attribution: Optional[str] = None
+    match_category: str
+    matched_ingredients: List[MatchedIngredientResponse]
+    missing_ingredients: List[MissingIngredientResponse]
+    fridge_match_count: int
+    pantry_match_count: int
+
+
+class RecipeMatchListResponse(BaseModel):
+    results: List[RecipeMatchResponse]

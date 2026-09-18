@@ -313,7 +313,7 @@
     {
       "id": "fresh-basil",
       "name": "fresh basil",
-      "aliases": ["fresh basil", "basil leaves"]
+      "aliases": ["basil", "fresh basil", "basil leaves"]
     },
     {
       "id": "thyme",
@@ -418,7 +418,7 @@
     {
       "id": "balsamic-vinegar",
       "name": "balsamic vinegar",
-      "aliases": ["balsamic vinegar"]
+      "aliases": ["balsamic vinegar", "balsamic"]
     },
     {
       "id": "apple-cider-vinegar",
@@ -758,7 +758,7 @@
     {
       "id": "powdered-sugar",
       "name": "powdered sugar",
-      "aliases": ["powdered sugar", "confectioners sugar", "icing sugar"]
+      "aliases": ["powdered sugar", "confectioners sugar", "icing sugar", "confectioners’"]
     },
     {
       "id": "unsweetened-cocoa-powder",
@@ -2046,6 +2046,11 @@
       "aliases": ["espresso powder", "instant espresso powder"]
     },
     {
+      "id": "coffee",
+      "name": "coffee",
+      "aliases": ["coffee", "Americano", "drip coffee", "black coffee"]
+    },
+    {
       "id": "instant-coffee",
       "name": "instant coffee",
       "aliases": ["instant coffee", "coffee granules"]
@@ -2701,6 +2706,11 @@
       "aliases": ["monosodium glutamate", "msg", "accent seasoning"]
     },
     {
+      "id": "sodium-citrate",
+      "name": "sodium citrate",
+      "aliases": ["sodium citrate", "melting salt"]
+    },
+    {
       "id": "taco-seasoning",
       "name": "taco seasoning",
       "aliases": ["taco seasoning", "taco seasoning mix"]
@@ -2776,9 +2786,9 @@
       "aliases": ["liquid aminos", "bragg liquid aminos"]
     },
     {
-      "id": "coconut-aminos",
-      "name": "coconut aminos",
-      "aliases": ["coconut aminos"]
+      "id": "coconut",
+      "name": "coconut",
+      "aliases": ["coconut", "coconuts"]
     },
     {
       "id": "liquid-smoke",

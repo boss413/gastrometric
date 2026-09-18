@@ -1,12 +1,12 @@
 # Test Recipe
-Note: This is where the ingredient ingestion pipeline test cases are kept.
+Note: This is where the ingredient ingestion pipeline test cases are kept. If you found this in the app, congratulations, you’re about to read the most nonsensical recipe ever!
 Ingredients:
 2 carrots	
 1 clove garlic	
 2 cloves garlic
 1 clove
 2 ribs
-1 rib celery
+2 ribs celery
 2 ribs, celery
 1 cup grape tomatoes
 2 cups chili paste
@@ -22,7 +22,8 @@ Ingredients:
 salt and pepper to taste
 1 medium garlic clove, minced or pressed
 2 tbsp xyz powder
-# Rogan Josh (Kashmiri Curry with Lamb)
+# Rogan Josh
+alt_title: Kashmiri Curry with Lamb
 url: https://www.recipetineats.com/rogan-josh/
 Author: Nagi Maehashi
 ## Curry
@@ -40,7 +41,7 @@ Ingredients:
 1 ½  cups chicken stock , salt reduced (broth)
 Instructions: 
 Toast whole spices – Melt ghee over medium heat in large heavy based pot. Add cinnamon, cardamom and cloves and cook for one minute.
-Sauté – Add onion and cook for 7 minutes, stirring frequently, until pieces are golden and starting the brown on the edges. Add the garlic and ginger, cook for another minute.
+Sauté – Add onion and cook for 7 minutes, stirring frequently, until pieces are golden and starting to brown on the edges. Add the garlic and ginger, cook for another minute.
 ## SPICES
 Ingredients:
 2 tbsp paprika , normal or sweet
@@ -71,7 +72,8 @@ yogurt
 Basmati rice, cooked
 Instructions:
 Serve with basmati rice, sprinkled with fresh coriander leaves and other garnishes if desired. More sides: Cucumber salad (Note 7) and Easy naan – No Yeast Flatbread
-# Chicken Scarpariello (Braised Chicken With Sausage and Peppers)
+# Chicken Scarpariello
+alt_title: Braised Chicken With Sausage and Peppers
 Attribution: Serious Eats
 url: https://www.seriouseats.com/chicken-scarpariello-sweet-and-sour-chicken-italian-recipe
 Author: J. Kenji López-Alt
@@ -147,7 +149,7 @@ Return the entire contents of the chicken bowl (chicken, marinade, and all juice
 Attribution: America’s Test Kitchen
 Source: The Best Recipe
 Note: Our wine of choice for this dish is Sweet Marsala Fine, an Italian wine that gives the sauce body, soft edges, and a smooth finish. Because these cutlets spend about 15 minutes in the oven while the sauce is being prepared, there's no need to pound the cutlets or remove the tenderloins.
-Yield: SERVES 4
+Servings: SERVES 4
 Ingredients:
 4 boneless, skinless chicken breasts (5 to 6 ounces each), fat trimmed 
 1 cup unbleached all-purpose flour 
@@ -229,8 +231,9 @@ Instructions:
 In an 8-quart heavy kettle cook bacon over moderate heat, stirring, until crisp and transfer with a slotted spoon to a large bowl. In fat remaining in kettle brown chuck in small batches over high heat, transferring it as browned with slotted spoon to bowl.
 Reduce heat to moderate and add oil. Add onions and garlic and cook, stirring, until golden. Stir in paprika, caraway seeds, and flour and cook, stirring, 2 minutes. Whisk in vinegar and tomato paste and cook, whisking, 1 minute. (Mixture will be very thick.) Stir in broth, water, salt, bell peppers, bacon, and chuck and bring to a boil, stirring. Simmer soup, covered, stirring occasionally, 60 to 75 minutes.
 Season soup with salt and pepper. Soup may be made 3 days ahead and cooled, uncovered, before chilling, covered. Reheat soup, thinning with water if desired.
-# Panera Mac and Cheese
+# Macaroni & Cheese
 URL: https://amandascookin.com/panera-mac-and-cheese-recipe/
+restaurant: Panera
 Ingredients: 
 16 ounce pipette rigate or elbow macaroni
 ¼ cup butter
@@ -248,7 +251,9 @@ Meanwhile, melt the butter in a large saucepan over low heat. Whisk in the flour
 Gradually whisk in the milk; cook over medium heat, whisking until mixture thickens and bubbles. Remove from heat.
 Add cheeses, mustard, salt, and hot sauce, stirring until cheese melts and cheese sauce is smooth.
 Stir in the cooked pasta and cook over medium heat for 1 minute (or until thoroughly heated). Serve immediately.
-# Crusty Bread (Over-night)
+# No-Knead Crusty Bread
+alt_title: Over-night Bread
+Favorites: 1
 Author: Matt Boss
 ## Mix the bread dough
 Ingredients:
@@ -313,11 +318,184 @@ Cook pork (or turkey), beef, onions, garlic, & seasonings in a pan until no pink
 Mix the remaining tomato sauce and tomato soup in a bowl. Spread a very thin layer of the tomato sauce mixture in a 9x13 pan.
 Remove or thin any thick stem on cabbage leaves. Lay the cabbage leaf flat and add ¼ to ⅓ cup filling to the center of the leaf. Fold in the sides and roll the cabbage up. Place seam side down in the pan. (See note for small leaves). Repeat with remaining cabbage.
 Pour sauce over the cabbage and cover tightly with foil. Bake for 75-90 minutes. Let cool for 15 minutes before serving.
+# Buttermilk Substitute (Sour Cream)
+Note: This is a fair amount more fat than buttermilk has, so it can make things end up a little greasy. But not many people will notice the difference.
+Yield: 1 cup
+Ingredients:
+½ c sour cream
+½ c milk
+Instructions:
+Mix until smooth.
+# Buttermilk Substitute (Yogurt)
+Note: The only better substitute for buttermilk is kefir, which is a 1:1 substitute.
+Yield: 1 cup
+Ingredients:
+¾ c cup of plain yogurt 
+1/4 cup of milk or water 
+Instructions:
+Mix to match the consistency of smooth buttermilk.
+# Buttermilk Substitute (Lemon Juice)
+Yield: 1 cup
+Note: This is an inferior substitute relative to a thinned out cultured milk like kefir, yogurt or sour cream, both due to texture and taste. But it’ll do the job in baking.
+Ingredients: 
+1 tablespoon of fresh lemon juice or white vinegar, 
+1 cup milk (whole or 2% works best) 
+Instructions: 
+Pour the lemon juice or vinegar into a measuring cup, then add the milk until it reaches the 1-cup line. Stir gently and let it rest at room temperature for 5 to 10 minutes until it slightly thickens and curdles.
+# Chicken Stock Substitute
+Ingredients:
+1 c room temperature or warm water
+1 tsp Better than Bouillon chicken base
+½ tsp gelatin
+Instructions:
+In a microwave-safe measuring cup, mix the gelatin into the water until hydrated (let stand at least one minute). Add the chicken base and stir again to break up the paste. Microwave for one minute and stir again to dissolve. Repeat heating and stirring if necessary.
+# Chicken Broth Substitute
+Ingredients:
+1 c room temperature or warm water
+1 tsp Better than Bouillon chicken base
+Instructions:
+In a microwave-safe measuring cup, mix the chicken base with the water and stir again to break up the paste. Microwave for one minute and stir again to dissolve. Repeat heating and stirring if necessary.
+# Sour Cream Substitute
+Ingredients: 
+1 cup heavy cream
+1 tsp lemon juice
+Instructions:
+Whisk heavy cream with lemon juice; allow it to thicken at room temperature.
+# Crème Fraîche Substitute
+Note: This is a fermentation, not a mix, so the carton must say it contains live cultures, and must NOT say “Pasteurized”.
+Ingredients: 
+1 cup heavy cream with 
+1 tbsp live cultured buttermilk or yogurt
+Instructions:
+Mix cream with buttermilk; leave covered at room temperature for 12–24 hours until thick.
+# Mascarpone Substitute
+Ingredients: 
+1 cup heavy cream
+1 tsp lemon juice
+Instructions:
+Simmer cream, add lemon juice, cook for 5 minutes, then cool and strain through cheesecloth.
+# Evaporated Milk Substitute
+Yield: 1 cup
+Ingredients: 
+2-¼  cups milk 
+Instructions:
+Reduce milk down until it reduces to 1 cup (roughly 60% volume reduction).
+# Invert Sugar Syrup / Honey Substitute
+Note: the extra cooking after reaching a boil is to break sucrose into glucose and fructose, this makes it sweeter than the sucrose (table sugar) by itself.
+Ingredients:
+4 cups white
+2 cups water
+1/4 tsp cream of tartar or lemon juice
+Instructions:
+Boil sugar, water, and cream of tartar or lemon juice to 236°F (113°C)
+# Simple Syrup Substitute
+Ingredients:
+½ c white granulated sugar
+½ c water
+Instructions:
+Dissolve sugar and water over low heat to form a stable liquid sweetener.
+# Baking Powder Substitute
+Note: the cornstarch absorbs moisture to prevent premature reaction
+Ingredients:
+1/4 tsp baking soda
+1/2 tsp cream of tartar
+1/4 tsp cornstarch
+Instructions:
+Combine baking soda, cream of tartar, and cornstarch.
+# Self-Rising Flour Substitute
+Ingredients:
+1 cup all-purpose flour
+1 1/2 tsp baking powder
+1/4 tsp fine salt
+Instructions:
+Whisk flour with baking powder and salt.
+# Cake Flour Substitute
+Ingredients:
+⅞ cup of all-purpose flour
+2 tbsp cornstarch
+Instructions:
+Remove 2 tbsp of flour from 1 cup of all-purpose flour, then replace those 2 tbsp with 2 tbsp cornstarch and sift multiple times.
+# Tomato Paste Substitute
+Yield: ½ cup
+Ingredients:
+1 cup tomato sauce
+Instructions:
+Simmer tomato sauce on low heat for about 10–15 minutes until reduced by half into a thick paste.
+# Sweetened Condensed Milk Substitute
+Yield: 1-½ c
+Ingredients: 
+2 cups milk
+⅔ cup sugar
+2 tbsp butter
+Instructions:
+Simmer milk with sugar until reduced by half, then whisk in butter.
+# Powdered Sugar Substitute
+Ingredients:
+1 cup granulated sugar with 
+1 tsp cornstarch
+Instructions:
+Blend sugar with cornstarch in a high-speed blender until a fine powder forms.
+# Light Brown Sugar Substitute
+Yield: 1 cup
+Ingredients: 
+1 cup granulated white sugar 
+1 tbsp molasses
+Instructions: 
+Mix thoroughly using a fork.
+# Dark Brown Sugar Substitute
+Yield: 1 cup
+Ingredients: 
+1 cup granulated white sugar 
+2 tbsp molasses
+Instructions: 
+Mix thoroughly using a fork.
+# Light Soy Sauce (Sheng Chou) Substitute
+Note: If you only have supermarket or Kikkoman Japanese style soy sauce on hand but your recipe calls for “light soy sauce”, It is thin, sharp, and highly salty, used to season a dish without darkening the ingredients.
+Ingredients:
+1 tsp Japanese Soy Sauce
+salt to taste
+Instructions:
+Kikkoman is a tiny bit darker and richer than Chinese light soy sauce due to the wheat-to-soy ratio. If you are making a delicate, crystal-clear broth and want to completely prevent discoloration, cut the Kikkoman with a tiny splash of water and add a pinch of sea salt to keep the salinity high.
+# Dark Soy Sauce Substitute
+alt_title: Lao Chou Substitute
+Note: It is thick, viscous, noticeably less salty, and deeply amber-black. It is packed with molasses or caramel color to coat meats and give stir-fries that signature rich, mahogany glaze.
+Ingredients:
+1 cup Japanese Kikkoman soy sauce
+1/2 cup dark brown sugar or 3 tbsp molasses
+Instructions:
+Combine Kikkoman soy sauce and dark brown sugar or molasses in a small saucepan.Bring to a gentle simmer over medium-low heat. Cook for 5–8 minutes, stirring frequently so the sugar dissolves and the liquid reduces by roughly 20-25%.
+Remove from heat. It will continue to thicken into a glossy, dark syrup as it cools.
+# Clarified Butter Substitute
+Note: If you don’t trust your mason jar lid, the alternative method is to poke two holes through the solidified butter and drain out the water, then pop out the clarified butter and tightly wrap it.
+Ingredients: 
+1 cup unsalted butter
+1 cup boiling water
+Instructions: 
+Combine unsalted butter and boiling water in a mason jar with a water-tight lid. Stir vigorously until the butter is completely melted and combined with the water.
+Let the mixture sit undisturbed on the counter for 10 minutes. The milk solids and water-soluble elements will naturally wash out of the fat and settle into the hot water layer at the bottom.
+Place the mason jar upside-down in the refrigerator for 2 to 3 hours (or overnight) until the top (inverted bottom) layer is completely firm and opaque.
+Turn the mason jar right-side up and pour the cloudy water and trapped milk solids down the drain.
+# Ghee Substitute
+Ingredients: 
+1 lb unsalted butter
+Instructions: 
+Melt butter in a heavy saucepan over medium-low heat without stirring. Let it simmer gently. The butter will separate into three layers: a white foam on top, a clear yellow liquid in the middle, and watery milk solids at the bottom. The water layer will crackle and evaporate.
+Watch closely as the white milk solids sink to the bottom of the pan and begin to change color from white to tan, and finally to a deep golden brown. The liquid will turn a rich amber color and smell intensely nutty.Immediately remove from heat to prevent burning.
+Strain the liquid through a fine-mesh sieve lined with cheesecloth or a paper coffee filter into a jar to trap the browned solids.
+# Roasted Beets
+Author: Julie Peck
+Notes: Put some foil underneath the packets in the oven in case there's a leak! You can also use a pressure cooker but I like the foil better. if beets are small you can put two of them in one foil packet if you want.
+Ingredients:
+2 lbs. beets, washed
+Instructions:
+Preheat your oven to 400F.
+Trim off leaves and root (leave a little bit on either end so the beet skin stays intact). Wrap in foil, I use a generous amount so I can make a packet out of it that’s sealed but isn’t crushed to the beet so it will steam inside the foil. Roast at 400 for an hour.
+Let cool then refrigerate in the foil until chilled. Unwrap, cut off the remaining stems and root–skin will slide right off with a paper towel.  
 # Fresh Corn Chowder
 Attribution: America's Test Kitchen
 url: https://www.americastestkitchen.com/recipes/692-fresh-corn-chowder
 Time: 1¼ hours
-Yield: Serves 6 (Makes about 2 quarts)
+Servings: Serves 6 (Makes about 2 quarts)
 Note: Be sure to use salt pork, not fatback, for the chowder. Streaks of lean meat distinguish salt pork from fatback; fatback is pure fat. We prefer Spanish onions for their sweet, mild flavor, but all-purpose yellow onions will work fine too.
 Ingredients:
 10 ears corn (medium), husks and silks removed
@@ -337,14 +515,16 @@ Ingredients:
 Instructions:
 Using chef’s knife, cut kernels from 4 ears corn (you should have about 3 cups). Grate kernels from remaining 6 ears on large holes of box grater into bowl, then firmly scrape any pulp remaining on cobs with back of butter knife or vegetable peeler (you should have 2 generous cups grated kernels and pulp).
 Cook salt pork in Dutch oven over medium-high heat, turning with tongs and pressing down on pieces to render fat, until cubes are crisp and golden brown, about 10 minutes. Reduce heat to low, stir in butter, onion, and salt, cover, and cook until onion is softened, about 12 minutes. Remove salt pork and reserve. Add garlic and cook until fragrant, about 1 minute. Whisk in flour and cook, stirring constantly, about 2 minutes. Whisking constantly, gradually add broth. Add milk, potatoes, thyme, bay leaf, grated corn and pulp, and reserved salt pork and bring to boil. Reduce heat to medium-low and simmer until potatoes are almost tender, 8 to 10 minutes. Add reserved corn kernels and heavy cream and return to simmer. Simmer until corn kernels are tender yet still slightly crunchy, about 5 minutes. Discard bay leaf and salt pork. Stir in parsley, season with salt and pepper to taste, and serve immediately.
-# Coleslaw (Applebee's)
+# Coleslaw
+restaurant: Applebee’s
 Ingredients:
 14 oz. coleslaw mix
 ¼ cup Freshly chopped cilantro
 ¾ cup mayonnaise, add more if needed
 2 Tbsp sugar
 1 teaspoon white vinegar
-# Jiffy Corn Muffins 
+# Doctored-Up Jiffy Corn Muffins 
+Note: Those “in the know” will tell you two things about Corn Muffins: First, just buy the Jiffy mix, and second, mine’s always better than my neighbor’s because I doctored them up with some sour cream and honey.
 Ingredients:
 1 Box Jiffy Corn muffin mix
 1 egg
@@ -362,7 +542,7 @@ Instructions:
 Prepare as directed for Corn Muffins, except pour batter into greased 8” square pan. bake 20-25 minutes.
 # Jamaican Black Pepper Shrimp
 Attribution: Crazy Man in the Kitchen
-Source: Cheesecake Factory
+Restaurant: Cheesecake Factory
 url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
 ## Prep the Shrimp
 Ingredients:
@@ -375,7 +555,7 @@ pinch of salt
 Instructions:
 Take 1/4 of a cup of white rice flour and mix it with 1/3 teaspoon of cayenne pepper, 1/2 teaspoon of black pepper, a pinch of salt, and 1/2 teaspoon of thyme. Stir mixture and pour over shrimp to coat. You do not need to use the entire mixture - just enough to coat the shrimp to your liking.
 ## Make the Sauce
-IngredientsL
+Ingredients:
 1 cup of chicken broth
 1/3 of a cup of minced garlic
 1 cup of Budweiser or Bud Light
@@ -468,7 +648,6 @@ Pinch of saffron (about 8 threads)
 5 cups low-sodium chicken broth or water
 1 cup calasparra or bomba rice
 Instructions:
-Preparation
 If using 1 lb. skin-on, bone-in chicken thighs (about 3), arrange a thigh skin side down on a cutting board. Using a sharp knife, cut along both sides of bone to release from flesh (do not cut all the way through; you want to keep thigh intact). Work knife underneath bone and cut flesh away from bone; remove bone from thigh and discard. Cut thigh into quarters. Repeat with remaining thighs.
 Heat 2 Tbsp. extra-virgin olive oil in a 15" paella pan or two-handled cast-iron or cast-aluminum skillet over medium-high until just beginning to smoke, 1–2 minutes. Add chicken thighs or 1 lb. chicken wings (drumettes and flats separated; 8–10) and cook, turning about every 3 minutes and moving pan around on burner every 2 minutes or so to ensure even cooking, until deeply browned all over, 7–9 minutes. Season chicken with a big pinch of kosher salt and push to edges of pan.
 Add 2 oz. mushrooms, preferably chanterelles, cut into ½" pieces (about ½ cup), to center of pan and cook, stirring, until just turning golden, about 1 minute. Add 3 oz. carrots (1–2 small), peeled, trimmed, cut into ½" pieces (about ½ cup), 3 oz. pattypan squash or zucchini, trimmed, cut into ½" pieces (about 1 cup), and ½ cup small cauliflower florets and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Add 2 oz. asparagus, trimmed, cut into 1½" pieces (about ½ cup), and 2 oz. Romano or other snap beans, trimmed, cut into 1½" pieces (about ½ cup), and cook, stirring occasionally, until lightly browned in spots, about 2 minutes. Push vegetables to edges of pan with chicken.
@@ -477,7 +656,8 @@ Crumble pinch of saffron (about 8 threads) into sauce and stir to combine. Add 2
 Remove rosemary from pan; discard. Add 1 cup paella or bomba rice and spread evenly around pan to incorporate with chicken and vegetables. Cook, stirring often with a wooden spoon and moving pan around on burner every 2 minutes or so, until rice is starting to swell as it absorbs some liquid, 7–9 minutes.
 Reduce heat to medium-low and stir to evenly distribute rice, chicken, and vegetables across bottom of pan. Cook, undisturbed, moving pan around on burner every 2 minutes or so, until rice is slightly al dente and liquid is almost completely evaporated, about 5 minutes. Increase heat to high; cook until a crunchy socarrat (caramelized crust) forms underneath. Let paella cool 3 minutes before serving.
 
-# Jamaican Sorrel (Hibiscus Punch)
+# Jamaican Sorrel Punch
+Alt_title: Hibiscus Punch
 Yield: 3 quarts
 Attribution: Serious Eats
 Ingredients:
@@ -511,7 +691,7 @@ Instructions:
 300 F 16 minutes 
 # Buddae Jjigae (Korean Army Stew)
 url: https://www.maangchi.com/recipe/budae-jjigae
-Yield: Serves 4
+Servings: Serves 4
 Ingredients:
 ## Make the Korean fish stock:
 2 dried shiitake mushrooms
@@ -559,6 +739,7 @@ Cook over medium high heat. Korean style is to cook at the table with a portable
 When it starts boiling about 10 minutes later, stir and turn the ingredients over with tongs to cook evenly.
 Serve right after the noodles and ramyeon have softened. Transfer some cooked stew to individual bowls and serve. Add more stock as the broth boils down.
 # Doctored-Up Boxed Cake
+Favorites: 1
 Note: A lot of grandmas I know don't want to accept the shame of using boxed cake mix and following the directions, so they'll say “it's a box cake, but I Doctored it up”. Honestly I don’t understand that shame, and boxed cake mixes get the benefit of industrial ingredients that help texture tremendously, so why fight it?
 Ingredients:
 1 package Betty Crocker boxed cake mix
@@ -637,7 +818,7 @@ Place the chicken back in the pan to warm through, about 4 minutes. Remove from 
 
 # Cioppino
 Attribution: Epicurious
-Yield: 6–8 servings
+Servings: 6–8 servings
 Note: Soup base (without clams, mussels, fish, shrimp, and parsley) can be made 1 day ahead. Let cool; cover and chill. Reheat before adding remaining seafood and parsley.
 ## Make the soup
 Ingredients: 
@@ -672,9 +853,10 @@ While cioppino simmers, mix 4 Tbsp. unsalted butter, room temperature, 1 Tbsp. c
 Heat broiler. Arrange 1 baguette, sliced, on a rimmed baking sheet and toast bread, turning halfway through, until light golden, about 4 minutes. Rub cut sides of 1 garlic clove, halved, over toasts.
 Spread gremolata butter over toasts. Ladle cioppino into shallow bowls and serve with toasts.
 # Simple Tomato Angel Hair
+alt_title: Burst Tomato Sauce
 Note: Adapted from Anna Stockwell’s 15-Minute Cherry Tomato Angel Hair on Epicurious. When making this with cherry tomatoes the skins separate and litter the finished dish in an unpleasant way.
 Author: Matt Boss
-Yield: 4–6 servings
+Servings: 4–6 servings
 Ingredients:
 1 lb. angel hair
 1 tsp. Diamond Crystal Kosher salt plus more for pasta pot
@@ -688,10 +870,10 @@ Instructions:
 Cook 1 lb. pasta in a large pot of boiling salted water, stirring occasionally, until al dente; drain pasta, reserving pasta water, and transfer to a large bowl.
 Meanwhile, warm ½ cup extra-virgin olive oil in a large skillet (12" diameter) or wide heavy saucepan over medium-high heat. Add 2 large garlic cloves, finely chopped, then 3 pints cherry tomatoes, ½ tsp. freshly ground black pepper, a pinch of sugar, and 1 tsp. Diamond Crystal or ½ tsp. plus ⅛ tsp. Morton kosher salt. Cook pasta sauce, stirring occasionally, until tomatoes burst and release their juices, 6–8 minutes.
 Toss cooked pasta with cherry tomato sauce; if needed, thin sauce with a little reserved pasta water. Toss in 1 cup coarsely chopped fresh basil and top with freshly grated Parmesan.
-# 15-Minute Cherry Tomato Angel Hair (burst tomato pasta)
+# 15-Minute Cherry Tomato Angel Hair
 Attribution: Epicurious
 Author: Anna Stockwell
-Yield: 4–6 servings
+Servings: 4–6 servings
 note: when making this with cherry tomatoes the skins separate and litter the finished dish.
 url: https://www.epicurious.com/recipes/food/views/pasta-with-15-minute-burst-cherry-tomato-sauce-56390060
 Ingredients:
@@ -714,11 +896,17 @@ Ingredients:
 Instructions:
 Bring water to a simmer.
 Whisk in butter two tablespoons at a time. The butter must be entirely melted before the next can be added.
-# Baked Potatoes
+# Hybrid Microwaved Baked Potatoes
+Ingredients:
+2 Russet potatoes, washed and scrubbed
+neutral oil
+kosher salt
 Instructions: 
-450 degrees 45 minutes.
-Brush oil on the skins. Pull at 205 degrees. Split open immediately
+Preheat convection oven or air fryer to 450. While holding the potatoes with a towel, stab them with a fork all over. Microwave on high for six minutes, rotating halfway through. 
+When potatoes internal temperature has reached 200 degrees, remove them from the microwave. Brush the potato skins with oil and sprinkle them with salt. Roast / air fry for 10 minutes.
+Split open immediately. Serve within an hour.
 # Panera-style mac & cheese sauce
+Favorites: 1
 Author: Matt Boss
 Ingredients: 
 2 cups milk
@@ -745,7 +933,7 @@ Ingredients:
 # Jambalaya (actually Etouffee)
 Attribution: America’s Test Kitchen 
 Source: Restaurant Favorites
-Yield: SERVES 12
+Servings: SERVES 12
 Note:
 Several brands of Cajun seasoning can be found in the spice aisle at the supermarket. Crushed tomatoes, depending on the brand, can vary in consistency from smooth to clunky. Pulse the tomatoes in a food processor to achieve a smooth consistency.
 
@@ -808,7 +996,9 @@ Ingredients:
 instructions:
 330 F, 13 min  + 10 min
 
-# Daddy (Toscana) Soup
+# Toscana Soup
+alt_title: Daddy Soup
+author: Matt Boss
 ## Cook the Kale
 
 INGREDIENTS:
@@ -836,7 +1026,7 @@ INGREDIENTS:
 1 t Xanthan gum (optional)
 1 T Chili flakes
 1 t Oregano
-9 oz. Great Northern beans, cooked (1 can)
+9 oz. Great Northern beans, cooked (1 can, drained)
 1 oz. minced fresh basil
 4-6 oz. half & half or 2-3 oz. cream
 INSTRUCTIONS:
@@ -1159,7 +1349,7 @@ Ingredients:
 Attribution: America’s Test Kitchen
 Source: The Best Recipe
 Note: Russet potatoes make slightly fluffier mashed potatoes, but Yukon Golds have an appealing buttery flavor and can be used if you prefer. Mashed potatoes stiffen and become gluey as they cool, so they are best served piping hot. If you must hold mashed potatoes before serving, place them in a heatproof bowl, cover the bowl tightly with plastic wrap, and set the bowl over a pot of simmer-ing water. Be sure to occasionally check the water level in the pan. The potatoes will remain hot and soft-textured for 1 hour. This recipe can be increased by half or doubled as needed. It yields smooth mashed potatoes. If you don't mind (or prefer) lumps, use a potato masher, as directed in the variation.
-Yield: SERVES 4 TO 6
+Servings: SERVES 4 TO 6
 Ingredients:
 2 pounds russet potatoes, scrubbed
 8 tablespoons (1 stick) unsalted butter, melted
@@ -1190,7 +1380,7 @@ Put cubed potatoes into steamer basket and place steamer into a large pot of sim
 
 # Mashed Sweet Potatoes
 Attribution: America’s Test Kitchen
-Yield: SERVES 4
+Servings: SERVES 4
 Note: Cutting the sweet potatoes into slices of even thickness is important in getting them to cook at the same rate. The potatoes are best served immediately, but they can be covered tightly with plastic wrap and kept relatively hot for 30 minutes. This recipe can be doubled and prepared in a Dutch oven; the cooking time must be doubled as well.
 Ingredients:
 4 tablespoons unsalted butter, cut into 4 pieces
@@ -1247,9 +1437,11 @@ Heat a cold pizza stone in the oven to its highest temperature, about 500 degree
 
 
 # British Indian Curry Shop “Base Gravy”
+Favorites: 1
 Attribution: Latifs Inspired
 Video: https://youtu.be/RAyEdD8g5Pg
-Yields: enough for 6-8 curries as main restaurant entrees.
+Servings: enough for 6-8 curries as main restaurant entrees.
+Note: This is a British Indian restaurant thing, so it’s useful for making Tikka, Bhuna, and Korma a la minute.
 ## Bloom the whole spices
 Ingredients: 
 1 cup of oil
@@ -1302,6 +1494,137 @@ Remove the star anise, cinnamon, and bay leaves
 Blitz until smooth, for about 5 minutes. It should stick to a spoon but not be thick
 To Serve: 
 Use after sauteeing most of a dish and before finishing herbs and acid, then simmer until it simmers continuously with small bubbles
+# Saag Paneer (Restaurant Style)
+Author: The Curry Kid
+url: https://thecurrykid.co.uk/recipe/saag-paneer/
+Note: Saag Paneer, is a well-loved vegetarian side dish with plenty of flavour . It's high in calcium and folate from the spinach and is gluten-free, too
+## For the Paneer
+Ingredients:
+200g Paneer (cubed)
+1/4 teaspoon Turmeric Powder
+1 teaspoon Chilli Powder
+1/2 teaspoon Salt
+3 tablespoons Vegetable Oil
+Instructions: 
+cut the paneer into small squares around 1-2 cm and coat them in the chilli powder, turmeric and salt
+Combine well and allow to marinate for a few minutes
+Add the oil to a pan on low to medium and add the paneer
+Fry stirring every minute turning the paneer cubes over as you go
+Continue to fry for 4-5 minutes until the cubes are starting to crisp and brown before removing them to drain
+Make sure you keep all the lovely seasoned oil in the pan, you'll need that next
+## For the Spinach (saag)
+Ingredients:
+200g Spinach
+1 Garlic Clove
+2 Green Finger Chillies
+Instructions:
+Place your spinach, green chillies and a garlic clove in a blender and blitz until it's a smooth paste
+## For the Curry
+Ingredients:
+1 teaspoon Ghee (Butter)
+1 Bay Leaf
+1/4 teaspoon Fennel (seeds)
+1/2 teaspoon Cumin Seeds
+100g (sliced) Brown/White Onion
+3 Garlic Cloves
+2 teaspoons Tomato Paste
+2 teaspoons Mix Powder / Curry Powder
+1 teaspoon Salt
+250 millilitres Curry Base
+1 teaspoon Sugar
+3 tablespoons Single Cream
+Instructions:
+Keeping the pan on low add the butter ghee and bay leaf and fry for a minute before adding the fennel and cumin seeds
+
+Once bubbles start to form around them add in the onions and fry stirring frequently until they begin to brown and soften
+
+Add in 2/3 of the garlic and allow to fry out until the bitter smell disappears
+
+When it has add in the tomato puree, spice mix and salt
+
+Stir well and allow to fry for a further minute
+
+Add in the base, allow to start bubbling then stir in the pureed spinach and the rest of the garlic
+
+Continue to reduce for a few minutes
+
+Sprinkle over the sugar and cream and allow to warm slightly before stirring it in
+
+This is a great way to ensure the cream doesn't curdle when mixed
+
+Taste and add more salt if required
+## To Serve
+Finally, when the sauce is the consistency you require stir in the paneer and serve immediately
+As I like my paneer crispy I serve up the curry and then add the fried paneer to the dish with a little drizzle of cream
+# Sweet Butter Chicken (Takeaway Style)
+Author: The Curry Kid
+url: https://thecurrykid.co.uk/recipe/sweet-butter-chicken-restaurant-style/
+Note: This stunning Butter Chicken is out of this world. If you like your Korma and Tikka Masala dishes this is definitely for you. A sweet and creamy dish of coconut, almonds, sugar and cream. It’s like a curry desert you’ll be making time and again
+
+Ingredients:
+1.5 tablespoons Vegetable Oil
+1 small onion (50g) Brown/White Onion 
+1/4 teaspoon Salt
+1 teaspoon Garlic & Ginger Paste
+1 tablespoon (watered down with 3 tablespoons of water) Tomato Paste
+250ml (heated) Curry Base
+1 tablespoon Sugar
+2 tablespoons Coconut Milk Powder
+1.5 tablespoons Ground Almonds
+2 tablespoon Sugar
+8 pieces Meat / Veg / Paneer
+120ml Single Cream
+50g Butter (Salted)
+Instructions:
+to begin heat a pan on medium and add the oil, finely diced onion and salt, stir through frequently and allow to soften for a few minutes and start to go light brown and caramelized
+
+add the garlic and ginger paste, stir through and fry for 30 seconds
+
+turn up the heat and add the tomato puree stir through thoroughly, allowing to cook out for a further minute
+
+add in half of the heated base, stir through and allow to reduce for a couple of minutes
+
+add the coconut milk powder, ground almonds and sugar stirring in well
+
+add the rest of the base and the chicken coating to stop it from drying out. lower the heat, add the cream (retain a little for decoration) and butter, allowing to heat slightly and melt before incorporating
+
+allow to simmer until the meat is cooked through and the sauce is the consistency you require. remove from the heat and serve drizzled with the remaining cream
+# Garlic Chilli Chicken Tikka Balti (Restaurant Style)
+Author: The Curry Kid
+url: https://thecurrykid.co.uk/recipe/garlic-chilli-chicken-tikka-balti-restaurant-style/
+Note: This Garlic Chilli Chicken Balti is a seriously hot and spicy, fantastically flavoured curry made with freshly diced garlic, fresh ginger, fresh chillies and sliced onions. If you like your Madras and Vindaloo then this is the curry for you. Reduce the heat by leaving out the chilli pickle and by adding less or de-seeding the chillies. You can even add a little sugar if required
+Ingredients:
+3 tablespoons Vegetable Oil
+2" Cassia Bark (Cinnamon Stick)
+2 Green Cardamom Pods
+1 Black Cardamom Pods
+1 Cloves
+5 diced Garlic Cloves
+1/2 large sliced or diced finely Brown/White Onion
+3/4 teaspoon Salt
+1" Ginger (Grated)
+4 sliced Birds Eye Chilli
+1 tablespoon Tomato Paste
+2 teaspoons Chilli Powder (Hot)
+2 teaspoons Mix Powder / Curry Powder
+1/4 teaspoon Turmeric Powder
+1/2 tomato, sliced Sliced Tomato
+6 pieces Chicken Tikka 
+250 millilitres Curry Base
+1/2 teaspoon Garam Masala Powder
+1/2 teaspoon Fenugreek Leaves (Kasoori Methi)
+1 grated Garlic Cloves
+1/4 cup Fresh/Chopped Coriander
+Instructions:
+heat the oil on a medium heat and add the cinnamon stick, black cardamom, green cardamoms and clove and stir gently until bubble begin to form around them
+add in the chopped garlic, stir through and allow to fry for a minute
+add in the onion, stir through well and allow to fry for around 3-5 minutes until beginning to soften and brown
+add the salt, ginger and chillies, stir through then cook for a further minute
+add the chilli powder, mix powder, tomato puree and turmeric, stir through then cook for 30 seconds adding a little base gravy if required
+add the tomatoes and meat and stir through to coat
+add 1/2 of the base gravy, stir through, allow to cook for a minute or two then add the rest
+add the garam masala, fenugreek leaves, freshly grated garlic and most of the fresh coriander
+when the dish is the consistency you require remove the cardamom pods, cinnamon and clove and serve decorated with a sprinkle of coriander and a fresh chilli
 # Palaak but with Kale
 Serve With: Rice, Brown Rice, Cauliflower, Chicken, Paneer, Tofu
 Ingredients: 
@@ -1621,6 +1944,7 @@ rinse off salt, do not pat dry
 grind 0.5 oz koji rice to fine powder, add 1 oz brown rice flour
 coat steak with the powder mix
 # Foolproof Pan Pizza
+Favorites: 1
 Attribution: Serious Eats
 Note: Choose your pans. 
 Cast Iron: Recipe yields two pizzas that fit into 10” cast iron pans, which are measured across the rim. They actually yield a 9” pizza due to the sloped sides, which means 128 in2 total. This is equivalent to a single 8” (33 in2) plus a single 12” (87 in2) cast iron pan.
@@ -2009,8 +2333,6 @@ Instructions:
 combine reserved piperade, oil, vinegar, herbs, and salt and pepper to taste in a bowl. 
 To serve, heat broiler and place byaldi underneath until lightly browned. Slice in quarters and very carefully lift onto plate with offset spatula. Turn spatula 90 degrees, guiding byaldi into fan shape. Drizzle vinaigrette around plate. Serve hot.
 
-Sweet
-Original Recipes
 # S’more Cake
 Author: Matt Boss
 Ingredients:
@@ -2454,6 +2776,7 @@ Instructions:
 Let cool completely, at least 
 with a pizza wheel, cut into desired size of bars
 # Boxed Mix Copycat Brownies
+Favorites: 1
 Author: Matt Boss
 Note: The goal is to replicate a glossy-top, fudgy, chewy brownie adding only water, egg, and oil, and without melting chocolate or using butter. If a boxed mix can do it, so can I.
 Through experimentation, I've learned that the key to a boxed mix is that all of the ingredients (sugar, chocolate, espresso powder) are superfine; the consistency of flour or powdered sugar (btw, you shouldn't substitute powdered sugar because it contains starch). If you don't blitz your ingredients you don't get the glossy top. That's why the instructions are more complicated than "dump and mix" like they are on the back of the box.
@@ -2498,9 +2821,8 @@ dump the wet ingredients on top & mix with a whisk
 325 F, 45 minutes
 # New York Cheesecake
 Attribution: America’s Test Kitchen
-Yield: SERVES 12 TO 16
-Note: 
-next time, try 155 next time.for an 8” pan
+Servings: SERVES 12 TO 16
+Note: next time, try 155 next time.for an 8” pan
 For the crust, chocolate wafers (such as Nabisco Famous) may be substituted for graham crackers; you will need about 14 wafers. The flavor and texture of the cheesecake are best if the cake is allowed to stand at room temperature for about 30 minutes before serving. When cutting the cake, have a pitcher of hot tap water ready; dipping the blade of the knife into the water and wiping it after each cut helps make clean slices.
 ## CRUST
 Ingredients: 
@@ -2633,6 +2955,7 @@ Ingredients:
 Instructions:
 375, 9 min
 # Thick and Chewy Chocolate Chip Cookies
+Favorites: 1
 Yield: MAKES ABOUT 18 LARGE
 Note: These oversize cookies are chewy and thick, like many of the chocolate chip cookies sold in gourmet shops and cookie stores. They rely on melted butter and an extra egg yolk to keep their texture soft. These cookies are best served warm from the oven but will retain their texture even when cooled. To ensure the proper texture, cool the cookies on the baking sheet. Oversize baking sheets allow you to get all the dough into the oven at one time. If you're using smaller baking sheets, put fewer cookies on each sheet and ake them in batches. See the illustrations on page 776 for tips on shaping these cookies.
 Ingredients: 
@@ -2657,7 +2980,7 @@ Beat in the egg, yolk, and vanilla until combined. Add the dry ingredients and b
 # Bourbon Cookies
 Author:  Matt Boss
 video: https://www.youtube.com/watch?v=sI7E8J1sGvw
-Note: These are not for kids. They’re designed to be eaten with a glass of bourbon. 
+Note: These are not to be wasted on kids. They’re designed to be eaten with a glass of bourbon. 
 ## Smoke the butter
 Ingredients:
 8 ounces unsalted butter (2 sticks; 225g)
@@ -2738,22 +3061,6 @@ Preheat oven to 300°F. Bake for 20 to 23 minutes, or until edges are golden bro
 Remove from oven and cool on baking sheet for about 1 hour.
 
 Cook’s note: You can freeze the unbaked cookies, and there’s no need to thaw. Preheat oven to 300°F and place frozen cookies on parchment paper-lined baking sheet about 2 inches apart. Bake until edges are golden brown and center is still soft.
-
-
-# Tuiles
-Ingredients:
-1/3 cup flour
-1/2 cup plus 2 Tbsp. granulated sugar
-1 pinch salt
-3 egg whites from large eggs
-2 1/2 Tbsp. melted unsalted butter
-3 Tbsp. (approximately) melted butter to grease the parchment paper
-2 Tbsp. (approximately) milk
-Instructions:
-Sift the flour, sugar, and salt into a small mixing bowl. Add the egg whites and then the melted unsalted butter, and whisk until just combined. Set the batter aside to rest for 1 1/2 hours before using, or cover and refrigerate for up to 3 days.
-Preheat the oven to 350°F. Heavily butter 3 pieces of parchment paper, and place one each on three baking sheets. Using 1 1/2 Tbsps. per tuile, spoon the batter onto the baking sheets, 5 per sheet. The cookies should be at least 2 inches apart, as they spread during baking. Dipping a finger in the milk first, spread each cookie into a 3-inch round. To insure even baking, make the edges no thinner than the centers.
-Bake the tuiles 8 to 10 minutes, or until the edges are golden and the centers are just beginning to color. Remove the cookies from the oven. As soon as they are cool enough to handle, remove the tuiles from the baking sheets and drape them around rolling pins or wine bottles.
-Fill with cheesecake or something
 # Cherry Cream Cheese Pie
 Ingredients:
 • Pre-baked pie shell
@@ -2792,21 +3099,8 @@ Preheat the oven to 350 degrees F and line two 12-cup muffin tins with liners. C
 Fill each cupcake liner about two-thirds full. Bake for 20 to 25 minutes, or until a toothpick inserted in the centre of a cupcake comes out clean. 
 In the bowl of an electric mixer, combine the butter and 4 cups of the sugar. Add the milk and vanilla extract. Beat until smooth and creamy (3 to 5 minutes). Gradually add the remainder of the sugar, 1 cup at a time. Be sure to beat well after each addition. Continue adding sugar just until the buttercream is thick enough to spread. 
 
-# Breanne’s Chocolate Chip Cookies
-Attribution: Breanne Wise
-Ingredients:
-½ c butter
-¾ c sugar
-1 c brown sugar
-1 t salt
-2 eggs
-3 T vanilla
-2½ c flour
-1 t baking soda
-12 oz chocolate chips
-Instructions:
-
 # Apple Pie
+Author: Matt Boss
 Note: Adapted from Serious Eats Perfect Apple Pie. For a looser, juicy pie, use 2 tablespoons of cornstarch. For a firmer filling that holds its shape more when sliced, use up to 4 tablespoons cornstarch.
 ## Make the crust
 Ingredients:
@@ -2911,6 +3205,30 @@ Ingredients:
 Instructions: 
 Whip cream to stiff peaks, add other ingredients, beat until mixture holds stiff peaks again
 
+# Banana Bread
+Favorites: 1
+Author: Matt Boss
+## Blend the wet ingredients
+Ingredients:
+2 eggs
+1 tsp vanilla extract
+¼ c yogurt
+6 Tbsp butter, melted
+3 overripe bananas (about 12 oz)
+¾ c sugar
+Instructions:
+Prepare a loaf pan with a baking parchment sling, nonstick spray and flour. Preheat oven to 350F.
+In the carafe of a blender, add the eggs, vanilla, yogurt, melted butter, bananas, and sugar. Blend on low speed until just combined.
+## Mix the batter
+¾ tsp baking soda
+½ tsp salt
+2 c ap flour
+½ c chocolate chips
+Instructions:
+In a large metal mixing bowl, whisk the flour, salt, and baking soda until no lumps appear. Dump in the blended wet ingredients and stir until lumps are small, but don’t worry about making it perfectly smooth. Let the batter stand five minutes. Pour into prepared loaf pan.
+## Bake the banana bread
+Instructions:
+350 F for 55 minutes
 # Banana Nut Cake
 Ingredients: 
 2 ½ c flour
@@ -3010,9 +3328,11 @@ Parmesan (25g)
 Pesto (60g)
 
 # Bro'-'Fu
+alt_title: Broccoli Tofu
 Author: Matt Boss
+Note: It’s Broccoli Beef, but with Tofu instead of steak, so it’s Broccoli Tofu, or Bro’-’Fu if ya nasty. 
 Ingredients: 
-1 recipe roasted broccoli
+1 recipe blasted broccoli
 1 recipe fried tofu
 Half onion
 ½ red bell pepper 
@@ -3121,9 +3441,10 @@ Carrots 234g
 4 cans Chicken broth
 
 3 Tbsp Potato Starch
-# Pad Krapow Gai (Thai Basil Chicken)
+# Pad Krapow Gai
+alt_title: Thai Basil Chicken
 url: https://www.allrecipes.com/recipe/257938/spicy-thai-basil-chicken-pad-krapow-gai/
-Yield: 2 servings
+Servings: 2 servings
 Ingredients:
 ⅓ cup chicken broth
 1 tablespoon oyster sauce
@@ -3191,6 +3512,8 @@ Ingredients:
 Instructions:
 Add the salt and sugar to the boiling water and cook until dissolved. Place the cabbage in the boiling water and cook for 2 minutes exactly. Drain the cabbage in the bowl of the salad spinner or colander. Spin the cabbage to remove any excess water. Add the cabbage to the butter-crumb dressing and toss to coat thoroughly.
 # Caboodles
+alt_title: Cabbage Noodles
+Note: It’s spaghetti & meat sauce made slightly lower in carbs and higher in fiber by using cabbage. And it’s a fun portmanteau of a title.
 Ingredients:
 1/2 head cabbage
 
@@ -3339,6 +3662,7 @@ Ingredients:
 
 1 part Salt
 # Umami Salt
+Favorites: 1
 Attribution: Berkaminon
 url: https://www.reddit.com/r/Cooking/comments/lyydr9/how_i_use_msg_i_make_umami_salt_and_i_use_that/
 Ingredients: 
@@ -3407,6 +3731,7 @@ Combine flour, sugar, salt, and yeast in bowl of food processor. Pulse 3 to 4 ti
 
 Transfer dough ball to lightly floured surface and knead once or twice by hand until smooth ball is formed. It should pass the windowpane test. Divide dough into three even portions and place each in a covered quart-sized deli container or in a zipper-lock freezer bag. Place in refrigerator and allow to rise at least 1 day, and up to 5 days.
 # Flaky Biscuits
+Favorites: 1
 Attribution: Sally's Baking Addiction
 URL: https://sallysbakingaddiction.com/flaky-buttermilk-biscuits/#tasty-recipes-66534			
 Notes: These have to be cut with round cutters inside of the edges; the folding means that they expand longitudinally, so the folds on the sides will cause them to open like a book.
@@ -3592,6 +3917,7 @@ Bake until the bacon is browned and starts to ripple, or to desired doneness, 10
 
 Transfer the bacon to a paper towel-lined plate to drain.							
 # Air Fryer Meatballs
+Favorite: 1
 Author: Matt Boss
 Note: Adapted from Anne Burrell’s Excellent Meatballs to use my savory salt, forget about using fresh parsley, lamb and pork, and using an airfryer as a massive quality of life improvement.
 Ingredients:
@@ -3745,7 +4071,7 @@ Combine the shallots, white wine, and lemon juice in a non-reactive saucepan ove
 Add the cream to the reduction. Once the liquid bubbles, reduce the heat to low. Add the butter, one cube at a time, whisking first on the heat and then off the heat. Continue whisking butter into the reduction until the mixture is fully emulsified and has reached a rich sauce consistency. Season with salt and white pepper. Store beurre blanc in a thermos until ready to serve.		
 
 
-Yields 220 g
+Yield 220 g
 # ULTRASTABLE BEURRE BLANC
 ## Hydrate gels
 Ingredients:
@@ -4025,9 +4351,9 @@ Heat 3 tablespoons (45ml) olive oil in a large, wide saucepan over medium heat u
 
 Remove from heat; stir in basil and tomato-plant cutting, if using; and let steep for 5 minutes. Discard basil and tomato-plant cutting. Stir in oven-dried tomato paste and reserved tomato purée and season with salt. Use as desired or freeze.		
 		
-# Tikka Masala (Butter Chicken Sauce)
+# Tikka Masala
 Note: The cream can be replaced with coconut cream (NOT cream of coconut) to make this vegan.
-Serve With: Rice, Brown Rice, Cauliflower, Chicken, Paneer, Tofu
+## Make the Curry
 Ingredients:
 3 tablespoons oil
 
@@ -4064,8 +4390,14 @@ Heat the oil in a large pot over medium heat, then sauté the onions, ginger, an
 Blend either with a bar blender or an immersion blender to form a very smooth puree.
 
 Add back to the pan, add the cream and remaining tomatoes, then heat over medium low for 5-10 minutes.
+## To Serve
+Ingredients:
+Cooked Basmati Rice or Brown Rice
+roasted Cauliflower
+Cooked Chicken, fried Paneer, or fried Tofu
 # Modernist Queso (Cheese Sauce)
-Used In: Nacho Dip
+Favorites: 1
+Author: Matt Boss
 Ingredients:
 12 oz. Lager or low-hop beer. No IPAs.
 
@@ -4080,11 +4412,13 @@ Instructions:
 Pour beer and Sodium Citrate into a large soup container (minimum 32 oz.). Microwave for at least three minutes, until beer reaches at least 150F. Watch it doesn't boil over.
 
 Working in handfuls, use an immersion blender to melt the cheese into the beer mixture. You will have to stop every second handful to microwave the mixture for another minute or two until it's hot again. Keep monitoring it to make sure it doesn't boil over.
-# Parmesan (Parm) Queso
+# Parm Queso
+alt_title: Parmesan Queso
+Notes: Recipe development note: I think this needs more liquid, as it’s almost solid at fridge temp. The purpose of this recipe is to be added to a marinara sauce at the end of cooking without cheese sticking to the bottom of the pan and emulsifying into the sauce easily and quickly.
 Ingredients:
-9 oz parmesan cheese
+9 oz parmesan cheese, finely grated
 
-7 oz white wine
+7 oz chardonnay
 
 2 tsp sodium citrate
 					
@@ -4298,7 +4632,7 @@ pinch salt
 Instructions:
 Over high heat, bring to a boil, stir, top with lid, drop heat down to low. Simmer for 35 minutes Without removing lid, remove from heat for 10 minutes. Fluff with a fork.
 # Oven-Baked Brown Rice										
-Yield: SERVES 4 ΤΟ 6
+Servings: SERVES 4 ΤΟ 6
 Note: Base your decision on whether to use oil or butter in the recipe on the dish the rice will accompany; for example, if you are serving a stir-fry, use oil for the rice. To minimize any loss of water through evaporation, cover the saucepan as the water is heating, and use the water as soon as it reaches a boil. If you own an 8-inch ceramic baking dish with a lid, use it instead of the glass baking dish and foil. To double the recipe, use a 13 by 9-inch baking dish; the baking time need not be increased.
 Ingredients:
 1 ½ cups brown rice
@@ -4413,7 +4747,7 @@ smoke for 1 hour or until thickest part of the thighs reach 145, brushing with m
 # Twice-Baked Potatoes
 Attribution: America’s Test Kitchen
 Source: The Best Recipe
-Yield: SERVES 6 TO 8
+Servings: SERVES 6 TO 8
 Note: To vary the flavor a bit, try substituting other types of cheese, such as Gruyère, fontina, or feta, for the cheddar. Yukon Gold potatoes, though slightly more moist than our ideal, gave our twice-baked potatoes a buttery flavor and mouthfeel that everyone liked, so we recommend them as a substitution for the russets.
 Ingredients:
 4 medium russet potatoes (7 to 8 ounces each), scrubbed, dried, and rubbed lightly with vegetable oil
@@ -4433,7 +4767,7 @@ Twice-Baked Potatoes with Chipotle Chiles and Onion
 For a slightly smoky aftertaste with just a hint of heat, limit the chipotles to 1 tablespoon. For more heat, increase the chipotles to 1 1/2 tablespoons.
 Heat 2 tablespoons butter in a medium skillet over medium heat. Add 1 medium onion, chopped fine, and cook until soft, 3 to 4 minutes. Follow the recipe for Twice-Baked Potatoes, omitting the but-ter and adding 1 to 1 1/2 tablespoons minced canned chipotle chiles in adobo sauce, the sautéed onion, and 2 tablespoons chopped fresh cilantro leaves to the filling mixture in step 2. Proceed as directed.
 # Shepherd’s Pie
-Yield: SERVES 6
+Servings: SERVES 6
 Note: To prevent the mashed potatoes from turning sticky or gummy, be careful not to overcook the potatoes and to drain them well.
 Ingredients:
 1 teaspoon olive oil or vegetable oil
@@ -4501,7 +4835,13 @@ Heat a smoker to 250 degrees F. Place 1 hardwood chunk in the smoker's wood tray
 Flip over the meatloaf pouch and poke 12 to 15 holes in the aluminum foil package to allow the fat to drain off. Turn the pouch back over. Set the meatloaf in the smoker and place a drip pan on the rack immediately below the meatloaf. Cook for 45 minutes.
 
 After 45 minutes, open the foil pack and fold down the sides of the foil to create a shallow "pan" around the meatloaf. Brush with the reserved glaze. Insert a probe thermometer into the meatloaf and cook until the internal temperature reaches 140 degrees F, approximately 40 minutes. Remove the meatloaf from the smoker and rest for 30 minutes before slicing and serving.
-# Macaroni
+# Hard-boiled Eggs
+Ingredients:
+10 eggs
+Instructions:
+Fill a small pot with at least a quart of cold water. Add the eggs one at a time to prevent them from cracking. Add more cold water until the eggs are submerged by an inch. Heat over high heat until boiling. Turn the heat down to low to prevent cracking, and let cook for seven minutes.
+drain the boiling water. cover the eggs with a fresh cold water and let sit for at least ten minutes. 
+# Cooked Macaroni
 Yield: 688g cooked, 48 volumetric ounces or about 1.4L
 Ingredients:
 9 oz. (250g) dry elbow Macaroni
@@ -4513,7 +4853,7 @@ Instructions:
 Bring to a boil, turn heat down to low or medium-low a simmer. Cook for 10 minutes.
 # Cassoulet Toulousian
 Attribution: America’s Test Kitchen
-Yield: SERVES 6
+Servings: SERVES 6
 Note: If flageolet beans aren't available, use great Northern beans or other small white beans. You may have to modify the cooking times slightly to account for differences in the size of the beans. Avoid using canned beans their flavor and texture will pale in comparison to properly cooked dried beans. Leave the salt pork skin in the cassoulet when serving. Although it is not eaten, it imparts flavor to the dish and should be left in the pot.
 Ingredients:
 1 pound dried flageolet beans, washed, picked over, covered with 10 cups water, and soaked overnight (6 hours or longer)
@@ -4587,7 +4927,7 @@ Occasionally check on the beans and add water to cover the beans, if needed over
 # Refried Beans (Red Kidney)
 Attribution: America’s Test Kitchen
 Source: The Best Recipe
-Yield: SERVES 4 ΤΟ 6 
+Servings: SERVES 4 ΤΟ 6 
 Note: If you have a spice grinder, you can enjoy freshly ground whole cumin seeds. The flavor is markedly better than that of store-bought ground cumin. Simply toast the seeds in a skillet for a couple of minutes or until fra-grant, then grind them until finely processed. If you like your beans on the spicy side, don't bother to seed the chile. Refried beans can be served with a variety of garnishes, including tortilla chips, salsa, pickled jalapeño chiles (sold in cans in most supermarkets), sliced scal-lions, shredded Monterey Jack or cheddar cheese, and sour cream.
 3 (15-ounce) cans red kidney beans, drained and rinsed
 1 cup water 
@@ -4893,6 +5233,8 @@ Add about 1/4 cup of the reserved pasta water to the sauce. Once again, stir wit
 
 Serve immediately.							
 # Shrimp Scampi
+Attribution: America’s Test Kitchen
+Author: Andrew Janjigian
 ## Brine the shrimp
 Ingredients: 
 3 tablespoons salt
@@ -5432,7 +5774,9 @@ tomatoes with green chilis
 cumin
 
 smoked chili powder												
-# Din Tai Fung Green Beans [Copycat]
+# Dry Fried Green Beans
+alt_title: Gan Bian Si Ji Dou
+Restaurant: Din Tai Fung
 note: This adaptation is a work in progress–the original recipe is “dry fried” in a quart of oil. I prefer to parboil the green beans using the Thomas Keller Big Pot Blanching method (https://www.youtube.com/watch?v=dPGke_I7hpk) then give them a quick saute to finish. My nearby dumpling house adds mushrooms–I need to go have them again to make sure they’re wood ears and how to prepare them right.
 Ingredients:
 1 lb green beans, washed and trimmed to 3" pieces
@@ -5446,6 +5790,7 @@ Soak the green beans for half an hour. Trim ends off green beans and cut them in
 Parboil the green beans in batches for 2-4 minutes in saltwater then shock in icewater. This can be done far ahead of service.
 In a pan or wok, add 2 tbsp of frying oil over medium low heat and add the garlic. Sauté on medium low for 1-2 minutes. We want to release the aroma of the garlic to a pale golden color but not browned. Add the green beans and season with white pepper, msg, and salt to taste (they should have been fairly well salted during parboiling). Turn the heat to high and saute for 1-2 minutes until combined and fragrant.
 # Green Bean Casserole			
+Author: Matt Boss
 Attribution: Serious Eats		
 URL: https://www.seriouseats.com/homemade-green-bean-casserole-recipe			Note: presuming you buy fried red onions from Uwajimaya instead of frying your own shallots.
 
@@ -5454,7 +5799,7 @@ I made this specific recipe and thought the sauce was too runny. Need to up the 
 I only used about 2/3 of the mushroom sauce for 1 pound of green beans in a 9x9 pyrex. I have decreased the measurements to a 1/3 recipe of the sauce.
 
 This method assumes you're serving immediately, so it foregoes shocking the green beans in icewater and instead lets them continue cooking with their own latent heat.		
-$$ For the mushroom sauce
+## For the mushroom sauce
 Ingredients:
 1/2 pound (225 g) white button mushrooms, rinsed and spun dry in a salad spinner
 
@@ -5525,26 +5870,6 @@ Dough is ready when its surface is dotted with bubbles. Lightly flour a work sur
 Using just enough flour to keep dough from sticking to work surface or to your fingers, gently and quickly shape dough into a ball. Generously coat a cotton towel (not terry cloth) with flour, wheat bran or cornmeal; put dough seam side down on towel and dust with more flour, bran or cornmeal. Cover with another cotton towel and let rise for about 2 hours. When it is ready, dough will be more than double in size and will not readily spring back when poked with a finger.
 
 At least a half-hour before dough is ready, heat oven to 450 degrees. Put a 6- to 8-quart heavy covered pot (cast iron, enamel, Pyrex or ceramic) in oven as it heats. When dough is ready, carefully remove pot from oven. Slide your hand under towel and turn dough over into pot, seam side up; it may look like a mess, but that is OK. Shake pan once or twice if dough is unevenly distributed; it will straighten out as it bakes. Cover with lid and bake 30 minutes, then remove lid and bake another 15 to 30 minutes, until loaf is beautifully browned. Cool on a rack.
-Instant Ramen Hacks (video: https://www.youtube.com/watch?v=8Nr2xxHM9kk&t=326s)
-Rabokki 3:53
-Ram-Don (jjapaguri) 5:13
-Korean army stew 6:57
-Thai inspired 8:47
-Mac n' ramen 10:01
-Carbonara 11:09
-Mozzarella moses 12:40
-Ramyun fried rice 14:42
-Cacio e pepe 18:28
-Rose ramen 20:23
-Curry ramen 21:38
-Assassin's ramen 22:59 
-Scallion ramen 24:25
-Leftovers (ramlette) 26:07
-Leftovers (okonomiyaki) 28:30
-Korean egg soufflé 30:14
-Leftovers (croquettes) 31:12
-Ramen gnocchi 34:27
-Chinese stir-fry noodles 35:50 
 # Cold Chewy Scallion & Cucumber Noodle
 url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
 Attribution: Anything with Alvin
@@ -5736,7 +6061,8 @@ In a pan over medium heat, combine the water, a pat of butter, olive oil, and pa
 Drop in the dry ramen block. Stir vigorously and constantly as the noodles cook and release starch into the water, emulsifying the cheese sauce.
 Once the noodles are cooked and coated in the thick sauce, plate immediately. Dust heavily with extra parmesan, black pepper, and ramen seasoning on top instead of mixing it in.
 
-# Rose (Rosé) Ramen
+# Rosé Ramen
+alt_title: Rose Ramen
 url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
 Attribution: Anything with Alvin
 Notes: An easy cream sauce made entirely in one pot. The starch from the noodles thickens the milk naturally as it cooks.
@@ -5809,6 +6135,9 @@ Pour the base sauce directly into the scallion oil and let it reduce and bubble 
 Toss the cooked, drained ramen noodles into the intensely flavored oil until fully coated.
 
 # Tan Tan Style Ramen Noodles
+alt_title: Dan Dan Style Ramen Noodles
+Author: Regular-Forever-3251
+url: https://www.reddit.com/r/Cooking/comments/1vnfurz/jazzing_up_instant_noodles/
 Note: I grew up in Singapore where we had Tan tan mian at a place called Crystal Jade, and the flavor ends up being kiiiinda reminiscent of that!
 Ingredients
 Buldak Noodles
@@ -5820,7 +6149,7 @@ rice vinegar
 sesame oil
 Instructions:
 in the bowl only put 3/4 of the spicy sauce. Mix up the sauce before tossing the noodles in it. Add some sesame oil if you have it.
-# Creamy Egg Style:
+# Creamy Egg Style Ramen Noodles
 Ingredients:
 Buldak Noodles
 egg
@@ -5829,7 +6158,7 @@ salt or soy sauce to taste
 Instructions:
 Start with Buldak Noodles. Add a raw egg in the bowl and mix. 
 Once the noodles are ready, put it in the bowl and mix with the egg vigorously (Let the heat of the noodles cook the egg). Then put in the sauce packet, mayonnaise, salt/soy sauce to taste
-# Baked Feta Pasta (from TikTok)
+# Baked Feta Pasta
 url: https://grilledcheesesocial.com/2019/06/27/baked-feta-pasta-with-tomatoes/#recipe
 Attribution: TikTok
 Notes: It works best if you use a small baking dish so the tomatoes are touching. If the tomatoes are out of season and are too sour or tart, try adding in some balsamic glaze to sweeten it up.
@@ -5870,6 +6199,7 @@ Thinly slice the cucumber using a mandolin and transfer to a jar.
 Add the chopped spring onion, minced garlic, soy sauce, fish sauce, sesame oil, sugar, MSG, and sesame seeds. 
 Place the lid on the jar and shake until well incorporated. Garnish with chili flakes
 # Dubai chewy cookie
+Attribution: TikTok
 ## Filling
 Ingredients:
 100g (approx. 1 ¼ cups) Kataifi pastry, finely chopped

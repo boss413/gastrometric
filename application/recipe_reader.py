@@ -223,5 +223,18 @@ def get_recipe(recipe_id: int, db_path: Optional[str] = None) -> Recipe:
         recipe_yield=recipe_data.get("recipe_yield"),
         recipe_state=recipe_data.get("recipe_state"),
         recipe_ingestion_method=recipe_data.get("recipe_ingestion_method"),
+        # These four map physical DB column names to different
+        # application field names (Change Order: Correct Recipe
+        # Metadata SQL) -- `SELECT *` returns dict keys under the
+        # physical names, so `.get("alt_title")` etc. would silently
+        # return None on the real schema rather than raising; reading
+        # the actual `recipe_*` keys here is what fixes that.
+        alt_title=recipe_data.get("recipe_alt_title"),
+        servings=recipe_data.get("recipe_servings"),
+        restaurant=recipe_data.get("recipe_restaurant"),
+        # `recipe_favorites` is documented as storing 1 or NULL (no 0
+        # state) -- known tech debt, not addressed here; just using
+        # what's available, same plain bool() conversion as before.
+        favorite=bool(recipe_data.get("recipe_favorites")),
         sections=sections,
     )

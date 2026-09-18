@@ -1,5 +1,25 @@
 [
   {
+    "input": "purple cabbage thing",
+    "location": "fridge"
+  },
+  {
+    "input": "salt to taste",
+    "location": "fridge"
+  },
+  {
+    "input": "2 ribs",
+    "location": "fridge"
+  },
+  {
+    "input": "beans",
+    "location": "fridge"
+  },
+  {
+    "input": "pepper",
+    "location": "fridge"
+  },
+  {
     "input": "cabbage",
     "location": "fridge"
   },
