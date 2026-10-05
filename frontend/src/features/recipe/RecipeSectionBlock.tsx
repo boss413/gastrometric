@@ -18,8 +18,23 @@ interface RecipeSectionBlockProps {
  * instructions use the backend's own `number` as the `<li value>` so the
  * displayed ordinal is the backend's number, not array position — while
  * still rendering in the backend's given array order.
+ *
+ * WO-2026-017: a section is presentation-only content. If it carries
+ * neither ingredients nor instructions, there is nothing to present, so
+ * the component renders nothing at all (no heading, no empty table, no
+ * empty list) rather than a placeholder shell. Likewise, the ingredient
+ * table and instruction list are each independently gated on their own
+ * collection being non-empty, so a section with only one of the two
+ * never renders an empty counterpart for the other.
  */
 export function RecipeSectionBlock({ section }: RecipeSectionBlockProps) {
+  const hasIngredients = section.ingredients.length > 0;
+  const hasInstructions = section.instructions.length > 0;
+
+  if (!hasIngredients && !hasInstructions) {
+    return null;
+  }
+
   const headingId = section.name ? `recipe-section-${section.id}` : undefined;
 
   return (
@@ -30,7 +45,7 @@ export function RecipeSectionBlock({ section }: RecipeSectionBlockProps) {
         </h2>
       )}
 
-      {section.ingredients.length > 0 && (
+      {hasIngredients && (
         <table className="recipe-ingredient-table">
           <caption className="visually-hidden">Ingredients</caption>
           <thead>
@@ -60,7 +75,7 @@ export function RecipeSectionBlock({ section }: RecipeSectionBlockProps) {
         </table>
       )}
 
-      {section.instructions.length > 0 && (
+      {hasInstructions && (
         <ol className="recipe-instructions">
           {section.instructions.map((instruction) => (
             <li key={instruction.number} value={instruction.number}>

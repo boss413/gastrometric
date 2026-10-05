@@ -1,27 +1,3 @@
-# Test Recipe
-Note: This is where the ingredient ingestion pipeline test cases are kept. If you found this in the app, congratulations, you’re about to read the most nonsensical recipe ever!
-Ingredients:
-2 carrots	
-1 clove garlic	
-2 cloves garlic
-1 clove
-2 ribs
-2 ribs celery
-2 ribs, celery
-1 cup grape tomatoes
-2 cups chili paste
-1 chicken breast, boneless, skinless
-2 skinless chicken thighs	
-2 large boneless chicken breasts
-3 lb boneless chuck, cut into 1/2” cubes
-4 tablespoons butter (1/2 stick)	
-2 cans (14-ounce) diced tomatoes
-1 12-ounce package spinach
-3-5 medium peppers
-1 cup milk or cream
-salt and pepper to taste
-1 medium garlic clove, minced or pressed
-2 tbsp xyz powder
 # Rogan Josh
 alt_title: Kashmiri Curry with Lamb
 url: https://www.recipetineats.com/rogan-josh/
@@ -71,7 +47,11 @@ finely shredded ginger
 yogurt
 Basmati rice, cooked
 Instructions:
-Serve with basmati rice, sprinkled with fresh coriander leaves and other garnishes if desired. More sides: Cucumber salad (Note 7) and Easy naan – No Yeast Flatbread
+## Serve with 
+Ingredients:
+basmati rice, sprinkled with fresh coriander leaves and other garnishes if desired. 
+1 recipe Cucumber salad 
+1 recipe Easy naan – No Yeast Flatbread
 # Chicken Scarpariello
 alt_title: Braised Chicken With Sausage and Peppers
 Attribution: Serious Eats
@@ -262,7 +242,7 @@ Ingredients:
 1 3/4 teaspoons salt
 
 1/2 teaspoon yeast
-1-1/4 c of warm water 
+1-1/4 c warm water 
 1 T sugar
 
 
@@ -523,6 +503,40 @@ Ingredients:
 ¾ cup mayonnaise, add more if needed
 2 Tbsp sugar
 1 teaspoon white vinegar
+# Crunchy Granola Clusters
+Note: Debug this when possible–Gastrometric silently dropped the line “butter or coconut oil” so i removed the “or coconut oil”. I removed the cinnamon and replaced the brown sugar with white. Adaptation on the Costco Kirkland Signature granola clusters from the late ‘90s, but saltier and with more puffed ingredients than oats to make it crispy rather than crunchy.
+Yield: About 4 cups of large clusters 
+Favorites: 1
+## Mix the dry ingredients 
+Ingredients:
+1 cup Old-fashioned rolled oats (do not use instant oats)
+½ cup puffed brown rice
+½ cup puffed quinoa
+½ cup rice krispies 
+2 Tbsp ground almonds
+2 Tbsp chia seeds
+2 Tbsp sesame seeds
+¼ cup Cashew, pecan, or walnut pieces
+¼ cup pepitas (pumpkin seeds without shells)
+Instructions: 
+Preheat your oven to 300°F). Line a quarter sheet pan with parchment paper.
+In a large mixing bowl, combine the rolled oats, puffs, nuts, and seeds. Set aside.
+## Make the Syrup
+Ingredients: 
+2 Tbsp butter
+2 oz. Honey
+1 oz. Pure maple syrup
+2 Tbsp sugar
+1 tsp vanilla extract
+¾ tsp Fine salt
+Instructions: 
+In a small saucepan over medium heat, melt the butter. Stir in the honey, maple syrup, sugar, and salt. Bring it to a gentle simmer for 1 to 2 minutes until the sugar completely dissolves. Remove from heat and stir in the vanilla extract.
+Pour the hot syrup mixture over the dry oats and nuts. Stir thoroughly with a spatula for a minute then add the cereals and gently fold them in, ensuring every single oat is wet and sticky.
+## Bake the Granola
+Pour the mixture onto your prepared baking sheet. Spread it out, then use the bottom of a flat measuring cup or a metal spatula to press the granola down gently into a solid, even sheet. Packing it tightly is what creates the massive clusters.
+Bake for 20 minutes. Keeping it undisturbed helps form large chunks. Watch it closely during the last 5 minutes—it is done when the edges just start to turn a golden brown.
+Let the granola cool completely in the pan without touching it for at least 1 to 2 hours. It will harden and crisp up substantially as it cools.
+Once totally cool, lift the parchment paper out and use your hands to break the giant sheet into your desired cluster sizes.
 # Doctored-Up Jiffy Corn Muffins 
 Note: Those “in the know” will tell you two things about Corn Muffins: First, just buy the Jiffy mix, and second, mine’s always better than my neighbor’s because I doctored them up with some sour cream and honey.
 Ingredients:
@@ -579,7 +593,7 @@ Ingredients:
 0.25 recipe Grilled / Fried Plantains
 # Grilled / Fried Plantains
 Attribution: Crazy Man in the Kitchen
-Source: Cheesecake Factory
+Restaurant: Cheesecake Factory
 url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
 Ingredients:
 2 ripe plantains
@@ -588,7 +602,7 @@ Instructions:
 Peel and slice the plantains into thirds horizontally then cut them into fourths vertically to form finger sized slices. Saute in a pan with a little bit of olive oil on medium to high heat watching them closely so they don't burn. Turn heat down and put the lid on to let them finish off.
 # Seasoned White RIce
 Attribution: Crazy Man in the Kitchen
-Source: Cheesecake Factory
+Restaurant: Cheesecake Factory
 url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
 Ingredients:
 1 cup of rice
@@ -599,7 +613,7 @@ Instructions:
 Put 1 cup of rice and two cups of water into a rice cooker if you have one and set them to cook. Once done transfer the rice to a large bowl and add 1 tablespoon of butter. Mix thoroughly. Finally, add a half teaspoon of basil for taste.
 # Mango Salsa
 Attribution: Crazy Man in the Kitchen
-Source: Cheesecake Factory
+Restaurant: Cheesecake Factory
 url: https://crazymaninthekitchen.blogspot.com/2012/09/jamaican-black-pepper-shrimp-by-crazy.html
 Ingredients: 
 6-8 mango spears
@@ -626,6 +640,13 @@ Instructions:
 Add all ingredients to an instant pot and press the “Chili / Beans” button OR pressure cook on high for 30 minutes. Let cook and cool completely (the vent pin must retract), about 1-½ hours.
 Discard the bay leaves. 
 Optional: If converting the recipe to Refried Style, reserve the cooked garlic and onion for blending
+# Cold Brew Coffee
+Ingredients:
+1 cup water
+6 ounces ground coffee
+3 cups water
+6 ounces ground coffee
+3 cups water
 # Paella
 url: https://www.bonappetit.com/recipe/paella-de-pollo-con-verduras
 Author: Jose Andres
@@ -689,7 +710,8 @@ Ingredients:
 2 eggs
 Instructions:
 300 F 16 minutes 
-# Buddae Jjigae (Korean Army Stew)
+# Buddae Jjigae
+alt_title: Korean Army Stew
 url: https://www.maangchi.com/recipe/budae-jjigae
 Servings: Serves 4
 Ingredients:
@@ -762,7 +784,7 @@ Bake on a sheet pan lined with parchment paper for ten minutes. For crunchy-topp
 # Melted Cabbage
 Attribution: Fallow
 Ingredients:
-cabbage, green, half head
+green cabbage, half head
 4 Tbsp butter
 Instructions:
 Heat oven to 250 F.
@@ -852,9 +874,9 @@ Instructions:
 While cioppino simmers, mix 4 Tbsp. unsalted butter, room temperature, 1 Tbsp. chopped parsley, ½ tsp. finely grated lemon zest, and a pinch of kosher salt in a small bowl. Taste gremolata butter and season with more salt if needed.
 Heat broiler. Arrange 1 baguette, sliced, on a rimmed baking sheet and toast bread, turning halfway through, until light golden, about 4 minutes. Rub cut sides of 1 garlic clove, halved, over toasts.
 Spread gremolata butter over toasts. Ladle cioppino into shallow bowls and serve with toasts.
-# Simple Tomato Angel Hair
-alt_title: Burst Tomato Sauce
-Note: Adapted from Anna Stockwell’s 15-Minute Cherry Tomato Angel Hair on Epicurious. When making this with cherry tomatoes the skins separate and litter the finished dish in an unpleasant way.
+# Simple Angel Hair Marinara
+alt_title: Better Than Burst Tomato Sauce
+Note: Adapted from Anna Stockwell’s 15-Minute Cherry Tomato Angel Hair on Epicurious. When making this with cherry tomatoes the skins separated and litter the finished dish in an unpleasant way.
 Author: Matt Boss
 Servings: 4–6 servings
 Ingredients:
@@ -867,14 +889,14 @@ Ingredients:
 1 cup coarsely chopped fresh basil
 Freshly grated Parmesan (for serving)
 Instructions:
-Cook 1 lb. pasta in a large pot of boiling salted water, stirring occasionally, until al dente; drain pasta, reserving pasta water, and transfer to a large bowl.
-Meanwhile, warm ½ cup extra-virgin olive oil in a large skillet (12" diameter) or wide heavy saucepan over medium-high heat. Add 2 large garlic cloves, finely chopped, then 3 pints cherry tomatoes, ½ tsp. freshly ground black pepper, a pinch of sugar, and 1 tsp. Diamond Crystal or ½ tsp. plus ⅛ tsp. Morton kosher salt. Cook pasta sauce, stirring occasionally, until tomatoes burst and release their juices, 6–8 minutes.
-Toss cooked pasta with cherry tomato sauce; if needed, thin sauce with a little reserved pasta water. Toss in 1 cup coarsely chopped fresh basil and top with freshly grated Parmesan.
+Cook pasta in a large pot of boiling salted water, stirring occasionally, until al dente; drain pasta, reserving pasta water, and transfer to a large bowl.
+Meanwhile, warm oil in a large skillet (12" diameter) or wide heavy saucepan over medium-high heat. Add garlic, then the tomatoes, black pepper, sugar, and salt. Cook pasta sauce, stirring occasionally, until bubbling, 6–8 minutes.
+Toss cooked pasta with cherry tomato sauce; if needed, thin sauce with a little reserved pasta water. Toss in basil and top with Parmesan.
 # 15-Minute Cherry Tomato Angel Hair
 Attribution: Epicurious
 Author: Anna Stockwell
 Servings: 4–6 servings
-note: when making this with cherry tomatoes the skins separate and litter the finished dish.
+note: when making this with cherry tomatoes the skins separate and litter the finished dish, so I wrote a different one.
 url: https://www.epicurious.com/recipes/food/views/pasta-with-15-minute-burst-cherry-tomato-sauce-56390060
 Ingredients:
 1 lb. angel hair
@@ -908,12 +930,13 @@ Split open immediately. Serve within an hour.
 # Panera-style mac & cheese sauce
 Favorites: 1
 Author: Matt Boss
+Note: This is NOT a Panera copycat or the original Panera recipe, it’s the recipe my daughter whose favorite kind of mac & cheese is from Panera likes.
 Ingredients: 
 2 cups milk
 2 Tbsp butter
 2 Tbsp flour
 ½ tsp savory salt
-½ tsp nutmeg
+½ tsp ground nutmeg
 2 Tbsp parmesan
 50g mozzarella 
 # Shrimp Stir Fry
@@ -1051,21 +1074,33 @@ Transfer to a cheesecloth lined colander
 Wring it out and add to tofu press
 
 # Cheeseburger Casserole
+## Brown the beef and aromatics
 INGREDIENTS:
-1 lb ground beef
-Half can diced tomatoes
+1½ pounds ground beef
 Half onion
 Two cloves garlic
-Savory salt
-Black pepper
-Thyme
-Paprika 
-¼ c beef broth
+¾ cup cooked chopped bacon
+Instructions:
+in a large skillet over medium high heat, brown the beef. add the onions and sweat until translucent. add the garlic and continue to cook for a minute.  add the bacon to warm through.
+## Mix the casserole
+Ingredients:
+2 cups shredded cheddar cheese
+½ can 14-ounce can diced tomatoes
+1 cup condensed cheddar cheese soup
+1 cup sour cream
+½ tsp Savory salt
+1 tsp Black pepper
+½ tsp dried Thyme
+1 tsp Paprika 
 2 T potato starch
-1 egg
-2 T mushrooms, minced
-3 c Tater tots
-1 c Mexican cheese blend
+Instructions:
+dump the meat and onions into a large bowl, add the cheese soup, salt, black pepper, herbs and spices, starch, and sour cream. stir to combine.
+## Bake the casserole
+Ingredients:
+1 (32-oz) package frozen tater tots
+instructions:
+preheat oven to 350
+Spread mixture into prepared pan. Top with the tater tots. Bake for 45 to 50 minutes, until bubbly.
 # Oven Wings
 ## Equilibrium brine
 Ingredients
@@ -1528,7 +1563,7 @@ Ingredients:
 100g (sliced) Brown/White Onion
 3 Garlic Cloves
 2 teaspoons Tomato Paste
-2 teaspoons Mix Powder / Curry Powder
+2 teaspoons Curry Powder
 1 teaspoon Salt
 250 millilitres Curry Base
 1 teaspoon Sugar
@@ -1554,6 +1589,7 @@ This is a great way to ensure the cream doesn't curdle when mixed
 
 Taste and add more salt if required
 ## To Serve
+Instructions:
 Finally, when the sauce is the consistency you require stir in the paneer and serve immediately
 As I like my paneer crispy I serve up the curry and then add the fried paneer to the dish with a little drizzle of cream
 # Sweet Butter Chicken (Takeaway Style)
@@ -1589,7 +1625,8 @@ add the coconut milk powder, ground almonds and sugar stirring in well
 add the rest of the base and the chicken coating to stop it from drying out. lower the heat, add the cream (retain a little for decoration) and butter, allowing to heat slightly and melt before incorporating
 
 allow to simmer until the meat is cooked through and the sauce is the consistency you require. remove from the heat and serve drizzled with the remaining cream
-# Garlic Chilli Chicken Tikka Balti (Restaurant Style)
+# Garlic Chilli Chicken (Restaurant Style)
+Alt_title: Tikka Balti
 Author: The Curry Kid
 url: https://thecurrykid.co.uk/recipe/garlic-chilli-chicken-tikka-balti-restaurant-style/
 Note: This Garlic Chilli Chicken Balti is a seriously hot and spicy, fantastically flavoured curry made with freshly diced garlic, fresh ginger, fresh chillies and sliced onions. If you like your Madras and Vindaloo then this is the curry for you. Reduce the heat by leaving out the chilli pickle and by adding less or de-seeding the chillies. You can even add a little sugar if required
@@ -1606,7 +1643,7 @@ Ingredients:
 4 sliced Birds Eye Chilli
 1 tablespoon Tomato Paste
 2 teaspoons Chilli Powder (Hot)
-2 teaspoons Mix Powder / Curry Powder
+2 teaspoons Curry Powder
 1/4 teaspoon Turmeric Powder
 1/2 tomato, sliced Sliced Tomato
 6 pieces Chicken Tikka 
@@ -1626,12 +1663,19 @@ add 1/2 of the base gravy, stir through, allow to cook for a minute or two then 
 add the garam masala, fenugreek leaves, freshly grated garlic and most of the fresh coriander
 when the dish is the consistency you require remove the cardamom pods, cinnamon and clove and serve decorated with a sprinkle of coriander and a fresh chilli
 # Palaak but with Kale
-Serve With: Rice, Brown Rice, Cauliflower, Chicken, Paneer, Tofu
+Author: Matt Boss
+## Cook the greens
 Ingredients: 
 350g kale
-
+1 cup water
+salt to taste
+1 tsp lemon juice
+Instructions:
+Cook covered on low for 30 minutes
+## Cook the aromatics
+Ingredients:
 3 T coconut oil
-1 yellow onion
+1 yellow onion, minced
 3 T garlic
 1 T ginger
 4 green cardamom pods
@@ -1641,14 +1685,24 @@ Ingredients:
 1 t ground curry powder
 10 cashews
 ½ can green chilies
-50g half & half
-
 4 cherry tomatoes
+50g half & half
+Instructions:
+saute the onion in the coconut oil over medium high heat. when it has begun to take color (about five minutes), add the garlic and cook an additional minute. add all or the remaining aromatic ingredients and cook for another five minutes.
+## Finish the curry
+Ingredients:
 3 T butter
 1 t sugar
 Salt
 Msg
-
+Instructions:
+Add the greens, all of the aromatics, and all of the remaining ingredients to a bar blender. Blend until smooth, about a minute on high. 
+## To Serve
+Ingredients:
+Cooked Basmati Rice or cooked Brown Rice or flatbread
+Roasted Cauliflower or broccoli
+Fried Paneer or fried Tofu
+plain yogurt
 # Avacado Chicken Salad
 Author: Matt Boss
 Ingredients: 
@@ -1732,7 +1786,7 @@ Once all of the meat is browned, add the beer to the cooker to deglaze the pot.
 
 Scrape the browned bits from the bottom of the pot. Add the meat back to the pressure cooker along with the salsa, tortilla chips, chipotle peppers, adobo sauce, tomato paste, chili powder, and ground cumin and stir to combine. Lock the lid in place according to the manufacturer's instructions. When the steam begins to hiss out of the cooker, reduce the heat to low, just enough to maintain a very weak whistle. Cook for 25 minutes. Remove from the heat and carefully release the steam. Serve immediately.
 # Bacon Avocado Potato Salad
-
+Ingredients:
 2 1/2 pounds red potatoes, large diced
 3 tablespoons red wine vinegar
 
@@ -1946,7 +2000,7 @@ coat steak with the powder mix
 # Foolproof Pan Pizza
 Favorites: 1
 Attribution: Serious Eats
-Note: Choose your pans. 
+Note: Choose your pans: 
 Cast Iron: Recipe yields two pizzas that fit into 10” cast iron pans, which are measured across the rim. They actually yield a 9” pizza due to the sloped sides, which means 128 in2 total. This is equivalent to a single 8” (33 in2) plus a single 12” (87 in2) cast iron pan.
 Aluminum Cake: Due to the straight walls, a slightly thicker single 12” aluminum cake pan (113 in2) or a slightly thinner 14” aluminum cake pan (154 in2). A 1.5x recipe will yield a single 16” cake pan (201 in2).
 ## Make the Pan Pizza Dough
@@ -1959,6 +2013,7 @@ Ingredients:
 Instructions: 
 Combine flour, salt, yeast, water, and oil in a large bowl. Mix with hands or a wooden spoon until no dry flour remains. (The bowl should be at least 4 to 6 times the volume of the dough to account for rising.)
 Cover bowl tightly with plastic wrap, making sure that the edges are well sealed, then let rest at cool room temperature (no warmer than 75°F) for at least 8 hours and up to 24. Dough should rise dramatically and fill bowl. In a hot kitchen, the dough may overproof near the end of that range.
+## Make the pizza
 Ingredients: 
 1 1/2 cups pizza sauce, such as our New York–style pizza sauce
 12 ounces grated full-fat, low moisture (dry) mozzarella cheese (see note)
@@ -1972,8 +2027,22 @@ After 2 hours, dough should be mostly filling the pan up to the edges. Use your 
 Top each round of dough with 3/4 cup sauce, spreading sauce to the very edge with the back of a spoon. Sprinkle evenly with mozzarella cheese, all the way to the edges. Season with salt. Add other toppings as desired. Drizzle with olive oil and scatter a few basil leaves over the top of each pizza, if desired.
 Transfer pan to oven and bake until top is golden brown and bubbly and bottom is golden brown and crisp when you lift it with a thin spatula, 12 to 15 minutes. Immediately sprinkle with grated Parmesan or Pecorino Romano cheese, if using. Using a thin spatula, loosen pizza and peek underneath. If bottom is not as crisp as desired, place pan over a burner and cook on medium heat, moving the pan around to cook evenly until it is crisp, 1 to 3 minutes. Remove the pizzas and transfer to a cutting board. Cut each pizza into slices and serve immediately.
 
-# Coconut Shrimp with Peanut Sauce
-
+# Coconut Shrimp 
+Ingredients:
+• 24 large (15 to 20 count) shrimp, peeled, deveined, and butterflied 
+• ½ c cornstarch 
+• ¼ t salt 
+• ¼ t white pepper 
+• ¼ t cayenne pepper 
+• 4 egg whites 
+• 2½ cups sweetened shredded coconut
+Instructions:
+Dry the shrimp with a paper towel. In a small bowl combine the cornstarch, salt, pepper, and cayenne. In a separate bowl, whisk the egg whites until foamy. In another bowl, place the coconut.  Bread:  cornstarch, egg white, then coconut.
+In a large pan, heat the oil to 350° and gently submerge the shrimp, 6 at a time. Fry for about 3 minutes or until golden brown. Remove them to a rack to drain. Serve with Peanut Sauce.
+Bring sauce to room temperature and serve with coconut shrimp. 
+# Peanut Sauce
+Yield: 2 cups
+Ingredients:
 • ¼ c chicken stock 
 • 3 oz coconut milk 
 • 1 oz lime juice 
@@ -1984,22 +2053,8 @@ Transfer pan to oven and bake until top is golden brown and bubbly and bottom is
 • 1 T chopped ginger 
 • 1½ cups creamy peanut butter 
 • ¼ cup chopped cilantro 
-
-• 24 large (15 to 20 count) shrimp, peeled, deveined, and butterflied 
-• ½ c cornstarch 
-• ¼ t salt 
-• ¼ t white pepper 
-• ¼ t cayenne pepper 
-• 4 egg whites 
-• 2½ cups sweetened shredded coconut
-
-
-In a food processor, puree the chicken stock, coconut milk, lime juice, soy sauce, fish sauce, hot sauce, chopped garlic, and ginger. Add the peanut butter and pulse to combine. Fold in the cilantro and keep refrigerated until ready to serve. Makes 2 cups
-
-Dry the shrimp with a paper towel. In a small bowl combine the cornstarch, salt, pepper, and cayenne. In a separate bowl, whisk the egg whites until foamy. In another bowl, place the coconut.  Bread:  cornstarch, egg white, then coconut.
-In a large pan, heat the oil to 350° and gently submerge the shrimp, 6 at a time. Fry for about 3 minutes or until golden brown. Remove them to a rack to drain. Serve with Peanut Sauce.
-Bring sauce to room temperature and serve with coconut shrimp. 
-
+Instructions:
+In a food processor, puree the chicken stock, coconut milk, lime juice, soy sauce, fish sauce, hot sauce, chopped garlic, and ginger. Add the peanut butter and pulse to combine. Fold in the cilantro and keep refrigerated until ready to serve. 
 # Minestrone
 Attribution: America’s Test Kitchen
 
@@ -2702,7 +2757,7 @@ Melt butter in large saucepan over medium heat. Stir in cocoa and cook until fra
 Divide batter evenly between prepared pans and bake until toothpick inserted in center comes out clean, 30 to 35 minutes. Cool layers in pans 15 minutes, then invert onto wire rack. Cool to room temperature (or even fridge temperature), at least 1 hour.
 To assemble the cake: Cut each cake in half horizontally. Crumble one cake layer into medium crumbs and set aside. Place one cake layer on serving platter or cardboard round. Spread 1 cup pudding over cake layer and top with another layer. Repeat with 1 cup pudding and last cake layer. Spread remaining pudding evenly over top and sides of cake. Sprinkle cake crumbs evenly over top and sides of cake, pressing lightly to adhere crumbs. Serve. (Cake can be refrigerated for up to 2 days.)
 # Snickerdoodles
-# Ingredients
+Ingredients
 • 2 ¼ c flour
 • 2 t cream of tartar
 • 1 t baking soda
@@ -2711,7 +2766,6 @@ To assemble the cake: Cut each cake in half horizontally. Crumble one cake layer
 • ¼ c shortening
 • 1 ½ c sugar
 • 1 T cinnamon
-
 Instructions:
 bake at 400 degrees 9-11 minutes
 # Fluffy Seven Minute Frosting
@@ -2721,9 +2775,7 @@ Ingredients:
 1/4 cup light corn syrup
 2 tablespoons water
 1 1/2 teaspoons pure vanilla extract
-
-Instructions: 
-
+Instructions:
 This is essentially the filling for hostess cakes.  Combine frosting ingredients with a pinch of salt in a metal bowl set over a saucepan of simmering water and beat with a handheld electric mixer at high speed until frosting is thick and fluffy, 6 to 7 minutes. Remove bowl from heat and continue to beat until slightly cooled.
 
 # Homemade Oreos
@@ -2740,6 +2792,7 @@ Ingredients:
 • ¼ c shortening
 • 2 c powdered sugar, sifted
 • 2 t vanilla 
+
 Instructions: 
 
 Heat to 375 degrees.   mix the flour, cocoa, baking soda and powder, salt, and sugar. While pulsing, or on low speed, add the butter, and then the egg. Continue processing or mixing until dough comes together in a mass.
@@ -2959,15 +3012,15 @@ Favorites: 1
 Yield: MAKES ABOUT 18 LARGE
 Note: These oversize cookies are chewy and thick, like many of the chocolate chip cookies sold in gourmet shops and cookie stores. They rely on melted butter and an extra egg yolk to keep their texture soft. These cookies are best served warm from the oven but will retain their texture even when cooled. To ensure the proper texture, cool the cookies on the baking sheet. Oversize baking sheets allow you to get all the dough into the oven at one time. If you're using smaller baking sheets, put fewer cookies on each sheet and ake them in batches. See the illustrations on page 776 for tips on shaping these cookies.
 Ingredients: 
-2 cups plus 2 tablespoons (105/8 ounces) unbleached all-purpose flour
+2 cups plus 2 tablespoons (10-⅝ ounces) unbleached all-purpose flour
 ½ teaspoon baking soda
 ½ teaspoon salt
-12 tablespoons (11/2 sticks) unsalted butter, melted and cooled until just warm
+12 tablespoons (1-1/2 sticks) unsalted butter, melted and cooled until just warm
 1 cup packed (7 ounces) light or dark brown sugar
-½ cup (31/2 ounces) granulated sugar
+½ cup (3-1/2 ounces) granulated sugar
 1 large egg, plus 1 large egg yolk
 2 teaspoons vanilla extract
-1-1 ½ cups semisweet chocolate chips
+1-1-½ cups semisweet chocolate chips
 Instructions: 
 1. Adjust the oven racks to the upper- and lower-middle positions and heat the oven to 325 degrees. Line 2 large baking sheets with parchment paper or spray them with nonstick cooking spray.
 2. Whisk the flour, baking soda, and salt
@@ -3029,7 +3082,7 @@ Remove baking sheets from oven. While cookies are still hot, sprinkle very light
 
 Repeat steps 4 and 5 for remaining cookie dough. Allow cookies to cool completely before storing in an airtight container, plastic bag, or cookie jar at room temperature for up to 5 days.
 
-# DoubleTree Signature Cookie Recipe
+# DoubleTree Signature Cookies
 Yield: Makes 26 cookies
 Ingredients:
 ½ pound butter, softened (2 sticks)
@@ -3401,7 +3454,8 @@ In a medium bowl, whisk together the sour cream, milk, eggs, and vanilla until c
 ## Assemble the cake
 Instructions
 Spread 1/3 of the batter into the prepared pan. Sprinkle ½ of the cinnamon-sugar layer over the top of the batter in an even layer. Spread half of remaining batter over the top (this does require some patience since the batter likes to lift off the cinnamon-sugar layer). Repeat with the cinnamon layer and remaining batter. Top with the crumble mixture.
-# Egg Roll in a Bowl (ERIAB)
+# Egg Roll in a Bowl
+alt_title: ERiaB
 Ingredients:
 1 lb ground beef or pork
 
@@ -3491,13 +3545,9 @@ hot sauce
 Author: Matt Boss
 Ingredients: 
 1/2 stick unsalted butter
-
 1/2 cup pulverized, seasoned croutons (if using panko bread crumbs, pulverize in a spice grinder)
-
 2 pinches dry mustard or 1 tsp dijon
-
 Splash malt vinegar
-
 1 teaspoon black pepper
 Instructions: 
 Fill your largest pot 3/4 full with water and bring to a boil on high heat. 
@@ -3736,10 +3786,6 @@ Attribution: Sally's Baking Addiction
 URL: https://sallysbakingaddiction.com/flaky-buttermilk-biscuits/#tasty-recipes-66534			
 Notes: These have to be cut with round cutters inside of the edges; the folding means that they expand longitudinally, so the folds on the sides will cause them to open like a book.
 Yield: 12 photogenic biscuits plus one scrappy boy
-## optional honey butter topping
-ingredients: 
-2 Tablespoons melted butter 
-1 Tablespoon honey
 ## make the biscuits
 Ingredients:
 2 and 1/2 cups (313g) all-purpose flour (spooned & leveled), plus more as needed for hands and work surface
@@ -3756,20 +3802,17 @@ Ingredients:
 
 Instructions:
 Preheat oven to 425°F (218°C).
-
 Make the biscuits: Place the flour, baking powder, and salt together in a large bowl or in a large food processor. Whisk or pulse until combined. Add the cubed butter and cut into the dry ingredients with a pastry cutter or by pulsing several times in the processor. Cut/pulse until coarse crumbs form. See photo above for a visual. If you used a food processor, pour the mixture into a large bowl.
-
 Make a well in the center of the mixture. Pour 1 cup (240ml) buttermilk and drizzle honey on top. Fold everything together with a large spoon or spatula until it begins to come together. Do not overwork the dough. The dough will be shaggy and crumbly with some wet spots. See photo above for a visual.
-
 Pour the dough and any dough crumbles onto a floured work surface and gently bring together with generously floured hands. The dough will become sticky as you bring it together. Have extra flour nearby and use it often to flour your hands and work surface in this step. Using floured hands, flatten into a 3/4 inch thick rectangle as best you can. Fold one side into the center, then the other side on top. Turn the dough horizontally. Gently flatten into a 3/4 inch thick rectangle again. Repeat the folding again. Turn the dough horizontally one more time. Gently flatten into a 3/4 inch thick rectangle. Repeat the folding one last time. Flatten into the final 3/4 inch thick rectangle.
-
 Cut into 2.5 or 3-inch circles with a biscuit cutter. (Tip: Do not twist the biscuit cutter when pressing down into the dough because this seals off the edges of the biscuit which prevents them from fully rising.) Re-roll scraps until all the dough is used. You should have about 8-10 biscuits. Arrange in a 10-inch cast iron skillet (see note) or close together on a parchment paper-lined baking sheet. Make sure the biscuits are touching.
-
 Brush the tops with remaining buttermilk. Bake for 18-20 minutes or until tops are golden brown.
-
 Remove from the oven, and then brush warm tops with optional honey butter, and serve warm.
-
 Cover leftovers tightly and store at room temperature or in the refrigerator for up to 5 days.
+## optional honey butter topping
+ingredients: 
+2 Tablespoons melted butter 
+1 Tablespoon honey
 # Challah (egg bread)
 URL: https://smittenkitchen.com/2008/09/best-challah-egg-bread/			
 Note: "Any of the three risings can be done in the fridge for a few hours, for more deeply-developed flavor. When you’re ready to work with it again, bring it back to room temperature before moving onto the next step.
@@ -3923,7 +3966,7 @@ Note: Adapted from Anne Burrell’s Excellent Meatballs to use my savory salt, f
 Ingredients:
 1 large onion, finely minced
 kosher salt
-½ tsp savory Salt
+¾ tsp savory Salt
 2 cloves garlic, smashed and chopped
 ½ tsp crushed red pepper flakes
 1-1/2 pound ground beef
@@ -4630,7 +4673,7 @@ pinch salt
 
 1 tsp. butter
 Instructions:
-Over high heat, bring to a boil, stir, top with lid, drop heat down to low. Simmer for 35 minutes Without removing lid, remove from heat for 10 minutes. Fluff with a fork.
+Over high heat, bring to a boil, stir, top with lid, drop heat down to low. Simmer for 20 minutes Without removing lid, remove from heat for 5 minutes. Fluff with a fork.
 # Oven-Baked Brown Rice										
 Servings: SERVES 4 ΤΟ 6
 Note: Base your decision on whether to use oil or butter in the recipe on the dish the rice will accompany; for example, if you are serving a stir-fry, use oil for the rice. To minimize any loss of water through evaporation, cover the saucepan as the water is heating, and use the water as soon as it reaches a boil. If you own an 8-inch ceramic baking dish with a lid, use it instead of the glass baking dish and foil. To double the recipe, use a 13 by 9-inch baking dish; the baking time need not be increased.
@@ -5277,7 +5320,7 @@ Attribution: Serious Eats
 url: https://www.seriouseats.com/pasta-carbonara-sauce-recipe
 Author: Daniel Gritzer
 Notes: Remember not to oversalt your pasta water; you'll add some of it to your sauce, which will already have salty ingredients. Feel free to substitute another dried pasta, such as penne, if desired. Guanciale, cured pork jowl, is generally considered the most authentic choice here; it's fattier than pancetta or bacon and often more heavily spiced, creating a pasta with pronounced spice notes and an extra-unctuous texture. Pancetta delivers the cleanest porky flavor, while American bacon, though less traditional, adds a hit of pleasant smoke. Use whichever you prefer.
-# Cook the noodles
+## Cook the noodles
 Ingredients:
 1/2 pound (220g) dried spaghetti
 Instructions:
@@ -5300,11 +5343,13 @@ Combine bacon with 1 tablespoons (15ml) olive oil in a large skillet and cook, s
 In a large, metal heatproof mixing bowl, whisk together whole eggs and yolks, Pecorino Romano, Parmigiano-Reggiano, and black pepper.
 
 Using tongs and/or a strainer, transfer pasta to skillet with crisped guanciale and its fat; be sure not to drain boiling pasta water. Add remaining 1 tablespoon (15ml) olive oil to pasta and stir to combine; let cool slightly. Scrape pasta, pork, and all the fat into the egg mixture. Measure 1/4 cup (60ml) pasta-cooking water and add to pasta and egg mixture. Stir well to combine.												
-Pad Thai
+# Pad Thai
+## Cook the noodles
 Ingredients:
 8 ounces flat rice noodles
 Instructions:
 Cook noodles according to package instructions, just until tender.  Rinse under cold water.
+## Mix the sauce
 Ingredients:
 3 Tbsp fish sauce
 
@@ -5317,6 +5362,7 @@ Ingredients:
 1 Tbsp chili flakes or twice as much chopped red thai chilis
 Instructions:
 Make sauce by combining sauce ingredients in a bowl. Set aside.
+## Fry the noodles
 Ingredients:
 3 Tbsp oil
 
@@ -5674,8 +5720,9 @@ Instructions:
 While the rice is crisping, drizzle the neutral oil across a 12-inch nonstick skillet. Evenly space the eggs in the skillet. (I find transferring the eggs in a small bowl helps here.) Leave at room temperature for 10 minutes. Season the egg whites with a few pinches of salt, and place over medium heat. (If you’re using an electric cooktop, begin heating the burner before adding the skillet.) Cook, uncovered, for 4 minutes. If the whites start to balloon up, just poke with a wooden chopstick to deflate. While the eggs cook, lightly lube a platter with oil or nonstick cooking spray. When the 4 minutes are up, slide the eggs onto the platter and rest for 1 minute. Cut into 4 individual egg wedges.
 # Pot Roast			
 Attribution: Good Eats Reloaded
+## Sear the roast
 Ingredients:
-2-3lb Chuck roast
+2-3 lb Chuck roast
 
 2.5 tsp salt
 
@@ -5697,6 +5744,7 @@ Heat a large dutch oven over medium-high with beef fat or a neutral oil to 400F
 Starting with the narrowest edges of your roast, sear until all sides have taken color. Once the edges have been seared and you’re searing the largest sides, sear the onions, cut side down. When you’re searing the final side, add the carrots
 
 pour in chicken stock
+## Braise the roast
 Ingredients:
 1 c tomato juice / V8
 
@@ -5713,6 +5761,7 @@ Once sputtering has ceased, add the juice, wine, celery heart, and herbs. Make s
 cover dutch oven and transfer to the oven
 
 set a timer for 2 hours
+
 Ingredients:
 1 lb potatoes, sliced into bite-sized chunks
 
@@ -5725,6 +5774,7 @@ Sear the potatoes and mushrooms until they take color
 Add the potatoes and mushrooms to the pot roast, making sure they’re submerged
 
 set a timer for 90 minutes
+## Season the roast
 Ingredients:
 red wine
 vinegar
@@ -5745,6 +5795,7 @@ Reduce the liquid until it has thickened and the bubbles decrease in size. Remov
 Put the solids back in the dutch oven, stir to coat
 
 Technically, you can eat it now. Otherwise, let cool completely on the counter, then put in the fridge overnight. This will improve the flavor.
+## Add delicate vegetables
 Ingredients:
 12 oz brussels sprouts
 
@@ -5890,7 +5941,8 @@ In a bowl, combine sugar, soy sauce, Chinese black vinegar, ramen seasoning, a l
 Pour toasted sesame oil into a large spoon and heat directly over a stove flame until smoking. Carefully pour the smoking oil directly onto the scallions and garlic in the bowl to fry them, then mix with the hot spoon.
 Add the cold, drained noodles and shredded cucumbers to the sauce. Mix well and let sit for at least 5 minutes so the cucumbers release some water before eating.
 
-# Rabokki (Ramen & Tteokbokki)
+# Rabokki
+alt_title: Ramen & Tteokbokki
 url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
 Attribution: Anything with Alvin
 Notes: A comforting, "throw anything in" dish. It's a great way to use leftover rice cakes and combine textures.
@@ -5929,7 +5981,8 @@ Boil the Chapagetti and Shin Ramen noodles with their dried veggies (no seasonin
 Mix the ramen seasonings and a bit of sugar into the wet noodles. Stir in the steak and onions.
 Plate and top with scallions and an extra dusting of dry ramen seasoning.
 
-# Instant Korean Army Stew (Budae Jjigae)
+# Instant Korean Army Stew
+alt_title: Ramen Budae Jjigae
 url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
 Attribution: Anything with Alvin
 Notes: Assemble everything in a cold pan first, then bring to a boil. American cheese is essential for adding creaminess and saltiness that balances the spicy gochujang and kimchi.
@@ -6099,7 +6152,8 @@ Sauté the carrots and onions in butter in a pot. Add water, ramen seasoning, an
 Add the ramen noodles and cook directly in the curry liquid without draining.
 Crack an egg directly on top of the noodles, cover the pot with a lid to let the steam lightly cook the egg, and top with scallions. Serve directly out of the pot.
 
-# Assassin's Ramen
+# Ramen all’Assassina
+alt_title: Assassin's Ramen
 url: https://www.youtube.com/watch?v=8Nr2xxHM9kk
 Attribution: Anything with Alvin
 Notes: A play on Spaghetti all'Assassina. Cooking in a non-stick pan is recommended to carefully build caramelization without completely burning it to the pan.
@@ -6228,3 +6282,2249 @@ Ingredients:
 2 to 3 tbsp Unsweetened cocoa powder (for dusting/dredging)
 Instructions:
 Flatten portions of the warm chocolate marshmallow dough.Wrap the dough securely around a chilled pistachio filling ball.Roll and dredge each finished cookie thoroughly in extra cocoa powder.
+# Fall Pasta Salad with Roasted Butternut Squash
+Servings: 6
+url: https://beautifuleatsandthings.com/2023/11/22/fall-pasta-salad-with-roasted-butternut-squash-maple-dressing/
+Attribution: Beautiful Eats & Thing
+Ingredients:
+4 cups butternut squash peeled and cubed
+1 tablespoon olive oil
+8 oz bow tie pasta cooked
+½ cup dried cranberries
+½ cup pecans
+4 oz crumbled feta
+8 oz baby spinach
+Salt & pepper to taste
+Instructions:
+Preheat oven to 375 degrees F.
+Place cubed butternut squash on a baking sheet and drizzle with olive oil. Season with salt and pepper to taste and bake for 20-25 minutes until softened.
+## Serve with
+1 recipe Maple Salad Dressing
+# Maple Salad Dressing
+Attribution: Beautiful Eats & Things
+url: https://beautifuleatsandthings.com/2023/11/22/fall-pasta-salad-with-roasted-butternut-squash-maple-dressing/
+Ingredients:
+⅓ cup extra virgin olive oil
+2 tablespoons Dijon mustard
+¼ cup maple syrup
+2 tablespoons apple cider vinegar
+Instructions:
+To Make the Salad Dressing:
+Combine all salad dressing ingredients in a mason jar, seal tightly with lid, and shake vigorously or until emulsified. Season with salt and pepper to taste. Set aside.
+In a large serving bowl, combine the bowtie pasta, dried cranberries, pecans, feta, roasted butternut squash, and spinach. Add the salad dressing and toss to combine.
+# Buddha Bowl With Roasted Chickpeas and Quinoa
+Attribution: IgA Nephropathy Foundation
+url: igan.org/recipe/buddha-bowl-w-quinoa-roasted-chickpeas-kale-tahini-dressing/
+Servings: Serves 4
+Ingredients:
+½ cup Quinoa, cooked
+1 Carrot, sliced into thin matchsticks
+½ Cucumber, sliced into rounds
+6 oz Kale de-stemmed, chopped
+1 can Chickpeas, rinsed and drained
+½ tsp Garlic
+½ tsp Paprika
+2 tbsp Olve oil
+
+Instructions:
+Preheat the oven to 425°F.
+In a mason jar, combine red onion slices, vinegar, sugar, salt, and very hot water. Stir until the sugar and salt are dissolved. Set aside.
+Cook the quinoa according to the package's instructions.
+Add chickpeas, 1 tbsp olive oil, garlic, and paprika to a bowl and toss to combine. Add chickpeas to a sheet pan or casserole dish and cook in the oven for 30 minutes, tossing halfway through.
+Place the kale in a large bowl and add the remaining 1 tbsp of olive oil. Use your hands to massage the kale with the oil. Optionally, you can lightly steam the kale in a pot with a steaming basket.
+In a small mason jar, add all the dressing ingredients, cover, and shake vigorously. Set aside.
+Assemble the Buddha bowl by adding everything to a bowl and drizzling with the creamy tahini sauce. Garnish with hemp seeds and chipped scallions.
+## Serve With
+Ingredients:
+1 recipe Tahini Dressing
+1 recipe pickled red onions
+# Tahini Dressing
+Attribution: IgA Nephropathy Foundation
+url: igan.org/recipe/buddha-bowl-w-quinoa-roasted-chickpeas-kale-tahini-dressing/
+Ingredients:
+2 tbsp Tahini paste
+2 tbsp Lemon juice
+1 tbsp Honey or maple syrup
+2 tbsp Water more if needed
+½ tsp Sesame oil optional
+
+# Pickled Red Onions
+Attribution: IgA Nephropathy Foundation
+url: igan.org/recipe/buddha-bowl-w-quinoa-roasted-chickpeas-kale-tahini-dressing/
+Ingredients:
+½ Red onion, very thinly sliced
+½ cup Water
+½ cup Distilled white vinegar
+2 tsp Sugar or honey
+¼ tsp Salt
+
+# Hyderabadi Chicken Korma
+alt_title: Murgh Kaju ka Korma
+Attribution: Maunika Gowardhan
+Author: Maunika Gowardhan
+url: maunikagowardhan.co.uk/cook-in-a-curry/hyderabadi-chicken-korma/
+Servings: Serves 4
+notes: If you are vegan and planning to cook this Korma, make sure to leave the yoghurt out but add a little more of the cashew nut paste for a luscious curry.
+
+Ingredients:
+1 kg chicken on the bone (skinless and cut into medium pieces)
+3 tbsp vegetable oil
+5 green cardamom pods
+2 bay leaves
+1” cinnamon stick
+2 black cardamom
+4 cloves
+360gms white onions finely chopped
+2” ginger roughly chopped
+6 garlic cloves roughly chopped
+1 tsp mild chilli powder
+Pinch of turmeric powder
+2 tbsp greek yoghurt
+50mls water
+100gms cashewnuts soaked in warm water
+Salt to taste
+Coriander for garnish
+Handful of cashewnuts toasted and chopped for garnish
+
+Instructions:
+Mix the yoghurt with the chilli powder and turmeric powder in a bowl and set aside. Add the ginger and garlic to a blender with a little water and blend to a thick smooth paste. Set aside and in the same blender add the soaked cashewnuts with 100mls of the soaking liquid. Blend to a smooth fine paste and set aside.
+In a heavy bottom large non stick saucepan heat the oil over a medium heat. Add the whole spices and fry for 2-3 seconds. Followed by the chopped onions; stirring well and continuing to fry for 16-18 minutes
+As they begin to change colour and brown add the chicken along with the ginger and garlic paste and fry for 5 minutes. Stir well making sure to seal the chicken pieces.
+Add the yoghurt spice mix and stir well coating the chicken pieces and continue to fry for 2-3 minutes. Add 50mls water, season to taste and simmer over a low heat for 20 minutes with the lid on. Make sure to stir half way through the cooking process.
+Now add the cashewnut paste and simmer for a further 5 minutes over a low heat stirring continuously. Garnish with fresh coriander and cashewnuts. Serve with naan or pulao.
+
+# Moroccan Chicken Tagine with Sweet Potatoes
+url: myyellowfarmhouse.com/2015/02/03/moroccan-chicken-tangine-with-sweet-potatoes/
+Servings: Serves 3 to 4
+
+
+Ingredients:
+6 – 8 boneless/skinless chicken THIGHS
+2 – 3 medium sweet potatoes – peeled and cut into eighths
+2 Tbs. olive oil
+1 medium onion, sliced
+4 large cloves of garlic, minced or finely chopped
+1 tsp. ground ginger
+1 tsp. ground cinnamon
+1/2 tsp. ground turmeric
+1 tsp. ground coriander
+1/4 to 1/2 tsp. chili powder
+1/4 tsp. cardamom
+1 tsp. salt
+1/4 tsp. freshly ground pepper
+1/4 cup chopped dates
+1 cup HOT chicken broth
+
+Instructions:
+Arrange boneless/skinless chicken thighs in one layer on bottom of tagine.
+Put the following spices in a small dish or glass and set aside; ginger, cinnamon, turmeric, coriander seed, chili powder, cardamom, salt and pepper.
+Pour 2 Tbs. olive oil into a large skillet. Add sliced onions and cook over medium heat until onions begin to brown a bit – between 5 to 6 minutes.
+Add minced garlic. Cook two to three minutes more, stirring occasionally.
+Add the spices you'd set aside. Stir to combine with the onions and garlic. Cook one more minute, stirring.
+Spread contents of skillet over chicken.
+Spread an even layer of the peeled and cut-up sweet potatoes. Sprinkle dates over potatoes. Pour broth over all.
+Cover on tagine. Lower oven rack to second lowest level. Place covered tagine in COLD oven. Set temperature to 325F.
+Cook for two hours.
+
+# Shakshuka
+alt_title: Eggs Poached in Spicy Tomato Sauce
+Attribution: Smitten Kitchen
+Author: Deb Perelman
+url: smittenkitchen.com/2010/04/shakshuka/
+Servings: Serves 3 to 6
+notes: Remove the pan from the heat when the whites are still a little undercooked, because they'll continue to cook as the pan rests. Don't add the eggs any more than 10 minutes before serving or they'll all end up hard-cooked.
+Ingredients:
+1/4 cup olive oil
+5 Anaheim chiles or 3 jalapeños, stemmed, seeded, and finely chopped
+1 small yellow onion, chopped
+5 cloves garlic, thinly sliced
+1 teaspoon ground cumin
+1 tablespoon paprika
+1 28-ounce can whole peeled tomatoes
+Kosher salt, to taste
+6 eggs
+1/2 cup feta cheese, crumbled
+1 tablespoon chopped flat-leaf parsley
+Warm pitas, for serving
+
+Instructions:
+Make the sauce: Heat oil in a deep 11- to 12-inch skillet over medium-high heat. Add chiles and onions and cook, stirring occasionally, until soft and golden brown, about 6 minutes. Add garlic, cumin, and paprika, and cook, stirring frequently, until garlic is soft, about 2 more minutes.
+Pour liquid from the can of tomatoes into the skillet and add the tomatoes, one at a time, crushing them in your hands before you do. Add 1/2 cup water, reduce the heat to medium, and simmer the sauce, stirring occasionally, until thickened slightly, about 15 minutes. Season with salt.
+10 minutes before serving, add the eggs: Use the back of a spoon to make some divots in the sauce and crack an egg into each, evenly distributing them across the pan. Cover skillet and cook until the yolks are just set, about 5 minutes. [* See tips below.] Use a spoon to baste the whites of the eggs with tomato mixture, being careful not to disturb the yolk. Sprinkle shakshuka with feta and parsley and serve directly from the pan with pitas, for dipping.
+
+# Butternut Squash Stew with Coconut Milk & Chickpeas
+url: thefirstmess.com/2025/09/17/butternut-squash-stew-coconut-milk-chickpeas-kale/
+Attribution: The First Mess
+Author: Laura Wright
+Servings: Serves 6
+notes: Minus the addition of the kale, this recipe freezes well.
+
+
+Ingredients:
+1 tablespoon coconut oil
+1 medium white onion, small dice
+½-1 teaspoon ground chilies (I like Diaspora's Guntur Sannam chilies)
+1 ½ teaspoons ground coriander
+1 ½ teaspoons ground cumin
+½ teaspoon ground turmeric
+3-inch piece fresh ginger, peeled and minced
+4 cloves garlic, peeled and minced
+salt and ground black pepper, to taste
+1 ½ lbs (690 grams) butternut squash, peeled and diced into 1-inch pieces
+19 oz can (540 ml) chickpeas, drained and rinsed
+2 cups vegetable stock, plus extra if needed
+13.5 oz can (400 ml) full fat coconut milk
+1 small bunch kale, stems removed and leaves chopped (about 4 cups chopped kale–not packed)
+2 teaspoons Tamari soy sauce
+chopped cilantro (optional) 
+lime wedges (optional)
+Instructions:
+Heat a large, heavy-bottomed soup pot over medium heat. Add the coconut oil to the pot and let it melt. Add the onions to the pot and stir. Sauté onions, stirring occasionally, until translucent and quite soft, about 5 minutes. Add the red pepper flakes, coriander, cumin, and turmeric. Sauté spices until very fragrant, about 1 minute. Add the ginger and garlic to the pot and cook for another minute.
+Add the butternut squash to the pot and stir to coat in the spices. Add the chickpeas to the pot and stir once more. Season everything liberally with salt and pepper. Add the vegetable stock and stir, scraping up any browned bits on the bottom of the pot. Place the lid on top of the pot and bring to a boil.
+Once boiling, lower the heat to a simmer. Continue to simmer, uncovered, until the squash pieces are almost falling apart, about 15-20 minutes. The liquid should also be reduced by almost a third.
+Add the coconut milk and kale to the pot and stir. Place the lid on top and continue to simmer the stew until the kale is wilted and bright green, about 3-4 minutes. Stir in the Tamari. Bring the stew back up to a boil and check for seasoning. If you'd like a more more liquid at this point, add more vegetable stock to your liking (being mindful that the ideal texture is quite thick). Adjust with more salt, pepper, ground chilies etc. if you wish.
+Serve the butternut squash stew with extra chopped cilantro on top and lime wedges on the side for squeezing over top.
+# Mediterranean Orzo and Beans
+Attribution: The Plant Based School
+Author: Nico Pallotta
+url: https://theplantbasedschool.com/mediterranean-orzo-and-beans/
+Servings: Serves 4
+notes: Keep leftovers in airtight containers in the fridge for 3–4 days, or freeze them for up to 3 months for easy reheating later.
+
+Ingredients:
+1 – 2 tablespoons extra virgin olive oil
+1 onion chopped
+2 carrots sliced into discs
+1½ cups cherry tomatoes
+2 cloves garlic grated
+2 bay leaves or 1/2 teaspoon thyme
+1 teaspoon dried oregano
+¼ teaspoon red pepper flakes
+2 tablespoons tomato paste
+2 cans beans 15 oz / 400 g each can — or 3 cups / 460 g cooked beans — we use 1 can kidney, 1 can pinto
+4 cups vegetable broth or chicken broth + 1 cup / 250 ml if needed to finish cooking the orzo
+1 cup orzo pasta or ditalini
+5 ounces baby spinach about 5 cups
+½ teaspoons salt or more to taste + black pepper
+
+Instructions:
+Sauté the veggies: Heat 1 – 2 tablespoons extra virgin olive oil in a large pot. Add 1 onion (chopped), 2 carrots (sliced into discs), and 1½ cups cherry tomatoes. Cook on medium heat for 4–5 minutes, until the veggies soften.
+Build the flavor: Add 2 cloves garlic (grated), 2 bay leaves, 1 teaspoon dried oregano, ¼ teaspoon red pepper flakes, and 2 tablespoons tomato paste. Stir and cook for 1 minute with a splash of water.
+Add beans and broth: Stir in 2 cans beans (drained and rinsed), 4 cups vegetable broth, ½ teaspoons salt, and pepper. Bring to a boil, then lower the heat and simmer for 10 minutes.
+Cook the orzo: Add 1 cup orzo pasta and simmer for 8–10 minutes, stirring often so it doesn't stick. Add extra broth or hot water as needed to keep it creamy.
+Finish with spinach: Stir in 5 ounces baby spinach and cook for 1 minute, just until wilted. Turn off the heat while the orzo is still slightly firm.
+Adjust the salt and finish with a grating of parmesan or a drizzle of olive oil.
+
+# Turmeric Rice with Chickpeas
+Attribution: The Plant Based School
+Author: Nico Pallotta
+url: https://theplantbasedschool.com/turmeric-rice-with-chickpeas/
+Servings: Serves 4
+notes: Keeps well for 3–4 days — perfect for weekday lunches or quick reheats.
+
+Ingredients:
+2 tablespoons extra virgin olive oil
+1 leek chopped – or a large onion
+3 cloves garlic grated
+1 teaspoon turmeric
+1 teaspoon dried oregano
+5 cups spinach about 5 cups / chopped
+½ cup basmati rice or jasmine rice — uncooked
+2 cans chickpeas 15 oz / 400 g each can — drained and rinsed — or 3 cups / 460 g cooked chickpeas
+3 cups vegetable broth add more to taste if you like a brothier dish
+½ teaspoon salt or more to taste + black pepper to taste
+1 lemon the juice
+4 dollops Greek yogurt
+
+Instructions:
+Sauté the Leek: Heat 2 tablespoons extra virgin olive oil in a large skillet or saucepan over medium heat. Add 1 leek (sliced) and cook for about 4 minutes, until soft and translucent.
+Add Flavor and Greens: Stir in 3 cloves garlic (grated), 1 teaspoon turmeric, 1 teaspoon dried oregano, and 5 cups spinach (chopped). Season with ½ teaspoon salt and pepper. Cook for 2–3 minutes, until the spinach wilts and everything smells delicious.
+Add Rice and Chickpeas: Add ½ cup basmati rice and 2 cans chickpeas, stirring to coat them in the spices. Pour in 3 cups vegetable broth, bring to a boil, then reduce heat and simmer for about 15 minutes, stirring occasionally, until the rice is tender.
+Finish and Serve: Taste and adjust seasoning. Serve warm with lemon juice and a dollop of Greek yogurt or Skyr. For extra protein, top with a poached egg.
+
+# Chickpea Cranberry Salad
+Attribution: The Plant Based School
+Author: Nico Pallotta
+url: https://theplantbasedschool.com/chickpea-cranberry-salad/
+Servings: Serves 4 to 8
+notes: Store leftovers in an airtight container in the fridge for up to 3 days. Freezing isn't recommended as the texture of the chickpeas and fruit changes.
+
+Main Recipe
+Ingredients:
+1 can chickpeas drained and rinsed — 15 oz / 400 g can — or 1½ cups cooked chickpeas
+½ cup dried cranberries
+2 ribs celery chopped
+1 apple honeycrisp or pink lady
+1 heaping cup red grapes best if seedless
+½ small red onion chopped
+¼ cup fresh parsley chopped
+½ cup toasted walnuts or pecans — chopped
+
+Instructions:
+Make the Dressing: In a large bowl, whisk 3 tablespoons extra virgin olive oil, 3 tablespoons apple cider vinegar, 1 tablespoon Dijon mustard, 1 tablespoon honey, ¼ teaspoon salt, and pepper until smooth. Crumble in 1 cup feta and stir to make a creamy, tangy dressing.
+Marinate the Chickpeas: Drain and rinse 1 can chickpeas well, then add them to the bowl. Toss until coated and let sit while you chop the other ingredients — even 10 minutes adds great flavor.
+Add the Crunchy Ingredients: Chop 2 ribs celery, 1 apple, and ½ small red onion. Halve 1 heaping cup red grapes, chop ¼ cup fresh parsley and ½ cup toasted walnuts, then add everything — including ½ cup dried cranberries — to the bowl. Toss until the salad looks glossy and evenly mixed. Taste and adjust vinegar, honey, or salt.
+Serve or Chill: Serve straight from the bowl or on a platter. If making ahead, chill in the fridge and take out 30 minutes before serving — the flavors only get better.
+## Serve with
+Ingredients: 
+1 recipe Creamy Feta Dressing
+# Creamy Feta Dressing
+Ingredients:
+3 tablespoons extra virgin olive oil
+3 tablespoons apple cider vinegar sub lemon juice or red wine vinegar
+1 tablespoon Dijon mustard
+1 tablespoon honey
+¼ teaspoon salt or to taste + black pepper — start with little salt since the feta is already salty
+1 cup feta crumbled
+
+# Butternut Squash Chickpea Curry
+alt_title: Best Spice Mix
+Attribution: The Plant Based School
+Author: Nico Pallotta
+Servings: Serves 4
+notes: Store leftovers in an airtight container in the fridge for up to 4 days or freeze for up to 3 months.
+Ingredients:
+2 tablespoons olive oil
+1 onion chopped
+3 cloves garlic grated
+1 inch ginger grated
+2 teaspoons curry powder
+1 teaspoon turmeric
+1 teaspoon ground coriander
+½ teaspoon ground cumin optional
+¼ teaspoon red pepper flakes or more to taste
+2 pounds butternut squash peeled and chopped into bite-sized chunks
+1 can chickpeas 15 oz / 400 g can – drained and rinsed
+2 cups vegetable broth
+1 can crushed tomatoes 15 oz / 400 g can
+1 can coconut milk we use light coconut milk
+¾ teaspoon salt or more to taste + black pepper
+1 squeeze lemon juice + ½ teaspoon garam masala and fresh cilantro (optional)
+
+Instructions:
+Prepare the Vegetables: Peel, seed, and chop 2 pounds butternut squash into large bite-size pieces. To save time, use peeled and chopped squash from the store. Set aside.
+Build the Flavor Base: Heat 2 tablespoons olive oil in a large skillet over medium heat. Add 1 onion (chopped) and cook for about 3 minutes until soft. Lower the heat, then stir in the 3 cloves garlic, 1 inch ginger (both grated), 2 teaspoons curry powder, 1 teaspoon turmeric, 1 teaspoon ground coriander, ½ teaspoon ground cumin, and ¼ teaspoon red pepper flakes. Cook for 1 minute until fragrant. If the pan gets dry, add a splash of broth to prevent sticking.
+Simmer: Add the squash, 1 can chickpeas (drained and rinsed), 2 cups vegetable broth, 1 can crushed tomatoes, and 1 can coconut milk. Season with ¾ teaspoon salt and pepper. Stir and simmer gently for about 25 minutes, or until the squash is tender.
+Finish and Serve: Turn off the heat, stir in ½ teaspoon garam masala if using, and let rest a few minutes. Serve warm with rice, 1 squeeze lemon juice, and fresh cilantro.
+# Garlicky Beef and Cabbage Noodles
+Attribution: The Kitchn
+Author: Kelli Foster
+Servings: Serves 4
+url: https://www.thekitchn.com/garlicky-beef-and-cabbage-noodles-recipe-23744760
+notes: The sauce can be made up to 1 day ahead and refrigerated in an airtight container. Refrigerate leftovers in an airtight container for up to 4 days.
+
+Ingredients:
+8 ounces dried udon, ramen, soba, lo mein noodles, or spaghetti
+1/4 cup soy sauce or tamari
+2 tablespoons rice vinegar
+3 tablespoons toasted sesame oil, divided
+1 tablespoon honey
+2 teaspoons cornstarch
+1 teaspoon Asian chili-garlic sauce, such as sambal oelek (optional)
+4 cloves garlic, minced
+1 pound lean ground beef
+1/2 teaspoon kosher salt, plus more for the noodles
+1/4 teaspoon freshly ground black pepper
+1/2 small head green cabbage (about 10 ounces), thinly sliced (about 4 cups)
+1 small yellow onion, thinly sliced (about 1 cup)
+Thinly sliced scallions, for garnish (optional)   
+
+Instructions:
+Bring a large pot of salted water to a boil. Add 8 ounces dried noodles and cook for 1 minute less than the package instructions. Meanwhile, whisk 1/4 cup soy sauce, 2 tablespoons rice vinegar, 1 tablespoon of the toasted sesame oil, 1 tablespoon honey, 2 teaspoons cornstarch, 1 teaspoon Asian chili-garlic sauce if using, and 4 minced garlic cloves together in a liquid measuring cup or small bowl.
+Drain the noodles and rinse well under cool water. Let sit in the strainer.
+Heat 1 tablespoon of the toasted sesame oil in a 12-inch or larger high-sided skillet over medium-high heat until shimmering. Add 1 pound lean ground beef and season with 1/2 teaspoon kosher salt and 1/4 teaspoon black pepper. Cook, breaking up the meat into medium pieces, until browned and cooked through, 5 to 7 minutes. Transfer to a plate.
+Heat the remaining 1 tablespoon toasted sesame oil in the skillet over medium-high heat. Add 1/2 head thinly sliced green cabbage and 1 thinly sliced small yellow onion. Toss to coat and spread in an even layer. Cook undisturbed until the bottom is lightly browned, about 3 minutes. Toss and cook until crisp-tender, 1 to 2 minutes more.
+Reduce the heat to medium. Return the beef and any accumulated juices to the skillet. Add the noodles. Whisk the sauce again, then add to the skillet. Cook, tossing regularly, until the noodles are heated through and the sauce coats the noodles well, about 1 minute. Garnish with thinly sliced scallions if desired.   
+
+# 7-Can Soup
+Attribution: The Pioneer Woman
+Author: Ree Drummond
+Servings: Serves 6
+url: https://www.thepioneerwoman.com/food-cooking/recipes/a78065/seven-can-soup/
+notes: This soup will keep in an airtight container in the refrigerator for up to three days or frozen for up to 3 months.
+
+Ingredients:
+1 (15-ounce) can no-beans chili
+1 (15-ounce) can black beans
+1 (15-ounce) can kidney beans
+1 (15-ounce) can pinto beans
+1 (15-ounce) can diced tomatoes
+1 (15-ounce) can corn (such as fiesta style)
+1 (10-ounce) can diced tomatoes with green chiles (such as Rotel)
+Salt and pepper, to taste
+8 oz. processed cheese (such as Velveeta), cubed
+Fresh cilantro, for serving
+
+Instructions:
+Without draining the cans, empty the chili, black beans, kidney beans, pinto beans, diced tomatoes, corn, and tomatoes with green chiles into a large pot. Bring to a boil over high heat, reduce the heat, and simmer for 10 to 15 minutes to bring all the flavors together. Add salt and pepper as needed.
+Add the processed cheese and stir it into the soup until melted. Serve immediately sprinkled with cilantro, if using.
+
+# Lebanese Mujadara
+alt_title: Lebanese Lentils and Rice
+Attribution: Feel Good Foodie
+Author: Yumna Jawad
+url: https://feelgoodfoodie.net/recipe/mujadara/
+Servings: Serves 8
+notes: Store any leftovers in an airtight container for 4-5 days in the fridge or freeze for up to 3 months.
+
+Ingredients:
+1 cup long grain or basmati white rice rinsed
+4 ½ cups water plus more for soaking the rice
+½ cup olive oil
+2 large yellow onions thinly sliced
+2 cups brown lentils rinsed and drained
+1 teaspoon salt
+2 teaspoons cumin
+Cucumber Yogurt Sauce for serving   
+
+Instructions:
+In a medium bowl, cover the rice with cold water. Set aside.
+Line a plate with two paper towels. Heat the olive oil in a large pot over high heat. Add the onions and cook, stirring constantly, until the onions are deeply browned and start to crisp around the edges, about 20 minutes. Use a slotted spoon to transfer to the plate and set aside. They will continue to crisp as they cool. Reserve the oil from cooking the onions.
+Add the lentils to another pot, add water and stir to combine. Bring everything to a boil, then reduce the heat to medium-low and cover with a tight-fitting lid. Cook for 15 minutes.
+Drain the soaked rice, rinse and transfer it to the pot with the lentils along with the salt. Stir once, then cover again with a tight-fitting lid and cook undisturbed for 15 minutes.
+Remove the pot from the heat. Rest, covered, for 5 minutes longer. Add the cumin and fluff the rice and lentils with a fork to combine.
+Pour the reserved oil on top of the mujadara. Then spoon the crispy onions on top. Serve warm, with cucumber yogurt sauce if desired.   
+
+# Cheap & Delicious Buttered Noodles
+Author: Joshua Weissman
+url: https://www.joshuaweissman.com/recipes/cheap-delicious-buttered-noodles-recipe
+Servings: Serves 4
+
+Ingredients:
+½ lb (225g) bucatini
+½ cup (120g) cold cubed unsalted butter, divided
+Kosher salt to taste
+Fresh cracked black pepper (optional)
+Flakey salt (optional)
+
+Instructions:
+Place bucatini in a large pot of boiling water that has been seasoned generously with salt. Cook according to package instructions or until cooked al dente, about 7 minutes. Do not drain the pasta. While noodles are boiling, to a large saucepan over medium-low heat add half your butter. Once butter is slightly melted, cut off the heat and wait for your pasta to finish boiling.
+Using tongs transfer your cooked pasta directly from the pot of water into your melted butter saucepan. Don't worry about pasta water getting into the pan as it helps to emulsify the sauce. Add your remaining butter and begin constantly tossing the pasta while adding a Tbsp of pasta water at a time until your sauce is fully emulsified and slightly thickened. Ideally you want it clinging to the pasta nicely. Season to taste with salt, toss again to coat evenly, and serve. Optionally, add flakey salt and freshly cracked pepper. Be cautious when using flaky salt as it could over salt your dish if it's already salty enough.   
+
+# Cheap & Delicious San Francisco Vietnamese Garlic Noodles
+Author: Joshua Weissman
+url: https://www.joshuaweissman.com/recipes/san-francisco-vietnamese-garlic-noodles-recipe
+Servings: Serves 6
+
+Ingredients:
+2 qt (1.8L) water
+¼ cup (60g) unsalted butter
+20-25 cloves garlic, thinly sliced
+1 lb (450g) spaghetti
+1 Tbsp (15g) fish sauce
+1 Tbsp (15g) soy sauce
+1 Tbsp (15g) oyster sauce
+1 oz (28g) Parmigiano Reggiano
+4 stalks green onion, thinly sliced, divided, 2 stalks for cooking, 2 stalks for garnish.
+Kosher salt to taste
+
+Instructions:
+In a 5 qt saute pan, bring 2 qt of water to a boil. Add spaghetti and boil for 8 to 10 minutes, or until al dente, and most of the water is absorbed. If the water evaporates earlier, just add water back about 1 cup at a time until the pasta is cooked through. The goal at the end of this cook is to have al dente pasta and a small amount of starch-rich water left behind in the pan to help create a nice sauce utilizing that highly starchy water.
+Meanwhile, in sauce pan placed over medium heat add butter, and once melted add garlic, gently stirring often, just until the garlic becomes fragrant and translucent. Remove from heat. Add fish sauce, soy sauce, and oyster sauce and mix until combined.
+Add the butter sauce to your pasta and toss constantly until emulsified and slightly thickened. Add Parmigiano Reggiano and continue tossing until emulsified and fully incorporated. Add most of your green onion, reserving a handful for garnish, and toss to combine. Taste and add salt to taste only if needed. Plate and garnish with green onion.   
+
+# Creamy Butternut Squash Pasta
+Attribution: The Pioneer Woman
+Author: Erin Merhar
+url: https://www.thepioneerwoman.com/food-cooking/recipes/a40710569/creamy-butternut-squash-pasta-recipe/
+Servings: Serves 4 to 6
+
+Ingredients:
+1/4 cup salted butter
+2 Tbsp. olive oil
+1 cup walnuts, chopped
+3 cloves garlic, chopped
+1 Tbsp. chopped sage, plus more for garnish
+6 cups cubed butternut squash (about 30 oz. cubed)
+1 tsp. kosher salt, plus more for pasta water
+1/2 tsp. ground black pepper, plus more to taste
+2 cups chicken broth
+1/4 cup heavy cream
+1 lb. penne pasta
+1/2 cup grated parmesan cheese, plus more serving   
+
+Instructions:
+Place the butter in a medium pot (with a lid) over medium heat. Let melt, then add the olive oil and walnuts. Cook until the walnuts are lightly toasted and the butter is golden brown, 2 to 3 minutes. Use a slotted spoon to transfer the walnuts to a paper towel lined plate.
+Add the garlic and sage to the pot and cook briefly until golden and aromatic, about 1 minute. Add the squash, broth, salt and pepper. Bring to a simmer, then cover and cook for 15 to 20 minutes, or until the squash is fork tender.
+Transfer the squash mixture to a blender. Cover, then remove the top insert from the lid and cover with a kitchen towel (to let steam escape). Puree until very smooth, about 1 minute.
+Meanwhile, bring a large pot of water to a boil. Season with salt. Add the pasta and reduce to medium heat (just simmering). Cook 1 minute less than the package directions. Reserve 1/2 cup of the pasta water then drain the pasta in a colander.
+Return the large pot to medium heat. Add the butternut squash sauce, heavy cream, cooked pasta and 1/4 cup of the pasta water and parmesan cheese. Stir gently with a rubber spatula, until the sauce has thickened slightly and is coating the pasta, about 2 minutes. (Add more pasta water to reach desired consistency). Season with more salt and pepper to taste.
+Serve immediately topped with more chopped sage, parmesan cheese, and the reserved walnuts.
+# Pork, Apple, and Sage Meatballs
+Attribution: The Pioneer Woman
+Author: Ree Drummond
+url: thepioneerwoman.com/food-cooking/recipes/a61936192/pork-apple-and-sage-meatballs-recipe/
+Servings: Serves 4 to 6
+notes: Serve the meatballs over creamy mashed sweet potatoes.
+
+Ingredients:
+1 1/2 lb. ground pork
+2/3 cup panko breadcrumbs
+1/2 Granny Smith apple, grated on the large holes of a box grater (about 1/2 cup)
+1 Tbsp. finely chopped fresh sage
+1 garlic clove, grated
+1 1/2 tsp. kosher salt
+1/2 tsp. black pepper
+1/4 tsp. ground allspice
+1 large egg, lightly beaten
+
+Instructions:
+Position a rack in the upper third of the oven and preheat to 450˚. For the sage: Heat 2 tablespoons butter in a large saucepan over medium heat until the foaming stops. Add the sage leaves and cook until crisp, about 1 minute. Remove with a slotted spoon.
+For the sweet potatoes: Add the potatoes to the pan, tossing to coat in the butter. Pour in 1 cup water and the heavy cream, then add 1 teaspoon salt. Stir, cover and bring to a simmer. Reduce the heat to medium-low and cook until potatoes are very tender, about 20 minutes.
+Remove from the heat. Uncover, add the remaining 1 tablespoon butter, remaining ½ teaspoon salt and the pepper and mash well. Keep warm.
+Meanwhile, for the meatballs: Mix the pork, panko, apple, chopped sage, garlic, salt, pepper, allspice and egg in a large bowl with your hands to combine.
+Form into 24 meatballs (2 tablespoons each) and place on a foil-lined baking sheet. Bake on the top rack until cooked through, 15 to 18 minutes. Switch the oven to broil and broil until the meatballs are browned, about 2 minutes more.
+Serve the meatballs over the potatoes. Top with the crispy sage.
+
+# Sage and Sweet Potatoes
+Attribution: The Pioneer Woman
+Author: Ree Drummond
+url: thepioneerwoman.com/food-cooking/recipes/a61936192/pork-apple-and-sage-meatballs-recipe/
+
+Ingredients:
+3 Tbsp. salted butter
+12 fresh sage leaves
+2 1/2 lb. sweet potatoes, peeled and cut into large chunks
+1/2 cup heavy cream
+1 1/2 tsp. kosher salt
+1/4 tsp. black pepper
+
+# One-Pan Creamy Orzo Chicken and Zucchini
+alt_title: Creamy Chicken and Orzo Skillet Recipe (with Zucchini)
+Attribution: The Kitchn
+Author: Kelli Foster
+url: thekitchn.com/creamy-orzo-chicken-skillet-recipe-23554753
+Servings: Serves 4
+notes: Refrigerate leftovers in an airtight container for up to 4 days.
+
+Ingredients:
+1 large shallot or 1/2 small yellow onion
+2 cloves garlic
+1 pound zucchini (2 medium)
+1 medium lemon
+1 ounce Parmesan cheese (1/2 cup firmly packed freshly grated or 1/3 cup store-bought grated)
+1 1/2 pounds boneless, skinless chicken thighs (5 to 6)
+2 teaspoons kosher salt, divided
+1/4 teaspoon freshly ground black pepper
+3 tablespoons olive oil, divided
+10 ounces dried orzo pasta (about 1 1/2 cups)
+2 cups low-sodium chicken broth
+2 cups whole milk
+
+Instructions:
+Thinly slice 1 large shallot or 1/2 small yellow onion (about 1/2 cup). Mince 2 garlic cloves. Trim 1 pound zucchini, halve lengthwise (quarter lengthwise if wider than 1 1/2-inches), then cut crosswise into 1/4-inch-wide pieces (about 3 1/2 cups). Finely grate the zest of 1 medium lemon (about 1 loosely packed tablespoon). Juice the lemon until you have 2 tablespoons. Finely grate 1 ounce Parmesan cheese (about 1/2 cup lightly packed) if needed, or measure out 1/3 cup store-bought.
+Pat 1 1/2 pounds boneless, chicken thighs dry with paper towels. Season all over with 1/2 teaspoon of the kosher salt and 1/4 teaspoon black pepper.
+Heat 1 tablespoon of the olive oil in a 12-inch or larger high-sided skillet or Dutch oven over medium-high heat until shimmering. Add the chicken and sear until browned on the bottom, 5 to 6 minutes. Flip with tongs and seared until the second side is browned, 2 to 3 minutes more. Transfer to a plate. The chicken will not be cooked through yet.
+Add the remaining 2 tablespoons olive oil, shallot, and zucchini to the skillet. Cook, stirring occasionally, until softened, about 3 minutes. Add 10 ounces dried orzo, garlic, and lemon zest, and stir to coat with the oil. Cook until lightly toasted and fragrant, 1 to 2 minutes.
+Add 2 cups low-sodium chicken broth, 2 cups whole milk, and the remaining 1 1/2 teaspoons kosher salt. Stir to combine, scraping up any browned bits from the bottom of the pan with a wooden spoon.
+Bring to a boil over medium-high heat, stirring frequently to keep the orzo from sticking. Reduce the heat to maintain a simmer. Nestle the chicken into the orzo and pour in any accumulated juices. Cook uncovered, making sure the orzo is in the liquid at all times and stirring frequently, until the orzo is tender, the chicken is cooked through and registers at least 165ºF on an instant-read thermometer, and most of the liquid is absorbed, 10 to 12 minutes.
+Remove the pan from the heat. Add the lemon juice and Parmesan and stir to combine. Taste and season with more kosher salt if needed. Let sit for 5 minutes before serving.
+
+# Zucchini and Fennel Salad
+Author: Lisa Donovan
+Attribution: New York Times
+url: https://cooking.nytimes.com/recipes/1026890-zucchini-and-fennel-salad
+Servings: 8 to 10 servings
+Ingredients:
+3 medium zucchini (about 1 pound)
+
+2 medium fennel bulbs (about 1 pound) 
+
+1 large or 2 small shallots
+
+Kosher salt (such as Diamond Crystal)
+
+3 small to medium lemons
+
+3 tablespoons red wine vinegar, plus more to taste
+
+1 heaping teaspoon freshly cracked black pepper, plus more to taste
+
+1 loosely packed cup roughly chopped flat-leaf parsley
+
+1 loosely packed cup fresh dill fronds
+
+½ loosely packed cup chopped mint leaves
+
+1 cup lightly toasted pine nuts or chopped pistachios
+Instructions: 
+Prepare the vegetables: Using a mandoline (or a sharp knife), slice the zucchini lengthwise into very thin ribbons, about 1/16-inch thick. (The thinner the slices, the better they will ribbon, but slices that are too thin will not hold up to the vinegar and salt.) Transfer to a large bowl.
+Shave the fennel and shallots crosswise to the same thickness and add them to the bowl with the zucchini. Toss to combine, add 2 teaspoons of salt, and toss again.
+Zest all 3 lemons over the vegetables. Halve 2 of the lemons and juice 3 of the halves through a small strainer over the vegetables. Reserve the remaining lemons for final adjustments.
+Add the vinegar and black pepper and toss everything together. Taste and adjust the seasonings, adding more lemon juice, vinegar, salt or black pepper as needed. Give this step your time and as many tastes and adjustments as it needs; it will matter in the end. You’re looking for the flavors to be plucky, bright and fresh, but not too tart or acidic.
+Add the herbs and ¾ of the nuts and toss until incorporated; transfer to a platter. (It’s OK if some liquid gets left behind.) Sprinkle with the remaining nuts and a few more cracks of black pepper and serve immediately.
+# Egg Drop Soup
+Attribution: AllRecipes
+Servings: 1
+url: https://www.allrecipes.com/recipe/115965/egg-drop-soup-better-than-restaurant-quality/
+Ingredients: 
+1 cup chicken broth
+
+¼ teaspoon soy sauce
+
+¼ teaspoon sesame oil
+
+2 teaspoons water (Optional)
+
+1 teaspoon cornstarch (Optional)
+
+1 large egg, beaten
+
+1 drop yellow food coloring (Optional)
+
+½ teaspoon ground white pepper (Optional)
+
+⅛ teaspoon salt (Optional)
+
+1 teaspoon chopped fresh chives
+Instructions: 
+Combine chicken broth, soy sauce, and sesame oil in a small saucepan over medium heat; bring to a boil.
+Combine water and cornstarch in a small bowl until cornstarch is dissolved; stir into boiling broth. Stir in food coloring.
+Slowly pour in beaten egg, stirring constantly in one direction to form thin egg ribbons. Season soup with white pepper and salt.
+Serve hot, garnished with fresh chives. Enjoy!
+# Caramelized Zucchini Pasta
+Attribution: AllRecipes
+Author: Courtney Kassel
+url: https://www.allrecipes.com/caramelized-zucchini-pasta-recipe-11784765
+Servings: 4
+Ingredients:
+3 tablespoons olive oil
+
+4 garlic cloves, minced
+
+1/4 teaspoon red pepper flakes
+
+1 1/2 pounds zucchini, trimmed and grated on the large holes of a box grater
+
+salt and freshly cracked black pepper as needed
+
+1 pound curly or tube-shaped pasta, such as fusilli or rigatoni
+
+1/2 cup finely grated Parmesan cheese or Pecorino plus more for serving
+
+1 tablespoon cold butter (optional)
+
+lemon zest (optional)
+
+fresh basil (optional)
+Instructions: 
+Heat olive oil in a large cast iron skillet or heavy-bottomed Dutch oven over medium heat. When warm, add garlic and red pepper flakes and stir until fragrant, about 1 minute. Add zucchini and season with 1 teaspoon salt and cracked black pepper. You may have to add zucchini in batches if it doesn’t all fit in the pan.
+
+Stir every few minutes until zucchini is softened and liquid is drawn out of it, 5 to 10 minutes. Continue to cook until liquid is evaporated, and zucchini starts to brown, 10 to 15 minutes more. 
+
+
+Meanwhile, bring a large pot of salted water to a boil and cook pasta for 1 to 2 minutes less than the package states for al dente pasta. Reserve 1 cup pasta water, then drain pasta; set aside.
+
+Turn heat under the skillet to medium-low, and stir zucchini frequently in the final 5 to 10 minutes of cooking. As zucchini caramelizes, it may start to stick to the bottom of the pan. You can loosen it by adding a little more olive oil or a few tablespoons of water; use a wooden spoon to release the browned bits (or fond) on the bottom of the pan. Zucchini is done when it starts to clump together, and looks darkened in color and slightly browned.
+
+Turn heat down to low and add pasta to the skillet along with about 1/2 cup pasta water; stir to combine. Add cheese slowly; stir and add pasta water as needed if it gets too thick. When cheese is well incorporated, add butter, and stir until glossy and smooth. Season with salt and pepper.
+
+Garnish with black pepper, more cheese, lemon zest, and chopped fresh basil.
+# Garlicky White Bean & Kale Stew with Lemon
+Author: Carolyn Malcoun
+Attribution: EatingWell
+url: https://www.eatingwell.com/garlicky-white-bean-kale-stew-with-lemon-11835743
+Servings: 4
+Notes: To save time, consider using bagged, pre-chopped kale. 
+If you prefer, you can substitute the cannellini beans with great northern or navy beans. You can also skip the gremolata and simply top the dish with store-bought breadcrumbs that have been toasted in olive oil.
+Zesting lemons and grating Parmesan is quick using a microplane. However, if you don’t have access to one, the fine holes on a box grater will work just fine.
+If you follow a vegetarian diet, be sure to check the label on the Parmesan cheese and opt for one produced with plant-based rennet or enzymes, as traditional Parmesan is made using animal rennet.
+Ingredients: 
+3 tablespoons extra-virgin olive oil, divided
+
+2 medium carrots, peeled and chopped (about 1⅓ cups)
+
+1 small yellow onion, chopped (about 1 cup)
+
+¾ teaspoon salt, divided
+
+1 medium bunch kale (about 12 ounces), chopped (about 8 cups)
+
+6 medium cloves garlic, finely chopped (2 tablespoons)
+
+½ teaspoon crushed red pepper
+
+3 cups reduced-sodium vegetable broth, divided
+
+2 (15-ounce) cans cannellini beans, rinsed, divided
+
+1 teaspoon grated lemon zest
+
+2 tablespoons lemon juice, divided
+
+¼ cup finely grated Parmesan cheese (1 ounce)
+
+2 tablespoons chopped fresh flat-leaf parsley (optional)
+Instructions: 
+Heat 2 tablespoons oil in a small Dutch oven over medium-high heat. Add chopped carrots, chopped onion and ¼ teaspoon salt; cook, stirring occasionally, until slightly softened, about 6 minutes. Add chopped kale, chopped garlic and ½ teaspoon crushed red pepper; cook, stirring often, until the kale is wilted, about 2 minutes. Add 1½ cups broth; cook, stirring occasionally, until slightly reduced, about 5 minutes. Stir in the remaining 1½ cups broth and ½ teaspoon salt. Continue cooking until the kale is tender, about 5 minutes.
+
+Meanwhile, place half of the rinsed beans in a small bowl; using a fork, mash until mostly smooth.
+
+Stir the mashed beans and the remaining whole beans into the stew. Bring to a lively simmer over medium-high heat. Simmer, stirring occasionally, until the broth thickens slightly, about 4 minutes. Stir in 2 tablespoons lemon juice. Remove from heat.
+In a small bowl, combine ¼ cup Parmesan, 2 tablespoons parsley and 1 teaspoon lemon zest. Divide the stew among 4 shallow bowls. Top each serving with the Parmesan mixture and drizzle with the remaining 4 teaspoons oil (1 teaspoon per bowl).
+# Chickpea Casserole with Spinach & Feta
+Author: Renu Dhar
+Attribution: EatingWell
+url: https://www.eatingwell.com/chickpea-casserole-11822736
+Servings: 4
+Notes: To make ahead Assemble through Step 3, cover and refrigerate for up to 24 hours. Bring to room temperature and bake as directed.
+Ingredients: 
+2 tablespoons extra-virgin olive oil
+
+½ cup chopped yellow onion
+
+3 cloves garlic, finely chopped (about 1 tablespoon)
+
+½ teaspoon crushed red pepper
+
+1 (16-ounce) package baby spinach
+
+½ cup lower-sodium vegetable broth
+
+2 (15-ounce) cans no-salt-added chickpeas, rinsed
+
+2 cups precooked brown rice (from 2 8.8-ounce packages)
+
+2 ounces reduced-fat cream cheese
+
+¼ cup chopped fresh dill, plus more for garnish
+
+1 teaspoon grated lemon zest
+
+3 tablespoons lemon juice
+
+⅛ teaspoon ground nutmeg
+
+6 ounces feta cheese, crumbled
+Instructions: 
+Preheat oven to 400°F. Heat 2 tablespoons oil in a large oven-safe skillet over medium heat. Add ½ cup onion, the chopped garlic and ½ teaspoon crushed red pepper; cook, stirring often, until the onion softens, 2 to 3 minutes.
+
+Add 16 ounces baby spinach in batches; cook, stirring frequently, until wilted, about 7 minutes. Continue cooking, stirring occasionally, until the liquid reduces slightly, about 1 minute.
+Add ½ cup broth; bring to a boil over medium-high heat, scraping up browned bits from the pan. Remove from heat; stir in rinsed chickpeas, 2 cups rice, 2 ounces cream cheese, ¼ cup dill, 3 tablespoons lemon juice and ⅛ teaspoon nutmeg until combined. Sprinkle with crumbled feta and stir gently once or twice.
+Cover and bake until bubbling around the edges, 20 to 22 minutes. Let rest for 5 minutes. Sprinkle with 1 teaspoon lemon zest. Garnish with additional dill, if desired.
+# Teriyaki Chicken Salad
+Attribution: EatingWell
+Author: Amanda Stanfield
+url: https://www.eatingwell.com/teriyaki-chicken-salad-11731945
+Servings: 4
+Instructions: 
+1 tablespoon extra-virgin olive oil
+
+1 pound boneless, skinless chicken thighs, trimmed
+
+2 tablespoons hoisin sauce
+
+2 tablespoons light brown sugar
+
+2 tablespoons reduced-sodium tamari or soy sauce
+
+2 tablespoons mirin
+
+2 tablespoons seasoned rice vinegar
+
+1 teaspoon grated garlic
+
+1 teaspoon grated fresh ginger
+
+4 cups chopped romaine hearts
+
+2 cups thinly shredded green cabbage
+
+1 small red bell pepper, sliced (about 1 cup)
+
+1 medium carrot, peeled and shredded (½ cup)
+
+½ cup seeded, halved and thinly sliced English cucumber
+
+2 large scallions, thinly bias-sliced (½ cup)
+
+1 small serrano pepper, unseeded and thinly sliced (about 1½ tablespoons)
+
+1 tablespoon toasted sesame seeds
+
+Crispy fried onions or fried shallots (optional)
+Instructions:
+Heat 1 tablespoon oil in a large nonstick skillet over medium-high heat. Add trimmed chicken thighs; cook, flipping once, until browned and an instant-read thermometer inserted in the thickest portion registers 165°F, about 10 minutes.
+Meanwhile, whisk 2 tablespoons each hoisin, brown sugar, tamari (or soy sauce), mirin and vinegar and 1 teaspoon each grated garlic and ginger together in a small bowl. Set aside 6 tablespoons of the dressing for serving.
+Pour the remaining ¼ cup dressing into the skillet with the chicken. Reduce heat to low and cook, stirring and flipping the chicken occasionally, until the sauce is glossy, slightly thickened and coats the chicken, about 2 minutes. Transfer the chicken to a cutting board, drizzling any pan drippings over it. Let rest for 5 minutes, then slice.
+Combine 4 cups romaine, 2 cups cabbage, the sliced bell pepper, the shredded carrot and ½ cup cucumber together in a large serving bowl; toss well. Top with the sliced chicken, sliced scallions, sliced serrano and 1 tablespoon sesame seeds. Sprinkle with crispy fried onions (or shallots), if desired. Serve with the reserved dressing on the side.
+# Nacho Cauliflower Casserole
+url: https://www.eatingwell.com/recipe/8012781/nacho-cauliflower-casserole/
+Author: Nicole Hopper
+Attribution: EatingWell
+Servings: 6
+Ingredients:
+1 medium head cauliflower, cored and sliced (1/2-inch; about 6 cups)
+
+1 medium white onion, sliced
+
+1 large red bell pepper, sliced (about 1 1/2 cups)
+
+1 medium poblano pepper, sliced
+
+2 tablespoons extra-virgin olive oil
+
+3 tablespoons lower-sodium taco seasoning
+
+¼ teaspoon salt
+
+1 (15 ounce) can no-salt-added black beans, rinsed
+
+2 cups cooked brown rice
+
+1 cup frozen corn, thawed
+
+1 cup chunky salsa
+
+1 ½ cups shredded Mexican-style cheese blend, divided
+
+3 cups unsalted corn tortilla chips, coarsely crushed
+
+Loosely packed fresh cilantro leaves and tender stems, sliced jalapeño peppers, sour cream and/or lime wedges for garnish
+Instructions:
+Position rack in bottom of oven; preheat to 425°F. Arrange cauliflower, onion, bell pepper and poblano on a large rimmed baking sheet. Drizzle with oil and sprinkle with taco seasoning and salt; toss to coat. Spread into an even layer. Roast, stirring once, until the vegetables are browned and crispy around the edges, about 30 minutes. Remove from the oven.
+
+Reduce oven temperature to 350°F. Lightly coat a 3-quart baking dish with cooking spray.
+
+Transfer the roasted vegetables to a large bowl. Stir in beans, rice, corn, salsa and 1/2 cup cheese. Transfer the mixture to the prepared baking dish. Sprinkle with tortilla chips. Sprinkle the remaining 1 cup cheese over the top. Cover loosely with foil and bake for 20 minutes. Remove the foil and continue baking until the casserole is hot throughout and the cheese is melted and browned, about 10 minutes more. Garnish with cilantro, jalapeños, sour cream and/or lime wedges, if desired.
+# Melting Curry-Spiced Cabbage
+Attribution: EatingWell
+Author: Amanda Stanfield
+url: https://www.eatingwell.com/melting-curry-spiced-cabbage-11795103
+Servings: 8
+Ingredients:
+1 small head green cabbage, outermost leaves removed
+
+2 tablespoons coconut oil, melted, divided
+
+¾ teaspoon salt, divided
+
+½ teaspoon ground pepper
+
+½ cup chopped yellow onion
+
+3 medium cloves garlic, finely chopped (1 tablespoon)
+
+1½ teaspoons Madras curry powder
+
+1 teaspoon fresh thyme, finely chopped
+
+¾ teaspoon ground cumin
+
+½ teaspoon ground turmeric
+
+¼ teaspoon ground coriander
+
+1 (14-ounce) can light coconut milk, well shaken and stirred
+
+2 tablespoons nonfat plain yogurt
+
+2 tablespoons fresh cilantro leaves
+
+Lime wedges, for serving (optional)
+Instructions:
+Preheat oven to 350°F. Slice cabbage in half through the root. Cut each half into 4 wedges, keeping the root intact. Brush the wedges all over with 1 tablespoon coconut oil. Sprinkle with ½ teaspoon each salt and pepper.
+Heat the remaining 1 tablespoon coconut oil in a large cast-iron skillet over medium-high heat. Add the cabbage wedges; cook, undisturbed, until lightly charred, about 5 minutes, flipping halfway through. Transfer to a plate.
+
+Reduce heat to medium and add ½ cup onion and the chopped garlic to the pan. Cook, stirring occasionally until starting to soften, 1 to 2 minutes. Stir in 1½ teaspoons curry powder, 1 teaspoon thyme, ¾ teaspoon cumin, ½ teaspoon turmeric, ¼ teaspoon coriander and the remaining ¼ teaspoon salt; cook, stirring, until fragrant, about 20 seconds. Stir in stirred coconut milk; cook, stirring constantly, until well combined and gently simmering, about 2 minutes. Return the cabbage to the pan, overlapping the wedges if necessary.
+Bake until the cabbage is tender, 45 to 50 minutes. Dollop the cabbage wedges with 2 tablespoons yogurt. Sprinkle with 2 tablespoons cilantro. Serve with lime wedges, if desired.
+# Creamy Basil-Tomato Chicken Pasta Bake
+Author: Giovanna Vazquez
+url: https://www.eatingwell.com/creamy-basil-tomato-chicken-pasta-bake-11780089
+Attribution: EatingWell
+Servings: 6
+Ingredients:
+2 tablespoons extra-virgin olive oil
+
+3 teaspoons salt-free Italian seasoning, divided
+
+1 teaspoon chopped Calabrian peppers
+
+1 teaspoon garlic powder
+
+¾ teaspoon salt, divided
+
+¼ teaspoon ground pepper
+
+3 cups cherry tomatoes (18 ounces)
+
+3 medium cloves garlic, thinly sliced (about 1 tablespoon)
+
+4 (6-ounce) boneless, skinless chicken breasts, trimmed
+
+1 (5.2-ounce) package basil-and-chive Gournay cheese (such as Boursin), at room temperature
+
+12 ounces whole-wheat pasta shells (about 4 cups)
+
+1 (5-ounce) package baby spinach
+
+½ cup half-and-half
+
+¼ cup chopped fresh basil, plus small leaves for garnish
+
+1¼ cups shredded fontina cheese, divided
+Instructions:
+Preheat oven to 400°F. Combine 2 tablespoons olive oil, 2 teaspoons Italian seasoning, 1 teaspoon Calabrian peppers, 1 teaspoon garlic powder, ¼ teaspoon salt and ¼ teaspoon pepper in a broiler-safe 9-by-13-inch baking dish. Add 3 cups cherry tomatoes and the sliced garlic; toss to coat.
+Season both sides of 4 chicken breasts with ¼ teaspoon salt and the remaining 1 teaspoon Italian seasoning. Place cheese in the center of the tomato mixture in the dish. Nestle the chicken around the cheese, turning to coat in the oil mixture.
+Bake, flipping the chicken halfway through, until the tomatoes have started to burst and an instant-read thermometer inserted into the thickest portion of chicken registers 150°F, 17 to 20 minutes.
+Meanwhile, bring a large saucepan of water to boil over high heat; cook 12 ounces pasta shells according to package directions for al dente, about 10 minutes. Stir in 5 ounces spinach; cook until wilted, about 30 seconds. Reserve ¼ cup of the cooking water; drain the pasta mixture.
+Remove the baking dish from the oven; transfer the chicken to a medium bowl. Using 2 forks, shred the chicken; return to the dish. Add ½ cup half-and-half, ¼ cup basil, the pasta mixture, ½ cup fontina, 1 tablespoon pasta cooking water and the remaining ¼ teaspoon salt; stir until well combined. If needed, stir in additional pasta cooking water, 1 tablespoon at a time, until the mixture is a little looser than desired consistency. Sprinkle with the remaining ¾ cup fontina. Bake, uncovered, until the mixture is heated through and the cheese has melted and the chicken is cooked through, 10 to 15 minutes. Without removing the dish, increase the oven temperature to broil. Broil until the cheese is lightly browned, 1 to 2 minutes. Let stand for 5 minutes before serving. Garnish with basil, if desired.
+# Unstuffed Zucchini Casserole
+Author: Amanda Stanfield
+url: https://www.eatingwell.com/unstuffed-zucchini-casserole-11779363
+Attribution: EatingWell
+Servings: 4
+Ingredients:
+2 medium zucchini, sliced into ½-inch rounds (about 4 cups)
+
+½ teaspoon crushed red pepper
+
+¼ teaspoon salt
+
+1 tablespoon extra-virgin olive oil
+
+1 pound lean ground beef
+
+1 small yellow onion, finely chopped (1 cup)
+
+1 small red bell pepper, chopped (1 cup)
+
+3 medium cloves garlic, thinly sliced (about 1 tablespoon)
+
+2 teaspoons Italian seasoning, divided 
+
+1½ cups lower-sodium marinara sauce
+
+1 tablespoon red-wine vinegar
+
+½ cup shredded sharp Cheddar cheese
+
+¼ cup shredded Italian 4-cheese blend
+
+1 tablespoon small fresh basil leaves
+Instructions: 
+Preheat oven to 350°F with rack about 7 inches from the heat source (middle position). Combine zucchini slices, ½ teaspoon crushed red pepper and ¼ teaspoon salt in a medium bowl; toss until well coated. Let stand at room temperature.
+Heat 1 tablespoon oil in a 12-inch oven-safe skillet over medium-high heat. Add 1 pound ground beef; cook, breaking the meat into bite-size pieces, until mostly browned, about 3 minutes. Stir in chopped onion, chopped bell pepper, sliced garlic and 1 teaspoon Italian seasoning; cook, stirring often, until the onion softens, about 2 minutes.
+Stir in 1½ cups marinara, 1 tablespoon vinegar and the remaining 1 teaspoon Italian seasoning; cook, stirring occasionally, until gently simmering, about 2 minutes. Remove from heat and carefully transfer half of the meat sauce (about 2 cups) to a medium heatproof bowl. Spread the remaining meat sauce (about 2 cups) in an even layer in the skillet. Layer half of the zucchini slices (about 2 cups) over the meat sauce. Spread the remaining meat sauce over the zucchini. Top with the remaining zucchini slices.
+Sprinkle with ½ cup Cheddar and ¼ cup Italian cheese. Bake until the cheese is melted and the zucchini is tender, about 30 minutes. Increase oven temperature to broil. Broil until the cheese is browned, about 2 minutes. Sprinkle with 1 tablespoon basil.
+# Broiled Curried-flower
+alt_title: Curry Cauliflower
+Author: Alton Brown
+Attribution: Food Network
+Source: Good Eats
+url: https://www.foodnetwork.com/recipes/alton-brown/broiled-curried-flower-recipe-1923825
+Servings: 4 servings
+Ingredients:
+
+1 medium head cauliflower (about 1 1/2 pounds)
+1/2 teaspoon whole cumin seeds
+1/2 teaspoon whole coriander seeds
+1/2 teaspoon yellow mustard seeds
+1/2 teaspoon dried orange peel
+1/2 teaspoon ground turmeric
+1/2 teaspoon fenugreek seeds
+1/2 cup canola oil
+1 cup boiling water
+1 1/2 teaspoons kosher salt, divided
+Instructions:
+
+Position an oven rack approximately 4 inches from the broiler and preheat to the high broil setting.
+Rinse and trim any green leaves from the head of the cauliflower, leaving as much of the center stalk as possible. Lay the head, stem up, on a cutting board and cut in half from top to bottom. Lay each half on its side and cut in half again. Slice each quarter pie style into wedges, so that a piece of core holds each wedge together and the outer edge thickness is not more than 3/4-inch thick. Lay the cauliflower onto a cooling rack set inside a half sheet pan and cover with aluminum foil, leaving one end open.
+Crush together the cumin, coriander, mustard, orange peel, turmeric, and fenugreek in a small ramekin using the end of a rolling pin. Place the oil in a large metal measuring cup or 1-quart saucepan and set over high heat until it shimmers. Immediately remove from the heat, add to the spice mixture, and steep for 5 minutes.
+Place the sheet pan into the oven and carefully pour in the water, seal the foil opening, and broil for 6 minutes. Remove the foil and brush the cauliflower with half of the seasoned oil. Sprinkle with 3/4 teaspoon salt. Return to the oven and broil until browned, another 5 to 10 minutes. Turn the cauliflower over and brush with the remaining oil and sprinkle with the remaining 3/4 teaspoon salt. Return to the oven and broil until browned, another 5 to 10 minutes. Serve immediately.
+# Blistered Green Beans with Spicy Chile Sauce
+Author: Valerie Bertinelli
+url: https://www.foodnetwork.com/recipes/valerie-bertinelli/blistered-green-beans-with-spicy-chile-sauce-3691510
+Attribution: Food Network
+Source: Valerie’s Home Cooking
+Ingredients:
+Kosher salt
+2 pounds green beans, trimmed 
+1/4 cup Garlic Oil, recipe follows
+2 tablespoons red chile paste, such as gochujang 
+1 tablespoon honey 
+Instructions:
+Preheat the oven to broil.
+Bring a large pot of water to a boil and season generously with salt. Prepare an ice bath in a large bowl. Blanch the green beans in the boiling water until tender but still crisp, about 2 minutes. Drain and immediately shock in the ice bath. Drain the beans and pat dry well.
+Add the Garlic Oil, chile paste, honey and salt to taste to a large bowl. Add the green beans and toss to coat. Transfer to 2 baking sheets and broil until brown and blistered in spots, 5 to 7 minutes. Serve immediately.
+# Garlic Oil
+Author: Valerie Bertinelli
+url: https://www.foodnetwork.com/recipes/valerie-bertinelli/blistered-green-beans-with-spicy-chile-sauce-3691510
+Attribution: Food Network
+Source: Valerie’s Home Cooking
+
+Yield: 1/2 cup
+
+Ingredients:
+1/2 cup extra-virgin olive oil
+2 cloves garlic, crushed
+Instructions:
+Combine the olive oil and garlic in a small saucepan. Turn the heat to medium low and gently poach the garlic for 5 minutes; the oil should be at a very bare simmer but not boiling, otherwise the garlic will burn. Remove from the heat and allow to cool completely. Once cool, discard the garlic.
+# The Fungal Saute
+alt_title: Sauteed Mushrooms
+Author: Alton Brown
+Attribution: Food Network
+Source: Good Eats
+url: https://www.foodnetwork.com/recipes/alton-brown/the-fungal-saute-recipe-1950881
+Servings: 4 servings
+Ingredients: 
+2 pounds cremini mushrooms, 1/4-inch sliced
+
+
+2 tablespoons clarified butter
+
+
+Kosher salt and cracked black pepper
+
+
+1 tablespoon minced shallots
+
+
+1 1/2 ounces cognac
+
+
+2 teaspoons fresh chopped chives
+Instructions:
+In a 10-inch heavy saute pan, heat 1 ounce of clarified butter over high heat. Add sliced mushrooms one handful at a time to saute pan. As mushrooms begin to develop rich, brown color, push them to the outside of the saute pan. Turn the mushrooms over as they begin to color. When pan becomes dry, add remaining clarified butter to the pan. Add another handful of mushrooms to the pan and continue until all mushrooms have been added. Season with salt and pepper after the last addition to the pan has been made.
+Make a hole in the middle of the pan and add the shallots. Deglaze pan with cognac, scraping up any browned mushroom bits. Add the chives. Adjust seasoning with salt and pepper.
+# Cantonese Slippery Eggs with Tofu and Peas Recipe
+Attribution: Serious Eats
+url: https://www.seriouseats.com/cantonese-eggs-with-tofu-and-peas-recipe-5218067
+Author: J. Kenji Lopez-Alt
+Servings: 4 servings
+Ingredients:
+3 tablespoons (28 g) cornstarch
+
+1 1/2 cups (355 ml) homemade or store-bought low-sodium chicken stock, dashi, or water, divided
+
+4 large eggs
+
+Kosher salt and ground white pepper
+
+1 tablespoon (15 ml) peanut, rice bran, or other neutral oil, plus more for greasing wok
+
+2 coin-sized fresh ginger
+
+2 scallions, chopped into 1/4-inch segments, greens reserved separately
+
+2 medium cloves garlic, finely minced (about 2 teaspoons; 10 g)
+
+2 tablespoons (30 ml) Shaoxing wine, dry sherry, or sake
+
+1/2 cup thawed frozen peas (optional)
+
+1 (12-ounce) block firm silken tofu, cut into 1/2-inch cubes (see note)
+
+Salt, to taste
+
+White pepper, to taste
+
+MSG, to taste (optional)
+
+Small handful roughly chopped cilantro, for garnish (optional)
+
+Steamed rice, for serving
+Instructions:
+In a small bowl, combine the cornstarch with 1/4 cup (60ml) of the stock, stirring to dissolve the starch. Reserve the remaining stock. 
+In a medium bowl, whisk together 1 tablespoon of the cornstarch slurry with the eggs and a pinch of salt and white pepper.
+Using a paper towel, rub a thin film of oil into a wok and set it over high heat until smoking. Add the 1 tablespoon oil and swirl to coat. Add the ginger and let it sizzle for 10 seconds. Immediately add the scallion whites and garlic and stir-fry until fragrant, about 15 seconds.
+Add the wine and cook, swirling as it sizzles, for a few seconds, then add the reserved chicken stock and peas. Stir the cornstarch slurry to redistribute, then stir it into the stock. Add the tofu and stir in very gently to avoid breaking it. Bring to a simmer, stirring gently, then reduce heat to maintain a simmer and cook until the sauce is thick enough to coat the back of a spoon, about 45 seconds. Adjust the seasoning to taste with salt, white pepper, and MSG (if using).
+Drizzle the egg mixture into the sauce, then very slowly stir it with a ladle or wok spatula until the eggs form tender ribbons, about 30 seconds, being careful not to break the tofu pieces. Sprinkle with the reserved scallion greens and chopped cilantro (if using). Divide the mixture evenly over bowls of steamed rice and serve immediately.
+# Asparagus and Chickpea Salad
+Attribution: Simply Recipes
+Author: Robin Asbell
+url: https://www.simplyrecipes.com/asparagus-and-chickpea-salad-recipe-11937163
+Servings: 4
+Ingredients:
+1 bunch asparagus (about 1 pound)
+1 bunch red radishes (about 6 ounces), trimmed and thinly sliced
+2 cups snow pea pods (about 5 ounces), trimmed
+1 (15-ounce) can chickpeas, drained and rinsed
+1/4 cup lemon juice
+1/4 cup olive oil
+1/2 teaspoon salt
+1/2 teaspoon ground black pepper
+Instructions: 
+Wash and dry the asparagus, cut off the tips, then chop the tender parts of the stems into 1/2-inch pieces. Discard the tough parts of the stems. Place the chopped asparagus in a large bowl.
+
+Add the radishes, snow peas, and chickpeas to the bowl and toss to combine. 
+
+Add the lemon juice, olive oil, salt, and pepper to the vegetables. Toss to coat. Serve immediately. Refrigerate leftovers tightly covered for up to 2 days.
+# Creamy One-Pot Broccoli Cheddar Orzo
+Attribution: the kitchn
+Servings: 4 to 8
+Notes: Leftovers can be refrigerated in an airtight container for up to 4 days. Add some milk, broth, or water to thin out the sauce again when reheating.
+Ingredients:
+8 ounces sharp cheddar cheese (about 2 cups shredded)
+1 pound broccoli crowns (about 2 medium)
+1 large yellow onion
+6 large cloves garlic
+2 tablespoons olive oil
+1 3/4 teaspoons kosher salt, divided
+1/2 teaspoon freshly ground black pepper, divided
+1 1/2 teaspoons dry ground mustard
+1/8 teaspoon ground cayenne pepper (optional)
+1 pound dried orzo pasta
+1 (32-ounce) carton low-sodium vegetable or chicken broth (scant 4 cups)
+1 cup whole or 2% milk
+2 tablespoons unsalted butter
+Instructions:
+Shred 8 ounces sharp cheddar cheese on the smaller holes of a box grater (about 2 packed cups). Trim the stem end from 1 pound broccoli crowns. Cut the florets from the stems. Separate or cut the florets into 1 to 1 1/2-inch pieces.
+Chop the stems into 1/4 to 1/2-inch pieces and place in a separate medium bowl. Finely chop 1 large yellow onion (about 2 cups) then add to the bowl with the broccoli stems. Finely grate 6 large garlic cloves (about 4 teaspoons).
+Heat 2 tablespoons olive oil in a large Dutch oven or heavy-bottomed pot over medium heat until shimmering, about 30 seconds. Add the onion and broccoli stems, 1 teaspoon of the kosher salt, and 1/4 teaspoon of the black pepper. Cook, stirring occasionally, until the onion is translucent and the stems are almost tender, 5 to 7 minutes.
+Add the broccoli florets, remaining 3/4 teaspoon kosher salt, remaining 1/4 teaspoon black pepper, 1 1/2 teaspoons ground mustard, and 1/8 teaspoon ground cayenne if desired, and stir to combine. Cook, stirring often, until the florets are vibrant green, 3 to 5 minutes.
+Add the garlic and cook, stirring constantly, until fragrant, about 30 seconds. Add 1 pound dried orzo pasta and cook, stirring constantly, until lightly toasted, about 1 minute. Add 1 (32-ounce) carton low-sodium broth and stir to combine, scraping up the browned bits from the bottom of the pot. Increase the heat to high and bring to a boil.
+Reduce the heat to maintain a very gentle simmer. Continue to cook, stirring every minute or so and scraping the bottom of the pot, until the orzo is a minute shy of al dente and most of the liquid is absorbed (but still glossy), 6 to 8 minutes or according to package instructions. Add 1 cup whole or 2% milk, stir to combine, and simmer until the orzo is al dente but still saucy, about 1 minute more.
+Remove the pot from the heat. Add 2 tablespoons unsalted butter and the cheese. Stir until the butter and cheese are melted and the orzo is glossy and saucy. Let sit for 5 minutes for the sauce to thicken before serving.
+# One-Pot Creamy Broccoli Pasta Bake
+Attribution: the kitchn
+url: https://www.thekitchn.com/creamy-broccoli-pasta-bake-recipe-23710983
+Servings: 6 to 8
+Author: Olivia Counter
+Notes: Refrigerate leftovers in an airtight container for up to 5 days. The pasta will lose some of its creaminess upon refrigeration; add a splash of milk or water during reheating to loosen the sauce.
+You can freeze the finished recipe in an airtight container for up to 3 months (I like to freeze in individual portions). Reheat from frozen, adding additional milk or water to help loosen the sauce.
+Ingredients:
+1 pound broccoli
+3 tablespoons olive oil, divided
+2 teaspoons kosher salt, divided, plus more as needed
+1 small yellow onion, diced (about 1 cup)
+4 cloves garlic, thinly sliced
+1/2 teaspoon ground mustard
+1/2 teaspoon red pepper flakes (optional)
+1 pound dried short, small pasta, such as elbow macaroni or small shells
+2 1/4 cups water
+2 cups whole milk
+1 (12-ounce) can evaporated milk
+8 ounces sharp cheddar cheese, shredded (about 2 cups)
+Freshly ground black pepper
+Instructions:
+Heat the oven to 375°F. Trim 1 pound broccoli. Keeping the stems and florets separate, dice the stems, then cut the florets into 1-inch pieces.
+Heat 1 tablespoon of the olive oil in a Dutch oven or broiler-safe large pot over medium heat until shimmering. Add the broccoli florets and 1/4 teaspoon of the kosher salt. Cook until the broccoli brightens in color, about 3 minutes. Transfer to a plate.
+Add 1 tablespoon of the olive oil to the pot. When shimmering, add the broccoli stems and 1/4 teaspoon of the kosher salt. Cook until softened and starting to brown, 2 to 3 minutes.
+Add the remaining 1 tablespoon olive oil, 1 diced small yellow onion, and 1/4 teaspoon of the kosher salt. Cook, stirring often, until softened but not browned, about 5 minutes. Stir in 4 thinly sliced garlic cloves, 1/2 teaspoon ground mustard, and 1/2 teaspoon red pepper flakes if using. Cook until fragrant, about 1 minute.
+Stir in 1 pound dried short pasta, 2 1/4 cups water, 2 cups whole milk, 1 (12-ounce) can evaporated milk, and the remaining 1 1/4 teaspoons kosher salt. Cover and transfer the pot to the oven. Bake, stirring halfway through to break up any clumps of pasta, until the pasta is almost tender, 18 to 20 minutes total.
+Remove the pot from the oven. Heat the broiler on high. Stir 6 ounces of the shredded sharp cheddar cheese (1 1/2 cups) and the reserved broccoli florets into the pasta until the cheese is melted. Taste and season with kosher salt and black pepper as needed.
+Evenly sprinkle with the remaining 2 ounces shredded cheddar cheese (1/2 cup). Return to the oven and broil uncovered until the cheese on top is melted and brown in spots, 3 to 5 minutes.
+# Dumpling Soup
+Author: Leah Perez
+Attribution: The Pioneer Woman
+url: https://www.thepioneerwoman.com/food-cooking/recipes/a44190393/dumpling-soup-recipe/
+Ingredients:
+
+1 Tbsp. vegetable oil
+
+2 tsp. sesame oil
+
+1 cup shredded carrots
+
+5 green onions, thinly sliced, whites and greens separated
+
+3 garlic cloves. finely chopped
+
+1/4 tsp. ground ginger
+
+1/4 cup white miso paste
+
+6 cups chicken or vegetable broth, divided
+
+1 lb. frozen mini dumplings
+
+3 cups baby spinach
+
+3 Tbsp. soy sauce, plus more to serve
+
+Hot sauce or chili oil, to serve
+Instructions:
+In a large pot, heat the vegetable oil and sesame oil over medium heat. Add the carrots, green onion whites, garlic, and ginger. Cook, stirring frequently, until the vegetables begin to soften, 2 to 3 minutes.
+In a small bowl, combine the miso paste with 1/2 cup broth, whisking until the miso paste is dissolved. Add the miso mixture and the rest of the broth to the pot and bring to a boil. Add the dumplings and bring to a simmer. Heat until the dumplings are heated through, 3 to 5 minutes. Stir in the spinach, cooking until the greens are wilted, 1 to 2 minutes.
+Add the soy sauce and green onion greens. Serve hot with hot sauce or chili oil, and extra soy sauce.
+# Kung Pao Cabbage with Tofu
+Attribution: epicurious
+Servings: 4 to 6 servings
+url: https://www.epicurious.com/recipes/food/views/kung-pao-cabbage-with-tofu
+## Seasoning Sauce
+Ingredients:
+1 Tbsp. dark soy sauce
+1 Tbsp. soy sauce or tamari
+1 Tbsp. black vinegar
+2 tsp. granulated sugar
+1 tsp. cornstarch
+Instructions:
+In a small bowl, whisk together 1 Tbsp. dark soy sauce, 1 Tbsp. soy sauce or tamari, 1 Tbsp. black vinegar, 2 tsp. granulated sugar, and 1 tsp. cornstarch with ¼ cup water. Set aside.
+## Cabbage & Tofu
+Ingredients:
+Neutral oil, such as sunflower or grapeseed
+1 medium head green cabbage (2 lb./900 g), cored and cut into 1" (2.5 cm) chunks
+Sea salt
+½–1 tsp. Sichuan peppercorns, smashed or lightly ground in a mortar and pestle
+4 or 5 whole dried chiles, such as er jing tiao or chiles de árbol
+2 garlic cloves, finely chopped
+1" (2.5 cm) piece fresh ginger, peeled and finely sliced
+7 oz. (200 g) store-bought baked tofu, cut into thin strips
+2 scallions, finely sliced
+½ cup (70 g) roasted cashews, divided
+Handful of fresh cilantro leaves
+Instructions:
+Heat a wok or large skillet over medium-high heat until very hot. Add 2 Tbsp. neutral oil, 1 medium head green cabbage (2 lb./900 g), cored and cut into 1" (2.5 cm) chunks, and ½ tsp. sea salt and toss until softened and charred in some parts, 4–5 minutes (it’s going to look like too much cabbage but it cooks down a lot). Add ½–1 tsp. Sichuan peppercorns, smashed or lightly ground in a mortar and pestle, and 4 or 5 whole dried chiles, such as er jing tiao or chiles de árbol, and stir until fragrant, 1 to 2 minutes. Add 2 garlic cloves, finely chopped, and one 1" (2.5 cm) piece fresh ginger, peeled and finely sliced, and toss for 30 seconds.
+
+Stir the seasoning sauce to make sure the cornstarch is well incorporated, then pour it over the cabbage. Toss until everything is well coated, the cabbage looks shiny and the sauce looks thick, 1–2 minutes. Taste the cabbage and season with salt if needed.
+
+Transfer the cabbage to a large bowl or serving platter. Add 7 oz. (200 g) store-bought baked tofu, cut into thin strips, 2 scallions, finely sliced, and ¼ cup (35 g) roasted cashews. Toss to combine. To serve, top with handful of fresh cilantro leaves and the remaining ¼ cup (35 g) roasted cashews.
+# The Perfect Late-Summer Soup
+alt_title: Ginger Chicken and Rice Soup with Zucchini
+url: https://www.nytimes.com/2025/08/28/dining/the-perfect-late-summer-soup.html
+Attribution: New York Times
+Author: Mia Leimkuhler
+Servings: 6 to 8
+Ingredients:
+1 pound boneless, skinless chicken thighs
+
+Salt and black pepper
+
+2 tablespoons neutral oil (such as canola or vegetable)
+
+2 tablespoons minced ginger (from a 2-inch piece)
+
+3 garlic cloves, minced
+
+2 teaspoons ground turmeric 
+
+½ cup brown rice
+
+1 large zucchini, cut into 1-inch pieces
+
+1 fresh or dried bay leaf
+
+Chile crisp, lemon wedges or chopped cilantro (or a combination), for serving (optional)
+Instructions:
+Pat the chicken thighs dry and season generously with salt and pepper.
+
+Heat a medium Dutch oven or other heavy-bottomed pot over medium. Add the oil, ginger, garlic and turmeric and let the mixture sizzle and soften for about 30 seconds, stirring constantly.
+Add 6 cups water to the pot, along with the chicken, rice, zucchini, bay leaf and a big pinch of salt. Bring to a simmer then turn the heat down to low and cook, stirring occasionally, until the rice is tender and the chicken is cooked through, about 30 minutes.
+When ready to serve, remove the chicken and place it on a cutting board. Use two forks to shred the thighs, then return the meat with all of its juices to the pot. Taste and season the soup with salt and pepper.
+To serve, divide the soup among bowls and top with any combination of chile crisp, lemon and cilantro.
+# Gochujang Buttered Noodles
+Author: Eric Kim
+Attribution: New York Times
+Servings: 4 servings
+url: https://cooking.nytimes.com/recipes/1024066-gochujang-buttered-noodles
+Notes: 
+Be sure to purchase plain gochujang paste, not gochujang sauce, which often includes additives like vinegar and sugar. To easily measure out gochujang, swipe the inside of a measuring cup with a little neutral oil, which will get it to slip right out.
+To make a single serving, follow the recipe using 4 to 5 ounces fresh or instant ramen noodles; 1½ tablespoons unsalted butter (1 tablespoon to fry the garlic and ½ tablespoon for the sauce at the end); 3 garlic cloves; 1 heaping tablespoon gochujang; 1 tablespoon honey; 1 tablespoon sherry vinegar or rice vinegar. Decrease the cook times throughout by 1 to 2 minutes.
+Ingredients:
+1 pound spaghetti or other long pasta
+
+6 tablespoons unsalted butter
+
+12 garlic cloves, finely chopped (about ⅓ cup)
+
+Salt and pepper
+
+¼ cup gochujang paste (not sauce; see Tip)
+
+¼ cup honey
+
+¼ cup sherry vinegar or rice vinegar
+
+Finely chopped cilantro or thinly sliced scallions (optional)
+
+Instructions:
+Bring a large pot of water to a boil. Add the spaghetti and cook according to package instructions. Reserve 1 cup of the cooking water. Drain the spaghetti and return to its pot.
+
+While the pasta cooks, melt 4 tablespoons of the butter in a skillet over medium-low. Add the garlic and season generously with salt. Cook, stirring occasionally, until the garlic starts to soften but not brown, 1 to 3 minutes.
+
+Stir in the gochujang, honey and vinegar, and bring to a simmer over medium-high. Cook, stirring constantly, until the mixture reduces significantly, 3 to 4 minutes; when you drag a spatula across the bottom of the pan, it should leave behind a trail that stays put for about 3 seconds. Remove from the heat.
+
+Transfer the sauce to the pot with the spaghetti and add the remaining 2 tablespoons butter. Vigorously stir until the butter melts. Add splashes of the pasta cooking water, as needed, to thin out the sauce. Taste and season with salt and pepper. Top with the cilantro or scallions (if using) and serve immediately.
+# Roasted Sweet Potato Soup
+Attribution: Serious Eats
+Author: Daniel Gritzer
+url: https://www.seriouseats.com/roasted-sweet-potato-soup-recipe-8735317
+Servings: Serves 4-6
+Ingredients:
+4 pounds sweet potato, peeled and cut into 1/2-inch dice
+
+6 tablespoons vegetable, canola, or grapeseed oil, divided
+
+Kosher salt
+
+4 medium carrots, peeled and diced
+
+1 medium onion, chopped
+
+5 cloves garlic, crushed
+
+2 sprigs sage (optional)
+
+2 quarts homemade or store-bought low-sodium chicken stock or vegetable stock
+
+1/4 cup fresh juice and 1 tablespoon freshly grated zest from 1 medium orange, divided
+
+3/4 cup shelled roasted pistachios, crushed in a mortar and pestle or food processor
+
+2 scallions, thinly sliced, white and light green parts only
+
+2 tablespoons very thinly sliced fresh mint leaves (from about 5 sprigs)
+
+Pinch cayenne pepper
+
+1/2 cup extra-virgin olive oil
+
+Instructions: 
+Preheat oven to 300°F (150°F). Toss sweet potato with 4 tablespoons vegetable oil and salt. Spread sweet potato on 2 rimmed baking sheets and bake for 1 hour, rotating pans front to back and top to bottom halfway through cooking. Increase oven temperature to 375°F (190°C) and cook until sweet potatoes are tender and lightly browned around the edges, about 25 minutes.
+In a large pot, heat remaining 2 tablespoons vegetable oil over medium-high heat until shimmering. Add carrot, onion, garlic, sage (if using), and a generous pinch of salt and cook, stirring, until vegetables are just tender.
+Add sweet potatoes and stock and bring to a simmer. Cook for 10 minutes until vegetables are very tender. Discard sage, if using. Add orange juice. Using an immersion blender or countertop blender, blend soup until smooth. Season with salt.
+If desired, pass soup through a fine-mesh strainer using a rubber spatula to plunge and scrape it through (it may not seem like it at first, but almost all of the soup will pass through).
+In a mixing bowl, stir together pistachios, orange zest, scallions, mint, and cayenne pepper. Fold in olive oil and season with salt.
+Serve soup, spooning pistachio salsa on top.
+# Miso-Squash Soup With Sesame-Ginger Apples
+Attribution: Serious Eats
+Author: Daniel Gritzer
+url: https://www.seriouseats.com/miso-squash-soup-recipe
+Servings: Serves 4
+Ingredients:
+1 1/2 quarts plus 2 cups water, divided, plus more as needed
+
+1/2 ounce kombu (approximately a 4- by 6-inch piece; see notes)
+
+1/2 ounce grated bonito flakes (about 3 cups; see notes)
+
+1 tablespoon plus 1 teaspoon vegetable oil, divided
+
+1 medium leek, white and light green parts only, diced (about 1 1/2 cups)
+
+2 medium carrots, diced (about 1 cup)
+
+2 medium cloves garlic, sliced
+
+2 (1 1/2-inch) knobs ginger, 1 knob peeled and thinly sliced, 1 knob peeled and finely grated, divided
+
+1 (2-pound) squash, such as kuri, kabocha, or butternut, peeled, seeded, and diced
+
+2 tablespoons white or red miso paste
+
+1 tablespoon fresh juice from 1 whole lemon
+
+1 teaspoon kosher salt, plus more as needed
+
+Pinch sugar, if needed
+
+1 large crisp apple, such as Fuji, peeled, cored, and diced
+
+1 large or 2 medium scallions, white and light green parts only, thinly sliced on the bias
+
+1 teaspoon toasted sesame seeds
+
+1/2 teaspoon toasted sesame oil
+
+1 teaspoon rice vinegar
+
+Shichimi togarashi, optional (see notes)
+
+Instructions:
+Combine 1 1/2 quarts water, kombu, and bonito flakes in a large saucepan and bring to a boil over high heat. Reduce to a bare simmer and cook for 5 minutes. Remove from heat, let cool for 5 minutes, then strain through a fine-mesh strainer. Discard solids and set dashi aside.
+
+In a large Dutch oven or soup pot, heat 1 tablespoon oil over medium-high heat until shimmering. Add leek, carrot, garlic, and sliced ginger. Cook, stirring, until vegetables are glistening and just starting to turn tender, about 4 minutes.
+
+Add squash and pour just enough dashi on top to cover vegetables. Bring to a simmer and cook until vegetables are fully tender, about 30 minutes. Using a standing blender or immersion blender, and working in batches if necessary, blend soup until very smooth. Blend in miso and lemon juice.
+
+Return soup to pot and thin with enough water to reach a pourable, silky-smooth consistency. Season with salt, add sugar to taste, and keep warm.
+
+Meanwhile, fill a medium bowl with 2 cups water and 1 teaspoon kosher salt. Add diced apple and let soak for 10 minutes. Drain apple well, then return to bowl. Toss with grated ginger, scallions, toasted sesame seeds, sesame oil, rice vinegar, and remaining 1 teaspoon vegetable oil. Season with salt, if needed.
+
+To serve, ladle hot soup into bowls and top with the apple-scallion salad. Garnish with shichimi togarashi, if desired.
+# Quick and Easy Creamy Mushroom Soup
+Attribution: Serious Eats
+Author: J. Kenji López-Alt
+url: https://www.seriouseats.com/easy-creamy-mushroom-soup-quick
+Servings: Serves 4-6
+Ingredients:
+4 tablespoons unsalted butter (50 g)
+
+2 pounds mixed mushrooms such as button, cremini, portabello, or shiitake (1 kg), sliced
+
+Kosher salt and freshly ground black pepper
+
+1 medium onion, finely chopped (about 8 ounces; 225 g)
+
+4 medium cloves garlic, minced
+
+2 tablespoons flour (45 g)
+
+1 cup dry sherry or white wine (235 ml)
+
+1 cup milk (235 ml)
+
+5 cups (1.2L) homemade or store-bought low-sodium chicken stock, or water
+
+2 bay leaves
+
+2 sprigs fresh thyme
+
+Squeeze of lemon juice (optional)
+
+Minced fresh herbs such as parsley, chervil, tarragon, and chives for serving
+
+Drizzle extra-virgin olive oil, for serving
+
+Instructions: 
+Melt butter in a large saucepan or Dutch oven over medium-high heat. Add mushrooms, season with salt and pepper, and cook, stirring frequently, until liquid has evaporated and mushrooms are well-browned, about 12 minutes total. Add onion and cook, stirring, until softened, about 3 minutes. Add garlic and cook until fragrant, about 30 seconds. Add flour and stir to combine.
+Add sherry or wine and cook until reduced by about half, scraping up browned bits from the bottom of the pan. Add milk, chicken stock, bay leaves, and thyme sprigs and stir to combine. Bring to a bare simmer and cook for 20 minutes.
+Using tongs, remove bay leaves and thyme. Blend soup with an immersion blender or in batches using a countertop blender. Season to taste with more salt and pepper and a squeeze of lemon juice (if desired). Serve immediately, garnished with minced herbs and olive oil.
+# Classic Creamy Carrot Soup
+Attribution: Serious Eats
+Author: Arlyn Osborne
+url: https://www.seriouseats.com/classic-creamy-carrot-soup-recipe-5219000
+Servings: Serves 4-6
+## For the Lemon-Herb Yogurt:
+Ingredients:
+1/2 cup (4 1/4 ounces; 120 g) plain full-fat Greek yogurt
+2 tablespoons (30 ml) fresh lemon juice from 1 lemon
+2 tablespoons (8 g) finely chopped flat-leaf parsley leaves and tender stems
+Instructions:
+In a small bowl, whisk together Greek yogurt, lemon juice, and parsley until well combined. Cover and refrigerate.
+## For the Carrot Soup: 
+Ingredients:
+2 1/2 pounds (1.1 kg) carrots (about 12 medium carrots), peeled, halved lengthwise, and cut into 1/2-inch thick slices, divided
+
+3 tablespoons (45 ml) extra-virgin olive oil, divided
+
+Kosher salt
+
+1 large leek (10 1/2 ounces; 300 g), white and pale green parts only, thinly sliced
+
+1 large yellow onion (12 ounces; 340 g), thinly sliced 
+
+2 medium garlic cloves, peeled and smashed under the flat side of a knife
+
+3 sprigs flat-leaf parsley
+
+5 cups (1.2 L) homemade or store-bought vegetable stock, plus more as needed
+
+1 cup (235 ml) fresh or store-bought carrot juice, plus more as needed
+
+4 tablespoons unsalted butter (2 ounces; 60 g), divided
+
+2 tablespoons (30 ml) fresh lemon juice from 1 lemon
+Instructions: 
+Adjust oven rack to middle position and preheat to 375°F (190°C). On a parchment-lined rimmed baking sheet, toss half of the carrots (1 1/4 pounds) with 1 tablespoon (15ml) oil; season with salt. Roast, stirring halfway through, until carrots are tender and deep golden brown in spots, about 25 minutes. Set aside.
+In a large Dutch oven or pot, heat remaining 2 tablespoons (30ml) oil over medium heat until shimmering. Add leek, onion, and garlic, and cook, stirring frequently, until softened but not browned, 7 to 10 minutes.
+Add remaining carrots along with the roasted carrots, parsley sprigs, vegetable stock, and carrot juice. Season lightly with salt. Bring to a boil over high heat, then lower to maintain a steady simmer. Cook, stirring occasionally, until all the carrots are completely tender, about 25 minutes. Discard parsley.
+Ladle half of liquid and solid ingredients into a blender jar and add half of the butter (1 ounce; 2 tablespoons). Remove the blender lid plug (this will allow steam pressure to escape), close lid, and set a folded clean dish towel on top to cover the hole in the blender lid (keep your hand on the towel to hold it in place). Starting at the lowest speed and gradually increasing to the highest, blend the soup until it is completely smooth. Transfer soup to a large pot (if an even smoother texture is desired, pass soup base through a fine-mesh strainer into the pot). Repeat with remaining soup and butter. If soup is too thick, thin as needed with additional vegetable stock or carrot juice to desired consistency (the consistency should not be a thick purée, but rather a silky, creamy, soup-like one).  Whisk in lemon juice and season to taste with salt.
+Divide soup among warmed bowls and drizzle with lemon-herb yogurt.
+# Caldo Verde
+alt_title: Portuguese Potato and Kale Soup With Sausage
+Attribution: Serious Eats
+Author: J. Kenji López-Alt
+url: https://www.seriouseats.com/caldo-verde-portuguese-potato-kale-soup-recipe
+Servings: 6
+Ingredients:
+2 tablespoons (30 g) unsalted butter
+
+1 medium yellow onion or large leek, finely diced (about 8 ounces; 225 g)
+
+3 medium cloves garlic, sliced (about 1 tablespoon; 15 g)
+
+Kosher salt and freshly ground black pepper
+
+About 6 tablespoons (90 ml) extra-virgin olive oil
+
+1 large russet potato, peeled, quartered, and cut into 1/4-inch slices (about 1/2 pound; 225 g)
+
+2 medium Yukon Gold potatoes, peeled, quartered, and cut into 1/4-inch slices (about 1/2 pound; 225 g)
+
+6 cups (1.4 L) homemade or store-bought low-sodium chicken stock (see note)
+
+1 bunch curly or lacinato kale, tough stems removed, leaves finely chopped (about 3/4 pound; 340 g)
+
+12 ounces (340 g) cooked linguiça or other garlicky pork sausage, cut into 1/4- to 1/2-inch slices (see note)
+
+Minced fresh chives, for garnish (optional)
+
+Instructions:
+Heat butter in a large Dutch oven or saucepan over medium heat until melted. Add onion (or leek) and garlic, season with salt and pepper, and cook, stirring frequently, until softened but not browned, about 5 minutes, adding olive oil as necessary to keep the mixture loose and moist.
+Add potatoes and stock and bring to a simmer, stirring occasionally. Add kale and continue to cook until russet potato slices have completely broken down (you can press them with a spoon or potato masher for an even thicker texture), the Yukon Golds are tender, the greens have softened, and the soup has thickened to a creamy consistency, 25 to 30 minutes. Stir in sausage. Season soup to taste with salt and pepper and serve garnished with chives, if desired.
+# Roasted Cauliflower Soup
+Attribution: Serious Eats
+Author: Daniel Gritzer
+url: https://www.seriouseats.com/roasted-cauliflower-soup-curry-cream-8748572
+Servings: Serves 8
+Yield: 2 Quarts
+Ingredients
+For the Soup:
+
+2 heads cauliflower (about 2 pounds/900g each), trimmed and cut into roughly 1-inch-thick florets
+
+9 tablespoons (150ml) extra-virgin olive oil, divided
+
+Kosher salt
+
+1 medium yellow onion (8 ounces; 227g), thinly sliced
+
+1 celery rib (2 ounces; 57g), thinly sliced
+
+3 medium cloves garlic, smashed
+
+1 large sprig fresh sage
+
+1 quart (1L) homemade chicken or vegetable stock or store-bought low-sodium broth, plus more as needed (see notes)
+
+3/4 cup (177ml) heavy cream
+
+Freshly ground black pepper
+Instructions:
+Preheat oven to 500°F (260°C) and set racks in upper and lower third positions. Divide cauliflower evenly between 2 rimmed baking sheets. Drizzle 6 tablespoons (90ml) olive oil all over both sheets of cauliflower, season all over with salt, then toss to coat evenly. Spread cauliflower in a single even layer on each sheet. Roast cauliflower, stopping once halfway through to rotate trays top to bottom and flip cauliflower florets, until cauliflower is well browned, about 25 minutes. (If you only have one rimmed baking sheet, you can roast the cauliflower in two successive batches.)
+Meanwhile, in a 4- or 5-quart saucepan, heat remaining 3 tablespoons (45ml) olive oil over medium-high heat until shimmering. Add onion, celery, and garlic, season lightly with salt, and cook, stirring, until softened but not browned, about 6 minutes; reduce heat if needed to prevent scorching.
+Add roasted cauliflower to pot along with sage and stock or broth. Bring to a simmer over high heat, then reduce heat to maintain simmer and cook until all vegetables are very soft, about 20 minutes. Discard sage.
+Carefully transfer vegetables and liquid to a blender jar, cover with blender lid with the center cap removed, and cover with a clean kitchen towel. Starting at the lowest speed and gradually increasing speed as needed, blend soup until very smooth, at least 1 minute; blend in batches if your blender jar can't hold all the soup vegetables and liquid at once. The soup will be thick at this point and may require some stirring in the blender jar to ensure it is fully blended. (If desired, you can also use an immersion blender and blend the soup directly in the pot.)
+Return blended soup to the rinsed and wiped-out pot and stir in cream. Thin with additional stock/broth or water as needed to reach desired soup consistency (it should be thick and silky, but still flow like a liquid). Season with salt and pepper to taste. Bring soup to a simmer when ready to serve.
+## For the Curry Cream:
+Ingredients:
+1/2 cup (118ml) heavy cream
+
+1/2 cup (118g) sour cream
+
+2 teaspoons (8g) curry powder (see notes)
+
+Kosher salt
+Instructions:
+In a large mixing bowl or the bowl of a stand mixer fitted with the whisk attachment, whisk cream, sour cream, curry powder, and a large pinch of salt until soft peaks form.
+Ladle hot soup into bowls, garnish each with a generous dollop of curry cream and serve.
+# Loaded Baked Potato Soup
+Attribution: Serious Eats
+Author: Genevieve Yam
+url: https://www.seriouseats.com/loaded-baked-potato-soup-recipe-8727452
+Servings: 4 to 6
+
+Ingredients:
+12 slices bacon (12 ounces; 340g), diced
+
+1 medium yellow onion (8 ounces; 226g), diced
+
+3 medium cloves garlic (15g), minced
+
+2 1/2 pounds russet potatoes (1.1kg; about 5 large potatoes)
+
+4 1/2 cups (1.06L) whole milk
+
+1 tablespoon (9g) Diamond Crystal kosher salt; for table salt, use half as much by volume
+
+Freshly ground black pepper
+
+1 cup sour cream, plus more for serving
+
+To Serve (Optional)
+
+1/4 cup (12g) chives
+
+1/2 cup extra-sharp cheddar (about 2 ounces; 57g), finely grated
+
+1/2 cup salt and vinegar potato chips (about 1/2 ounce; 15g)
+
+Bacon (see above)
+
+Instructions:
+Using a fork or paring knife, prick skin of potatoes all over. Working in batches if needed, place potatoes on microwave-safe plate and microwave on high power, flipping halfway through, until potatoes can be easily pierced with a paring knife, 12 to 14 minutes. (If they aren't ready, continue to microwave in 30-second increments until soft.) Let potatoes sit until cool enough to handle. Peel the potatoes and pass through a ricer into a medium bowl; set aside. (See notes if you’d prefer to use a blender instead.)
+While potatoes cook: In a 6-quart pot, cook bacon over medium heat, stirring constantly, until bacon is crisp and fat is rendered, about 12 minutes. Using a slotted spoon, transfer bacon to a paper-towel lined plate to drain. Pour off all but 3 tablespoons bacon fat from pot.
+Add onion and garlic to remaining bacon fat in pot and sauté over medium heat until very soft but not browned, 8 to 10 minutes. Add milk, season with salt and pepper to taste. Bring to a boil over high heat, reduce to a gentle simmer and cook until flavors meld, about 10 minutes.
+Using an immersion blender, purée onion, garlic, and milk until smooth. Add riced potatoes and sour cream, stirring to combine, until soup is warmed through. Season to taste with salt and pepper, and serve. Garnish with sour cream, chives, cheddar, and potato chips, if desired.
+# Brown Butter-Sunchoke Soup With Brussels Sprouts and Bacon
+Attribution: Serious Eats
+Author: J. Kenji López-Alt
+url: https://www.seriouseats.com/brown-butter-sunchoke-soup-recipe
+Servings: 4 servings
+Ingredients:
+6 tablespoons butter
+
+2 pounds sunchokes (also sold as Jerusalem artichokes), skin-on, scrubbed, and cut into 1/2-inch disks
+
+1 large leek, white and pale green parts only, split in half, washed and sliced into half-inch pieces
+
+1 medium onion, finely sliced (about 1 cup)
+
+2 medium cloves garlic, minced (about 2 teaspoons)
+
+1/4 cup finely chopped fresh sage leaves
+
+6 cups low-sodium homemade or store-bought chicken broth
+
+2 bay leaves
+
+1/4 pound bacon, cut into 1/2-inch pieces
+
+Kosher salt and freshly ground black pepper
+
+Dash sherry or white wine vinegar
+
+1/2 pound Brussels sprouts, split in half
+
+Instructions: 
+Melt butter in a large Dutch oven over medium-high heat, swirling constantly until it is a deep brown and has a nutty aroma, about 1 1/2 minutes. Add sunchokes and stir. Cook, stirring occasionally, until sunchokes are well browned on all surfaces and starting to lightly char, about 10 minutes. Add leeks and onions and continue to cook, stirring occasionally, until softened, about 5 minutes longer. Add garlic and sage and cook, stirring constantly, until aromatic, about 1 minute. Add chicken stock and bay leaves. Bring to a boil, reduce to a simmer and cook until sunchokes are tender, about ten minutes. Discard bay leaves.
+
+While soup simmers, place bacon in a large cast iron skillet over medium-high heat and cook, stirring occasionally, until brown and crisp, about 10 minutes. Transfer bacon to a bowl, leaving fat in the skillet. Set aside.
+
+Working in batches, puree soup in a blender on high speed until completely smooth, about 2 minutes per batch. Transfer to a large saucepot, straining through a fine mesh strainer if a smoother soup is desired. When all batches are pureed, season to taste with salt and pepper. Whisk in vinegar, a teaspoon at a time, until desired flavor is reached (about 1 tablespoon total). Keep soup warm.
+
+Reheat the bacon fat over high heat until sizzling, then add the brussels sprouts, cut-side-down into the skillet. Cook without moving until well-charred, about 3 minutes. Toss and continue to cook, tossing and stirring occasionally, until tender and well browned, about 6 minutes total. Return bacon to skillet and toss to combine. Season to taste with salt, pepper, and a dash of vinegar. Remove from heat and set aside.
+
+Serve hot soup in bowls, garnished with sauteed brussels sprouts and bacon, and drizzled with bacon fat or olive oil.
+# Jamaican rice and peas
+alt_title: Jamaican rice and beans
+Author: Nagi Maehashi
+Attribution: recipetineats
+Ingredients
+50g / 3 tbsp unsalted butter (or 2 tbsp canola or veg oil)
+2 garlic cloves , finely minced
+1 small onion , finely chopped
+1 tsp dried thyme
+1 tsp all spice powder (sub mixed spice)
+2 bay leaves , preferably fresh
+1 scotch bonnet or habanero chilli – any colour (optional), keep whole (Note 1)
+2 x 400g / 14oz cans red kidney beans , drained (Note 2)
+1 x 400 ml / 14oz coconut milk , full fat (Note 3)
+1 cup water
+1 tsp cooking salt
+2 cups long grain white rice (Note 4)
+Instructions
+Preheat oven to 200°C/400°F (180°C fan).
+Sauté aromatics – Melt butter over medium-high heat in a medium or large ovenproof pot (Note 5). Cook garlic, onion, thyme, all spice, bay leaves, scotch bonnet until onion is translucent (~ 3 minutes).
+Add coconut milk, water, beans and salt. Once it comes to a simmer, add rice then give it a quick stir. Once you see bubbles breaking the surface, immediately cover then transfer to oven.
+Bake for 40 minutes. All liquid should be absorbed (tilt to check) though you will have some coconut cream on the surface.
+Rest – Leave the pot on the counter with the lid on for 15 minutes. Then fluff and serve!
+# Authentic Nigerian Jollof Rice
+url: https://www.dashofjazz.com/nigerian-jollof-rice/
+Author: Jazzmine Woodard 
+Attribution: Dash of Jazz
+Video: youtube.com/watch?v=z40rd7N5T4M
+Servings: 8 servings
+Ingredients:
+¼ white onion
+3 roma tomatoes
+½ red bell pepper
+2 habanero or scotch bonnet peppers (use fewer or more depending on your heat preference)
+¼ cup water
+4 cups parboiled rice (
+2-3 Tbsp oil like palm oil, olive oil or avocado oil
+4 ounces tomato sauce
+2-3 ounces tomato paste
+2 maggi cubes crushed into powder
+1-½ cups chicken and or beef stock
+1 teaspoon powdered white pepper
+1 teaspoon curry powder
+1 bay leaf or one teaspoon powdered bay leaf
+½ teaspoon powdered thyme
+sea salt to taste
+Instructions:
+Cut tomatoes, onion, and red bell pepper into chunks, discarding bell pepper seeds. Add all to a blender with scotch bonnet pepper and ¼ cup of water then blend until completely liquified and uniform (about 2 minutes).
+Meanwhile, rinse the parboiled rice in plenty of warm water until water starts to run clear then drain.
+Add rice and oil to a large pot over medium flame, followed by blended tomato mixture, tomato paste and sauce, chicken and beef stocks, crushed maggi cubes, white pepper, curry powder, bay leaf, salt, and thyme. Stir everything together until uniform.
+Cook for about 40 minutes or until rice is fluffy and cooked through and all liquid has dissipated, stirring (to help prevent sticking and burning) and taste-testing the liquid and rice as you go. See notes.
+It may be necessary to add more liquid along the way to prevent the rice at the bottom from burning excessively (see recipe notes). The bottom layer of rice in a pot of jollof rice often burns, which is where the smoky flavor comes from. Some believe that the rice tastes best when this happens. As you stir the rice and expose any burnt portions, you can simply discard them if you don't want them in the rice.
+# Vegan Jollof Rice
+Attribution: New York Times
+Author: Tunde Wey
+url: https://cooking.nytimes.com/recipes/1018069-vegan-jollof-rice
+Yield: 7½ cups rice
+Ingredients:
+2 medium tomatoes, roughly chopped (about 5 ounces each)
+
+½ medium Scotch bonnet pepper (or use a habanero pepper), stem removed
+
+½ medium onion, roughly chopped
+
+3 small red bell peppers, roughly chopped (about 5 ounces each)
+
+½ cup vegetable oil
+
+1 ½ teaspoons salt
+
+1 teaspoon curry powder
+
+1 ½ teaspoons hot ground chile pepper, such as African dried chile or cayenne
+
+1 ½ teaspoons garlic powder
+
+1 tablespoon plus 1 heaping teaspoon onion powder
+
+2 bay leaves
+
+½ teaspoon ground ginger
+
+1 tablespoon dried thyme
+
+2 ½ cups medium-grain rice
+
+Instructions:
+
+In a blender, combine tomatoes, scotch bonnet pepper and onions; purée. Pour out half the purée into a bowl; set aside. Add the bell peppers to the purée remaining in the blender and pulse until smooth. Add to the mixture that was set aside and stir to combine.
+Heat vegetable oil in a large pot over medium heat. Add blended vegetables along with the salt, curry powder, ground chile pepper, garlic powder, onion powder, bay leaves, ginger and thyme. Bring mixture to a boil.
+Stir in the rice until well mixed, then reduce the heat to low.
+Cover pot and let cook until rice is al dente, about 45 minutes. Check after 30 minutes; if rice is sauce-logged, remove the lid to cook off the excess sauce. If rice seems dry, stir in 1 to 2 cups water. Allow the rice at the bottom of the pot to char a bit to infuse it with a smoky flavor.
+# One-Dish Chicken Sweet Potato Bake with Broccoli
+Author: Stacie Hassing
+Attribution: the real food DIETITIANS
+url: https://therealfooddietitians.com/sweet-potato-broccoli-chicken-bake/
+Servings: Serves 4-5
+Ingredients:
+Nonstick cooking spray
+1 lb. boneless, skinless chicken breast or thighs, cut into bite-size pieces
+5 cups broccoli florets (may also use the broccoli stems)
+1 large sweet potato, peeled or scrubbed and cut into ¼–½ inch cubes (2-2 ½ cups)
+½ medium red onion, sliced (⅔ cup)
+2–3 garlic cloves, minced
+¼ cup chopped dates (may substitute raisins or dried cranberries) 
+3 tablespoons olive oil or avocado oil
+1 ½ teaspoons dried Italian seasoning
+¾ teaspoon fine salt
+¼ teaspoon black pepper
+3 tablespoons chopped pecans or walnuts (or a mix), toasted 
+Lemon or lime wedge and/or shredded Parmesan (optional – omit for dairy-free and Whole30)
+Instructions:
+Preheat the oven to 375°F. Mist a 9×13 inch baking dish with nonstick cooking spray (may also use a round 10-inch baking dish or any 3-quart baking dish).   
+In the dish, combine the chicken pieces, broccoli, sweet potatoes, red onion, garlic, dates, oil, Italian seasoning, salt, and pepper. Toss until all ingredients are coated evenly with the oil and seasonings. 
+Cover the dish with foil and bake for 20 minutes. After 20 minutes, remove the foil, stir, and continue to bake (uncovered) until the sweet potatoes are tender and chicken is cooked through to an internal temperature of 165°F, another 15-20 minutes.
+Meanwhile, toast the nuts by placing a small skillet over medium heat. Add the nuts to the skillet. Toast until the nuts are lightly browned and fragrant, stirring occasionally and watching carefully so they don’t burn, 4-7 minutes. Remove nuts from heat. 
+Stir in or sprinkle the nuts over the Sweet Potato Broccoli Chicken Bake just before serving. Serve topped shredded cheese and a lemon wedge and garnish with fresh thyme leaves, if desired.
+Store leftovers in an airtight container in the fridge for up to 3 days.
+# Maple and Spice Roasted Winter Vegetable Salad
+Attribution: FLOATING kitchen
+url: https://www.floatingkitchen.net/maple-spiced-winter-vegetable-and-kale-bowl/
+Servings: Serves about 4
+Adapted: https://www.sproutedkitchen.com/home/2013/2/6/maple-spice-delicata-fennel-kale-bowl.html
+## For the Dressing
+Ingredients:
+ 2 tablespoons extra-virgin olive oil
+ 2 tablespoons maple syrup
+ 1 tsp. whole grain mustard
+ 1/2 tsp. salt
+ 1/2 tsp. black pepper
+ 1/2 tsp. ground cinnamon
+ 1/4 tsp. ground nutmeg
+ 1/4 tsp. cayenne pepper
+ 1/4 tsp. red pepper flakes
+Instructions: 
+In a small bowl, stir together all the ingredients for the dressing. Set aside.
+## For the Vegetables
+ 1 lb new potatoes, cut into 1-inch pieces
+ 1 delicata squash, halved, seeds removed and sliced into half-moons
+ 1 fennel bulb, trimmed and sliced
+ 1 large bunch curly kale, thick stems removed and leaves torn
+ 1 tablespoon extra-virgin olive oil
+ 1/4 tsp. salt
+ 2 tablespoons roasted and salted pepitas
+Instructions: 
+Pre-heat your oven to 400 degrees.
+Add the potatoes, delicata squash and fennel to a large bowl. Scrape in all the dressing and toss until everything is well coated. Dump everything out onto a large rimmed baking sheet. The baking sheet will be very full and the vegetables will overlap some. Transfer the baking sheet to your pre-heated oven and roast for 35 minutes.
+Meanwhile, add the kale to the same large bowl. Drizzle with the olive oil and then use your fingers to massage it into the leaves. Spread the kale out onto a second rimmed baking sheet. Sprinkle with the salt. 
+After 35 minutes, stir the roasting vegetables and return them to your oven. And add the baking sheet with the kale. Roast everything for an additional 10 minutes.
+Remove both baking sheets from your oven. The vegetables should be soft and browned in a few places. The edges of the kale should be slightly crisp.
+Toss the roasted vegetables and kale together and transfer to a serving dish. Top with the pepitas. Enjoy immediately.
+# Chicken Tortellini Soup
+Attribution: EatingWell
+Author: Amanda Stanfield
+url:https://www.eatingwell.com/chicken-tortellini-soup-8717552
+Servings: 6
+Ingredients:
+2 tablespoons unsalted butter
+
+1 medium yellow onion, finely chopped
+
+3 small carrots, peeled and thinly sliced
+
+1 large celery stalk, finely chopped
+
+3 cloves garlic, finely chopped
+
+2 tablespoons finely chopped fresh tarragon, divided
+
+1½ teaspoons salt-free garlic-and-herb seasoning
+
+¼ teaspoon ground pepper
+
+⅛ teaspoon salt
+
+5 cups unsalted chicken broth
+
+1 (9-ounce) package refrigerated cheese tortellini
+
+2 cups shredded rotisserie chicken
+
+2 cups packed finely chopped baby spinach
+
+1 cup frozen green peas
+
+1 cup heavy cream
+
+Instructions:
+Melt 2 tablespoons butter in a large Dutch oven over medium-high heat. Add onion, carrots, celery and garlic; cook, stirring occasionally, until softened and translucent, about 3 minutes. Add 1 tablespoon tarragon, 1½ teaspoons garlic-and-herb seasoning, ¼ teaspoon pepper and ⅛ teaspoon salt; cook, stirring constantly, until fragrant, about 1 minute.
+Stir in 5 cups broth; cover and bring to a boil over high heat. Reduce heat to low and stir in 1 (9-ounce) package tortellini. Cover and cook, undisturbed, until al dente, about 5 minutes.
+Increase heat to medium. Stir in 2 cups chicken, 2 cups spinach, 1 cup peas and 1 cup cream; cook, uncovered and stirring often, until the spinach is wilted and the peas are bright green, 2 to 3 minutes.
+Ladle the soup into 6 bowls and sprinkle with the remaining 1 tablespoon tarragon.
+# Butternut Squash Mac & Cheese
+Attribution: EatingWell
+Author: Amanda Stanfield
+url: https://www.eatingwell.com/butternut-squash-mac-cheese-8717671
+Servings: 6
+Ingredients:
+3 cups peeled and cubed butternut squash
+
+1 medium yellow onion, quartered
+
+4 cloves garlic, peeled
+
+1 tablespoon extra-virgin olive oil
+
+¾ cup whole milk
+
+12 ounces whole-wheat elbow pasta (about 3 cups)
+
+3 tablespoons unsalted butter
+
+8 large fresh sage leaves
+
+3 tablespoons all-purpose flour
+
+1¼ cups unsalted vegetable broth
+
+1 cup shredded sharp Cheddar cheese
+
+3 ounces garlic-and-herb spreadable cheese (such as Boursin; about ½ cup)
+
+2 teaspoons Dijon mustard
+
+½ teaspoon salt
+
+½ teaspoon ground pepper
+
+Instructions:
+Preheat oven to 425°F. Bring a large pot of water to a boil over high heat.
+Meanwhile, combine 3 cups squash, onion, garlic and 1 tablespoon oil on a large rimmed baking sheet; toss until well coated. Roast until the squash is tender and browned, 25 to 30 minutes. Transfer the mixture to a blender; add ¾ cup milk. Secure the lid on the blender and remove the center piece to allow steam to escape. Place a clean towel over the opening. Process until smooth, about 2 minutes.
+
+Add 12 ounces pasta to the boiling water; cook until al dente, about 8 minutes. Drain and set aside. Reserve the pot.
+
+Cook 3 tablespoons butter in the pot over medium heat until foamy, about 1 minute. Add 8 sage leaves in an even layer; fry until slightly transparent and dark green, about 1 minute. Carefully remove and transfer to a paper-towel-lined plate. Reserve the butter in the pot.
+
+Add 3 tablespoons flour to the reserved butter in the pot; cook over medium heat, whisking constantly, until the mixture smells nutty, about 1 minute. Gradually whisk in 1¼ cups broth; cook, whisking, until smooth and thickened, about 2 minutes. Reduce heat to low; whisk in the squash puree, 1 cup Cheddar, ½ cup spreadable cheese, 2 teaspoons mustard and ½ teaspoon each salt and pepper; cook, whisking constantly, until warmed through and smooth, 2 to 3 minutes. Add the cooked pasta; cook, stirring often, until warmed through, about 1 minute. Transfer to a large bowl. Garnish with the fried sage leaves.
+# Caramelized Onion & Sun-Dried Tomato Pasta
+Attribution: EatingWell
+Author: Liv Dansky
+url: https://www.eatingwell.com/caramelized-onion-sun-dried-tomato-pasta-8719020
+Servings: 6
+Ingredients:
+1 (8-ounce) jar sun-dried tomatoes in oil
+
+2 medium yellow onions, thinly sliced (about 4 cups)
+
+4 large cloves garlic, thinly sliced
+
+2 tablespoons balsamic vinegar
+
+2 tablespoons water
+
+¾ teaspoon salt
+
+¼ teaspoon crushed red pepper
+
+12 ounces whole-wheat penne or rigatoni (about 3 cups)
+
+½ cup half-and-half
+
+⅓ cup grated Parmesan cheese
+
+¼ cup chopped fresh basil
+
+¼ cup pine nuts, toasted
+
+Instructions:
+Preheat oven to 325°F. Drain oil from 1 (8-ounce) jar sun-dried tomatoes to equal ¼ cup; reserve the remaining oil for another use. Chop the drained tomatoes to equal ¾ cup. Add the tomatoes and the ¼ cup oil to a 2-quart baking dish. Stir in onions,  garlic, 2 tablespoons each vinegar and water, ¾ teaspoon salt and ¼ teaspoon crushed red pepper; toss to combine. Cover with foil.
+Bake, stirring every 20 minutes and covering again with foil after each stirring, until the onions are caramelized, about 1 hour 30 minutes.
+When the onions are almost done, bring a large pot of water to a boil over high heat. Add 12 ounces pasta; cook, undisturbed, until al dente, about 9 minutes. Reserve 1 cup cooking water. Drain the pasta and place in a large bowl.
+Add the caramelized onion mixture and ½ cup half-and-half to the pasta; stir until combined. Stir in the reserved cooking water, ¼ cup at a time, until the desired creamy consistency is reached. Divide among 6 bowls; sprinkle with ⅓ cup Parmesan, ¼ cup basil and ¼ cup pine nuts.
+# Chicken-Potpie Twice-Baked Potatoes
+Attribution: EatingWell
+Author: Liv Dansky
+url: https://www.eatingwell.com/chicken-potpie-twice-baked-potatoes-8721904
+Servings: 4
+Ingredients:
+4 medium russet potatoes, scrubbed
+
+½ cup half-and-half
+
+¼ cup unsalted butter, cut into small cubes
+
+2 cups shredded rotisserie chicken
+
+1 cup frozen carrots and peas, thawed
+
+¾ cup shredded sharp Cheddar cheese, divided
+
+1 tablespoon chopped fresh thyme, plus more for garnish
+
+1 tablespoon chopped fresh chives, plus more for garnish
+
+½ teaspoon salt
+
+½ teaspoon ground pepper
+
+Instructions:
+Preheat oven to 400°F. Line a large rimmed baking sheet with foil. Pierce potatoes all over with a fork and place on the prepared baking sheet. Bake until the skin is crispy and the potatoes are tender, about 1 hour. (Alternatively, place potatoes on a microwave-safe plate; microwave on High until a fork can easily be inserted into centers, 10 to 12 minutes.) Let the potatoes stand until cool enough to handle, about 10 minutes; reserve the foil-lined baking sheet.
+Cut the cooled potatoes in half lengthwise; scoop the flesh into a large bowl. Place the skins, hollowed-side up, on the reserved baking sheet. Add ½ cup half-and-half and ¼ cup cubed butter to the potatoes; mash to combine. Stir in 2 cups chicken, 1 cup carrots and peas, ¼ cup cheese, 1 tablespoon each thyme and chives and ½ teaspoon each salt and pepper.
+Divide the chicken mixture among the potato skins; sprinkle with the remaining ½ cup cheese. Bake until the cheese is melted, about 10 minutes. Garnish with additional thyme and chives, if desired.
+# Orange Chicken & Broccoli Skillet
+Attribution: EatingWell
+Author: Liv Dansky
+url: https://www.eatingwell.com/orange-chicken-broccoli-skillet-8718237
+Servings: 6
+Ingredients:
+1 tablespoon neutral oil, such as canola or avocado
+
+6 (6-ounce) bone-in, skin-on chicken thighs, patted dry
+
+1 teaspoon salt, divided
+
+1 tablespoon grated orange zest
+
+¾ cup orange juice
+
+2 tablespoons reduced-sodium soy sauce
+
+2 teaspoons sugar
+
+2 teaspoons finely chopped fresh ginger
+
+1½ teaspoons cornstarch, divided
+
+¼ teaspoon ground pepper
+
+2 (8.8-ounce) packages precooked microwaveable brown rice
+
+6 cups fresh broccoli florets
+
+¼ cup thinly sliced scallions
+
+1 tablespoon toasted sesame seeds
+
+Instructions:
+Preheat oven to 350°F. Heat 1 tablespoon oil in a large ovenproof skillet over medium-high heat. Season chicken with ¼ teaspoon salt. Arrange the chicken in the skillet skin-side down; cook, undisturbed, until the skin is golden brown and crisp, 8 to 10 minutes. Transfer the chicken, skin-side up, to a large plate. Remove the skillet from the heat; reserve 1 tablespoon of the drippings in the skillet (discard remaining drippings).
+Meanwhile, whisk 1 tablespoon orange zest, ¾ cup orange juice, 2 tablespoons soy sauce, 2 teaspoons sugar, 2 teaspoons ginger, 1 teaspoon cornstarch, ½ teaspoon salt and ¼ teaspoon pepper in a medium bowl until combined. Pour ½ cup of the mixture into a small saucepan.
+Add the remaining ½ teaspoon cornstarch and ¼ teaspoon salt to the orange juice mixture in the bowl. To the reserved drippings in the skillet, add 2 packages rice, 6 cups broccoli and the orange juice mixture from the bowl; stir until well combined. Nestle the chicken, skin-side up, into the broccoli mixture.
+Bake until the broccoli is tender, the sauce has thickened slightly, and an instant-read thermometer inserted into the thickest portion of chicken registers at least 165°F, 40 to 50 minutes.
+Meanwhile, bring the reserved orange juice mixture in the saucepan to a lively simmer; cook, stirring occasionally, until the sauce thickens and coats the back of a spoon, about 5 minutes. Spoon the sauce over the chicken. Sprinkle with ¼ cup scallions and 1 tablespoon sesame seeds.
+# French Onion Cabbage Soup
+Attribution: EatingWell
+Author: Melissa Gray-Streett
+url: https://www.eatingwell.com/french-onion-cabbage-soup-8723346
+Servings: 
+Ingredients:
+6 tablespoons vegetable oil, divided
+
+1 small head green cabbage, cored and thinly sliced (about 16 cups), divided
+
+1 large sweet onion, thinly sliced (about 3 cups), divided
+
+3 tablespoons cider vinegar, divided
+
+7½ cups unsalted vegetable broth
+
+1 teaspoon reduced-sodium soy sauce
+
+1 teaspoon chopped fresh thyme, plus more for garnish
+
+1 teaspoon ground pepper, plus more for garnish
+
+¼ teaspoon salt
+
+5 cups cubed whole-wheat baguette (½-inch)
+
+¾ cup shredded Gruyère cheese
+
+Instructions:
+Heat 2 tablespoons oil in a large Dutch oven over medium-high heat. Add half of the cabbage (about 8 cups) and onion (about 1½ cups); cook, stirring occasionally, until the vegetables are light golden brown, about 15 minutes. Add 1½ tablespoons vinegar; cook, scraping browned bits from the bottom of the pan using a wooden spoon, for 1 minute. Transfer the mixture to a medium heatproof bowl; set aside, uncovered. (Do not wipe the pot clean). Repeat the process with 2 tablespoons oil and the remaining cabbage (about 8 cups), onion (about 1½ cups) and 1½ tablespoons vinegar.
+
+Return all of the vegetables to the pot. Add 7½ cups broth, 1 teaspoon each soy sauce, thyme and pepper and ¼ teaspoon salt; bring to a simmer over medium-high heat, stirring occasionally. Reduce heat to medium; cook, stirring occasionally, until the cabbage and onion are tender and the flavors are blended, about 15 minutes.
+
+About 5 minutes before serving, preheat oven to broil with rack in middle position. Line a large rimmed baking sheet with foil. Add 5 cups bread and the remaining 2 tablespoons oil; toss until the bread is coated in oil; spread in an even layer. Broil, stirring once, until toasted, about 2 minutes. Push the bread cubes together and sprinkle with ¾ cup cheese; broil until the croutons are crisp and the cheese is melted, about 1 minute. Ladle the soup into 6 bowls; top with croutons. Garnish with additional thyme and pepper, if desired.
+
+# Creamy Spinach & Artichoke Chicken Skillet
+Attribution: EatingWell
+Author: Renu Anshie Dhar
+url: https://www.eatingwell.com/creamy-spinach-artichoke-chicken-skillet-8725666
+Servings: 4
+Ingredients: 
+4 (4-ounce) chicken cutlets
+
+¼ teaspoon ground pepper, plus more for garnish
+
+2 tablespoons extra-virgin olive oil, divided
+
+2 shallots, chopped (about ½ cup)
+
+4 cloves garlic, finely chopped (about 1 tablespoon)
+
+2 tablespoons all-purpose flour
+
+¼ cup dry white wine
+
+½ cup unsalted chicken broth
+
+6 cups spinach, chopped
+
+1 cup canned quartered artichoke hearts, rinsed and chopped
+
+½ cup heavy cream
+
+¼ cup cream cheese, cubed and softened
+
+¼ teaspoon crushed red pepper (optional)
+
+⅛ teaspoon salt
+
+¼ cup grated Parmesan cheese
+
+2 tablespoons chopped fresh basil
+
+Instructions:
+Sprinkle chicken with ¼ teaspoon pepper. Heat 1 tablespoon oil in a large nonstick skillet over medium-high heat. Add the chicken; cook until golden brown on both sides and an instant-read thermometer inserted into the thickest portion registers 165°F, 4 to 5 minutes per side. Transfer the chicken to a plate. Do not wipe the skillet clean.
+
+Add shallots, garlic and the remaining 1 tablespoon oil to the skillet. Cook over medium heat, stirring constantly, until the shallot is translucent, 1 to 2 minutes. Sprinkle with 2 tablespoons flour; cook, stirring constantly, until fragrant, about 1 minute. Add ¼ cup wine; cook, undisturbed, until most of the liquid has evaporated, about 30 seconds. Whisking constantly, add ½ cup broth in a steady stream. Cook, whisking constantly, until the mixture thickens, 1 to 2 minutes.
+
+Add spinach and artichokes; cook, stirring often, until the spinach is wilted, 2 to 3 minutes. Stir in ½ cup cream, ¼ cup cream cheese, ¼ teaspoon crushed red pepper (if using) and ⅛ teaspoon salt. Return the chicken to the pan and cook, stirring occasionally, until the cream cheese has melted, 2 to 3 minutes
+
+Remove from heat. Add ¼ cup Parmesan and 2 tablespoons basil; stir until the Parmesan is melted, about 1 minute. Garnish with pepper, if desired.
+# Skillet Spinach, Mushroom & Wild Rice Casserole
+Attribution: EatingWell
+Author: Craig Ruff
+url: https://www.eatingwell.com/skillet-spinach-mushroom-wild-rice-casserole-8731518
+Servings: 6
+Ingredients:
+6 tablespoons unsalted butter, divided
+
+2 (8-ounce) packages cremini mushrooms, sliced
+
+¾ teaspoon salt, divided
+
+2 leeks, thinly sliced and well rinsed
+
+3 cloves garlic, finely chopped
+
+2 teaspoons chopped fresh rosemary
+
+2 teaspoons chopped fresh thyme, plus more for garnish
+
+½ teaspoon ground pepper
+
+3 tablespoons all-purpose flour
+
+2½ cups whole milk
+
+¼ teaspoon ground nutmeg
+
+1 (10-ounce) package frozen chopped spinach, thawed and squeezed dry 
+
+1 (5.2-ounce) package garlic-and-herb spreadable cheese (such as Boursin)
+
+2 (8.5-ounce) packages microwaveable wild rice, cooked according to package directions
+
+1 cup shredded Gruyère cheese
+
+Instructions:
+Preheat the oven to 350°F with a rack in top third position (or 6 inches from heat source). Melt 3 tablespoons butter in a 10-inch cast-iron or other deep ovenproof skillet over medium-high heat. Add sliced mushrooms and ¼ teaspoon salt; cook, stirring occasionally, until browned, about 16 minutes. Transfer to a plate; do not wipe the skillet clean.
+Melt the remaining 3 tablespoons butter in the skillet over medium heat. Add sliced leeks and ¼ teaspoon salt; cook, stirring often, until softened and slightly translucent, about 5 minutes. Add chopped garlic, 2 teaspoons each rosemary and thyme and ½ teaspoon pepper; cook, stirring constantly, until fragrant, about 1 minute. Add 3 tablespoons flour; cook, stirring constantly, for 1 minute, then gradually add 2½ cups milk (about ¾ cup at a time); cook, stirring often, until the sauce thickens and coats the back of a spoon, 4 to 5 minutes. Stir in ¼ teaspoon nutmeg and the remaining ¼ teaspoon salt. Add drained spinach and 1 (5.2-ounce) package garlic-and herb cheese; cook over medium-low heat, stirring constantly, until the cheese is melted and the spinach is evenly distributed, about 2 minutes. Remove from heat; fold in prepared rice and the cooked mushrooms until combined. Spread into an even layer; sprinkle with 1 cup Gruyère.
+Bake until the cheese is melted, 10 to 12 minutes. Increase oven temperature to broil (do not remove skillet from oven) and broil until the cheese is browned, 2 to 3 minutes.  Let rest for 10 minutes before serving; garnish with additional thyme, if desired.
+# Skillet Curry Chickpea Potpie
+Attribution: EatingWell
+Author: Melissa Gray-Streett
+url: https://www.eatingwell.com/skillet-curry-chickpea-potpie-8690937
+Servings: 6
+Ingredients:
+1 (14-ounce) can light coconut milk, well shaken and stirred, divided
+
+2 tablespoons extra-virgin olive oil
+
+1 cup chopped white onion (about 1 small)
+
+1 cup chopped peeled carrot (about 1 large)
+
+1 tablespoon grated fresh ginger
+
+2 teaspoons curry powder
+
+1 teaspoon ground cumin
+
+¼ cup no-salt-added tomato paste
+
+2 (15-ounce) cans no-salt-added chickpeas, rinsed
+
+1 cup frozen peas
+
+¼ cup chopped fresh cilantro, plus more for garnish
+
+½ teaspoon plus ⅛ teaspoon salt
+
+½ (17-ounce) package frozen puff pastry sheets, thawed
+
+Instructions: 
+Preheat oven to 400°F with rack in top third position. Measure out 1 tablespoon coconut milk; set aside.
+
+Heat 2 tablespoons oil in a 10-inch cast-iron skillet over medium heat. Add 1 cup onion and 1 cup carrot; cook, stirring occasionally, until the vegetables are softened, 8 to 10 minutes. Add 1 tablespoon ginger, 2 teaspoons curry powder and 1 teaspoon cumin; cook, stirring constantly, until fragrant, about 1 minute. Add ¼ cup tomato paste; cook, stirring constantly, until slightly darkened in color, about 1 minute. Stir in 2 cans chickpeas, 1 cup peas, ¼ cup cilantro, ½ teaspoon plus ⅛ teaspoon salt and the remaining coconut milk; bring just to a simmer over medium heat, stirring occasionally.
+Working quickly, unfold 1 sheet puff pastry onto a work surface, and cut into 9 (about 3-inch) squares. Place on top of the hot filling, overlapping as needed. Brush the pastry with the reserved 1 tablespoon coconut milk.
+Bake until the pastry is puffed and golden brown in spots, 20 to 22 minutes. Reduce oven temperature to 350°F; bake until the pastry is puffed and browned all over, about 15 minutes. Let stand for 5 minutes. Garnish with additional cilantro before serving, if desired.
+# Dinner Roll Muffins
+Restaurant: Ezell’s Famous Chicken
+Yield: About 24 standard rolls
+Ingredients:
+¾ cup Warm water (105°F–110°F)
+2 ¼ teaspoons (1 standard packet) Active dry yeast
+¼ cup (plus a pinch for the yeast) Granulated sugar
+1 cup Warm milk
+⅓ cup Unsalted butter  (melted and cooled slightly)
+2 large Eggs (room temperature)
+1 ½ teaspoons Salt
+4 ½ to 5 cups All-purpose or bread flour
+3 tablespoons Melted butter (for brushing after baking)
+Instructions:
+1. Mix the warm water, a pinch of sugar, and the yeast in a large bowl or stand mixer bowl.Let it sit for 5 to 10 minutes until the top becomes frothy and active.
+2. Add the warm milk, melted butter, sugar, eggs, and salt to the yeast mixture. Whisk well to combine. Gradually add 4 cups of the flour, mixing with a wooden spoon or the dough hook attachment on a stand mixer until a sticky dough forms. Knead for 6 to 8 minutes, adding remaining flour a little at a time, until the dough is smooth, elastic, and slightly tacky but pulls away from the bowl.
+3. Place the dough in a greased bowl, cover with a damp towel or plastic wrap, and let it go through its first primary rise in a warm spot until doubled in size (about 1.5 hours). Punch down the dough. Ezell’s signature light texture relies on letting the dough rest, shape, and rise multiple times. Divide and shape the dough into small individual balls (about 63g each). Place the shaped rolls in a greased muffin tin. Cover and let them rise a second and third time lightly between shaping and final proofing until very puffy and light (roughly 45 to 60 minutes per rise).
+4. Preheat your oven to 375°F (190°C).Bake the rolls for 15 to 18 minutes, or until the tops turn a light golden brown. Remove them from the oven immediately and brush the hot tops generously with melted butter for that soft, shiny finish.
+# Miso-Braised Kale
+Attribution: FOOD52
+url: https://food52.com/recipes/85122-miso-braised-kale-with-rice-recipe
+Author: Myo Quinn
+Servings: 4
+Ingredients:
+2 tablespoon neutral oil, such as grapeseed or vegetable
+2 garlic cloves, minced
+1 scallion, finely chopped (white and green parts)
+2 bunchkale, tough stems removed, leaves chopped into 1-inch pieces
+1 3/4 cup low-sodium chicken stock or water
+3 tablespoon white miso
+2 tablespoon agave syrup (or whatever sweetener you prefer)
+2 teaspoon soy sauce
+2 teaspoon unseasoned rice wine vinegar
+Instuctions: 
+cook the kale: In a large skillet over medium-high heat, add the oil, garlic, and scallion. Cook, stirring continuously, until fragrant, about 1 minute. Add the kale in batches, stirring with each addition (the kale will slowly wilt, creating space for more kale). Stir in the stock, miso, agave, and soy sauce. Bring to a simmer, then cover and reduce heat to medium-low. Cook for 5 minutes, allowing the flavors to meld. Right before serving, drizzle with the vinegar and stir to combine. Taste and adjust the soy sauce or agave syrup if needed.
+# Multigrain Rice
+Attribution: FOOD52
+url: https://food52.com/recipes/85122-miso-braised-kale-with-rice-recipe
+Author: Myo Quinn
+Servings: 4
+Ingredients:
+1 cup medium-grain white rice
+1/2 cup millet
+1/4 cup sweet rice
+1/4 cup quinoa
+Instuctions: 
+Cook the multigrain rice: Rinse and drain the white rice, millet, sweet rice, and quinoa. Place in a medium pot with 2 cups of water. Cook over high heat, uncovered, until it comes to a boil. Reduce heat to the lowest setting, cover, and cook for 15 minutes. Remove from heat and let sit for 5 minutes to finish cooking. Do not uncover! That would release all the steam you need to make the rice fluffy.
+# Cajun Sweet Potato Rigatoni With Kale
+Attribution: FOOD52
+url: https://food52.com/recipes/86709-cajun-sweet-potato-rigatoni-with-kale
+Author: Shanika Graham-White
+Servings: 4
+Ingredients:
+1 pound rigatoni
+1 tablespoon extra-virgin olive oil
+3 garlic cloves, finely chopped
+1 pinch ground cinnamon
+1/4 cup all-purpose flour
+1 cup low-sodium vegetable stock
+1(13-ounce) can coconut cream or full-fat coconut milk
+1 to 2 tablespoon homemade or store-bought Cajun seasoning, plus more for topping if desired
+1 1/2 cup sweet potato purée
+1/4 cup nutritional yeast
+1 tablespoon dry white wine
+1 pinch finely ground sea salt
+1 pinch ground black pepper
+2 cup destemmed and chopped kale
+Instuctions: 
+Bring a large pot of salted water to a boil. Add the pasta and cook according to the package directions. While the pasta is cooking, begin preparing the sauce.
+In a large skillet over medium-high heat, heat the oil. Add the garlic and cinnamon and sauté for 30 seconds to 1 minute, until the garlic begins to become fragrant. Reduce the heat to medium and add the flour to the skillet, whisking until well combined and a paste forms.
+Slowly whisk in the stock, stirring constantly until a thick sauce begins to form. Repeat this step with the coconut cream, then stir in the Cajun seasoning, sweet potato purée, nutritional yeast, wine, salt, and pepper. Add the kale and simmer, stirring occasionally, for another 3 to 4 minutes, until the kale is tender.
+Drain the pasta, then add it to the sauce. Stir to fully coat the pasta. Remove from the heat. Serve immediately in bowls topped with additional Cajun seasoning, if desired.
+# Caesar Dressing
+Attribution: FOOD52
+url: https://food52.com/recipes/84025-broccoli-kale-salad-recipe-ina-garten
+Author: Ina Garten
+Servings: 6
+Ingredients:
+2 extra-large egg yolks, at room temperature
+2 teaspoon Dijon mustard, at room temperature
+2 teaspoon chopped garlic (2 cloves)
+10 anchovy fillets
+1/2 cup freshly squeezed lemon juice, at room temperature (2 to 3 lemons)
+Kosher salt and freshly ground black pepper
+1 1/2 cup good mild olive oil
+1/2 cup freshly grated Italian Parmesan cheese
+Instructions:
+Place the egg yolks, mustard, garlic, anchovies, lemon juice, 2 teaspoons salt, and ½ teaspoon pepper in the bowl of a food processor fitted with the steel blade and process until smooth. With the food processor running, slowly pour the olive oil through the feed tube (as though you were making mayonnaise) and process until thick. Add the Parmesan and pulse 3 times to combine.
+# Broccoli & Kale Salad
+Attribution: FOOD52
+url: https://food52.com/recipes/84025-broccoli-kale-salad-recipe-ina-garten
+Author: Ina Garten
+Servings: 6
+Ingredients:
+Good olive oil, such as Olio Santo
+2 1/2 ounce country white bread, crusts removed and 1/2-inch diced
+Kosher salt and freshly ground black pepper
+8 cup broccoli florets, stems removed (2 bunches)
+1 bunch baby kale
+Caesar Salad Dressing (recipe below)
+1/4 cup freshly squeezed lemon juice (1 to 2 lemons)
+1/4 cup grated Italian Parmesan cheese
+6 extra-large eggs
+1 recipe Caesar Dressing
+Instructions:
+Make the toasted croutons: Pour 2 tablespoons of olive oil in a small (8-inch) sauté pan and heat over medium high heat until hot but not smoking. Add the bread and sauté, tossing occasionally, for 4 to 5 minutes, until evenly browned. Sprinkle generously with salt and pepper.
+Bring a large pot of water with 1 tablespoon of salt to a boil and fill a bowl with ice water. Add the broccoli to the boiling water and cook for exactly 4 minutes. Remove the broccoli with a slotted spoon and transfer to the bowl of ice water. When cool, drain well and transfer to a large bowl.
+Remove and discard any hard ribs from the kale, stack the leaves on top of each other, and thinly julienne them crosswise. Add to the bowl with the broccoli.
+Add enough Caesar Dressing to moisten the broccoli and kale and toss well. Add the croutons, lemon juice, and Parmesan. Divide the salad among six dinner plates.
+Meanwhile, fill a medium saucepan with water and bring to a boil. With a spoon, carefully lower each of the eggs into the boiling water and lower the heat until the water is at a low simmer. (You don’t want the eggs knocking around in the pot or they will crack.) Cook the eggs for 6½ minutes exactly, remove them from the saucepan, run them under cool water, and peel (see note). Place one egg on each salad, cut it in half, sprinkle with salt and pepper, and serve immediately.
+# Kale Pesto Orecchiette
+Attribution: FOOD52
+url: https://food52.com/recipes/25673-kale-pesto-orecchiette
+Servings: 4
+Ingredients:
+2 bunches (about two cups) lacinato kale, stems removed and roughly chopped
+1 yellow onion, diced
+5 cloves garlic, roughly chopped
+1 teaspoon crushed red pepper flakes
+2 tablespoon Dijon mustard
+2 tablespoon white distilled vinegar
+1 cup freshly grated Parmesan cheese
+Juice of 1/2 a lemon
+Kosher salt and pepper
+2 tablespoonolive oil
+1/2 - 3/4 cup olive oil
+1 pound (1 box) orecchiette pasta
+1/2 cup pasta water
+Instructions:
+This recipe makes about double what you need for pasta. I made the pesto and put half of it in the freezer for a super easy meal down the road.
+Heat a large saute pan over medium heat. Add 2 tablespoons of olive oil, onion, garlic, crushed red pepper flakes, salt, and pepper and cook for about 5 minutes. Add the kale and 2 tablespoons of Dijon mustard. Cover and let steam and cook for 8 minutes, until the kale is soft.
+In a food processor, pulse together the parmesan cheese, lemon juice, white vinegar, kale mixture, and a dash of salt and pepper about 8 times. Blend everything together as you pour 1/2 - 3/4 cup olive oil into the food processor in a slow, steady stream. Taste and adjust salt and pepper as necessary.
+Transfer about half of the pesto, which should be about 1 to 2 cups total, to a large serving bowl. Add the other half to a sealable container and pop in the freezer.
+Boil the pasta according to the instructions on the box in salty water. Before draining, add 1/2 cup pasta water to the pesto in the bowl. Drain the pasta and add it directly to the pesto. Combine everything with two wooden spoons and serve hot.
+# Chicken Stir Fry with Celery, Carrot and Cashew
+url: https://japan.recipetineats.com/chicken-stir-fry-celery-carrot-cashew/
+Author: Yumiko
+Attribution: RecipeTinEats Japan
+Ingredients: 
+1 tsp cornflour/corn starch
+60ml / 2oz water
+¼ tsp chicken stock powder
+½ tsp sake
+¼ tsp soy sauce
+⅛ tsp salt
+200g / 0.4lb chicken thigh fillets cut into thin strips (note 1)
+250g / 0.6lb celery cut diagonally to 5cm / 2” long pieces , 5mm / 3/16” thick
+100g / 3.5oz carrot diagonally sliced thinly (3mm / ⅛" thick)
+70g / 2.5oz roasted cashew nuts (unsalted)
+1 tbsp oil
+Salt & pepper
+1 tsp sesame oil
+Instructions:
+Add cornflour to a small bowl and gradually add water to dilute it completely. Then add the remaining Sauce ingredients and mix well.
+Heat oil in a large frying pan over high heat.
+Add chicken pieces, season with salt & pepper and cook for 1.5 to 2 minutes until the chicken pieces start browning a bit.
+Add celery and carrot. Cook for 1.5 minutes, then add cashew nuts. Stir for 30 seconds.
+Add the sauce (note 2) and stir quickly as the sauce will thicken fast. Ensure that sauce coats each piece of stir fry ingredients.
+Add the sesame oil and quickly stir. Serve immediately.

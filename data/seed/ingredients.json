@@ -416,6 +416,11 @@
       "aliases": ["vinegar"]
     },
     {
+      "id": "malt-vinegar",
+      "name": "malt vinegar",
+      "aliases": ["vinegar"]
+    },
+    {
       "id": "balsamic-vinegar",
       "name": "balsamic vinegar",
       "aliases": ["balsamic vinegar", "balsamic"]
@@ -763,7 +768,7 @@
     {
       "id": "unsweetened-cocoa-powder",
       "name": "unsweetened cocoa powder",
-      "aliases": ["unsweetened cocoa powder", "cocoa powder", "dutch process cocoa"]
+      "aliases": ["unsweetened cocoa powder", "cocoa powder", "dutch process cocoa", "cocoa"]
     },
     {
       "id": "semisweet-chocolate-chips",
@@ -773,7 +778,22 @@
     {
       "id": "oats",
       "name": "oats",
-      "aliases": ["oats", "oatmeal"]
+      "aliases": ["oats", "oatmeal", "rolled oats"]
+    },
+        {
+      "id": "puffed-rice",
+      "name": "puffed rice",
+      "aliases": ["puffed rice", "rice puffs", "puffed rice cereal", "rice cereal", "rice krispies"]
+    },
+    {
+      "id": "puffed-brown-rice",
+      "name": "puffed brown rice",
+      "aliases": ["puffed brown rice", "brown rice puffs", "puffed brown rice cereal"]
+    },
+    {
+      "id": "puffed-quinoa",
+      "name": "puffed quinoa",
+      "aliases": ["puffed quinoa", "quinoa puffs", "puffed quinoa cereal"]
     },
     {
       "id": "rolled-oats",
@@ -789,6 +809,11 @@
       "id": "rice",
       "name": "rice",
       "aliases": ["rice"]
+    },
+    {
+      "id": "rice-cakes",
+      "name": "rice cakes",
+      "aliases": ["rice cakes"]
     },
     {
       "id": "long-grain-rice",
@@ -998,7 +1023,7 @@
     {
       "id": "turmeric",
       "name": "turmeric",
-      "aliases": ["turmeric", "ground turmeric"]
+      "aliases": ["turmeric", "ground turmeric", "tumeric", "ground tumeric", "turmeric powder", "tumeric powder"]
     },
     {
       "id": "curry-powder",
@@ -1314,6 +1339,11 @@
       "id": "sesame-seeds",
       "name": "sesame seeds",
       "aliases": ["sesame seeds", "white sesame seeds"]
+    },
+    {
+      "id": "chia-seeds",
+      "name": "chia seeds",
+      "aliases": ["chia seeds"]
     },
     {
       "id": "poppy-seeds",
@@ -1653,7 +1683,7 @@
     {
       "id": "pistachios",
       "name": "pistachios",
-      "aliases": ["pistachios", "shelled pistachios"]
+      "aliases": ["pistachios", "shelled pistachios", "pistachio nuts"]
     },
     {
       "id": "dried-fig",

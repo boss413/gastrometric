@@ -1,30 +1,10 @@
 [
   {
-    "input": "purple cabbage thing",
-    "location": "fridge"
-  },
-  {
-    "input": "salt to taste",
-    "location": "fridge"
-  },
-  {
-    "input": "2 ribs",
-    "location": "fridge"
-  },
-  {
-    "input": "beans",
-    "location": "fridge"
-  },
-  {
-    "input": "pepper",
-    "location": "fridge"
-  },
-  {
     "input": "cabbage",
     "location": "fridge"
   },
   {
-    "input": "scallions",
+    "input": "walnuts",
     "location": "fridge"
   },
   {
@@ -36,11 +16,23 @@
     "location": "fridge"
   },
   {
-    "input": "criminis",
+    "input": "kielbasa",
     "location": "fridge"
   },
   {
-    "input": "parsley",
+    "input": "kale",
+    "location": "fridge"
+  },
+  {
+    "input": "sweet potato",
+    "location": "fridge"
+  },
+  {
+    "input": "chuck roast",
+    "location": "fridge"
+  },
+  {
+    "input": "criminis",
     "location": "fridge"
   },
   {
@@ -56,7 +48,119 @@
     "location": "pantry"
   },
   {
+    "input": "almonds",
+    "location": "pantry"
+  },
+  {
+    "input": "green onions",
+    "location": "pantry"
+  },
+  {
+    "input": "ground coriander",
+    "location": "pantry"
+  },
+  {
+    "input": "nutmeg",
+    "location": "pantry"
+  },
+  {
+    "input": "bourbon",
+    "location": "pantry"
+  },
+  {
+    "input": "pie crust",
+    "location": "pantry"
+  },
+  {
+    "input": "xanthan gum",
+    "location": "pantry"
+  },
+  {
+    "input": "vegetable broth",
+    "location": "pantry"
+  },
+  {
     "input": "bread flour",
+    "location": "pantry"
+  },
+  {
+    "input": "evoo",
+    "location": "pantry"
+  },
+  {
+    "input": "snow peas",
+    "location": "fridge"
+  },
+  {
+    "input": "rubbed sage",
+    "location": "pantry"
+  },
+  {
+    "input": "green cabbage",
+    "location": "fridge"
+  },
+  {
+    "input": "american cheese",
+    "location": "pantry"
+  },
+  {
+    "input": "caraway seeds",
+    "location": "pantry"
+  },
+  {
+    "input": "beans",
+    "location": "pantry"
+  },
+  {
+    "input": "rice",
+    "location": "pantry"
+  },
+  {
+    "input": "pasta",
+    "location": "pantry"
+  },
+  {
+    "input": "pepitas",
+    "location": "pantry"
+  },
+  {
+    "input": "chia seeds",
+    "location": "pantry"
+  },
+  {
+    "input": "chives",
+    "location": "pantry"
+  },
+  {
+    "input": "canned baked beans",
+    "location": "pantry"
+  },
+  {
+    "input": "condensed tomato soup",
+    "location": "pantry"
+  },
+  {
+    "input": "unsalted butter",
+    "location": "pantry"
+  },
+  {
+    "input": "dry mustard",
+    "location": "pantry"
+  },
+  {
+    "input": "cayenne pepper",
+    "location": "pantry"
+  },
+  {
+    "input": "puffed brown rice",
+    "location": "pantry"
+  },
+  {
+    "input": "puffed quinoa",
+    "location": "pantry"
+  },
+  {
+    "input": "dried shiitake mushrooms",
     "location": "pantry"
   },
   {
@@ -280,6 +384,18 @@
     "location": "pantry"
   },
   {
+    "input": "ground mustard",
+    "location": "pantry"
+  },
+  {
+    "input": "vinegar",
+    "location": "pantry"
+  },
+  {
+    "input": "rolled oats",
+    "location": "pantry"
+  },
+  {
     "input": "sherry vinegar",
     "location": "pantry"
   },
@@ -388,6 +504,10 @@
     "location": "pantry"
   },
   {
+    "input": "grape tomatoes",
+    "location": "pantry"
+  },
+  {
     "input": "crushed tomatoes",
     "location": "pantry"
   },
@@ -445,6 +565,18 @@
   },
   {
     "input": "garlic",
+    "location": "pantry"
+  },
+  {
+    "input": "garlic powder",
+    "location": "pantry"
+  },
+  {
+    "input": "onion powder",
+    "location": "pantry"
+  },
+  {
+    "input": "flour",
     "location": "pantry"
   },
   {
@@ -540,6 +672,10 @@
     "location": "pantry"
   },
   {
+    "input": "malt vinegar",
+    "location": "pantry"
+  },
+  {
     "input": "savory salt",
     "location": "pantry"
   },
@@ -597,6 +733,14 @@
   },
   {
     "input": "cinnamon sticks",
+    "location": "pantry"
+  },
+  {
+    "input": "pistachios",
+    "location": "pantry"
+  },
+  {
+    "input": "miso paste",
     "location": "pantry"
   },
   {
